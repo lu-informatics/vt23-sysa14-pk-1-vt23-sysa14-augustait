@@ -60,5 +60,21 @@ namespace Connection
             connection.Dispose();
         }
 
-    }
+        public void deleteProduct (int productId) 
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Product WHERE ProductId = @ProductId";
+            command.Parameters.Add(new SqlParameter("@ProductId", productId));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+
+        }
+}
 }
