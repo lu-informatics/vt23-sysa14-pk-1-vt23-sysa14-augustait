@@ -42,5 +42,23 @@ namespace Connection
             reader.Close();
 
         }
+        public void insertProduct(int productId, string productName, double productPrice, int categoryId)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Product VALUES (@ProductId, @ProductName, @ProductPrice, @CategoryId)";
+            command.Parameters.Add(new SqlParameter("@ProductId", productId));
+            command.Parameters.Add(new SqlParameter("@ProductName", productName));
+            command.Parameters.Add(new SqlParameter("@ProductPrice", productPrice));
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
     }
 }
