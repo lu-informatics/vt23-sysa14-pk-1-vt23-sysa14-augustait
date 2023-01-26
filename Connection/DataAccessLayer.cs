@@ -154,7 +154,46 @@ namespace Connection
 
         }
 
-      
+        public void findProductCategory(int categoryId)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM ProductCategory WHERE CategoryId = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+             
+
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+        }
+
+        public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
+            {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Store VALUES (@SupermarketID, @RegionName, @StoreName, @City, @StoreAddress)";
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@RegionName", regionName));
+            command.Parameters.Add(new SqlParameter("@StoreName", storeName));
+            command.Parameters.Add(new SqlParameter("@City", city));
+            command.Parameters.Add(new SqlParameter("@StoreAddress", storeAddress));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
 
     }
 }
