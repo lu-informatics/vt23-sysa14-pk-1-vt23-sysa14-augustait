@@ -176,6 +176,7 @@ namespace Connection
             connection.Close();
         }
 
+
         public void updateProductCategory(int categoryID, string categoryName)
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -194,6 +195,7 @@ namespace Connection
             connection.Dispose();
 
         }
+
 
 
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
@@ -251,10 +253,11 @@ namespace Connection
             connection.Dispose();
             connection.Close();
         }
-
-        public void updateStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
+        
+           public void updateStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
+
 
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE Store SET regionName = @regionName, storeName = @storeName, city = @city, storeAddress = @storeAddress WHERE supermarketID = @supermarketID";
@@ -270,13 +273,33 @@ namespace Connection
 
             connection.Close();
             connection.Dispose();
+            
+            }
 
 
+        public void insertOrder(int orderID, string orderDate, int productID, int supermarketID, string userName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Order_ VALUES (@OrderID, @OrderDate, @ProductID, @SupermarketID, @UserName)";
+            command.Parameters.Add(new SqlParameter("@OrderID", orderID));
+            command.Parameters.Add(new SqlParameter("@OrderDate", orderDate));
+            command.Parameters.Add(new SqlParameter("@ProductID", productID));
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
 
 
+            connection.Open();
 
+            command.ExecuteNonQuery();
 
-
+            connection.Close();
+            connection.Dispose();
         }
+
+       
+
+
+     
 }
 }
