@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -176,6 +177,27 @@ namespace Connection
         }
 
 
+        public void updateProductCategory(int categoryID, string categoryName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+
+            command.CommandText = "UPDATE ProductCategory SET CategoryName = @CategoryName WHERE CategoryID = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryID", categoryID));
+            command.Parameters.Add(new SqlParameter("@CategoryName", categoryName));
+            ;
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+
+
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
             {
             SqlConnection connection = GetDatabaseConnection();
@@ -231,6 +253,29 @@ namespace Connection
             connection.Dispose();
             connection.Close();
         }
+        
+           public void updateStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Store SET regionName = @regionName, storeName = @storeName, city = @city, storeAddress = @storeAddress WHERE supermarketID = @supermarketID";
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@regionName", regionName));
+            command.Parameters.Add(new SqlParameter("@storeName", storeName));
+            command.Parameters.Add(new SqlParameter("@city", city));
+            command.Parameters.Add(new SqlParameter("@storeAddress", storeAddress));
+           
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+            
+            }
+
 
         public void insertOrder(int orderID, string orderDate, int productID, int supermarketID, string userName)
         {
@@ -255,6 +300,6 @@ namespace Connection
        
 
 
-
-    }
+     
+}
 }
