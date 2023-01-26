@@ -175,6 +175,7 @@ namespace Connection
             connection.Close();
         }
 
+
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
             {
             SqlConnection connection = GetDatabaseConnection();
