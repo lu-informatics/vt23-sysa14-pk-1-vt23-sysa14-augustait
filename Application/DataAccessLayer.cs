@@ -6,22 +6,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Connection
+namespace Application
 {
-    public class DataAccessLayer
+    internal class DataAccessLayer
     {
         public SqlConnection GetDatabaseConnection()
         {
             string connectionString = ConfigurationManager.ConnectionStrings
               ["ICAStoreDBConnectionString"].ConnectionString;
-           
+
             SqlConnectionStringBuilder builder = new(connectionString);
-            
+
             SqlConnection connection = new(builder.ConnectionString);
 
-            return connection;     
+            return connection;
         }
-      
+
         //Prints 
         public void printallProducts()
         {
@@ -30,8 +30,8 @@ namespace Connection
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM ProductCategory";
             connection.Open();
-            SqlDataReader reader = command.ExecuteReader();          
-            
+            SqlDataReader reader = command.ExecuteReader();
+
             while (reader.Read())
             {
                 Console.WriteLine(reader.GetInt32(0));
@@ -62,7 +62,7 @@ namespace Connection
             connection.Dispose();
         }
 
-        public void deleteProduct (int productId) 
+        public void deleteProduct(int productId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -78,5 +78,5 @@ namespace Connection
 
 
         }
-}
+    }
 }
