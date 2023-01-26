@@ -356,7 +356,89 @@ namespace Connection
 
         }
 
-      
+        public void addCustomer(string name, string userName, string address, int phoneNumber, string eMail)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Customer VALUES (@Name, @UserName, @Address, @PhoneNumber, @Email)";
+            command.Parameters.Add(new SqlParameter("@Name", name));
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.Parameters.Add(new SqlParameter("@Address", address));
+            command.Parameters.Add(new SqlParameter("@PhoneNumber", phoneNumber));
+            command.Parameters.Add(new SqlParameter("@Email", eMail));
+
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+        public void deleteCustomer(string userName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Customer WHERE UserName = @UserName";
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+        public void findCustomer (string userName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Customer WHERE UserName = @UserName";
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetString(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetString(2));
+                Console.WriteLine(reader.GetInt32(3));
+                Console.WriteLine(reader.GetString(4));
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+        }
+
+        public void updateCustomer(string name, string userName, string address, int phoneNumber, string eMail)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Customer SET Name = @Name, Address = @Address, PhoneNumber = @PhoneNumber, Email = @Email WHERE UserName = @UserName";
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.Parameters.Add(new SqlParameter("@Name", name));
+            command.Parameters.Add(new SqlParameter("@Address", address));
+            command.Parameters.Add(new SqlParameter("@PhoneNumber", phoneNumber));
+            command.Parameters.Add(new SqlParameter("@Email", eMail));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+
+
+
+
 
 
 
