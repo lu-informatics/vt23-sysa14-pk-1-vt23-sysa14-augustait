@@ -4,4 +4,4 @@
 DataAccessLayer dal = new DataAccessLayer();
 
 
-dal.deleteProductCategory(4);
+dal.updateProduct(16, "Test", 44);
