@@ -101,6 +101,24 @@ namespace Connection
             connection.Close();
         }
 
+        public void updateProduct(int productId, string productName, decimal price)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Product SET ProductName = @ProductName, Price = @Price WHERE ProductID = @ProductId";
+            command.Parameters.Add(new SqlParameter("@ProductId", productId));
+            command.Parameters.Add(new SqlParameter("@ProductName", productName));
+            command.Parameters.Add(new SqlParameter("@Price", price));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
         public void insertProductCategory(int categoryId, string categoryName)
         {
             SqlConnection connection = GetDatabaseConnection();
