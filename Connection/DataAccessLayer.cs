@@ -297,9 +297,71 @@ namespace Connection
             connection.Dispose();
         }
 
-       
+        public void deleteOrder(int orderID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Order_ WHERE OrderID = @OrderID";
+            command.Parameters.Add(new SqlParameter("@OrderID", orderID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+        public void findOrder(int orderID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Order_ WHERE OrderID = @OrderID";
+            command.Parameters.Add(new SqlParameter("@OrderID", orderID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetInt32(2));
+                Console.WriteLine(reader.GetInt32(3));
+                Console.WriteLine(reader.GetString(4));
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+        }
+
+        public void updateOrder(int orderID, string orderDate, int productID, int supermarketID, string userName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
 
 
-     
-}
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Order_ SET orderDate = @OrderDate, ProductID = @ProductID, SupermarketID = @SupermarketID, UserName = @UserName WHERE OrderID = @OrderID";
+            command.Parameters.Add(new SqlParameter("@OrderID", orderID));
+            command.Parameters.Add(new SqlParameter("@OrderDate", orderDate));
+            command.Parameters.Add(new SqlParameter("@ProductID", productID));
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+      
+
+
+
+
+
+
+    }
 }
