@@ -232,6 +232,28 @@ namespace Connection
             connection.Close();
         }
 
+        public void insertOrder(int orderID, string orderDate, int productID, int supermarketID, string userName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Order_ VALUES (@OrderID, @OrderDate, @ProductID, @SupermarketID, @UserName)";
+            command.Parameters.Add(new SqlParameter("@OrderID", orderID));
+            command.Parameters.Add(new SqlParameter("@OrderDate", orderDate));
+            command.Parameters.Add(new SqlParameter("@ProductID", productID));
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
+
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+       
+
 
 
     }
