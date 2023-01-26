@@ -209,5 +209,29 @@ namespace Connection
             connection.Dispose();
         }
 
+        public void findStore(int supermarketID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Store WHERE SupermarketID = @SupermarketID";
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetString(2));
+                Console.WriteLine(reader.GetString(3));
+                Console.WriteLine(reader.GetString(4));
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+        }
+
+
+
     }
 }
