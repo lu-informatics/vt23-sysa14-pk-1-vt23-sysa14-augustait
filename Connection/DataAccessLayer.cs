@@ -194,6 +194,20 @@ namespace Connection
             connection.Dispose();
         }
 
+        public void deleteStore(int supermarketID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Store WHERE SupermarketID = @SupermarketID";
+            command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
 
     }
 }
