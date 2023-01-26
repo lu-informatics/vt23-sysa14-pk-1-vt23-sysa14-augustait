@@ -84,7 +84,7 @@ namespace Connection
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Product VALUES (@CategoryId, @CategoryName)";
+            command.CommandText = "INSERT INTO ProductCategory VALUES (@CategoryId, @CategoryName)";
             command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
             command.Parameters.Add(new SqlParameter("@CategoryName", categoryName));
 

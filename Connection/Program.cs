@@ -3,4 +3,5 @@
 
 DataAccessLayer dal = new DataAccessLayer();
 
-dal.insertProductCategory(4, "Frukt");
+
+dal.deleteProductCategory(4);
