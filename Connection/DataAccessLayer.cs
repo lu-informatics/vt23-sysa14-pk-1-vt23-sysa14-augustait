@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -174,6 +175,26 @@ namespace Connection
             connection.Dispose();
             connection.Close();
         }
+
+        public void updateProductCategory(int categoryID, string categoryName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+
+            command.CommandText = "UPDATE ProductCategory SET CategoryName = @CategoryName WHERE CategoryID = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryID", categoryID));
+            command.Parameters.Add(new SqlParameter("@CategoryName", categoryName));
+            ;
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
 
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
             {
