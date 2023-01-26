@@ -4,4 +4,4 @@
 DataAccessLayer dal = new DataAccessLayer();
 
 
-dal.deleteProductCategory(4);
+dal.addStore(4, "Skåne", "ICA MAXI KUK", "Arlöv", "Kukvägen");
