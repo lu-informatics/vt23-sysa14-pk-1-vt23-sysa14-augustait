@@ -62,6 +62,7 @@ namespace Connection
             connection.Dispose();
         }
 
+       
         public void deleteProduct (int productId) 
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -78,5 +79,43 @@ namespace Connection
 
 
         }
-}
+
+        public void insertProductCategory(int categoryId, string categoryName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Product VALUES (@CategoryId, @CategoryName)";
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
+            command.Parameters.Add(new SqlParameter("@CategoryName", categoryName));
+
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+
+        public void deleteProductCategory(int categoryID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM ProductCategory WHERE CategoryId = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+
+        }
+
+      
+
+    }
 }
