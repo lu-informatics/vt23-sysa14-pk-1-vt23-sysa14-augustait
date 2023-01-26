@@ -4,5 +4,5 @@
 DataAccessLayer dal = new DataAccessLayer();
 
 dal.printallProducts();
-dal.insertProduct(16, "Blåbär", 20.00, 2);
+dal.findProduct(17);
 dal.deleteProduct(15);

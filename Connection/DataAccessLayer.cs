@@ -44,7 +44,7 @@ namespace Connection
             reader.Close();
 
         }
-        public void insertProduct(int productId, string productName, double productPrice, int categoryId)
+        public void insertProduct(int productId, string productName, decimal productPrice, int categoryId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -78,5 +78,28 @@ namespace Connection
 
 
         }
-}
-}
+
+        public void findProduct (int productId)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Product WHERE ProductId = @ProductId";
+            command.Parameters.Add(new SqlParameter("@ProductId", productId));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetDecimal(2));
+                Console.WriteLine(reader.GetInt32(3));
+
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+        }
+
+    }
+    }
