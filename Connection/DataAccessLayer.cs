@@ -435,6 +435,53 @@ namespace Connection
 
         }
 
+        public void showAllCustomers()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Customer";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetString(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetString(2));
+                Console.WriteLine(reader.GetInt32(3));
+                Console.WriteLine(reader.GetString(4));
+
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+            reader.Close();
+
+        }
+
+        public void showAllMembers()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Member";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetString(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetString(2));
+                Console.WriteLine(reader.GetInt32(3));
+                Console.WriteLine(reader.GetString(4));
+
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+            reader.Close();
 
 
 
@@ -444,6 +491,8 @@ namespace Connection
 
 
 
+
+        }
 
     }
 }
