@@ -44,7 +44,7 @@ namespace Application
             reader.Close();
 
         }
-        public void insertProduct(int productId, string productName, double productPrice, int categoryId)
+        public void insertProduct(int productId, string productName, decimal productPrice, int categoryId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
