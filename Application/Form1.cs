@@ -1,5 +1,6 @@
 using System.Data.SqlClient;
 using System.Drawing.Text;
+using System.Linq.Expressions;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace Application
@@ -13,11 +14,14 @@ namespace Application
             InitializeComponent();
         }
 
+
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
         }
 
+        //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
         {
             string productIdString = textBoxProductID.Text;
@@ -67,24 +71,41 @@ namespace Application
             }
         }
 
-private void buttonViewAllProducts_Click(object sender, EventArgs e)
+        //VIEW ALL PRODUCT INFORMATION
+        private void buttonViewAllProducts_Click(object sender, EventArgs e)
         {
-            using (SqlDataReader readerViewProducts = _layer.printallProducts())
+            try
             {
-                while (readerViewProducts.Read())
+                using (SqlDataReader readerViewProducts = _layer.printallProducts())
                 {
-                    richTextBoxProduct.Text += "ID: " + readerViewProducts.GetInt32(0) + " ";
-                    richTextBoxProduct.Text += "Name: " + readerViewProducts.GetString(1) + " ";
-                    richTextBoxProduct.Text += "Cost: " + readerViewProducts.GetDecimal(2) + "kr " + " ";
-                    richTextBoxProduct.Text += "ProductCategoryID: " + readerViewProducts.GetInt32(3) + "\n";
+                    while (readerViewProducts.Read())
+                    {
+                        richTextBoxProduct.Text += "ID: " + readerViewProducts.GetInt32(0) + " " + "\n";
+                        richTextBoxProduct.Text += "Name: " + readerViewProducts.GetString(1) + " " + "\n";
+                        richTextBoxProduct.Text += "Cost: " + readerViewProducts.GetDecimal(2) + "kr " + " " + "\n";
+                        richTextBoxProduct.Text += "ProductCategoryID: " + readerViewProducts.GetInt32(3) + "\n";
+                        richTextBoxProduct.Text += "-----------------------" + "\n";
+
+                    }
                 }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
+            }
+            catch (NullReferenceException)
+            {
+                richTextBoxProduct.Text = "There are no Products to view!";
             }
         }
 
 
-      
-    
 
+
+        //UPDATE PRODUCT
         private void buttonProductUpdate_Click(object sender, EventArgs e)
         {
             string productIdString = textBoxProductID.Text;
@@ -120,7 +141,6 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
                     }
                 }
 
-
                 catch (FormatException)
                 {
                     richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
@@ -129,6 +149,7 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
             }
         }
 
+        //DELETE PRODUCT
         private void buttonProductDelete_Click(object sender, EventArgs e)
         {
             string productIdString = textBoxProductID.Text;
@@ -146,8 +167,6 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
                     _layer.deleteProduct(productId);
 
                     richTextBoxProduct.Text = "Product has successfully been deleted!";
-
-
                 }
                 catch (FormatException)
                 {
@@ -157,6 +176,7 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
             }
         }
 
+        //FIND PRODUCT
         private void buttonFindProduct_Click(object sender, EventArgs e)
         {
             try
@@ -170,9 +190,9 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
                     {
                         while (readerFindProduct.Read())
                         {
-                            richTextBoxProduct.Text += "ID: " + readerFindProduct.GetInt32(0) + " ";
-                            richTextBoxProduct.Text += "Name: " + readerFindProduct.GetString(1) + " ";
-                            richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " ";
+                            richTextBoxProduct.Text += "ID: " + readerFindProduct.GetInt32(0) + " " + "\n";
+                            richTextBoxProduct.Text += "Name: " + readerFindProduct.GetString(1) + " " + "\n";
+                            richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
                         }
                     }
@@ -180,9 +200,23 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
             }
             catch (SqlException ex)
             {
-                
+               if(ex.Number == 0) {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
             }
+
+            catch (FormatException)
+            {
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+            }
+            catch (NullReferenceException)
+            {
+                richTextBoxProduct.Text = "ProductID does not exist";
+            }
+
+
         }
+        
 
     }
     }
