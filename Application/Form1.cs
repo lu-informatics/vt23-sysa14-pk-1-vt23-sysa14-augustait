@@ -25,29 +25,49 @@ namespace Application
             string productPriceString = textBoxProductPrice.Text;
             string categoryIdString = textBoxCategoryID.Text;
 
-            if (!productPriceString.Equals("[0-9]+"))
+            if (string.IsNullOrWhiteSpace(productIdString) || string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(productPriceString)
+                || string.IsNullOrWhiteSpace(categoryIdString))
             {
-
-                int productId = Int32.Parse(productIdString);
-                int categoryId = Int32.Parse(categoryIdString);
-                decimal productPrice = Decimal.Parse(productPriceString);
-
-                _layer.insertProduct(productId, productName, productPrice, categoryId);
-
-                richTextBoxProduct.Text = "The Product has successfully been created!";
-
-                textBoxProductID.Text = " ";
-                textBoxProductName.Text = " ";
-                textBoxProductPrice.Text = " ";
-                textBoxCategoryID.Text = " ";
-
-
+                richTextBoxProduct.Text = "Please enter all the fields!";
             }
+            else
+            {
+                try
+                {
+                    int productId = int.Parse(productIdString);
+                    int categoryId = int.Parse(categoryIdString);
+                    decimal productPrice = decimal.Parse(productPriceString);
 
+                    _layer.insertProduct(productId, productName, productPrice, categoryId);
 
+                    richTextBoxProduct.Text = "The product has been successfully created!";
+
+                    textBoxProductID.Text = " ";
+                    textBoxProductName.Text = " ";
+                    textBoxProductPrice.Text = " ";
+                    textBoxCategoryID.Text = " ";
+                }
+                
+               catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+                    richTextBoxProduct.Text = "A product with the same ID already exists.";
+                }
+                else if (ex.Number == 547)
+                    {
+                        richTextBoxProduct.Text = "The category ID provided does not exist.";
+                    }
+                }
+
+                catch (FormatException)
+                {
+                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                }
+            }
         }
 
-        private void buttonViewAllProducts_Click(object sender, EventArgs e)
+private void buttonViewAllProducts_Click(object sender, EventArgs e)
         {
             using (SqlDataReader readerViewProducts = _layer.printallProducts())
             {
