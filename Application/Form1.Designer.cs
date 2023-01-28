@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabProduct = new System.Windows.Forms.TabPage();
+            this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
             this.textBoxCategoryID = new System.Windows.Forms.TextBox();
             this.pictureBoxICA = new System.Windows.Forms.PictureBox();
             this.buttonDeleteProduct = new System.Windows.Forms.Button();
@@ -43,7 +44,7 @@
             this.tabOrder = new System.Windows.Forms.TabPage();
             this.tabCustomer = new System.Windows.Forms.TabPage();
             this.tabStore = new System.Windows.Forms.TabPage();
-            this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
+            this.buttonViewAllProducts = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
@@ -64,6 +65,7 @@
             // 
             // tabProduct
             // 
+            this.tabProduct.Controls.Add(this.buttonViewAllProducts);
             this.tabProduct.Controls.Add(this.richTextBoxProduct);
             this.tabProduct.Controls.Add(this.textBoxCategoryID);
             this.tabProduct.Controls.Add(this.pictureBoxICA);
@@ -81,6 +83,16 @@
             this.tabProduct.TabIndex = 0;
             this.tabProduct.Text = "Product";
             this.tabProduct.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxProduct
+            // 
+            this.richTextBoxProduct.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBoxProduct.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxProduct.Name = "richTextBoxProduct";
+            this.richTextBoxProduct.ReadOnly = true;
+            this.richTextBoxProduct.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxProduct.TabIndex = 10;
+            this.richTextBoxProduct.Text = "";
             // 
             // textBoxCategoryID
             // 
@@ -201,15 +213,15 @@
             this.tabStore.Text = "Store";
             this.tabStore.UseVisualStyleBackColor = true;
             // 
-            // richTextBoxProduct
+            // buttonViewAllProducts
             // 
-            this.richTextBoxProduct.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxProduct.Location = new System.Drawing.Point(40, 140);
-            this.richTextBoxProduct.Name = "richTextBoxProduct";
-            this.richTextBoxProduct.ReadOnly = true;
-            this.richTextBoxProduct.Size = new System.Drawing.Size(662, 96);
-            this.richTextBoxProduct.TabIndex = 10;
-            this.richTextBoxProduct.Text = "";
+            this.buttonViewAllProducts.Location = new System.Drawing.Point(312, 257);
+            this.buttonViewAllProducts.Name = "buttonViewAllProducts";
+            this.buttonViewAllProducts.Size = new System.Drawing.Size(109, 23);
+            this.buttonViewAllProducts.TabIndex = 11;
+            this.buttonViewAllProducts.Text = "View all";
+            this.buttonViewAllProducts.UseVisualStyleBackColor = true;
+            this.buttonViewAllProducts.Click += new System.EventHandler(this.buttonViewAllProducts_Click);
             // 
             // Form1
             // 
@@ -246,5 +258,6 @@
         private Button buttonUpdateProduct;
         private TextBox textBoxCategoryID;
         private RichTextBox richTextBoxProduct;
+        private Button buttonViewAllProducts;
     }
 }

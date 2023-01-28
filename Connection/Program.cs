@@ -3,3 +3,5 @@
 
 DataAccessLayer dal = new DataAccessLayer();
 
+dal.printallProducts();
+

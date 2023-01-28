@@ -24,7 +24,7 @@ namespace Connection
         }
       
         //Prints 
-        public void printallProducts()
+        public void printallProductCategory()
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -37,6 +37,30 @@ namespace Connection
             {
                 Console.WriteLine(reader.GetInt32(0));
                 Console.WriteLine(reader.GetString(1));
+
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+            reader.Close();
+
+        }
+        public void printallProducts()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Product";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetDecimal(2));
+                Console.WriteLine(reader.GetInt32(3));
+
 
             }
             reader.Close();
