@@ -150,6 +150,7 @@
             this.buttonFindProduct.TabIndex = 5;
             this.buttonFindProduct.Text = "Find";
             this.buttonFindProduct.UseVisualStyleBackColor = true;
+            this.buttonFindProduct.Click += new System.EventHandler(this.buttonFindProduct_Click);
             // 
             // buttonCreateProduct
             // 

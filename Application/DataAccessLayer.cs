@@ -23,20 +23,14 @@ namespace Application
         }
 
         //Prints all from Product Category
-
         public SqlDataReader printallProductCategory()
         {
-            using (SqlConnection connection = GetDatabaseConnection())
-            {
-                using (SqlCommand command = connection.CreateCommand())
-                {
-                    command.CommandText = "SELECT * FROM ProductCategory";
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-
-                    return reader;
-                }
-            }
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM ProductCategory";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
         }
 
         //Prints All Products
@@ -101,6 +95,17 @@ namespace Application
             connection.Close();
             connection.Dispose();
 
+        }
+        public SqlDataReader findProduct(int productId)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Product WHERE ProductId = @ProductId";
+            command.Parameters.Add(new SqlParameter("@ProductId", productId));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
         }
     }
 }
