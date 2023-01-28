@@ -157,6 +157,33 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
             }
         }
 
+        private void buttonFindProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string productIdString = textBoxProductID.Text;
+                int productID = Int32.Parse(productIdString);
+
+                using (SqlDataReader readerFindProduct = _layer.findProduct(productID))
+                {
+                    if (readerFindProduct != null)
+                    {
+                        while (readerFindProduct.Read())
+                        {
+                            richTextBoxProduct.Text += "ID: " + readerFindProduct.GetInt32(0) + " ";
+                            richTextBoxProduct.Text += "Name: " + readerFindProduct.GetString(1) + " ";
+                            richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " ";
+                            richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                
+            }
+        }
+
     }
     }
    
