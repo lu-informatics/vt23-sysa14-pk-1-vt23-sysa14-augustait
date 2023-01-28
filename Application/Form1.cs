@@ -82,9 +82,86 @@ private void buttonViewAllProducts_Click(object sender, EventArgs e)
         }
 
 
+      
+    
+
+        private void buttonProductUpdate_Click(object sender, EventArgs e)
+        {
+            string productIdString = textBoxProductID.Text;
+            string productName = textBoxProductName.Text;
+            string productPriceString = textBoxProductPrice.Text;
+            string categoryIdString = textBoxCategoryID.Text;
+
+            if (string.IsNullOrWhiteSpace(productIdString) || string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(productPriceString))
+            {
+                richTextBoxProduct.Text = "Please enter all of the following fields: Product Name, Product ID and Product Price.";
+            }
+            else
+            {
+                try
+                {
+                    int productId = int.Parse(productIdString);
+                    decimal productPrice = decimal.Parse(productPriceString);
+
+                    _layer.updateProduct(productId, productName, productPrice);
+
+                    richTextBoxProduct.Text = "The product has been successfully been updated!";
+
+                    textBoxProductID.Text = " ";
+                    textBoxProductName.Text = " ";
+                    textBoxProductPrice.Text = " ";
+                    textBoxCategoryID.Text = " ";
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        richTextBoxProduct.Text = "A product with the same ID already exists.";
+                    }
+                }
 
 
+                catch (FormatException)
+                {
+                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                }
 
+            }
+        }
+
+        private void buttonProductDelete_Click(object sender, EventArgs e)
+        {
+            string productIdString = textBoxProductID.Text;
+
+            if (string.IsNullOrWhiteSpace(productIdString))
+            {
+                richTextBoxProduct.Text = "Please enter the Product ID that you want to delete!";
+            }
+
+            else
+            {
+                try
+                {
+                    int productId = int.Parse(productIdString);
+                    _layer.deleteProduct(productId);
+
+                    richTextBoxProduct.Text = "Product has successfully been deleted!";
+
+
+                }
+                catch (FormatException)
+                {
+                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
+                }
+
+            }
+        }
 
     }
-}
+    }
+   
+    
+
+
+
+
