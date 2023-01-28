@@ -22,28 +22,35 @@ namespace Application
             return connection;
         }
 
-        //Prints 
-        public void printallProducts()
+        //Prints all from Product Category
+
+        public SqlDataReader printallProductCategory()
+        {
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                using (SqlCommand command = connection.CreateCommand())
+                {
+                    command.CommandText = "SELECT * FROM ProductCategory";
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    return reader;
+                }
+            }
+        }
+
+        //Prints All Products
+        public SqlDataReader printallProducts()
         {
             SqlConnection connection = GetDatabaseConnection();
-
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM ProductCategory";
+            command.CommandText = "SELECT * FROM Product";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Console.WriteLine(reader.GetInt32(0));
-                Console.WriteLine(reader.GetString(1));
-
-            }
-            reader.Close();
-            connection.Dispose();
-            connection.Close();
-            reader.Close();
+            return reader;
 
         }
+
         public void insertProduct(int productId, string productName, decimal productPrice, int categoryId)
         {
             SqlConnection connection = GetDatabaseConnection();
