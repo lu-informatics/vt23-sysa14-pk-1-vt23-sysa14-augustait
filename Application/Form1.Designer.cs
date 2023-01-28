@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabProduct = new System.Windows.Forms.TabPage();
+            this.buttonViewAllProducts = new System.Windows.Forms.Button();
             this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
             this.textBoxCategoryID = new System.Windows.Forms.TextBox();
             this.pictureBoxICA = new System.Windows.Forms.PictureBox();
@@ -44,7 +45,6 @@
             this.tabOrder = new System.Windows.Forms.TabPage();
             this.tabCustomer = new System.Windows.Forms.TabPage();
             this.tabStore = new System.Windows.Forms.TabPage();
-            this.buttonViewAllProducts = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
@@ -84,6 +84,16 @@
             this.tabProduct.Text = "Product";
             this.tabProduct.UseVisualStyleBackColor = true;
             // 
+            // buttonViewAllProducts
+            // 
+            this.buttonViewAllProducts.Location = new System.Drawing.Point(312, 257);
+            this.buttonViewAllProducts.Name = "buttonViewAllProducts";
+            this.buttonViewAllProducts.Size = new System.Drawing.Size(109, 23);
+            this.buttonViewAllProducts.TabIndex = 11;
+            this.buttonViewAllProducts.Text = "View all";
+            this.buttonViewAllProducts.UseVisualStyleBackColor = true;
+            this.buttonViewAllProducts.Click += new System.EventHandler(this.buttonViewAllProducts_Click);
+            // 
             // richTextBoxProduct
             // 
             this.richTextBoxProduct.BackColor = System.Drawing.Color.WhiteSmoke;
@@ -120,6 +130,7 @@
             this.buttonDeleteProduct.TabIndex = 7;
             this.buttonDeleteProduct.Text = "Delete";
             this.buttonDeleteProduct.UseVisualStyleBackColor = true;
+            this.buttonDeleteProduct.Click += new System.EventHandler(this.buttonProductDelete_Click);
             // 
             // buttonUpdateProduct
             // 
@@ -129,6 +140,7 @@
             this.buttonUpdateProduct.TabIndex = 6;
             this.buttonUpdateProduct.Text = "Update";
             this.buttonUpdateProduct.UseVisualStyleBackColor = true;
+            this.buttonUpdateProduct.Click += new System.EventHandler(this.buttonProductUpdate_Click);
             // 
             // buttonFindProduct
             // 
@@ -212,16 +224,6 @@
             this.tabStore.TabIndex = 4;
             this.tabStore.Text = "Store";
             this.tabStore.UseVisualStyleBackColor = true;
-            // 
-            // buttonViewAllProducts
-            // 
-            this.buttonViewAllProducts.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllProducts.Name = "buttonViewAllProducts";
-            this.buttonViewAllProducts.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllProducts.TabIndex = 11;
-            this.buttonViewAllProducts.Text = "View all";
-            this.buttonViewAllProducts.UseVisualStyleBackColor = true;
-            this.buttonViewAllProducts.Click += new System.EventHandler(this.buttonViewAllProducts_Click);
             // 
             // Form1
             // 
