@@ -136,7 +136,7 @@ namespace Application
         }
 
         //METHOD FIND STORE
-        public void findStore(int supermarketID)
+        public SqlDataReader findStore(int supermarketID)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -145,17 +145,7 @@ namespace Application
             command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                Console.WriteLine(reader.GetInt32(0));
-                Console.WriteLine(reader.GetString(1));
-                Console.WriteLine(reader.GetString(2));
-                Console.WriteLine(reader.GetString(3));
-                Console.WriteLine(reader.GetString(4));
-            }
-            reader.Close();
-            connection.Dispose();
-            connection.Close();
+            return reader;
         }
 
         //METHOD UPDATE STORE
@@ -198,7 +188,6 @@ namespace Application
         }
 
         //METHOD VIEW ALL INFORMATION ABOUT STORE
-        //Prints All Products
         public SqlDataReader printallStores()
         {
             SqlConnection connection = GetDatabaseConnection();

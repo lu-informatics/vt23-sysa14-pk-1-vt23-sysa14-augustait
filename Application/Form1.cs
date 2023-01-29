@@ -225,6 +225,44 @@ namespace Application
         //FIND STORE
         private void buttonStoreFind_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string storeID = textBoxStoreID.Text;
+                int newID = Int32.Parse(storeID);
+
+                using (SqlDataReader readerFindStore = _layer.findStore(newID))
+                {
+                    if (readerFindStore != null)
+                    {
+                        while (readerFindStore.Read())
+                        {
+
+                            richTextBoxStore.Text += "ID: " + readerFindStore.GetInt32(0) + " " + "\n";
+                            richTextBoxStore.Text += "Region Name: " + readerFindStore.GetString(1) + " " + "\n";
+                            richTextBoxStore.Text += "Store name: " + readerFindStore.GetString(2) + "kr " + " " + "\n";
+                            richTextBoxStore.Text += "City: " + readerFindStore.GetString(3) + "\n";
+                            richTextBoxStore.Text += "Address: " + readerFindStore.GetString(4) + "\n";
+                            richTextBoxStore.Text += "-----------------------" + "\n";
+
+                        }
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+            }
+            catch (NullReferenceException)
+            {
+                richTextBoxProduct.Text = "ProductID does not exist";
+            }
 
         }
 
