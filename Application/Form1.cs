@@ -186,7 +186,7 @@ namespace Application
 
                 using (SqlDataReader readerFindProduct = _layer.findProduct(productID))
                 {
-                    if (readerFindProduct != null)
+                    if (readerFindProduct.HasRows)
                     {
                         while (readerFindProduct.Read())
                         {
@@ -195,6 +195,10 @@ namespace Application
                             richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
                         }
+                    }
+                    else
+                    {
+                        richTextBoxProduct.Text += "The ProductID you have provided does not exist";
                     }
                 }
             }
@@ -208,10 +212,6 @@ namespace Application
             {
                 richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
             }
-            catch (NullReferenceException)
-            {
-                richTextBoxProduct.Text = "ProductID does not exist";
-            }
 
 
         }
@@ -219,6 +219,54 @@ namespace Application
         //ADD STORE
         private void buttonStoreAdd_Click(object sender, EventArgs e)
         {
+          
+               string storeID = textBoxStoreID.Text;
+               string regionName = textBoxStoreRegionName.Text;
+               string storeName = textBoxStoreName.Text;
+               string storeCity = textBoxStoreCity.Text;
+               string storeAddress = textBoxStoreAddress.Text;
+            
+
+                if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
+                    || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
+                {
+                    richTextBoxStore.Text = "Please enter all the fields!";
+                }
+                else
+                {
+                    try
+                    {
+                        int tmpID = int.Parse(storeID);
+
+                        _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
+
+                        richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
+
+                        textBoxStoreID.Text = " ";
+                        textBoxStoreRegionName.Text = " ";
+                        textBoxStoreName.Text = " ";
+                        textBoxStoreCity.Text = " ";
+                        textBoxStoreAddress.Text = " ";
+
+                }
+
+                catch (SqlException ex)
+                    {
+                        if (ex.Number == 2627)
+                        {
+                            richTextBoxStore.Text = "A Store with the same ID already exists.";
+                        }
+                        else if (ex.Number == 0)
+                        {
+                            richTextBoxStore.Text = "No connection with server";
+                        }
+                    }
+
+                    catch (FormatException)
+                    {
+                        richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
+                    }
+                }
 
         }
 
@@ -232,19 +280,23 @@ namespace Application
 
                 using (SqlDataReader readerFindStore = _layer.findStore(newID))
                 {
-                    if (readerFindStore != null)
+                    if (readerFindStore.HasRows)
                     {
                         while (readerFindStore.Read())
                         {
 
                             richTextBoxStore.Text += "ID: " + readerFindStore.GetInt32(0) + " " + "\n";
                             richTextBoxStore.Text += "Region Name: " + readerFindStore.GetString(1) + " " + "\n";
-                            richTextBoxStore.Text += "Store name: " + readerFindStore.GetString(2) + "kr " + " " + "\n";
+                            richTextBoxStore.Text += "Store name: " + readerFindStore.GetString(2).ToUpperInvariant() + " " + "\n";
                             richTextBoxStore.Text += "City: " + readerFindStore.GetString(3) + "\n";
                             richTextBoxStore.Text += "Address: " + readerFindStore.GetString(4) + "\n";
                             richTextBoxStore.Text += "-----------------------" + "\n";
 
                         }
+                    }
+                    else
+                    {
+                        richTextBoxStore.Text = "The SupermarketID you have provided does not exist";
                     }
                 }
             }
@@ -252,18 +304,13 @@ namespace Application
             {
                 if (ex.Number == 0)
                 {
-                    richTextBoxProduct.Text = "No connection with server";
+                    richTextBoxStore.Text = "No connection with server";
                 }
             }
             catch (FormatException)
             {
-                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Store ID";
             }
-            catch (NullReferenceException)
-            {
-                richTextBoxProduct.Text = "ProductID does not exist";
-            }
-
         }
 
         //UPDATE STORE
@@ -275,7 +322,36 @@ namespace Application
         //DELETE STORE
         private void buttonStoreDelete_Click(object sender, EventArgs e)
         {
+            String storeID = textBoxStoreID.Text;
 
+            if (string.IsNullOrWhiteSpace(storeID))
+            {
+                richTextBoxStore.Text = "Please enter the Store ID that you want to delete!";
+            }
+
+            else
+            {
+                try
+                {
+                    int tmpID = Int32.Parse(storeID);
+                    _layer.deleteStore(tmpID);
+
+                    richTextBoxStore.Text = "Store has successfully been deleted!";
+                }
+                catch (SqlException ex)
+                {
+                  if (ex.Number == 0)
+                    {
+                        richTextBoxStore.Text = "No connection with server";
+
+                    }
+                }
+                catch (FormatException)
+                {
+                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
+                }
+
+            }
         }
 
         //VIEW ALL INFORMATION STORE
@@ -289,7 +365,7 @@ namespace Application
                         {
                             richTextBoxStore.Text += "ID: " + readerViewStores.GetInt32(0) + " " + "\n";
                             richTextBoxStore.Text += "Region Name: " + readerViewStores.GetString(1) + " " + "\n";
-                            richTextBoxStore.Text += "Store name: " + readerViewStores.GetString(2) + "kr " + " " + "\n";
+                            richTextBoxStore.Text += "Store name: " + readerViewStores.GetString(2) + " " + "\n";
                             richTextBoxStore.Text += "City: " + readerViewStores.GetString(3) + "\n";
                             richTextBoxStore.Text += "Address: " + readerViewStores.GetString(4) + "\n";
                             richTextBoxStore.Text += "-----------------------" + "\n";
