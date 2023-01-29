@@ -204,7 +204,6 @@ namespace Application
                     richTextBoxProduct.Text = "No connection with server";
                 }
             }
-
             catch (FormatException)
             {
                 richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
@@ -216,8 +215,8 @@ namespace Application
 
 
         }
-        
 
+      
     }
     }
    
