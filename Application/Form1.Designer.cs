@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabProduct = new System.Windows.Forms.TabPage();
             this.buttonViewAllProducts = new System.Windows.Forms.Button();
@@ -45,9 +46,25 @@
             this.tabOrder = new System.Windows.Forms.TabPage();
             this.tabCustomer = new System.Windows.Forms.TabPage();
             this.tabStore = new System.Windows.Forms.TabPage();
+            this.pictureBoxStoreMap = new System.Windows.Forms.PictureBox();
+            this.buttonViewAllStore = new System.Windows.Forms.Button();
+            this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxStore = new System.Windows.Forms.PictureBox();
+            this.textBoxStoreID = new System.Windows.Forms.TextBox();
+            this.textBoxStoreRegionName = new System.Windows.Forms.TextBox();
+            this.textBoxStoreName = new System.Windows.Forms.TextBox();
+            this.textBoxStoreCity = new System.Windows.Forms.TextBox();
+            this.textBoxStoreAddress = new System.Windows.Forms.TextBox();
+            this.buttonStoreAdd = new System.Windows.Forms.Button();
+            this.buttonStoreFind = new System.Windows.Forms.Button();
+            this.buttonStoreUpdate = new System.Windows.Forms.Button();
+            this.buttonStoreDelete = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
+            this.tabStore.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -218,6 +235,19 @@
             // 
             // tabStore
             // 
+            this.tabStore.Controls.Add(this.buttonStoreDelete);
+            this.tabStore.Controls.Add(this.buttonStoreUpdate);
+            this.tabStore.Controls.Add(this.buttonStoreFind);
+            this.tabStore.Controls.Add(this.buttonStoreAdd);
+            this.tabStore.Controls.Add(this.textBoxStoreAddress);
+            this.tabStore.Controls.Add(this.textBoxStoreCity);
+            this.tabStore.Controls.Add(this.textBoxStoreName);
+            this.tabStore.Controls.Add(this.textBoxStoreRegionName);
+            this.tabStore.Controls.Add(this.textBoxStoreID);
+            this.tabStore.Controls.Add(this.pictureBoxStoreMap);
+            this.tabStore.Controls.Add(this.buttonViewAllStore);
+            this.tabStore.Controls.Add(this.richTextBoxStore);
+            this.tabStore.Controls.Add(this.pictureBoxStore);
             this.tabStore.Location = new System.Drawing.Point(4, 24);
             this.tabStore.Name = "tabStore";
             this.tabStore.Padding = new System.Windows.Forms.Padding(3);
@@ -225,6 +255,121 @@
             this.tabStore.TabIndex = 4;
             this.tabStore.Text = "Store";
             this.tabStore.UseVisualStyleBackColor = true;
+            // 
+            // pictureBoxStoreMap
+            // 
+            this.pictureBoxStoreMap.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxStoreMap.Image")));
+            this.pictureBoxStoreMap.Location = new System.Drawing.Point(397, 18);
+            this.pictureBoxStoreMap.Name = "pictureBoxStoreMap";
+            this.pictureBoxStoreMap.Size = new System.Drawing.Size(324, 181);
+            this.pictureBoxStoreMap.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxStoreMap.TabIndex = 13;
+            this.pictureBoxStoreMap.TabStop = false;
+            // 
+            // buttonViewAllStore
+            // 
+            this.buttonViewAllStore.Location = new System.Drawing.Point(492, 212);
+            this.buttonViewAllStore.Name = "buttonViewAllStore";
+            this.buttonViewAllStore.Size = new System.Drawing.Size(109, 23);
+            this.buttonViewAllStore.TabIndex = 12;
+            this.buttonViewAllStore.Text = "View all";
+            this.buttonViewAllStore.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxStore
+            // 
+            this.richTextBoxStore.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBoxStore.Location = new System.Drawing.Point(377, 241);
+            this.richTextBoxStore.Name = "richTextBoxStore";
+            this.richTextBoxStore.ReadOnly = true;
+            this.richTextBoxStore.Size = new System.Drawing.Size(365, 158);
+            this.richTextBoxStore.TabIndex = 11;
+            this.richTextBoxStore.Text = "";
+            // 
+            // pictureBoxStore
+            // 
+            this.pictureBoxStore.Image = global::Application.Properties.Resources.ICA;
+            this.pictureBoxStore.Location = new System.Drawing.Point(17, 18);
+            this.pictureBoxStore.Name = "pictureBoxStore";
+            this.pictureBoxStore.Size = new System.Drawing.Size(123, 86);
+            this.pictureBoxStore.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxStore.TabIndex = 9;
+            this.pictureBoxStore.TabStop = false;
+            // 
+            // textBoxStoreID
+            // 
+            this.textBoxStoreID.Location = new System.Drawing.Point(17, 148);
+            this.textBoxStoreID.Name = "textBoxStoreID";
+            this.textBoxStoreID.PlaceholderText = "Supermarket ID:";
+            this.textBoxStoreID.Size = new System.Drawing.Size(108, 23);
+            this.textBoxStoreID.TabIndex = 14;
+            // 
+            // textBoxStoreRegionName
+            // 
+            this.textBoxStoreRegionName.Location = new System.Drawing.Point(17, 187);
+            this.textBoxStoreRegionName.Name = "textBoxStoreRegionName";
+            this.textBoxStoreRegionName.PlaceholderText = "Region name:";
+            this.textBoxStoreRegionName.Size = new System.Drawing.Size(108, 23);
+            this.textBoxStoreRegionName.TabIndex = 15;
+            // 
+            // textBoxStoreName
+            // 
+            this.textBoxStoreName.Location = new System.Drawing.Point(17, 228);
+            this.textBoxStoreName.Name = "textBoxStoreName";
+            this.textBoxStoreName.PlaceholderText = "Store name:";
+            this.textBoxStoreName.Size = new System.Drawing.Size(108, 23);
+            this.textBoxStoreName.TabIndex = 16;
+            // 
+            // textBoxStoreCity
+            // 
+            this.textBoxStoreCity.Location = new System.Drawing.Point(17, 272);
+            this.textBoxStoreCity.Name = "textBoxStoreCity";
+            this.textBoxStoreCity.PlaceholderText = "City:";
+            this.textBoxStoreCity.Size = new System.Drawing.Size(108, 23);
+            this.textBoxStoreCity.TabIndex = 17;
+            // 
+            // textBoxStoreAddress
+            // 
+            this.textBoxStoreAddress.Location = new System.Drawing.Point(17, 311);
+            this.textBoxStoreAddress.Name = "textBoxStoreAddress";
+            this.textBoxStoreAddress.PlaceholderText = "Address:";
+            this.textBoxStoreAddress.Size = new System.Drawing.Size(108, 23);
+            this.textBoxStoreAddress.TabIndex = 18;
+            // 
+            // buttonStoreAdd
+            // 
+            this.buttonStoreAdd.Location = new System.Drawing.Point(6, 376);
+            this.buttonStoreAdd.Name = "buttonStoreAdd";
+            this.buttonStoreAdd.Size = new System.Drawing.Size(75, 23);
+            this.buttonStoreAdd.TabIndex = 19;
+            this.buttonStoreAdd.Text = "Add";
+            this.buttonStoreAdd.UseVisualStyleBackColor = true;
+            // 
+            // buttonStoreFind
+            // 
+            this.buttonStoreFind.Location = new System.Drawing.Point(98, 376);
+            this.buttonStoreFind.Name = "buttonStoreFind";
+            this.buttonStoreFind.Size = new System.Drawing.Size(75, 23);
+            this.buttonStoreFind.TabIndex = 20;
+            this.buttonStoreFind.Text = "Find";
+            this.buttonStoreFind.UseVisualStyleBackColor = true;
+            // 
+            // buttonStoreUpdate
+            // 
+            this.buttonStoreUpdate.Location = new System.Drawing.Point(194, 376);
+            this.buttonStoreUpdate.Name = "buttonStoreUpdate";
+            this.buttonStoreUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonStoreUpdate.TabIndex = 21;
+            this.buttonStoreUpdate.Text = "Update";
+            this.buttonStoreUpdate.UseVisualStyleBackColor = true;
+            // 
+            // buttonStoreDelete
+            // 
+            this.buttonStoreDelete.Location = new System.Drawing.Point(287, 376);
+            this.buttonStoreDelete.Name = "buttonStoreDelete";
+            this.buttonStoreDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonStoreDelete.TabIndex = 22;
+            this.buttonStoreDelete.Text = "Delete";
+            this.buttonStoreDelete.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -239,6 +384,10 @@
             this.tabProduct.ResumeLayout(false);
             this.tabProduct.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).EndInit();
+            this.tabStore.ResumeLayout(false);
+            this.tabStore.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -262,5 +411,18 @@
         private TextBox textBoxCategoryID;
         private RichTextBox richTextBoxProduct;
         private Button buttonViewAllProducts;
+        private PictureBox pictureBoxStore;
+        private Button buttonViewAllStore;
+        private RichTextBox richTextBoxStore;
+        private PictureBox pictureBoxStoreMap;
+        private Button buttonStoreDelete;
+        private Button buttonStoreUpdate;
+        private Button buttonStoreFind;
+        private Button buttonStoreAdd;
+        private TextBox textBoxStoreAddress;
+        private TextBox textBoxStoreCity;
+        private TextBox textBoxStoreName;
+        private TextBox textBoxStoreRegionName;
+        private TextBox textBoxStoreID;
     }
 }
