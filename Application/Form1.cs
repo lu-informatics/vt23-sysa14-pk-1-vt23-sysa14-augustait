@@ -14,6 +14,21 @@ namespace Application
             InitializeComponent();
         }
 
+        public void clearAllTextBox()
+        {
+            List<TextBox> list = new List<TextBox>();
+            list.Add(textBoxProductID);
+            list.Add(textBoxProductName);
+            list.Add(textBoxCategoryID);
+            list.Add(textBoxProductPrice);
+            foreach (TextBox tb in list)
+            {
+                tb.Text = ("");
+            }
+        }
+
+
+
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -46,10 +61,7 @@ namespace Application
 
                     richTextBoxProduct.Text = "The product has been successfully created!";
 
-                    textBoxProductID.Text = " ";
-                    textBoxProductName.Text = " ";
-                    textBoxProductPrice.Text = " ";
-                    textBoxCategoryID.Text = " ";
+                    clearAllTextBox();
                 }
                 
                catch (SqlException ex)
@@ -57,10 +69,12 @@ namespace Application
                 if (ex.Number == 2627)
                 {
                     richTextBoxProduct.Text = "A product with the same ID already exists.";
+                        textBoxProductID.Text = " ";
                 }
                 else if (ex.Number == 547)
                     {
                         richTextBoxProduct.Text = "The category ID provided does not exist.";
+                        textBoxCategoryID.Text = " ";
                     }
                 }
 
@@ -128,18 +142,10 @@ namespace Application
 
                     richTextBoxProduct.Text = "The product has been successfully been updated!";
 
-                    textBoxProductID.Text = " ";
-                    textBoxProductName.Text = " ";
-                    textBoxProductPrice.Text = " ";
-                    textBoxCategoryID.Text = " ";
+                    clearAllTextBox();
                 }
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 2627)
-                    {
-                        richTextBoxProduct.Text = "A product with the same ID already exists.";
-                    }
-                }
+              
+                
 
                 catch (FormatException)
                 {
@@ -167,6 +173,7 @@ namespace Application
                     _layer.deleteProduct(productId);
 
                     richTextBoxProduct.Text = "Product has successfully been deleted!";
+                    clearAllTextBox();
                 }
                 catch (FormatException)
                 {
