@@ -216,7 +216,64 @@ namespace Application
 
         }
 
-      
+        //ADD STORE
+        private void buttonStoreAdd_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //FIND STORE
+        private void buttonStoreFind_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //UPDATE STORE
+        private void buttonStoreUpdate_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //DELETE STORE
+        private void buttonStoreDelete_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //VIEW ALL INFORMATION STORE
+        private void buttonViewAllStore_Click(object sender, EventArgs e)
+        {
+                try
+                {
+                using (SqlDataReader readerViewStores = _layer.printallStores()) 
+                    {
+                        while (readerViewStores.Read())
+                        {
+                            richTextBoxStore.Text += "ID: " + readerViewStores.GetInt32(0) + " " + "\n";
+                            richTextBoxStore.Text += "Region Name: " + readerViewStores.GetString(1) + " " + "\n";
+                            richTextBoxStore.Text += "Store name: " + readerViewStores.GetString(2) + "kr " + " " + "\n";
+                            richTextBoxStore.Text += "City: " + readerViewStores.GetString(3) + "\n";
+                            richTextBoxStore.Text += "Address: " + readerViewStores.GetString(4) + "\n";
+                            richTextBoxStore.Text += "-----------------------" + "\n";
+                        
+
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 0)
+                    {
+                        richTextBoxProduct.Text = "No connection with server";
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    richTextBoxProduct.Text = "There are no Products to view!";
+                }
+ 
+
+        }
     }
     }
    
