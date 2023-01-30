@@ -45,6 +45,19 @@
             this.tabProductCategory = new System.Windows.Forms.TabPage();
             this.tabOrder = new System.Windows.Forms.TabPage();
             this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.buttonAddCostumer = new System.Windows.Forms.Button();
+            this.buttonFindCostumer = new System.Windows.Forms.Button();
+            this.buttonDeleteCostumer = new System.Windows.Forms.Button();
+            this.buttonUpdateCostumer = new System.Windows.Forms.Button();
+            this.textBoxCostumerUserName = new System.Windows.Forms.TextBox();
+            this.textBoxCostumerAddress = new System.Windows.Forms.TextBox();
+            this.textBoxCostumerPhoneNumber = new System.Windows.Forms.TextBox();
+            this.textBoxCostumerMail = new System.Windows.Forms.TextBox();
+            this.textBoxCostumerName = new System.Windows.Forms.TextBox();
+            this.buttonViewAllCostumers = new System.Windows.Forms.Button();
+            this.richTextBoxCostumer = new System.Windows.Forms.RichTextBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabStore = new System.Windows.Forms.TabPage();
             this.buttonStoreDelete = new System.Windows.Forms.Button();
             this.buttonStoreUpdate = new System.Windows.Forms.Button();
@@ -62,6 +75,9 @@
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
+            this.tabCustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabStore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
@@ -225,6 +241,19 @@
             // 
             // tabCustomer
             // 
+            this.tabCustomer.Controls.Add(this.buttonAddCostumer);
+            this.tabCustomer.Controls.Add(this.buttonFindCostumer);
+            this.tabCustomer.Controls.Add(this.buttonDeleteCostumer);
+            this.tabCustomer.Controls.Add(this.buttonUpdateCostumer);
+            this.tabCustomer.Controls.Add(this.textBoxCostumerUserName);
+            this.tabCustomer.Controls.Add(this.textBoxCostumerAddress);
+            this.tabCustomer.Controls.Add(this.textBoxCostumerPhoneNumber);
+            this.tabCustomer.Controls.Add(this.textBoxCostumerMail);
+            this.tabCustomer.Controls.Add(this.textBoxCostumerName);
+            this.tabCustomer.Controls.Add(this.buttonViewAllCostumers);
+            this.tabCustomer.Controls.Add(this.richTextBoxCostumer);
+            this.tabCustomer.Controls.Add(this.pictureBox2);
+            this.tabCustomer.Controls.Add(this.pictureBox1);
             this.tabCustomer.Location = new System.Drawing.Point(4, 24);
             this.tabCustomer.Name = "tabCustomer";
             this.tabCustomer.Padding = new System.Windows.Forms.Padding(3);
@@ -232,6 +261,126 @@
             this.tabCustomer.TabIndex = 3;
             this.tabCustomer.Text = "Customer";
             this.tabCustomer.UseVisualStyleBackColor = true;
+            // 
+            // buttonAddCostumer
+            // 
+            this.buttonAddCostumer.Location = new System.Drawing.Point(56, 369);
+            this.buttonAddCostumer.Name = "buttonAddCostumer";
+            this.buttonAddCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonAddCostumer.TabIndex = 21;
+            this.buttonAddCostumer.Text = "Create";
+            this.buttonAddCostumer.UseVisualStyleBackColor = true;
+            this.buttonAddCostumer.Click += new System.EventHandler(this.buttonAddCostumer_Click);
+            // 
+            // buttonFindCostumer
+            // 
+            this.buttonFindCostumer.Location = new System.Drawing.Point(249, 369);
+            this.buttonFindCostumer.Name = "buttonFindCostumer";
+            this.buttonFindCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonFindCostumer.TabIndex = 20;
+            this.buttonFindCostumer.Text = "Find";
+            this.buttonFindCostumer.UseVisualStyleBackColor = true;
+            this.buttonFindCostumer.Click += new System.EventHandler(this.buttonFindCostumer_Click);
+            // 
+            // buttonDeleteCostumer
+            // 
+            this.buttonDeleteCostumer.Location = new System.Drawing.Point(609, 369);
+            this.buttonDeleteCostumer.Name = "buttonDeleteCostumer";
+            this.buttonDeleteCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonDeleteCostumer.TabIndex = 19;
+            this.buttonDeleteCostumer.Text = "Delete";
+            this.buttonDeleteCostumer.UseVisualStyleBackColor = true;
+            this.buttonDeleteCostumer.Click += new System.EventHandler(this.buttonDeleteCostumer_Click);
+            // 
+            // buttonUpdateCostumer
+            // 
+            this.buttonUpdateCostumer.Location = new System.Drawing.Point(440, 369);
+            this.buttonUpdateCostumer.Name = "buttonUpdateCostumer";
+            this.buttonUpdateCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonUpdateCostumer.TabIndex = 18;
+            this.buttonUpdateCostumer.Text = "Update";
+            this.buttonUpdateCostumer.UseVisualStyleBackColor = true;
+            this.buttonUpdateCostumer.Click += new System.EventHandler(this.buttonUpdateCostumer_Click);
+            // 
+            // textBoxCostumerUserName
+            // 
+            this.textBoxCostumerUserName.Location = new System.Drawing.Point(182, 320);
+            this.textBoxCostumerUserName.Name = "textBoxCostumerUserName";
+            this.textBoxCostumerUserName.PlaceholderText = "User name:";
+            this.textBoxCostumerUserName.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCostumerUserName.TabIndex = 17;
+            // 
+            // textBoxCostumerAddress
+            // 
+            this.textBoxCostumerAddress.Location = new System.Drawing.Point(333, 320);
+            this.textBoxCostumerAddress.Name = "textBoxCostumerAddress";
+            this.textBoxCostumerAddress.PlaceholderText = "Address:";
+            this.textBoxCostumerAddress.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCostumerAddress.TabIndex = 16;
+            // 
+            // textBoxCostumerPhoneNumber
+            // 
+            this.textBoxCostumerPhoneNumber.Location = new System.Drawing.Point(475, 320);
+            this.textBoxCostumerPhoneNumber.Name = "textBoxCostumerPhoneNumber";
+            this.textBoxCostumerPhoneNumber.PlaceholderText = "Phone Number#";
+            this.textBoxCostumerPhoneNumber.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCostumerPhoneNumber.TabIndex = 15;
+            // 
+            // textBoxCostumerMail
+            // 
+            this.textBoxCostumerMail.Location = new System.Drawing.Point(618, 320);
+            this.textBoxCostumerMail.Name = "textBoxCostumerMail";
+            this.textBoxCostumerMail.PlaceholderText = "E-mail:";
+            this.textBoxCostumerMail.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCostumerMail.TabIndex = 14;
+            // 
+            // textBoxCostumerName
+            // 
+            this.textBoxCostumerName.Location = new System.Drawing.Point(56, 320);
+            this.textBoxCostumerName.Name = "textBoxCostumerName";
+            this.textBoxCostumerName.PlaceholderText = "Name:";
+            this.textBoxCostumerName.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCostumerName.TabIndex = 13;
+            // 
+            // buttonViewAllCostumers
+            // 
+            this.buttonViewAllCostumers.Location = new System.Drawing.Point(324, 282);
+            this.buttonViewAllCostumers.Name = "buttonViewAllCostumers";
+            this.buttonViewAllCostumers.Size = new System.Drawing.Size(109, 23);
+            this.buttonViewAllCostumers.TabIndex = 12;
+            this.buttonViewAllCostumers.Text = "View all";
+            this.buttonViewAllCostumers.UseVisualStyleBackColor = true;
+            this.buttonViewAllCostumers.Click += new System.EventHandler(this.buttonViewAllCostumers_Click);
+            // 
+            // richTextBoxCostumer
+            // 
+            this.richTextBoxCostumer.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBoxCostumer.Location = new System.Drawing.Point(56, 180);
+            this.richTextBoxCostumer.Name = "richTextBoxCostumer";
+            this.richTextBoxCostumer.ReadOnly = true;
+            this.richTextBoxCostumer.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxCostumer.TabIndex = 11;
+            this.richTextBoxCostumer.Text = "";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(310, 63);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(123, 111);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox2.TabIndex = 10;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Application.Properties.Resources.ICA;
+            this.pictureBox1.Location = new System.Drawing.Point(310, 0);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(123, 73);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 9;
+            this.pictureBox1.TabStop = false;
             // 
             // tabStore
             // 
@@ -292,7 +441,7 @@
             this.buttonStoreAdd.Name = "buttonStoreAdd";
             this.buttonStoreAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreAdd.TabIndex = 19;
-            this.buttonStoreAdd.Text = "Add";
+            this.buttonStoreAdd.Text = "Create";
             this.buttonStoreAdd.UseVisualStyleBackColor = true;
             this.buttonStoreAdd.Click += new System.EventHandler(this.buttonStoreAdd_Click);
             // 
@@ -389,6 +538,10 @@
             this.tabProduct.ResumeLayout(false);
             this.tabProduct.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).EndInit();
+            this.tabCustomer.ResumeLayout(false);
+            this.tabCustomer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabStore.ResumeLayout(false);
             this.tabStore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
@@ -403,7 +556,6 @@
         private TabPage tabProduct;
         private TabPage tabProductCategory;
         private TabPage tabOrder;
-        private TabPage tabCustomer;
         private TextBox textBoxProductPrice;
         private TextBox textBoxProductID;
         private TextBox textBoxProductName;
@@ -429,5 +581,19 @@
         private TextBox textBoxStoreName;
         private TextBox textBoxStoreRegionName;
         private TextBox textBoxStoreID;
+        private TabPage tabCustomer;
+        private Button buttonAddCostumer;
+        private Button buttonFindCostumer;
+        private Button buttonDeleteCostumer;
+        private Button buttonUpdateCostumer;
+        private TextBox textBoxCostumerUserName;
+        private TextBox textBoxCostumerAddress;
+        private TextBox textBoxCostumerPhoneNumber;
+        private TextBox textBoxCostumerMail;
+        private TextBox textBoxCostumerName;
+        private Button buttonViewAllCostumers;
+        private RichTextBox richTextBoxCostumer;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
     }
 }
