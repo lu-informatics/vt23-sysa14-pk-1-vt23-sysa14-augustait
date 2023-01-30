@@ -217,7 +217,7 @@ namespace Application
             }
             catch (FormatException)
             {
-                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
             }
 
 
@@ -393,6 +393,36 @@ namespace Application
                     richTextBoxProduct.Text = "There are no Products to view!";
                 }
  
+
+        }
+
+        //CREATE CUSTOMER
+        private void buttonAddCostumer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //FIND CUSTOMER
+        private void buttonFindCostumer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //UPDATE CUSTOMER
+        private void buttonUpdateCostumer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //DELETE CUSTOMER
+        private void buttonDeleteCostumer_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        //VIEW ALL COSTUMERS
+        private void buttonViewAllCostumers_Click(object sender, EventArgs e)
+        {
 
         }
     }
