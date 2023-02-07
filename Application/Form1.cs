@@ -160,7 +160,7 @@ namespace Application
             }
         }
 
-        //DELETE PRODUCT
+        //DELETE PRODUCTt
         private void buttonProductDelete_Click(object sender, EventArgs e)
         {
             string productIdString = textBoxProductID.Text;
