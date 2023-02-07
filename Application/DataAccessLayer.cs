@@ -278,12 +278,13 @@ namespace Application
 
         }
 
-        public void addCustomer(string name, string userName, string address, int phoneNumber, string eMail)
+        public void addCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Customer VALUES (@Name, @UserName, @Address, @PhoneNumber, @Email)";
+            command.CommandText = "INSERT INTO Customer VALUES (@Name, @CustomerID, @UserName, @Address, @PhoneNumber, @Email)";
             command.Parameters.Add(new SqlParameter("@Name", name));
+            command.Parameters.Add(new SqlParameter("@CustomerID", customerId));
             command.Parameters.Add(new SqlParameter("@UserName", userName));
             command.Parameters.Add(new SqlParameter("@Address", address));
             command.Parameters.Add(new SqlParameter("@PhoneNumber", phoneNumber));
@@ -298,12 +299,12 @@ namespace Application
             connection.Dispose();
         }
 
-        public void deleteCustomer(string userName)
+        public void deleteCustomer(int customerId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Customer WHERE UserName = @UserName";
-            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.CommandText = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
+            command.Parameters.Add(new SqlParameter("@CustomerID", customerId));
 
             connection.Open();
 
@@ -313,37 +314,39 @@ namespace Application
             connection.Dispose();
         }
 
-        public void findCustomer(string userName)
+        public void findCustomer(int customerId)
         {
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Customer WHERE UserName = @UserName";
-            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.CommandText = "SELECT * FROM Customer WHERE CustomerID = @CustomerID";
+            command.Parameters.Add(new SqlParameter("@CustomerID", customerId));
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
                 Console.WriteLine(reader.GetString(0));
-                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetInt32(1));
                 Console.WriteLine(reader.GetString(2));
-                Console.WriteLine(reader.GetInt32(3));
-                Console.WriteLine(reader.GetString(4));
+                Console.WriteLine(reader.GetString(3));
+                Console.WriteLine(reader.GetInt32(4));
+                Console.WriteLine(reader.GetString(5));
             }
             reader.Close();
             connection.Dispose();
             connection.Close();
         }
 
-        public void updateCustomer(string name, string userName, string address, int phoneNumber, string eMail)
+        public void updateCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
         {
             SqlConnection connection = GetDatabaseConnection();
 
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Customer SET Name = @Name, Address = @Address, PhoneNumber = @PhoneNumber, Email = @Email WHERE UserName = @UserName";
-            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.CommandText = "UPDATE Customer SET Name = @Name, UserName = @UserName, Address = @Address, PhoneNumber = @PhoneNumber, Email = @Email WHERE CustomerID = @CustomerID";
+            command.Parameters.Add(new SqlParameter("@CustomerID", customerId));
             command.Parameters.Add(new SqlParameter("@Name", name));
+            command.Parameters.Add(new SqlParameter("@UserName", userName));
             command.Parameters.Add(new SqlParameter("@Address", address));
             command.Parameters.Add(new SqlParameter("@PhoneNumber", phoneNumber));
             command.Parameters.Add(new SqlParameter("@Email", eMail));
@@ -369,10 +372,11 @@ namespace Application
             while (reader.Read())
             {
                 Console.WriteLine(reader.GetString(0));
-                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetInt32(1));
                 Console.WriteLine(reader.GetString(2));
-                Console.WriteLine(reader.GetInt32(3));
-                Console.WriteLine(reader.GetString(4));
+                Console.WriteLine(reader.GetString(3));
+                Console.WriteLine(reader.GetInt32(4));
+                Console.WriteLine(reader.GetString(5));
 
             }
             reader.Close();
