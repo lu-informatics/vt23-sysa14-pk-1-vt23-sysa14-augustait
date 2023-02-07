@@ -114,6 +114,85 @@ namespace Application
             return reader;
         }
 
+        //METHOD ADD ProductCategory
+        public void insertProductCategory(int categoryId, string categoryName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO ProductCategory VALUES (@CategoryId, @CategoryName)";
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
+            command.Parameters.Add(new SqlParameter("@CategoryName", categoryName));
+
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+        //METHOD DELETE ProductCategory
+        public void deleteProductCategory(int categoryID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM ProductCategory WHERE CategoryId = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+
+        }
+
+        //METHOD FIND ProductCategory
+        public void findProductCategory(int categoryId)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM ProductCategory WHERE CategoryId = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+
+
+            }
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+        }
+
+        // METHOD UPDATE ProductCategory
+        public void updateProductCategory(int categoryID, string categoryName)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+
+            command.CommandText = "UPDATE ProductCategory SET CategoryName = @CategoryName WHERE CategoryID = @CategoryId";
+            command.Parameters.Add(new SqlParameter("@CategoryID", categoryID));
+            command.Parameters.Add(new SqlParameter("@CategoryName", categoryName));
+            ;
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+
 
         //METHOD ADD STORE
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
