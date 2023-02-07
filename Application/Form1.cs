@@ -250,9 +250,9 @@ namespace Application
                     int productCategoryId = int.Parse(productCategoryIdString);
 
 
-                    _layer.insertProductCategory(productCategoryId, productCategoryName)
+                    _layer.insertProductCategory(productCategoryId, productCategoryName);
 
-                    richTextBoxProductCategory.Text = "The product has been successfully created!";
+                   
 
                     clearAllTextBox();
                 }
@@ -303,9 +303,18 @@ namespace Application
                     int productCategoryId = int.Parse(productCategoryIdString);
 
 
-                    _layer.updateProduct(productCategoryId, productCategoryName,);
+                    _layer.updateProductCategory(productCategoryId, productCategoryName);
 
                     richTextBoxProductCategory.Text = "The product has been successfully been updated!";
+
+                }
+
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                }
+            }
+        }
 
 
         // FIND PRODUCTCATEGORY 
@@ -348,6 +357,7 @@ namespace Application
 
 
         }
+        
 
         //ADD STORE
         private void buttonStoreAdd_Click(object sender, EventArgs e)
@@ -433,7 +443,7 @@ namespace Application
     
         // FIND PRODUCTCATEGORY 
 
-        private void buttonFindProductCategory_Click(object sender, EventArgs e)
+        private void ButtonFindProductCategory_Click(object sender, EventArgs e)
         {
             try
             {
@@ -463,68 +473,13 @@ namespace Application
                     richTextBoxProductCategory.Text = "No connection with server";
                 }
             }
+
             catch (FormatException)
             {
                 richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
             }
-
-
-        }
-
-        //ADD STORE
-        private void buttonStoreAdd_Click(object sender, EventArgs e)
-        {
-
-            string storeID = textBoxStoreID.Text;
-            string regionName = textBoxStoreRegionName.Text;
-            string storeName = textBoxStoreName.Text;
-            string storeCity = textBoxStoreCity.Text;
-            string storeAddress = textBoxStoreAddress.Text;
-
-
-            if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
-                || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
-            {
-                richTextBoxStore.Text = "Please enter all the fields!";
-            }
-            else
-            {
-                try
-                {
-                    int tmpID = int.Parse(storeID);
-
-                    _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
-
-                    richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
-
-                    textBoxStoreID.Text = " ";
-                    textBoxStoreRegionName.Text = " ";
-                    textBoxStoreName.Text = " ";
-                    textBoxStoreCity.Text = " ";
-                    textBoxStoreAddress.Text = " ";
-
-                }
-
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 2627)
-                    {
-                        richTextBoxStore.Text = "A Store with the same ID already exists.";
-                    }
-
-                    else if (ex.Number == 0)
-                    {
-                        richTextBoxStore.Text = "No connection with server";
-                    }
-                }
-
-                catch (FormatException)
-                {
-                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
-                }
             }
 
-        }
 
         //FIND STORE
         private void buttonStoreFind_Click(object sender, EventArgs e)
@@ -685,18 +640,7 @@ namespace Application
         {
 
         }
-    }
-
-
-
-
-
-   
-
-
-
-
-        }
+    
 
         //VIEW ALL PRODUCT CATEGORY
         private void buttonViewAllProductCategory_Click(object sender, EventArgs e)
