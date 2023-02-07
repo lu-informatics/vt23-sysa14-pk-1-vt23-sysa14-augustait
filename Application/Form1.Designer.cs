@@ -42,6 +42,9 @@
             this.textBoxProductID = new System.Windows.Forms.TextBox();
             this.textBoxProductName = new System.Windows.Forms.TextBox();
             this.tabProductCategory = new System.Windows.Forms.TabPage();
+            this.richTextBoxProductCategory = new System.Windows.Forms.RichTextBox();
+            this.textBoxProductCategoryName = new System.Windows.Forms.TextBox();
+            this.textBoxProductCategoryID = new System.Windows.Forms.TextBox();
             this.buttonProductCategoryDelete = new System.Windows.Forms.Button();
             this.buttonFindProductCategory = new System.Windows.Forms.Button();
             this.buttonProductCategoryUpdate = new System.Windows.Forms.Button();
@@ -75,9 +78,8 @@
             this.buttonViewAllStore = new System.Windows.Forms.Button();
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
-            this.textBoxProductCategoryID = new System.Windows.Forms.TextBox();
-            this.textBoxProductCategoryName = new System.Windows.Forms.TextBox();
-            this.richTextBoxProductCategory = new System.Windows.Forms.RichTextBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.buttonViewAllProductCategory = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
@@ -88,6 +90,7 @@
             this.tabStore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -228,6 +231,8 @@
             // 
             // tabProductCategory
             // 
+            this.tabProductCategory.Controls.Add(this.buttonViewAllProductCategory);
+            this.tabProductCategory.Controls.Add(this.pictureBox3);
             this.tabProductCategory.Controls.Add(this.richTextBoxProductCategory);
             this.tabProductCategory.Controls.Add(this.textBoxProductCategoryName);
             this.tabProductCategory.Controls.Add(this.textBoxProductCategoryID);
@@ -242,6 +247,30 @@
             this.tabProductCategory.TabIndex = 1;
             this.tabProductCategory.Text = "Product Category";
             this.tabProductCategory.UseVisualStyleBackColor = true;
+            // 
+            // richTextBoxProductCategory
+            // 
+            this.richTextBoxProductCategory.Location = new System.Drawing.Point(45, 132);
+            this.richTextBoxProductCategory.Name = "richTextBoxProductCategory";
+            this.richTextBoxProductCategory.Size = new System.Drawing.Size(628, 96);
+            this.richTextBoxProductCategory.TabIndex = 6;
+            this.richTextBoxProductCategory.Text = "";
+            // 
+            // textBoxProductCategoryName
+            // 
+            this.textBoxProductCategoryName.Location = new System.Drawing.Point(405, 275);
+            this.textBoxProductCategoryName.Name = "textBoxProductCategoryName";
+            this.textBoxProductCategoryName.PlaceholderText = "Name:";
+            this.textBoxProductCategoryName.Size = new System.Drawing.Size(100, 23);
+            this.textBoxProductCategoryName.TabIndex = 5;
+            // 
+            // textBoxProductCategoryID
+            // 
+            this.textBoxProductCategoryID.Location = new System.Drawing.Point(190, 275);
+            this.textBoxProductCategoryID.Name = "textBoxProductCategoryID";
+            this.textBoxProductCategoryID.PlaceholderText = "ID:";
+            this.textBoxProductCategoryID.Size = new System.Drawing.Size(100, 23);
+            this.textBoxProductCategoryID.TabIndex = 4;
             // 
             // buttonProductCategoryDelete
             // 
@@ -577,29 +606,25 @@
             this.pictureBoxStore.TabIndex = 9;
             this.pictureBoxStore.TabStop = false;
             // 
-            // textBoxProductCategoryID
+            // pictureBox3
             // 
-            this.textBoxProductCategoryID.Location = new System.Drawing.Point(190, 275);
-            this.textBoxProductCategoryID.Name = "textBoxProductCategoryID";
-            this.textBoxProductCategoryID.PlaceholderText = "ID:";
-            this.textBoxProductCategoryID.Size = new System.Drawing.Size(100, 23);
-            this.textBoxProductCategoryID.TabIndex = 4;
+            this.pictureBox3.Image = global::Application.Properties.Resources.ICA;
+            this.pictureBox3.Location = new System.Drawing.Point(308, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(123, 86);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 9;
+            this.pictureBox3.TabStop = false;
             // 
-            // textBoxProductCategoryName
+            // buttonViewAllProductCategory
             // 
-            this.textBoxProductCategoryName.Location = new System.Drawing.Point(405, 275);
-            this.textBoxProductCategoryName.Name = "textBoxProductCategoryName";
-            this.textBoxProductCategoryName.PlaceholderText = "Name:";
-            this.textBoxProductCategoryName.Size = new System.Drawing.Size(100, 23);
-            this.textBoxProductCategoryName.TabIndex = 5;
-            // 
-            // richTextBoxProductCategory
-            // 
-            this.richTextBoxProductCategory.Location = new System.Drawing.Point(45, 132);
-            this.richTextBoxProductCategory.Name = "richTextBoxProductCategory";
-            this.richTextBoxProductCategory.Size = new System.Drawing.Size(628, 96);
-            this.richTextBoxProductCategory.TabIndex = 6;
-            this.richTextBoxProductCategory.Text = "";
+            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(308, 234);
+            this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
+            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(75, 23);
+            this.buttonViewAllProductCategory.TabIndex = 10;
+            this.buttonViewAllProductCategory.Text = "View All";
+            this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
+            this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
             // 
             // Form1
             // 
@@ -624,6 +649,7 @@
             this.tabStore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -680,5 +706,7 @@
         private RichTextBox richTextBoxProductCategory;
         private TextBox textBoxProductCategoryName;
         private TextBox textBoxProductCategoryID;
+        private Button buttonViewAllProductCategory;
+        private PictureBox pictureBox3;
     }
 }
