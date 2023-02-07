@@ -216,8 +216,9 @@ namespace Application
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 0)
-                {
+
+                if (ex.Number == 0) {
+
                     richTextBoxProduct.Text = "No connection with server";
                 }
             }
@@ -228,6 +229,83 @@ namespace Application
 
 
         }
+
+        // ADD PRODUCTCATEGORY
+        private void buttonAddProductCategory_Click(object sender, EventArgs e)
+        {
+
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+            string productCategoryName = textBoxProductCategoryName.Text;
+
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString) || string.IsNullOrWhiteSpace(productCategoryName))
+            {
+                richTextBoxProductCategory.Text = "Please enter all the fields!";
+            }
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+
+
+                    _layer.insertProductCategory(productCategoryId, productCategoryName)
+
+                    richTextBoxProductCategory.Text = "The product has been successfully created!";
+
+                    clearAllTextBox();
+                }
+
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        richTextBoxProductCategory.Text = "A product with the same ID already exists.";
+                        textBoxProductID.Text = " ";
+                    }
+                    else if (ex.Number == 547)
+                    {
+                        richTextBoxProductCategory.Text = "The category ID provided does not exist.";
+                        textBoxCategoryID.Text = " ";
+                    }
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxProductCategory.Text = "No connection with the server.";
+
+                    }
+                }
+
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                }
+            }
+
+
+        }
+        // UPDATE PRODUCTCATEGORY
+        private void buttonUpdateProductCategory_Click(object sender, EventArgs e)
+        {
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+            string productCategoryName = textBoxProductCategoryName.Text;
+
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString) || string.IsNullOrWhiteSpace(productCategoryName))
+            {
+                richTextBoxProductCategory.Text = "Please enter all of the following fields: Product Name, Product ID and Product Price.";
+            }
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+
+
+                    _layer.updateProduct(productCategoryId, productCategoryName,);
+
+                    richTextBoxProductCategory.Text = "The product has been successfully been updated!";
 
 
         // FIND PRODUCTCATEGORY 
@@ -303,6 +381,128 @@ namespace Application
                     textBoxStoreCity.Text = " ";
                     textBoxStoreAddress.Text = " ";
 
+
+                    clearAllTextBox();
+                }
+
+
+
+
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                }
+
+            }
+
+
+        }
+
+        // DELETE PRODUCTCATEGORY
+        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
+        {
+
+
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString))
+            {
+                richTextBoxProductCategory.Text = "Please enter the Product ID that you want to delete!";
+            }
+
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+                    _layer.deleteProduct(productCategoryId);
+
+                    richTextBoxProductCategory.Text = "Product has successfully been deleted!";
+                    clearAllTextBox();
+                }
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
+                }
+
+            }
+
+
+        }
+    
+        // FIND PRODUCTCATEGORY 
+
+        private void buttonFindProductCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string productCategoryString = textBoxCategoryID.Text;
+                int productCategoryID = Int32.Parse(productCategoryString);
+
+                using (SqlDataReader readerFindProductCategory = _layer.findProduct(productCategoryID))
+                {
+                    if (readerFindProductCategory.HasRows)
+                    {
+                        while (readerFindProductCategory.Read())
+                        {
+                            richTextBoxProduct.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
+                            richTextBoxProduct.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
+                        }
+                    }
+                    else
+                    {
+                        richTextBoxProductCategory.Text += "The ProductID you have provided does not exist";
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProductCategory.Text = "No connection with server";
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+            }
+
+
+        }
+
+        //ADD STORE
+        private void buttonStoreAdd_Click(object sender, EventArgs e)
+        {
+
+            string storeID = textBoxStoreID.Text;
+            string regionName = textBoxStoreRegionName.Text;
+            string storeName = textBoxStoreName.Text;
+            string storeCity = textBoxStoreCity.Text;
+            string storeAddress = textBoxStoreAddress.Text;
+
+
+            if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
+                || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
+            {
+                richTextBoxStore.Text = "Please enter all the fields!";
+            }
+            else
+            {
+                try
+                {
+                    int tmpID = int.Parse(storeID);
+
+                    _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
+
+                    richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
+
+                    textBoxStoreID.Text = " ";
+                    textBoxStoreRegionName.Text = " ";
+                    textBoxStoreName.Text = " ";
+                    textBoxStoreCity.Text = " ";
+                    textBoxStoreAddress.Text = " ";
+
                 }
 
                 catch (SqlException ex)
@@ -311,6 +511,7 @@ namespace Application
                     {
                         richTextBoxStore.Text = "A Store with the same ID already exists.";
                     }
+
                     else if (ex.Number == 0)
                     {
                         richTextBoxStore.Text = "No connection with server";
@@ -484,21 +685,16 @@ namespace Application
         {
 
         }
-
-        private void buttonAddProductCategory_Click(object sender, EventArgs e)
-        {
-
-        }
+    }
 
 
 
-        private void buttonUpdateProductCategory_Click(object sender, EventArgs e)
-        {
 
-        }
 
-        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
-        {
+   
+
+
+
 
         }
 
@@ -536,6 +732,7 @@ namespace Application
         }
     }
 }
+
 
 
 
