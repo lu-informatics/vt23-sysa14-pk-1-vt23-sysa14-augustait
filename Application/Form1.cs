@@ -228,6 +228,48 @@ namespace Application
 
         }
 
+
+        // FIND PRODUCTCATEGORY 
+
+        //FIND PRODUCT
+        private void buttonFindProductCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string productCategoryString = textBoxCategoryID.Text;
+                int productCategoryID = Int32.Parse(productCategoryString);
+
+                using (SqlDataReader readerFindProductCategory = _layer.findProduct(productCategoryID))
+                {
+                    if (readerFindProductCategory.HasRows)
+                    {
+                        while (readerFindProductCategory.Read())
+                        {
+                            richTextBoxProduct.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
+                            richTextBoxProduct.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
+                        }
+                    }
+                    else
+                    {
+                        richTextBoxProduct.Text += "The ProductID you have provided does not exist";
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+            }
+
+
+        }
+
         //ADD STORE
         private void buttonStoreAdd_Click(object sender, EventArgs e)
         {
