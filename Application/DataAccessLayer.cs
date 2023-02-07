@@ -151,7 +151,7 @@ namespace Application
         }
 
         //METHOD FIND ProductCategory
-        public void findProductCategory(int categoryId)
+        public SqlDataReader findProductCategory(int categoryId)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -160,17 +160,9 @@ namespace Application
             command.Parameters.Add(new SqlParameter("@CategoryId", categoryId));
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                Console.WriteLine(reader.GetInt32(0));
-                Console.WriteLine(reader.GetString(1));
-
-
-            }
-            reader.Close();
-            connection.Dispose();
-            connection.Close();
+            return reader;
         }
+
 
         // METHOD UPDATE ProductCategory
         public void updateProductCategory(int categoryID, string categoryName)
