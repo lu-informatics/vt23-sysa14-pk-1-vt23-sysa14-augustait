@@ -310,7 +310,6 @@ namespace Application
 
         // FIND PRODUCTCATEGORY 
 
-        //FIND PRODUCT
         private void buttonFindProductCategory_Click(object sender, EventArgs e)
         {
             try
