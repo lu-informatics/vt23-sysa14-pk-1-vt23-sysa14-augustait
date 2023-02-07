@@ -483,6 +483,26 @@ namespace Application
         {
 
         }
+
+        private void buttonAddProductCategory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonFindProductCategory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonUpdateProductCategory_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     }
    
