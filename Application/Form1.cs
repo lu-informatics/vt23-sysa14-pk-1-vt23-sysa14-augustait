@@ -63,20 +63,20 @@ namespace Application
 
                     clearAllTextBox();
                 }
-                
-               catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
+
+                catch (SqlException ex)
                 {
-                    richTextBoxProduct.Text = "A product with the same ID already exists.";
+                    if (ex.Number == 2627)
+                    {
+                        richTextBoxProduct.Text = "A product with the same ID already exists.";
                         textBoxProductID.Text = " ";
-                }
-                else if (ex.Number == 547)
+                    }
+                    else if (ex.Number == 547)
                     {
                         richTextBoxProduct.Text = "The category ID provided does not exist.";
                         textBoxCategoryID.Text = " ";
                     }
-                else if (ex.Number == 0)
+                    else if (ex.Number == 0)
                     {
                         richTextBoxProduct.Text = "No connection with the server.";
 
@@ -149,8 +149,8 @@ namespace Application
 
                     clearAllTextBox();
                 }
-              
-                
+
+
 
                 catch (FormatException)
                 {
@@ -216,7 +216,7 @@ namespace Application
             }
             catch (SqlException ex)
             {
-               if(ex.Number == 0) {
+                if (ex.Number == 0) {
                     richTextBoxProduct.Text = "No connection with server";
                 }
             }
@@ -228,10 +228,133 @@ namespace Application
 
         }
 
+        // ADD PRODUCTCATEGORY
+        private void buttonAddProductCategory_Click(object sender, EventArgs e)
+        {
 
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+            string productCategoryName = textBoxProductCategoryName.Text;
+
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString) || string.IsNullOrWhiteSpace(productCategoryName))
+            {
+                richTextBoxProductCategory.Text = "Please enter all the fields!";
+            }
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+
+
+                    _layer.insertProductCategory(productCategoryId, productCategoryName)
+
+                    richTextBoxProductCategory.Text = "The product has been successfully created!";
+
+                    clearAllTextBox();
+                }
+
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        richTextBoxProductCategory.Text = "A product with the same ID already exists.";
+                        textBoxProductID.Text = " ";
+                    }
+                    else if (ex.Number == 547)
+                    {
+                        richTextBoxProductCategory.Text = "The category ID provided does not exist.";
+                        textBoxCategoryID.Text = " ";
+                    }
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxProductCategory.Text = "No connection with the server.";
+
+                    }
+                }
+
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                }
+            }
+
+
+        }
+        // UPDATE PRODUCTCATEGORY
+        private void buttonUpdateProductCategory_Click(object sender, EventArgs e)
+        {
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+            string productCategoryName = textBoxProductCategoryName.Text;
+
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString) || string.IsNullOrWhiteSpace(productCategoryName))
+            {
+                richTextBoxProductCategory.Text = "Please enter all of the following fields: Product Name, Product ID and Product Price.";
+            }
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+
+
+                    _layer.updateProduct(productCategoryId, productCategoryName,);
+
+                    richTextBoxProductCategory.Text = "The product has been successfully been updated!";
+
+                    clearAllTextBox();
+                }
+
+
+
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                }
+
+            }
+
+
+        }
+
+        // DELETE PRODUCTCATEGORY
+        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
+        {
+
+
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString))
+            {
+                richTextBoxProductCategory.Text = "Please enter the Product ID that you want to delete!";
+            }
+
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+                    _layer.deleteProduct(productCategoryId);
+
+                    richTextBoxProductCategory.Text = "Product has successfully been deleted!";
+                    clearAllTextBox();
+                }
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
+                }
+
+            }
+
+
+        }
+    
         // FIND PRODUCTCATEGORY 
 
-        //FIND PRODUCT
         private void buttonFindProductCategory_Click(object sender, EventArgs e)
         {
             try
@@ -251,7 +374,7 @@ namespace Application
                     }
                     else
                     {
-                        richTextBoxProduct.Text += "The ProductID you have provided does not exist";
+                        richTextBoxProductCategory.Text += "The ProductID you have provided does not exist";
                     }
                 }
             }
@@ -259,12 +382,12 @@ namespace Application
             {
                 if (ex.Number == 0)
                 {
-                    richTextBoxProduct.Text = "No connection with server";
+                    richTextBoxProductCategory.Text = "No connection with server";
                 }
             }
             catch (FormatException)
             {
-                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+                richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
             }
 
 
@@ -273,54 +396,54 @@ namespace Application
         //ADD STORE
         private void buttonStoreAdd_Click(object sender, EventArgs e)
         {
-          
-               string storeID = textBoxStoreID.Text;
-               string regionName = textBoxStoreRegionName.Text;
-               string storeName = textBoxStoreName.Text;
-               string storeCity = textBoxStoreCity.Text;
-               string storeAddress = textBoxStoreAddress.Text;
-            
 
-                if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
-                    || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
+            string storeID = textBoxStoreID.Text;
+            string regionName = textBoxStoreRegionName.Text;
+            string storeName = textBoxStoreName.Text;
+            string storeCity = textBoxStoreCity.Text;
+            string storeAddress = textBoxStoreAddress.Text;
+
+
+            if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
+                || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
+            {
+                richTextBoxStore.Text = "Please enter all the fields!";
+            }
+            else
+            {
+                try
                 {
-                    richTextBoxStore.Text = "Please enter all the fields!";
-                }
-                else
-                {
-                    try
-                    {
-                        int tmpID = int.Parse(storeID);
+                    int tmpID = int.Parse(storeID);
 
-                        _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
+                    _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
 
-                        richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
+                    richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
 
-                        textBoxStoreID.Text = " ";
-                        textBoxStoreRegionName.Text = " ";
-                        textBoxStoreName.Text = " ";
-                        textBoxStoreCity.Text = " ";
-                        textBoxStoreAddress.Text = " ";
+                    textBoxStoreID.Text = " ";
+                    textBoxStoreRegionName.Text = " ";
+                    textBoxStoreName.Text = " ";
+                    textBoxStoreCity.Text = " ";
+                    textBoxStoreAddress.Text = " ";
 
                 }
 
                 catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
                     {
-                        if (ex.Number == 2627)
-                        {
-                            richTextBoxStore.Text = "A Store with the same ID already exists.";
-                        }
-                        else if (ex.Number == 0)
-                        {
-                            richTextBoxStore.Text = "No connection with server";
-                        }
+                        richTextBoxStore.Text = "A Store with the same ID already exists.";
                     }
-
-                    catch (FormatException)
+                    else if (ex.Number == 0)
                     {
-                        richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
+                        richTextBoxStore.Text = "No connection with server";
                     }
                 }
+
+                catch (FormatException)
+                {
+                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
+                }
+            }
 
         }
 
@@ -394,7 +517,7 @@ namespace Application
                 }
                 catch (SqlException ex)
                 {
-                  if (ex.Number == 0)
+                    if (ex.Number == 0)
                     {
                         richTextBoxStore.Text = "No connection with server";
 
@@ -411,35 +534,35 @@ namespace Application
         //VIEW ALL INFORMATION STORE
         private void buttonViewAllStore_Click(object sender, EventArgs e)
         {
-                try
+            try
+            {
+                using (SqlDataReader readerViewStores = _layer.printallStores())
                 {
-                using (SqlDataReader readerViewStores = _layer.printallStores()) 
+                    while (readerViewStores.Read())
                     {
-                        while (readerViewStores.Read())
-                        {
-                            richTextBoxStore.Text += "ID: " + readerViewStores.GetInt32(0) + " " + "\n";
-                            richTextBoxStore.Text += "Region Name: " + readerViewStores.GetString(1) + " " + "\n";
-                            richTextBoxStore.Text += "Store name: " + readerViewStores.GetString(2) + " " + "\n";
-                            richTextBoxStore.Text += "City: " + readerViewStores.GetString(3) + "\n";
-                            richTextBoxStore.Text += "Address: " + readerViewStores.GetString(4) + "\n";
-                            richTextBoxStore.Text += "-----------------------" + "\n";
-                        
+                        richTextBoxStore.Text += "ID: " + readerViewStores.GetInt32(0) + " " + "\n";
+                        richTextBoxStore.Text += "Region Name: " + readerViewStores.GetString(1) + " " + "\n";
+                        richTextBoxStore.Text += "Store name: " + readerViewStores.GetString(2) + " " + "\n";
+                        richTextBoxStore.Text += "City: " + readerViewStores.GetString(3) + "\n";
+                        richTextBoxStore.Text += "Address: " + readerViewStores.GetString(4) + "\n";
+                        richTextBoxStore.Text += "-----------------------" + "\n";
 
-                        }
+
                     }
                 }
-                catch (SqlException ex)
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
                 {
-                    if (ex.Number == 0)
-                    {
-                        richTextBoxProduct.Text = "No connection with server";
-                    }
+                    richTextBoxProduct.Text = "No connection with server";
                 }
-                catch (NullReferenceException)
-                {
-                    richTextBoxProduct.Text = "There are no Products to view!";
-                }
- 
+            }
+            catch (NullReferenceException)
+            {
+                richTextBoxProduct.Text = "There are no Products to view!";
+            }
+
 
         }
 
@@ -453,7 +576,7 @@ namespace Application
             string costumerUserName = textBoxCostumerUserName.Text;
             string costumerAddress = textBoxCostumerAddress.Text;
 
-            
+
 
 
 
@@ -483,30 +606,13 @@ namespace Application
         {
 
         }
-
-        private void buttonAddProductCategory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonFindProductCategory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonUpdateProductCategory_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
-        {
-
-        }
     }
-    }
+
+
    
-    
+
+
+
 
 
 
