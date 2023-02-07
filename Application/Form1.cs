@@ -216,7 +216,9 @@ namespace Application
             }
             catch (SqlException ex)
             {
+
                 if (ex.Number == 0) {
+
                     richTextBoxProduct.Text = "No connection with server";
                 }
             }
@@ -305,8 +307,84 @@ namespace Application
 
                     richTextBoxProductCategory.Text = "The product has been successfully been updated!";
 
+
+        // FIND PRODUCTCATEGORY 
+
+        //FIND PRODUCT
+        private void buttonFindProductCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string productCategoryString = textBoxCategoryID.Text;
+                int productCategoryID = Int32.Parse(productCategoryString);
+
+                using (SqlDataReader readerFindProductCategory = _layer.findProduct(productCategoryID))
+                {
+                    if (readerFindProductCategory.HasRows)
+                    {
+                        while (readerFindProductCategory.Read())
+                        {
+                            richTextBoxProduct.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
+                            richTextBoxProduct.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
+                        }
+                    }
+                    else
+                    {
+                        richTextBoxProduct.Text += "The ProductID you have provided does not exist";
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+            }
+
+
+        }
+
+        //ADD STORE
+        private void buttonStoreAdd_Click(object sender, EventArgs e)
+        {
+
+            string storeID = textBoxStoreID.Text;
+            string regionName = textBoxStoreRegionName.Text;
+            string storeName = textBoxStoreName.Text;
+            string storeCity = textBoxStoreCity.Text;
+            string storeAddress = textBoxStoreAddress.Text;
+
+
+            if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
+                || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
+            {
+                richTextBoxStore.Text = "Please enter all the fields!";
+            }
+            else
+            {
+                try
+                {
+                    int tmpID = int.Parse(storeID);
+
+                    _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
+
+                    richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
+
+                    textBoxStoreID.Text = " ";
+                    textBoxStoreRegionName.Text = " ";
+                    textBoxStoreName.Text = " ";
+                    textBoxStoreCity.Text = " ";
+                    textBoxStoreAddress.Text = " ";
+
+
                     clearAllTextBox();
                 }
+
 
 
 
@@ -433,6 +511,7 @@ namespace Application
                     {
                         richTextBoxStore.Text = "A Store with the same ID already exists.";
                     }
+
                     else if (ex.Number == 0)
                     {
                         richTextBoxStore.Text = "No connection with server";
@@ -609,7 +688,51 @@ namespace Application
     }
 
 
+
+
+
    
+
+
+
+
+        }
+
+        //VIEW ALL PRODUCT CATEGORY
+        private void buttonViewAllProductCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                using (SqlDataReader readerViewProductCategory = _layer.printallProductCategory())
+                {
+                    while (readerViewProductCategory.Read())
+                    {
+                        richTextBoxProductCategory.Text += "ID: " + readerViewProductCategory.GetInt32(0) + " " + "\n";
+                        richTextBoxProductCategory.Text += "Category Name: " + readerViewProductCategory.GetString(1) + " " + "\n";
+                        richTextBoxProductCategory.Text += "-----------------------" + "\n";
+
+
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
+            }
+            catch (NullReferenceException)
+            {
+                richTextBoxProduct.Text = "There are no Product Categories to view!";
+            }
+
+
+
+        }
+    }
+}
+
 
 
 
