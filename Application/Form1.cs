@@ -76,6 +76,11 @@ namespace Application
                         richTextBoxProduct.Text = "The category ID provided does not exist.";
                         textBoxCategoryID.Text = " ";
                     }
+                else if (ex.Number == 0)
+                    {
+                        richTextBoxProduct.Text = "No connection with the server.";
+
+                    }
                 }
 
                 catch (FormatException)
@@ -399,6 +404,17 @@ namespace Application
         //CREATE CUSTOMER
         private void buttonAddCostumer_Click(object sender, EventArgs e)
         {
+
+            string costumerName = textBoxCostumerName.Text;
+            string costumerMail = textBoxCostumerMail.Text;
+            string costumerPhoneNumber = textBoxProductPrice.Text;
+            string costumerUserName = textBoxCostumerUserName.Text;
+            string costumerAddress = textBoxCostumerAddress.Text;
+
+            
+
+
+
 
         }
 
