@@ -62,11 +62,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxSupermarketID = new System.Windows.Forms.ComboBox();
-            this.comboBoxCustomerID = new System.Windows.Forms.ComboBox();
-            this.OrderDate = new System.Windows.Forms.DateTimePicker();
-            this.OrderOrderID = new System.Windows.Forms.TextBox();
-            this.comboBoxProductID = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrderSupermarketID = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrderCustomerID = new System.Windows.Forms.ComboBox();
+            this.textOrderDate = new System.Windows.Forms.DateTimePicker();
+            this.textOrderOrderID = new System.Windows.Forms.TextBox();
+            this.comboBoxOrderProductID = new System.Windows.Forms.ComboBox();
             this.OrderTextBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabCustomer = new System.Windows.Forms.TabPage();
@@ -363,11 +363,11 @@
             this.tabOrder.Controls.Add(this.label3);
             this.tabOrder.Controls.Add(this.label2);
             this.tabOrder.Controls.Add(this.label1);
-            this.tabOrder.Controls.Add(this.comboBoxSupermarketID);
-            this.tabOrder.Controls.Add(this.comboBoxCustomerID);
-            this.tabOrder.Controls.Add(this.OrderDate);
-            this.tabOrder.Controls.Add(this.OrderOrderID);
-            this.tabOrder.Controls.Add(this.comboBoxProductID);
+            this.tabOrder.Controls.Add(this.comboBoxOrderSupermarketID);
+            this.tabOrder.Controls.Add(this.comboBoxOrderCustomerID);
+            this.tabOrder.Controls.Add(this.textOrderDate);
+            this.tabOrder.Controls.Add(this.textOrderOrderID);
+            this.tabOrder.Controls.Add(this.comboBoxOrderProductID);
             this.tabOrder.Controls.Add(this.OrderTextBox);
             this.tabOrder.Controls.Add(this.pictureBox4);
             this.tabOrder.Location = new System.Drawing.Point(4, 24);
@@ -386,6 +386,7 @@
             this.BtnViewAllOrders.TabIndex = 29;
             this.BtnViewAllOrders.Text = "View all";
             this.BtnViewAllOrders.UseVisualStyleBackColor = true;
+            this.BtnViewAllOrders.Click += new System.EventHandler(this.BtnViewAllOrders_Click);
             // 
             // BtnDeleteOrder
             // 
@@ -395,6 +396,7 @@
             this.BtnDeleteOrder.TabIndex = 28;
             this.BtnDeleteOrder.Text = "Delete";
             this.BtnDeleteOrder.UseVisualStyleBackColor = true;
+            this.BtnDeleteOrder.Click += new System.EventHandler(this.BtnDeleteOrder_Click);
             // 
             // BtnUpdateOrder
             // 
@@ -404,6 +406,7 @@
             this.BtnUpdateOrder.TabIndex = 27;
             this.BtnUpdateOrder.Text = "Update";
             this.BtnUpdateOrder.UseVisualStyleBackColor = true;
+            this.BtnUpdateOrder.Click += new System.EventHandler(this.BtnUpdateOrder_Click);
             // 
             // BtnFindOrder
             // 
@@ -413,6 +416,7 @@
             this.BtnFindOrder.TabIndex = 26;
             this.BtnFindOrder.Text = "Find";
             this.BtnFindOrder.UseVisualStyleBackColor = true;
+            this.BtnFindOrder.Click += new System.EventHandler(this.BtnFindOrder_Click);
             // 
             // BtnCreateOrder
             // 
@@ -422,9 +426,7 @@
             this.BtnCreateOrder.TabIndex = 25;
             this.BtnCreateOrder.Text = "Create";
             this.BtnCreateOrder.UseVisualStyleBackColor = true;
-            
-
-
+            this.BtnCreateOrder.Click += new System.EventHandler(this.BtnCreateOrder_Click);
             // 
             // label5
             // 
@@ -471,43 +473,44 @@
             this.label1.TabIndex = 20;
             this.label1.Text = "Order ID:";
             // 
-            // comboBoxSupermarketID
+            // comboBoxOrderSupermarketID
             // 
-            this.comboBoxSupermarketID.FormattingEnabled = true;
-            this.comboBoxSupermarketID.Location = new System.Drawing.Point(511, 321);
-            this.comboBoxSupermarketID.Name = "comboBoxSupermarketID";
-            this.comboBoxSupermarketID.Size = new System.Drawing.Size(94, 23);
-            this.comboBoxSupermarketID.TabIndex = 19;
+            this.comboBoxOrderSupermarketID.FormattingEnabled = true;
+            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(511, 321);
+            this.comboBoxOrderSupermarketID.Name = "comboBoxOrderSupermarketID";
+            this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderSupermarketID.TabIndex = 19;
             // 
-            // comboBoxCustomerID
+            // comboBoxOrderCustomerID
             // 
-            this.comboBoxCustomerID.FormattingEnabled = true;
-            this.comboBoxCustomerID.Location = new System.Drawing.Point(645, 321);
-            this.comboBoxCustomerID.Name = "comboBoxCustomerID";
-            this.comboBoxCustomerID.Size = new System.Drawing.Size(94, 23);
-            this.comboBoxCustomerID.TabIndex = 18;
+            this.comboBoxOrderCustomerID.FormattingEnabled = true;
+            this.comboBoxOrderCustomerID.Location = new System.Drawing.Point(645, 321);
+            this.comboBoxOrderCustomerID.Name = "comboBoxOrderCustomerID";
+            this.comboBoxOrderCustomerID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderCustomerID.TabIndex = 18;
             // 
-            // OrderDate
+            // textOrderDate
             // 
-            this.OrderDate.Location = new System.Drawing.Point(168, 321);
-            this.OrderDate.Name = "OrderDate";
-            this.OrderDate.Size = new System.Drawing.Size(174, 23);
-            this.OrderDate.TabIndex = 17;
+            this.textOrderDate.Location = new System.Drawing.Point(168, 321);
+            this.textOrderDate.Name = "textOrderDate";
+            this.textOrderDate.Size = new System.Drawing.Size(174, 23);
+            this.textOrderDate.TabIndex = 17;
             // 
-            // OrderOrderID
+            // textOrderOrderID
             // 
-            this.OrderOrderID.Location = new System.Drawing.Point(36, 321);
-            this.OrderOrderID.Name = "OrderOrderID";
-            this.OrderOrderID.Size = new System.Drawing.Size(94, 23);
-            this.OrderOrderID.TabIndex = 14;
+            this.textOrderOrderID.Location = new System.Drawing.Point(36, 321);
+            this.textOrderOrderID.Name = "textOrderOrderID";
+            this.textOrderOrderID.PlaceholderText = "Order ID:";
+            this.textOrderOrderID.Size = new System.Drawing.Size(94, 23);
+            this.textOrderOrderID.TabIndex = 14;
             // 
-            // comboBoxProductID
+            // comboBoxOrderProductID
             // 
-            this.comboBoxProductID.FormattingEnabled = true;
-            this.comboBoxProductID.Location = new System.Drawing.Point(381, 321);
-            this.comboBoxProductID.Name = "comboBoxProductID";
-            this.comboBoxProductID.Size = new System.Drawing.Size(94, 23);
-            this.comboBoxProductID.TabIndex = 13;
+            this.comboBoxOrderProductID.FormattingEnabled = true;
+            this.comboBoxOrderProductID.Location = new System.Drawing.Point(381, 321);
+            this.comboBoxOrderProductID.Name = "comboBoxOrderProductID";
+            this.comboBoxOrderProductID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderProductID.TabIndex = 13;
             // 
             // OrderTextBox
             // 
@@ -900,9 +903,9 @@
         private PictureBox pictureBox3;
         private RichTextBox OrderTextBox;
         private PictureBox pictureBox4;
-        private DateTimePicker OrderDate;
-        private TextBox OrderOrderID;
-        private ComboBox comboBoxProductID;
+        private DateTimePicker textOrderDate;
+        private TextBox textOrderOrderID;
+        private ComboBox comboBoxOrderProductID;
         private Button BtnViewAllOrders;
         private Button BtnDeleteOrder;
         private Button BtnUpdateOrder;
@@ -913,7 +916,7 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private ComboBox comboBoxSupermarketID;
-        private ComboBox comboBoxCustomerID;
+        private ComboBox comboBoxOrderSupermarketID;
+        private ComboBox comboBoxOrderCustomerID;
     }
 }
