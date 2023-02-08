@@ -648,32 +648,49 @@ namespace Application
 
             string costumerName = textBoxCostumerName.Text;
             string costumerMail = textBoxCostumerMail.Text;
-            string costumerPhoneNumber = textBoxProductPrice.Text;
+            string stringCostumerPhoneNumber = textBoxCostumerPhoneNumber.Text;
             string costumerUserName = textBoxCostumerUserName.Text;
             string costumerAddress = textBoxCostumerAddress.Text;
-            string customerID = textBoxCustomerID.Text;
+            string stringCustomerID = textBoxCustomerID.Text;
 
-            if (string.IsNullOrWhiteSpace(costumerName) || string.IsNullOrWhiteSpace(costumerMail) || string.IsNullOrWhiteSpace(costumerPhoneNumber)
-               || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(customerID))
+            if (string.IsNullOrWhiteSpace(costumerName) || string.IsNullOrWhiteSpace(costumerMail) || string.IsNullOrWhiteSpace(stringCostumerPhoneNumber)
+               || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(stringCustomerID))
             {
                 richTextBoxStore.Text = "Please enter all the fields!";
             }
             else
             {
-                
-                
+
+                try
+                {
+                    int customerID = int.Parse(stringCustomerID);
+                    int costumerPhoneNumber = int.Parse(stringCostumerPhoneNumber);
+
+                    _layer.addCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
+
+                    richTextBoxCostumer.Text = "The Customer has been successfully created!" + "\n";
+
+
+                    clearAllTextBox();
+                }
 
 
 
 
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
+                }
 
-                
-                  
+            }
         }
-        }
 
-        //FIND CUSTOMER
-        private void buttonFindCostumer_Click(object sender, EventArgs e)
+    
+
+
+
+//FIND CUSTOMER
+private void buttonFindCostumer_Click(object sender, EventArgs e)
         {
 
         }
