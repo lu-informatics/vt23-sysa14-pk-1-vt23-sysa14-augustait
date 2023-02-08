@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /Connection/App.config
 /Application/App.config
+/Application/Properties/App.config
