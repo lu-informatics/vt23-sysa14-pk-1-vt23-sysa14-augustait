@@ -28,6 +28,12 @@ namespace Application
             list.Add(textBoxStoreCity);
             list.Add(textBoxStoreRegionName);
             list.Add(textBoxStoreAddress);
+            list.Add(textBoxCostumerAddress);
+            list.Add(textBoxCostumerMail);
+            list.Add(textBoxCostumerName);
+            list.Add(textBoxCostumerPhoneNumber);
+            list.Add(textBoxCostumerUserName);
+            list.Add(textBoxCustomerID);
 
             foreach (TextBox tb in list)
             {
@@ -243,6 +249,7 @@ namespace Application
                             richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
                             clearAllTextBox();
+
 
                         }
                     }
@@ -471,7 +478,7 @@ namespace Application
 
                 catch (FormatException)
                 {
-                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
                 }
 
             }
@@ -682,16 +689,77 @@ namespace Application
                     richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
                 }
 
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        richTextBoxProductCategory.Text = "A product with the same ID already exists.";
+                        textBoxProductID.Text = " ";
+                    }
+                    else if (ex.Number == 547)
+                    {
+                        richTextBoxProductCategory.Text = "The category ID provided does not exist.";
+                        textBoxCategoryID.Text = " ";
+                    }
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxProductCategory.Text = "No connection with the server.";
+
+                    }
+                }
+
             }
         }
 
-    
 
 
 
 //FIND CUSTOMER
 private void buttonFindCostumer_Click(object sender, EventArgs e)
         {
+            try
+            {
+            string stringCustomerID = textBoxCustomerID.Text;
+            int customerID = Int32.Parse(stringCustomerID);
+
+            using (SqlDataReader readerFindCostumer = _layer.findCustomer(customerID))
+            {
+                if (readerFindCostumer.HasRows)
+                {
+                    while (readerFindCostumer.Read())
+                    {
+                        richTextBoxCostumer.Text += "Name: " + readerFindCostumer.GetString(0) + " " + "\n";
+                        richTextBoxCostumer.Text += "CustomerID: " + readerFindCostumer.GetInt32(1) + " " + "\n";
+                        richTextBoxCostumer.Text += "Username: " + readerFindCostumer.GetString(2) + " " + "\n";
+                        richTextBoxCostumer.Text += "Address: " + readerFindCostumer.GetString(3) + "\n";
+                        richTextBoxCostumer.Text += "Phonenumber: " + readerFindCostumer.GetInt32(4) + "\n";
+                        richTextBoxCostumer.Text += "Mail: " + readerFindCostumer.GetString(5) + "\n";
+                       
+                        clearAllTextBox();
+
+                    }
+                }
+                else
+                {
+                    richTextBoxCostumer.Text += "The CustomerID you have provided does not exist";
+                }
+            }
+        }
+            catch (SqlException ex)
+            {
+
+                if (ex.Number == 0) {
+
+                    richTextBoxCostumer.Text = "No connection with server";
+                }
+}
+            catch (FormatException)
+{
+    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+}
+
+
+
 
         }
 
