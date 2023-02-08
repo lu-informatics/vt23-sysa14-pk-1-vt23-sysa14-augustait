@@ -97,6 +97,7 @@
             this.buttonViewAllStore = new System.Windows.Forms.Button();
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
+            this.textBoxCustomerID = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
@@ -534,6 +535,7 @@
             // 
             // tabCustomer
             // 
+            this.tabCustomer.Controls.Add(this.textBoxCustomerID);
             this.tabCustomer.Controls.Add(this.buttonAddCostumer);
             this.tabCustomer.Controls.Add(this.buttonFindCostumer);
             this.tabCustomer.Controls.Add(this.buttonDeleteCostumer);
@@ -597,7 +599,7 @@
             // 
             // textBoxCostumerUserName
             // 
-            this.textBoxCostumerUserName.Location = new System.Drawing.Point(182, 320);
+            this.textBoxCostumerUserName.Location = new System.Drawing.Point(268, 319);
             this.textBoxCostumerUserName.Name = "textBoxCostumerUserName";
             this.textBoxCostumerUserName.PlaceholderText = "User name:";
             this.textBoxCostumerUserName.Size = new System.Drawing.Size(100, 23);
@@ -605,7 +607,7 @@
             // 
             // textBoxCostumerAddress
             // 
-            this.textBoxCostumerAddress.Location = new System.Drawing.Point(333, 320);
+            this.textBoxCostumerAddress.Location = new System.Drawing.Point(401, 319);
             this.textBoxCostumerAddress.Name = "textBoxCostumerAddress";
             this.textBoxCostumerAddress.PlaceholderText = "Address:";
             this.textBoxCostumerAddress.Size = new System.Drawing.Size(100, 23);
@@ -613,7 +615,7 @@
             // 
             // textBoxCostumerPhoneNumber
             // 
-            this.textBoxCostumerPhoneNumber.Location = new System.Drawing.Point(475, 320);
+            this.textBoxCostumerPhoneNumber.Location = new System.Drawing.Point(541, 320);
             this.textBoxCostumerPhoneNumber.Name = "textBoxCostumerPhoneNumber";
             this.textBoxCostumerPhoneNumber.PlaceholderText = "Phone Number#";
             this.textBoxCostumerPhoneNumber.Size = new System.Drawing.Size(100, 23);
@@ -621,7 +623,7 @@
             // 
             // textBoxCostumerMail
             // 
-            this.textBoxCostumerMail.Location = new System.Drawing.Point(618, 320);
+            this.textBoxCostumerMail.Location = new System.Drawing.Point(669, 320);
             this.textBoxCostumerMail.Name = "textBoxCostumerMail";
             this.textBoxCostumerMail.PlaceholderText = "E-mail:";
             this.textBoxCostumerMail.Size = new System.Drawing.Size(100, 23);
@@ -629,7 +631,7 @@
             // 
             // textBoxCostumerName
             // 
-            this.textBoxCostumerName.Location = new System.Drawing.Point(56, 320);
+            this.textBoxCostumerName.Location = new System.Drawing.Point(6, 319);
             this.textBoxCostumerName.Name = "textBoxCostumerName";
             this.textBoxCostumerName.PlaceholderText = "Name:";
             this.textBoxCostumerName.Size = new System.Drawing.Size(100, 23);
@@ -816,6 +818,14 @@
             this.pictureBoxStore.TabIndex = 9;
             this.pictureBoxStore.TabStop = false;
             // 
+            // textBoxCustomerID
+            // 
+            this.textBoxCustomerID.Location = new System.Drawing.Point(141, 319);
+            this.textBoxCustomerID.Name = "textBoxCustomerID";
+            this.textBoxCustomerID.PlaceholderText = "Customer ID:";
+            this.textBoxCustomerID.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCustomerID.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -918,5 +928,6 @@
         private Label label1;
         private ComboBox comboBoxOrderSupermarketID;
         private ComboBox comboBoxOrderCustomerID;
+        private TextBox textBoxCustomerID;
     }
 }
