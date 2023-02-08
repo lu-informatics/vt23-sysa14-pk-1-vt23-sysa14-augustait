@@ -186,7 +186,7 @@ namespace Application
 
 
 
-        //METHOD ADD STORE
+        //METHOD ADD STOREe
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -337,6 +337,7 @@ namespace Application
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE Customer SET Name = @Name, UserName = @UserName, Address = @Address, PhoneNumber = @PhoneNumber, Email = @Email WHERE CustomerID = @CustomerID";
             command.Parameters.Add(new SqlParameter("@CustomerID", customerId)); 
+
             command.Parameters.Add(new SqlParameter("@Name", name));
             command.Parameters.Add(new SqlParameter("@UserName", userName));
             command.Parameters.Add(new SqlParameter("@Address", address));
