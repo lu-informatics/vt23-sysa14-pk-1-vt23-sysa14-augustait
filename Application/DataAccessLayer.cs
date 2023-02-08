@@ -307,7 +307,7 @@ namespace Application
             connection.Dispose();
         }
 
-        public void findCustomer(int customerId)
+        public SqlDataReader findCustomer(int customerId)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -316,19 +316,10 @@ namespace Application
             command.Parameters.Add(new SqlParameter("@CustomerID", customerId));
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            while (reader.Read())
-            {
-                Console.WriteLine(reader.GetString(0));
-                Console.WriteLine(reader.GetInt32(1));
-                Console.WriteLine(reader.GetString(2));
-                Console.WriteLine(reader.GetString(3));
-                Console.WriteLine(reader.GetInt32(4));
-                Console.WriteLine(reader.GetString(5));
-            }
-            reader.Close();
-            connection.Dispose();
-            connection.Close();
+            return reader;
         }
+
+     
 
         public void updateCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
         {
