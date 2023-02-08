@@ -252,7 +252,9 @@ namespace Application
 
                     _layer.insertProductCategory(productCategoryId, productCategoryName);
 
-                   
+                    richTextBoxProduct.Text = "The product has been successfully created!";
+
+
 
                     clearAllTextBox();
                 }
@@ -294,7 +296,7 @@ namespace Application
 
             if (string.IsNullOrWhiteSpace(productCategoryIdString) || string.IsNullOrWhiteSpace(productCategoryName))
             {
-                richTextBoxProductCategory.Text = "Please enter all of the following fields: Product Name, Product ID and Product Price.";
+                richTextBoxProductCategory.Text = "Please fill in a Product Category Name";
             }
             else
             {
@@ -317,9 +319,40 @@ namespace Application
         }
 
 
-        // FIND PRODUCTCATEGORY 
+        // DELETE PRODUCTCATEGORY
+        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
+        {
 
-        //FIND PRODUCT
+
+
+            string productCategoryIdString = textBoxProductCategoryID.Text;
+
+            if (string.IsNullOrWhiteSpace(productCategoryIdString))
+            {
+                richTextBoxProductCategory.Text = "Please enter the Product ID that you want to delete!";
+            }
+
+            else
+            {
+                try
+                {
+                    int productCategoryId = int.Parse(productCategoryIdString);
+                    _layer.deleteProduct(productCategoryId);
+
+                    richTextBoxProductCategory.Text = "Product has successfully been deleted!";
+                    clearAllTextBox();
+                }
+                catch (FormatException)
+                {
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
+                }
+
+            }
+
+
+        }
+
+        //FIND PRODUCTCATEGORY
         private void buttonFindProductCategory_Click(object sender, EventArgs e)
         {
             try
@@ -408,77 +441,10 @@ namespace Application
 
         }
 
-        // DELETE PRODUCTCATEGORY
-        private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
-        {
 
 
 
-            string productCategoryIdString = textBoxProductCategoryID.Text;
 
-            if (string.IsNullOrWhiteSpace(productCategoryIdString))
-            {
-                richTextBoxProductCategory.Text = "Please enter the Product ID that you want to delete!";
-            }
-
-            else
-            {
-                try
-                {
-                    int productCategoryId = int.Parse(productCategoryIdString);
-                    _layer.deleteProduct(productCategoryId);
-
-                    richTextBoxProductCategory.Text = "Product has successfully been deleted!";
-                    clearAllTextBox();
-                }
-                catch (FormatException)
-                {
-                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
-                }
-
-            }
-
-
-        }
-    
-        // FIND PRODUCTCATEGORY 
-
-        private void ButtonFindProductCategory_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string productCategoryString = textBoxCategoryID.Text;
-                int productCategoryID = Int32.Parse(productCategoryString);
-
-                using (SqlDataReader readerFindProductCategory = _layer.findProduct(productCategoryID))
-                {
-                    if (readerFindProductCategory.HasRows)
-                    {
-                        while (readerFindProductCategory.Read())
-                        {
-                            richTextBoxProduct.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
-                            richTextBoxProduct.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
-                        }
-                    }
-                    else
-                    {
-                        richTextBoxProductCategory.Text += "The ProductID you have provided does not exist";
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 0)
-                {
-                    richTextBoxProductCategory.Text = "No connection with server";
-                }
-            }
-
-            catch (FormatException)
-            {
-                richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
-            }
-            }
 
 
         //FIND STORE
