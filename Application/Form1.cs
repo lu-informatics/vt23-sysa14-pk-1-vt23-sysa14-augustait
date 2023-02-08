@@ -1,6 +1,7 @@
 using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.Linq.Expressions;
+using System.Security.Cryptography.X509Certificates;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace Application
@@ -65,6 +66,9 @@ namespace Application
                     richTextBoxProduct.Text = "The product has been successfully created!";
 
                     clearAllTextBox();
+                    
+
+
                 }
 
                 catch (SqlException ex)
@@ -682,11 +686,212 @@ namespace Application
                 richTextBoxProduct.Text = "There are no Product Categories to view!";
             }
 
+          
 
 
+            //ADD ORDER
+
+            private void BtnCreateOrder_Click(object sender, EventArgs e)
+            {
+
+                string orderID = OrderOrderID.Text;
+                string date = OrderDate.ToString(date);
+                string productId = comboBoxProductID.Text;
+                string supermarketID = comboBoxSupermarketID.Text;
+                string customerID = comboBoxCustomerID.Text;
+
+
+                if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(productId) || string.IsNullOrWhiteSpace(supermarketID)
+                    || string.IsNullOrWhiteSpace(customerID) )
+                {
+                    OrderTextBox.Text = "Please enter all the fields!";
+                }
+                else
+                {
+                    try
+                    {
+                        int ID = int.Parse(orderID);
+                        int prodID = int.Parse(productId);
+                        int storeID = int.Parse(supermarketID);
+                        int custID = int.Parse(customerID);
+
+                        _layer.AddOrder(ID, date, prodID, storeID, custID);
+
+                        OrderTextBox.Text = "The order has been successfully created!" + "\n";
+
+                        OrderOrderID.Clear();
+                        comboBoxProductID.ResetText();
+                        comboBoxCustomerID.ResetText();
+                        comboBoxSupermarketID.ResetText();
+
+                    }
+
+                    catch (FormatException)
+                    {
+                        OrderTextBox.Text = "Invalid input format. Please make sure to only insert numbers for the order id.";
+                    }
+                    catch (SqlException error)
+                    {
+                        if (error.Number == 2627)
+                        {
+                            OrderTextBox.Text = "An order with the same ID already exists.";
+
+                        }
+
+
+                        using (SqlDataReader productIdDatareader = _layer.getProductID()) ;
+                    List<int> productIDList = new List<int>();
+                    productIDList.Add(productiddatareader);
+
+                }
+            }
+                //VIEW ALL ORDERS INFORMATION
+                private void BtnViewAllOrders_Click(object sender, EventArgs e)
+                {
+                    try
+                    {
+                        using (SqlDataReader readerViewOrders = _layer.printallOrders())
+                        {
+                            while (readerViewOrders.Read())
+                            {
+                                OrderTextBox.Text += "ID: " + readerViewOrders.GetInt32(0) + " " + "\n";
+                                OrderTextBox.Text += "Date: " + readerViewOrders.GetString(1) + " " + "\n";
+                                OrderTextBox.Text += "Products: " + readerViewOrders.GetInt32(2) +  " " + "\n";
+                                OrderTextBox.Text += "Store: " + readerViewOrders.GetInt32(3) + "\n";
+                                OrderTextBox.Text += "Customer: " + readerViewOrders.GetInt32(4) + "\n";
+
+                            }
+                        }
+                    }
+                    catch (NullReferenceException)
+                    {
+                        OrderTextBox.Text = "There are no orders to view!";
+                    }
+                }
+
+
+                //UPDATE ORDERS
+                private void BtnUpdateOrder_Click(object sender, EventArgs e)
+                {
+                    string orderID = OrderOrderID.Text;
+                    string Date = OrderDate.ToString(date);
+                    string productId = comboBoxProductID.Text;
+                    string supermarketID = comboBoxSupermarketID.Text;
+                    string customerID = comboBoxCustomerID.Text;
+
+
+                    if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(productId) || string.IsNullOrWhiteSpace(supermarketID)
+                        || string.IsNullOrWhiteSpace(customerID))
+                    {
+                        OrderTextBox.Text = "Please enter all the fields!";
+                    }
+                    else
+                    {
+                        try
+                        {
+                            int ID = int.Parse(orderID);
+                            int prodID = int.Parse(productId);
+                            int storeID = int.Parse(supermarketID);
+                            int custID = int.Parse(customerID);
+
+                            _layer.updateOrder(ID, Date, prodID, storeID, custID);
+
+                            OrderTextBox.Text = "The order has been successfully been updated!";
+
+                            OrderOrderID.Clear();
+                            comboBoxProductID.ResetText();
+                            comboBoxCustomerID.ResetText();
+                            comboBoxSupermarketID.ResetText();
+                     
+                    }
+                        catch (FormatException)
+                        {
+                            richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the order ID.";
+                        }
+                    }
+
+                //DELETE ORDER
+                private void BtnDeleteOrder_Click(object sender, EventArgs e)
+                {
+                        string orderID = OrderOrderID.Text;
+
+                        if (string.IsNullOrWhiteSpace(orderID))
+                    {
+                        OrderTextBox.Text = "Please enter the Order ID that you want to delete!";
+                    }
+
+                    else
+                    {
+                        try
+                        {
+                            int ID = int.Parse(orderID);
+                            _layer.deleteProduct(ID);
+
+                            richTextBoxProduct.Text = "Order has successfully been deleted!";
+                            OrderOrderID.Clear();
+                        }
+                        catch (FormatException)
+                        {
+                            OrderTextBox.Text = "Invalid input format. Please make sure to provide a positive number for the order ID.";
+                        }
+
+                    }
+                }
+
+                //FIND ORDER
+                private void BtnFindOrder_Click(object sender, EventArgs e)
+                {
+                    try
+                    {
+                        string orderID = OrderOrderID.Text;
+                        int ID = int.Parse(orderID);
+
+                        using (SqlDataReader readerFindOrder = _layer.findOrder(ID))
+                        {
+                            if (readerFindOrder.HasRows)
+                            {
+                                while (readerFindOrder.Read())
+                                {
+                                        OrderTextBox.Text += "ID: " + readerFindOrder.GetInt32(0) + " " + "\n";
+                                        OrderTextBox.Text += "Date: " + readerFindOrder.GetString(1) + " " + "\n";
+                                        OrderTextBox.Text += "Products: " + readerFindOrder.GetInt32(2) + " " + "\n";
+                                        OrderTextBox.Text += "Store: " + readerFindOrder.GetInt32(3) + "\n";
+                                        OrderTextBox.Text += "Customer: " + readerFindOrder.GetInt32(4) + "\n";
+                                    }
+                            }
+                            else
+                            {
+                                OrderTextBox.Text += "The order Id you have provided does not exist";
+                            }
+                        }
+                    }
+                    catch (SqlException ex)
+                    {
+
+                        if (ex.Number == 0)
+                        {
+
+                            OrderTextBox.Text = "No connection with server";
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        OrderTextBox.Text = "Invalid input format. Please make sure to provide a positive number for the order ID";
+                    }
+
+
+                    {
+
+                    }
+    }
+                }
+            }
         }
     }
 }
+
+
+
 
 
 

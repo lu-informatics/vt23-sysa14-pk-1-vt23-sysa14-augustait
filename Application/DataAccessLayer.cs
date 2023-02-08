@@ -378,9 +378,117 @@ namespace Application
             reader.Close();
 
         }
+        public SqlDataReader printallOrders()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Order_";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
 
 
+        }
+        public void AddOrder(int orderID, string orderDate, int productID, int supermarketID, int customerID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @productID, @supermarketID, @customerID)";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
+            command.Parameters.Add(new SqlParameter("@productID", productID));
+            command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@customerID", customerID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+    
+        public SqlDataReader findOrder(int orderID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Order_ WHERE orderID = @orderID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+
+       
+        public void updateOrder(int productID, int supermarketID, int customerID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
 
 
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Order_ SET supermarketID = @supermarketID, customerID = @customerID, WHERE orderID = @orderID";
+            command.Parameters.Add(new SqlParameter("@productID", productID));
+            command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
+            command.Parameters.Add(new SqlParameter("@customerID", customerID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+       
+        public void deleteOrder(int orderID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Order_ WHERE orderID = @orderID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+        public SqlDataReader getCustomerID(int customerID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT CustomerID FROM Customer";
+            command.Parameters.Add(new SqlParameter("@customerID", customerID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+        public SqlDataReader getStoreID(int supermarketID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT SupermarketID FROM Store";
+            command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+        public SqlDataReader getProductID(int productID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT ProductID FROM Product";
+            command.Parameters.Add(new SqlParameter("@productID", productID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
     }
 }

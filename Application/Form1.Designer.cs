@@ -42,6 +42,8 @@
             this.textBoxProductID = new System.Windows.Forms.TextBox();
             this.textBoxProductName = new System.Windows.Forms.TextBox();
             this.tabProductCategory = new System.Windows.Forms.TabPage();
+            this.buttonViewAllProductCategory = new System.Windows.Forms.Button();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.richTextBoxProductCategory = new System.Windows.Forms.RichTextBox();
             this.textBoxProductCategoryName = new System.Windows.Forms.TextBox();
             this.textBoxProductCategoryID = new System.Windows.Forms.TextBox();
@@ -50,6 +52,23 @@
             this.buttonProductCategoryUpdate = new System.Windows.Forms.Button();
             this.buttonCreateProductCategory = new System.Windows.Forms.Button();
             this.tabOrder = new System.Windows.Forms.TabPage();
+            this.BtnViewAllOrders = new System.Windows.Forms.Button();
+            this.BtnDeleteOrder = new System.Windows.Forms.Button();
+            this.BtnUpdateOrder = new System.Windows.Forms.Button();
+            this.BtnFindOrder = new System.Windows.Forms.Button();
+            this.BtnCreateOrder = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Store = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxSupermarketID = new System.Windows.Forms.ComboBox();
+            this.comboBoxCustomerID = new System.Windows.Forms.ComboBox();
+            this.OrderDate = new System.Windows.Forms.DateTimePicker();
+            this.OrderOrderID = new System.Windows.Forms.TextBox();
+            this.comboBoxProductID = new System.Windows.Forms.ComboBox();
+            this.OrderTextBox = new System.Windows.Forms.RichTextBox();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabCustomer = new System.Windows.Forms.TabPage();
             this.buttonAddCostumer = new System.Windows.Forms.Button();
             this.buttonFindCostumer = new System.Windows.Forms.Button();
@@ -78,19 +97,19 @@
             this.buttonViewAllStore = new System.Windows.Forms.Button();
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.buttonViewAllProductCategory = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
             this.tabProductCategory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.tabOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabCustomer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabStore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -248,6 +267,26 @@
             this.tabProductCategory.Text = "Product Category";
             this.tabProductCategory.UseVisualStyleBackColor = true;
             // 
+            // buttonViewAllProductCategory
+            // 
+            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(308, 234);
+            this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
+            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(75, 23);
+            this.buttonViewAllProductCategory.TabIndex = 10;
+            this.buttonViewAllProductCategory.Text = "View All";
+            this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
+            this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Image = global::Application.Properties.Resources.ICA;
+            this.pictureBox3.Location = new System.Drawing.Point(308, 0);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(123, 86);
+            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox3.TabIndex = 9;
+            this.pictureBox3.TabStop = false;
+            // 
             // richTextBoxProductCategory
             // 
             this.richTextBoxProductCategory.Location = new System.Drawing.Point(45, 132);
@@ -314,6 +353,23 @@
             // 
             // tabOrder
             // 
+            this.tabOrder.Controls.Add(this.BtnViewAllOrders);
+            this.tabOrder.Controls.Add(this.BtnDeleteOrder);
+            this.tabOrder.Controls.Add(this.BtnUpdateOrder);
+            this.tabOrder.Controls.Add(this.BtnFindOrder);
+            this.tabOrder.Controls.Add(this.BtnCreateOrder);
+            this.tabOrder.Controls.Add(this.label5);
+            this.tabOrder.Controls.Add(this.Store);
+            this.tabOrder.Controls.Add(this.label3);
+            this.tabOrder.Controls.Add(this.label2);
+            this.tabOrder.Controls.Add(this.label1);
+            this.tabOrder.Controls.Add(this.comboBoxSupermarketID);
+            this.tabOrder.Controls.Add(this.comboBoxCustomerID);
+            this.tabOrder.Controls.Add(this.OrderDate);
+            this.tabOrder.Controls.Add(this.OrderOrderID);
+            this.tabOrder.Controls.Add(this.comboBoxProductID);
+            this.tabOrder.Controls.Add(this.OrderTextBox);
+            this.tabOrder.Controls.Add(this.pictureBox4);
             this.tabOrder.Location = new System.Drawing.Point(4, 24);
             this.tabOrder.Name = "tabOrder";
             this.tabOrder.Padding = new System.Windows.Forms.Padding(3);
@@ -321,6 +377,157 @@
             this.tabOrder.TabIndex = 2;
             this.tabOrder.Text = "Order";
             this.tabOrder.UseVisualStyleBackColor = true;
+            // 
+            // BtnViewAllOrders
+            // 
+            this.BtnViewAllOrders.Location = new System.Drawing.Point(608, 371);
+            this.BtnViewAllOrders.Name = "BtnViewAllOrders";
+            this.BtnViewAllOrders.Size = new System.Drawing.Size(75, 23);
+            this.BtnViewAllOrders.TabIndex = 29;
+            this.BtnViewAllOrders.Text = "View all";
+            this.BtnViewAllOrders.UseVisualStyleBackColor = true;
+            // 
+            // BtnDeleteOrder
+            // 
+            this.BtnDeleteOrder.Location = new System.Drawing.Point(472, 371);
+            this.BtnDeleteOrder.Name = "BtnDeleteOrder";
+            this.BtnDeleteOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnDeleteOrder.TabIndex = 28;
+            this.BtnDeleteOrder.Text = "Delete";
+            this.BtnDeleteOrder.UseVisualStyleBackColor = true;
+            // 
+            // BtnUpdateOrder
+            // 
+            this.BtnUpdateOrder.Location = new System.Drawing.Point(340, 371);
+            this.BtnUpdateOrder.Name = "BtnUpdateOrder";
+            this.BtnUpdateOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnUpdateOrder.TabIndex = 27;
+            this.BtnUpdateOrder.Text = "Update";
+            this.BtnUpdateOrder.UseVisualStyleBackColor = true;
+            // 
+            // BtnFindOrder
+            // 
+            this.BtnFindOrder.Location = new System.Drawing.Point(203, 371);
+            this.BtnFindOrder.Name = "BtnFindOrder";
+            this.BtnFindOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnFindOrder.TabIndex = 26;
+            this.BtnFindOrder.Text = "Find";
+            this.BtnFindOrder.UseVisualStyleBackColor = true;
+            // 
+            // BtnCreateOrder
+            // 
+            this.BtnCreateOrder.Location = new System.Drawing.Point(72, 371);
+            this.BtnCreateOrder.Name = "BtnCreateOrder";
+            this.BtnCreateOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnCreateOrder.TabIndex = 25;
+            this.BtnCreateOrder.Text = "Create";
+            this.BtnCreateOrder.UseVisualStyleBackColor = true;
+            
+
+
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(662, 303);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(59, 15);
+            this.label5.TabIndex = 24;
+            this.label5.Text = "Customer";
+            // 
+            // Store
+            // 
+            this.Store.AutoSize = true;
+            this.Store.Location = new System.Drawing.Point(522, 303);
+            this.Store.Name = "Store";
+            this.Store.Size = new System.Drawing.Size(34, 15);
+            this.Store.TabIndex = 23;
+            this.Store.Text = "Store";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(401, 303);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 15);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Product";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(222, 303);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(66, 15);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "Order date:";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(52, 303);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(54, 15);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Order ID:";
+            // 
+            // comboBoxSupermarketID
+            // 
+            this.comboBoxSupermarketID.FormattingEnabled = true;
+            this.comboBoxSupermarketID.Location = new System.Drawing.Point(511, 321);
+            this.comboBoxSupermarketID.Name = "comboBoxSupermarketID";
+            this.comboBoxSupermarketID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxSupermarketID.TabIndex = 19;
+            // 
+            // comboBoxCustomerID
+            // 
+            this.comboBoxCustomerID.FormattingEnabled = true;
+            this.comboBoxCustomerID.Location = new System.Drawing.Point(645, 321);
+            this.comboBoxCustomerID.Name = "comboBoxCustomerID";
+            this.comboBoxCustomerID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxCustomerID.TabIndex = 18;
+            // 
+            // OrderDate
+            // 
+            this.OrderDate.Location = new System.Drawing.Point(168, 321);
+            this.OrderDate.Name = "OrderDate";
+            this.OrderDate.Size = new System.Drawing.Size(174, 23);
+            this.OrderDate.TabIndex = 17;
+            // 
+            // OrderOrderID
+            // 
+            this.OrderOrderID.Location = new System.Drawing.Point(36, 321);
+            this.OrderOrderID.Name = "OrderOrderID";
+            this.OrderOrderID.Size = new System.Drawing.Size(94, 23);
+            this.OrderOrderID.TabIndex = 14;
+            // 
+            // comboBoxProductID
+            // 
+            this.comboBoxProductID.FormattingEnabled = true;
+            this.comboBoxProductID.Location = new System.Drawing.Point(381, 321);
+            this.comboBoxProductID.Name = "comboBoxProductID";
+            this.comboBoxProductID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxProductID.TabIndex = 13;
+            // 
+            // OrderTextBox
+            // 
+            this.OrderTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.OrderTextBox.Location = new System.Drawing.Point(63, 97);
+            this.OrderTextBox.Name = "OrderTextBox";
+            this.OrderTextBox.ReadOnly = true;
+            this.OrderTextBox.Size = new System.Drawing.Size(645, 163);
+            this.OrderTextBox.TabIndex = 12;
+            this.OrderTextBox.Text = "";
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = global::Application.Properties.Resources.ICA;
+            this.pictureBox4.Location = new System.Drawing.Point(315, 6);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(123, 86);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 10;
+            this.pictureBox4.TabStop = false;
             // 
             // tabCustomer
             // 
@@ -606,26 +813,6 @@
             this.pictureBoxStore.TabIndex = 9;
             this.pictureBoxStore.TabStop = false;
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox3.Location = new System.Drawing.Point(308, 0);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(123, 86);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 9;
-            this.pictureBox3.TabStop = false;
-            // 
-            // buttonViewAllProductCategory
-            // 
-            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(308, 234);
-            this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
-            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(75, 23);
-            this.buttonViewAllProductCategory.TabIndex = 10;
-            this.buttonViewAllProductCategory.Text = "View All";
-            this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
-            this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -641,6 +828,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).EndInit();
             this.tabProductCategory.ResumeLayout(false);
             this.tabProductCategory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.tabOrder.ResumeLayout(false);
+            this.tabOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabCustomer.ResumeLayout(false);
             this.tabCustomer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
@@ -649,7 +840,6 @@
             this.tabStore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -708,5 +898,22 @@
         private TextBox textBoxProductCategoryID;
         private Button buttonViewAllProductCategory;
         private PictureBox pictureBox3;
+        private RichTextBox OrderTextBox;
+        private PictureBox pictureBox4;
+        private DateTimePicker OrderDate;
+        private TextBox OrderOrderID;
+        private ComboBox comboBoxProductID;
+        private Button BtnViewAllOrders;
+        private Button BtnDeleteOrder;
+        private Button BtnUpdateOrder;
+        private Button BtnFindOrder;
+        private Button BtnCreateOrder;
+        private Label label5;
+        private Label Store;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private ComboBox comboBoxSupermarketID;
+        private ComboBox comboBoxCustomerID;
     }
 }

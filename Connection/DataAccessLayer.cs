@@ -301,7 +301,7 @@ namespace Connection
             }
 
 
-        public void insertOrder(int orderID, string orderDate, int productID, int supermarketID, string userName)
+        public void insertOrder(int orderID, string orderDate, int productID, int supermarketID, int customerID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -310,7 +310,7 @@ namespace Connection
             command.Parameters.Add(new SqlParameter("@OrderDate", orderDate));
             command.Parameters.Add(new SqlParameter("@ProductID", productID));
             command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
-            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.Parameters.Add(new SqlParameter("@customerID", customerID));
 
 
             connection.Open();
@@ -358,7 +358,7 @@ namespace Connection
             connection.Close();
         }
 
-        public void updateOrder(int orderID, string orderDate, int productID, int supermarketID, string userName)
+        public void updateOrder(int orderID, string orderDate, int productID, int supermarketID, int customerID)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -369,7 +369,7 @@ namespace Connection
             command.Parameters.Add(new SqlParameter("@OrderDate", orderDate));
             command.Parameters.Add(new SqlParameter("@ProductID", productID));
             command.Parameters.Add(new SqlParameter("@SupermarketID", supermarketID));
-            command.Parameters.Add(new SqlParameter("@UserName", userName));
+            command.Parameters.Add(new SqlParameter("@customerID", customerID));
 
             connection.Open();
 
@@ -379,7 +379,31 @@ namespace Connection
             connection.Dispose();
 
         }
+        public void printAllOrders()
+        {
+            SqlConnection connection = GetDatabaseConnection();
 
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Order_";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            while (reader.Read())
+            {
+                Console.WriteLine(reader.GetInt32(0));
+                Console.WriteLine(reader.GetString(1));
+                Console.WriteLine(reader.GetInt32(2));
+                Console.WriteLine(reader.GetInt32(3));
+                Console.WriteLine(reader.GetInt32(4));
+
+            }
+
+            reader.Close();
+            connection.Dispose();
+            connection.Close();
+            reader.Close();
+
+        }
         public void addCustomer(string name, string userName, string address, int phoneNumber, string eMail)
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -456,6 +480,8 @@ namespace Connection
 
             connection.Close();
             connection.Dispose();
+
+  
 
         }
 
