@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -457,38 +458,56 @@ namespace Application
             connection.Close();
             connection.Dispose();
         }
-        public SqlDataReader getCustomerID(int customerID)
+        public DataTable GetProductData()
         {
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CustomerID FROM Customer";
-            command.Parameters.Add(new SqlParameter("@customerID", customerID));
+            command.CommandText = "SELECT ProductID, ProductName FROM Product";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            return reader;
+            DataTable productData = new DataTable();
+            productData.Load(reader);
+            connection.Close();
+            return productData;
         }
-        public SqlDataReader getStoreID(int supermarketID)
+
+        public DataTable GetSupermarketData()
         {
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT SupermarketID FROM Store";
-            command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
+            command.CommandText = "SELECT SupermarketID, SupermarketName FROM Store";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            return reader;
+            DataTable supermarketData = new DataTable();
+            supermarketData.Load(reader);
+            connection.Close();
+            return supermarketData;
         }
-        public SqlDataReader getProductID(int productID)
+
+        public DataTable GetCustomerData()
         {
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ProductID FROM Product";
-            command.Parameters.Add(new SqlParameter("@productID", productID));
+            command.CommandText = "SELECT CustomerID, CustomerName FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            return reader;
+            DataTable customerData = new DataTable();
+            customerData.Load(reader);
+            connection.Close();
+            return customerData;
         }
+
+
+
     }
+
+
+
+
+
+
+
 }
