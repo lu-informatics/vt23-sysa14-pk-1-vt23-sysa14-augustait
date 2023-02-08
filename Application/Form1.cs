@@ -651,12 +651,25 @@ namespace Application
             string costumerPhoneNumber = textBoxProductPrice.Text;
             string costumerUserName = textBoxCostumerUserName.Text;
             string costumerAddress = textBoxCostumerAddress.Text;
+            string customerID = textBoxCustomerID.Text;
+
+            if (string.IsNullOrWhiteSpace(costumerName) || string.IsNullOrWhiteSpace(costumerMail) || string.IsNullOrWhiteSpace(costumerPhoneNumber)
+               || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(customerID))
+            {
+                richTextBoxStore.Text = "Please enter all the fields!";
+            }
+            else
+            {
+                
+                
 
 
 
 
 
-
+                
+                  
+        }
         }
 
         //FIND CUSTOMER
