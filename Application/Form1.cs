@@ -21,14 +21,17 @@ namespace Application
             list.Add(textBoxProductName);
             list.Add(textBoxCategoryID);
             list.Add(textBoxProductPrice);
+            list.Add(textBoxStoreID);
+            list.Add(textBoxStoreName);
+            list.Add(textBoxStoreCity);
+            list.Add(textBoxStoreRegionName);
+            list.Add(textBoxStoreAddress);
+
             foreach (TextBox tb in list)
             {
                 tb.Text = ("");
             }
         }
-
-
-
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -105,6 +108,8 @@ namespace Application
                         richTextBoxProduct.Text += "ProductCategoryID: " + readerViewProducts.GetInt32(3) + "\n";
                         richTextBoxProduct.Text += "-----------------------" + "\n";
 
+                        clearAllTextBox();
+
                     }
                 }
             }
@@ -160,7 +165,7 @@ namespace Application
             }
         }
 
-        //DELETE PRODUCT
+        //DELETE PRODUCTt
         private void buttonProductDelete_Click(object sender, EventArgs e)
         {
             string productIdString = textBoxProductID.Text;
@@ -206,6 +211,8 @@ namespace Application
                             richTextBoxProduct.Text += "Name: " + readerFindProduct.GetString(1) + " " + "\n";
                             richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
+                            clearAllTextBox();
+
                         }
                     }
                     else
@@ -229,6 +236,8 @@ namespace Application
 
 
         }
+
+
 
         // ADD PRODUCTCATEGORY
         private void buttonAddProductCategory_Click(object sender, EventArgs e)
@@ -352,6 +361,7 @@ namespace Application
 
         }
 
+
         //FIND PRODUCTCATEGORY
         private void buttonFindProductCategory_Click(object sender, EventArgs e)
         {
@@ -368,6 +378,9 @@ namespace Application
                         {
                             richTextBoxProduct.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
                             richTextBoxProduct.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
+
+                            clearAllTextBox();
+
                         }
                     }
                     else
@@ -418,12 +431,6 @@ namespace Application
 
                     richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
 
-                    textBoxStoreID.Text = " ";
-                    textBoxStoreRegionName.Text = " ";
-                    textBoxStoreName.Text = " ";
-                    textBoxStoreCity.Text = " ";
-                    textBoxStoreAddress.Text = " ";
-
 
                     clearAllTextBox();
                 }
@@ -468,6 +475,8 @@ namespace Application
                             richTextBoxStore.Text += "City: " + readerFindStore.GetString(3) + "\n";
                             richTextBoxStore.Text += "Address: " + readerFindStore.GetString(4) + "\n";
                             richTextBoxStore.Text += "-----------------------" + "\n";
+                            
+                            clearAllTextBox();
 
                         }
                     }
@@ -493,7 +502,38 @@ namespace Application
         //UPDATE STORE
         private void buttonStoreUpdate_Click(object sender, EventArgs e)
         {
+            string storeID = textBoxStoreID.Text;
+            string regionName = textBoxStoreRegionName.Text;
+            string storeName = textBoxStoreName.Text;
+            string storeCity = textBoxStoreCity.Text;
+            string storeAddress = textBoxStoreAddress.Text;
 
+            if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName) 
+                || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
+                {
+                    richTextBoxProduct.Text = "Please enter all of the following fields: Store ID, Region Name, Store Name, Store City & Store Address.";
+                }
+                else
+                {
+                    try
+                    {
+                        int tmpStoreID = int.Parse(storeID);
+
+                        _layer.updateStore(tmpStoreID, regionName, storeName, storeCity, storeAddress);
+
+                        richTextBoxProduct.Text = "The Store has been successfully been updated!";
+
+                        clearAllTextBox();
+                    }
+
+
+
+                    catch (FormatException)
+                    {
+                        richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the Store ID";
+                    }
+
+                }
         }
 
         //DELETE STORE
@@ -514,6 +554,9 @@ namespace Application
                     _layer.deleteStore(tmpID);
 
                     richTextBoxStore.Text = "Store has successfully been deleted!";
+                   
+                    clearAllTextBox();
+
                 }
                 catch (SqlException ex)
                 {
@@ -547,6 +590,8 @@ namespace Application
                         richTextBoxStore.Text += "Address: " + readerViewStores.GetString(4) + "\n";
                         richTextBoxStore.Text += "-----------------------" + "\n";
 
+                        
+                        clearAllTextBox();
 
                     }
                 }
@@ -606,7 +651,7 @@ namespace Application
         {
 
         }
-    
+
 
         //VIEW ALL PRODUCT CATEGORY
         private void buttonViewAllProductCategory_Click(object sender, EventArgs e)

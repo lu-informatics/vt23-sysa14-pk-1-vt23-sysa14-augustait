@@ -336,7 +336,8 @@ namespace Application
 
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "UPDATE Customer SET Name = @Name, UserName = @UserName, Address = @Address, PhoneNumber = @PhoneNumber, Email = @Email WHERE CustomerID = @CustomerID";
-            command.Parameters.Add(new SqlParameter("@CustomerID", customerId));
+            command.Parameters.Add(new SqlParameter("@CustomerID", customerId)); 
+
             command.Parameters.Add(new SqlParameter("@Name", name));
             command.Parameters.Add(new SqlParameter("@UserName", userName));
             command.Parameters.Add(new SqlParameter("@Address", address));
