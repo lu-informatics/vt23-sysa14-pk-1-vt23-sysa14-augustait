@@ -1,3 +1,4 @@
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.Linq.Expressions;
@@ -32,6 +33,23 @@ namespace Application
             {
                 tb.Text = ("");
             }
+        }
+        private void Form_Load(object sender, EventArgs e)
+        {
+            // Fetch the data for each ComboBox from the database
+            DataTable productData = _layer.GetProductData();
+            DataTable supermarketData = _layer.GetSupermarketData();
+            DataTable customerData = _layer.GetCustomerData();
+
+            // Bind the data to each ComboBox
+            comboBoxOrderProductID.DataSource = productData;
+            comboBoxOrderProductID.ValueMember = "ProductID";
+
+            comboBoxOrderSupermarketID.DataSource = supermarketData;
+            comboBoxOrderSupermarketID.ValueMember = "SupermarketID";
+
+            comboBoxOrderCustomerID.DataSource = customerData;
+            comboBoxOrderCustomerID.ValueMember = "CustomerID";
         }
 
 
@@ -691,7 +709,48 @@ namespace Application
 
         private void BtnCreateOrder_Click(object sender, EventArgs e)
         {
+            string orderID = textOrderOrderID.Text;
+            string date = textOrderDate.Value.ToString("yyyy-MM-dd");
+            int productId = int.Parse(comboBoxOrderProductID.SelectedValue.ToString());
+            int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
+            int customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
 
+            if (string.IsNullOrWhiteSpace(orderID))
+            {
+                OrderTextBox.Text = "Please enter an Order ID!";
+            }
+            else if (comboBoxOrderProductID.SelectedIndex == -1 || comboBoxOrderSupermarketID.SelectedIndex == -1
+                     || comboBoxOrderCustomerID.SelectedIndex == -1)
+            {
+                OrderTextBox.Text = "Please select a value from each of the comboboxes!";
+            }
+            else
+            {
+                try
+                {
+                    int ID = int.Parse(orderID);
+
+                    _layer.AddOrder(ID, date, productId, supermarketID, customerID);
+
+                    OrderTextBox.Text = "The order has been successfully created!" + "\n";
+
+                    textOrderOrderID.Clear();
+                    comboBoxOrderProductID.SelectedIndex = -1;
+                    comboBoxOrderSupermarketID.SelectedIndex = -1;
+                    comboBoxOrderCustomerID.SelectedIndex = -1;
+                }
+                catch (FormatException)
+                {
+                    OrderTextBox.Text = "Invalid input format. Please make sure to only insert numbers for the order id.";
+                }
+                catch (SqlException error)
+                {
+                    if (error.Number == 2627)
+                    {
+                        OrderTextBox.Text = "An order with the same ID already exists.";
+                    }
+                }
+            }
         }
 
         private void BtnFindOrder_Click(object sender, EventArgs e)
