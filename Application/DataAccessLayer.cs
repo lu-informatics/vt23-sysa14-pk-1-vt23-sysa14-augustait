@@ -186,7 +186,7 @@ namespace Application
 
 
 
-        //METHOD ADD STORE
+        //METHOD ADD STOREe
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
