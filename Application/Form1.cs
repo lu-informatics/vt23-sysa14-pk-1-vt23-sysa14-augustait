@@ -34,29 +34,38 @@ namespace Application
                 tb.Text = ("");
             }
         }
-        private void Form_Load(object sender, EventArgs e)
+       
+
+
+
+
+        private void Form1_Load(object sender, EventArgs e)
         {
-            // Fetch the data for each ComboBox from the database
             DataTable productData = _layer.GetProductData();
             DataTable supermarketData = _layer.GetSupermarketData();
             DataTable customerData = _layer.GetCustomerData();
 
             // Bind the data to each ComboBox
+
+
+            // Bind the data to the ComboBox
             comboBoxOrderProductID.DataSource = productData;
+            comboBoxOrderProductID.DisplayMember = "ProductID";
             comboBoxOrderProductID.ValueMember = "ProductID";
+
+
 
             comboBoxOrderSupermarketID.DataSource = supermarketData;
             comboBoxOrderSupermarketID.ValueMember = "SupermarketID";
 
             comboBoxOrderCustomerID.DataSource = customerData;
             comboBoxOrderCustomerID.ValueMember = "CustomerID";
-        }
 
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
 
-        }
+        
+
+    }
 
         //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
@@ -714,6 +723,8 @@ namespace Application
             int productId = int.Parse(comboBoxOrderProductID.SelectedValue.ToString());
             int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
             int customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
+
+
 
             if (string.IsNullOrWhiteSpace(orderID))
             {
