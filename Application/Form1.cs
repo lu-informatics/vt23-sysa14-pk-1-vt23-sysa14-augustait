@@ -859,14 +859,96 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
         private void BtnFindOrder_Click(object sender, EventArgs e)
         {
 
+            try
+            {
+                string orderID = textOrderOrderID.Text;
+                int tmpOrderID = int.Parse(orderID);
+
+
+                using (SqlDataReader readerFindOrder = _layer.findOrder(tmpOrderID))
+                {
+                    if (readerFindOrder.HasRows)
+                    {
+                        while (readerFindOrder.Read())
+                        {
+                            OrderTextBox.Text += "--- ORDER FOUND ---" + "\n";
+                            OrderTextBox.Text += "Order ID: " + readerFindOrder.GetInt32(0) + " " + "\n";
+                            OrderTextBox.Text += "Date: " + readerFindOrder.GetString(1) + " " + "\n";
+                            OrderTextBox.Text += "Product ID: " + readerFindOrder.GetInt32(2) + " " + "\n";
+                            OrderTextBox.Text += "Supermarket ID: " + readerFindOrder.GetInt32(3) + "\n";
+                            OrderTextBox.Text += "Customer ID: " + readerFindOrder.GetInt32(4) + "\n";
+                            OrderTextBox.Text += "-----------------------" + "\n";
+
+                            textOrderOrderID.Clear();
+
+                        }
+                    }
+                    else
+                    {
+                        richTextBoxCostumer.Text += "The OrderID you have provided does not exist";
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+
+                if (ex.Number == 0)
+                {
+
+                    richTextBoxCostumer.Text = "No connection with server";
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID";
+            }
         }
 
         private void BtnUpdateOrder_Click(object sender, EventArgs e)
         {
+            string orderID = textOrderOrderID.Text;
+            int productId = int.Parse(comboBoxOrderProductID.SelectedValue.ToString());
+            int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
+            int customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
 
+            if (string.IsNullOrWhiteSpace(orderID))
+            {
+                OrderTextBox.Text = "Please enter an Order ID!";
+            }
+            else if (comboBoxOrderProductID.SelectedIndex == -1 || comboBoxOrderSupermarketID.SelectedIndex == -1
+                     || comboBoxOrderCustomerID.SelectedIndex == -1)
+            {
+                OrderTextBox.Text = "Please select a Product, Store & Customer";
+            }
+            else
+            {
+                try
+                {
+
+                    _layer.updateOrder( productId, supermarketID, customerID);
+
+                    OrderTextBox.Text = "The order has been updated!" + "\n";
+
+                    textOrderOrderID.Clear();
+                    comboBoxOrderProductID.SelectedIndex = -1;
+                    comboBoxOrderSupermarketID.SelectedIndex = -1;
+                    comboBoxOrderCustomerID.SelectedIndex = -1;
+                }
+                catch (FormatException)
+                {
+                    OrderTextBox.Text = "Invalid input format. Please make sure to only insert numbers for the order id.";
+                }
+                catch (SqlException error)
+                {
+                    if (error.Number == 2627)
+                    {
+                        OrderTextBox.Text = "An order with the same ID already exists.";
+                    }
+                }
+            }
         }
 
-        private void BtnDeleteOrder_Click(object sender, EventArgs e)
+            private void BtnDeleteOrder_Click(object sender, EventArgs e)
         {
             string orderID = textOrderOrderID.Text;
 
@@ -937,20 +1019,7 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
             
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click_2(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
 
