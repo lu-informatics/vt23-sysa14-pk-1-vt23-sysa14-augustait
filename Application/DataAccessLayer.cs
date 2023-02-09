@@ -449,6 +449,64 @@ namespace Application
             connection.Close();
             connection.Dispose();
         }
+
+        public void AddCheckout(int checkoutID, string orderID, int totCost, String paymentMethod)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "INSERT INTO Checkout VALUES (@checkoutID, @orderID, @totCost, @paymentMethod)";
+            command.Parameters.Add(new SqlParameter("@checkoutID", checkoutID));
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@totCost", totCost));
+            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+        public void deleteCheckout(int checkoutID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "DELETE FROM Checkout WHERE CheckoutID = @chekoutID";
+            command.Parameters.Add(new SqlParameter("@chekoutID", checkoutID));
+
+            connection.Open();
+
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+        }
+
+        public SqlDataReader findCheckout(int checkoutID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Checkout WHERE CheckoutID = @checkoutID";
+            command.Parameters.Add(new SqlParameter("@checkoutID", checkoutID));
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+
+        public SqlDataReader printallCheckouts()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Checkout";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+
+
+        }
+
         public DataTable GetProductData()
         {
             SqlConnection connection = GetDatabaseConnection();

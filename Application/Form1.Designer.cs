@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.allTabs = new System.Windows.Forms.TabControl();
             this.tabProduct = new System.Windows.Forms.TabPage();
             this.buttonViewAllProducts = new System.Windows.Forms.Button();
             this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
@@ -70,6 +70,7 @@
             this.OrderTextBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.textBoxCustomerID = new System.Windows.Forms.TextBox();
             this.buttonAddCostumer = new System.Windows.Forms.Button();
             this.buttonFindCostumer = new System.Windows.Forms.Button();
             this.buttonDeleteCostumer = new System.Windows.Forms.Button();
@@ -97,8 +98,11 @@
             this.buttonViewAllStore = new System.Windows.Forms.Button();
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
-            this.textBoxCustomerID = new System.Windows.Forms.TextBox();
-            this.tabControl1.SuspendLayout();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label6 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
+            this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
             this.tabProductCategory.SuspendLayout();
@@ -111,20 +115,24 @@
             this.tabStore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
+            this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckout)).BeginInit();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // allTabs
             // 
-            this.tabControl1.Controls.Add(this.tabProduct);
-            this.tabControl1.Controls.Add(this.tabProductCategory);
-            this.tabControl1.Controls.Add(this.tabOrder);
-            this.tabControl1.Controls.Add(this.tabCustomer);
-            this.tabControl1.Controls.Add(this.tabStore);
-            this.tabControl1.Location = new System.Drawing.Point(5, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(783, 448);
-            this.tabControl1.TabIndex = 0;
+            this.allTabs.AccessibleName = "";
+            this.allTabs.Controls.Add(this.tabProduct);
+            this.allTabs.Controls.Add(this.tabProductCategory);
+            this.allTabs.Controls.Add(this.tabOrder);
+            this.allTabs.Controls.Add(this.tabCustomer);
+            this.allTabs.Controls.Add(this.tabStore);
+            this.allTabs.Controls.Add(this.tabPage1);
+            this.allTabs.Location = new System.Drawing.Point(5, 0);
+            this.allTabs.Name = "allTabs";
+            this.allTabs.SelectedIndex = 0;
+            this.allTabs.Size = new System.Drawing.Size(783, 448);
+            this.allTabs.TabIndex = 0;
             // 
             // tabProduct
             // 
@@ -557,6 +565,14 @@
             this.tabCustomer.Text = "Customer";
             this.tabCustomer.UseVisualStyleBackColor = true;
             // 
+            // textBoxCustomerID
+            // 
+            this.textBoxCustomerID.Location = new System.Drawing.Point(141, 319);
+            this.textBoxCustomerID.Name = "textBoxCustomerID";
+            this.textBoxCustomerID.PlaceholderText = "Customer ID:";
+            this.textBoxCustomerID.Size = new System.Drawing.Size(100, 23);
+            this.textBoxCustomerID.TabIndex = 22;
+            // 
             // buttonAddCostumer
             // 
             this.buttonAddCostumer.Location = new System.Drawing.Point(56, 369);
@@ -818,24 +834,61 @@
             this.pictureBoxStore.TabIndex = 9;
             this.pictureBoxStore.TabStop = false;
             // 
-            // textBoxCustomerID
+            // tabPage1
             // 
-            this.textBoxCustomerID.Location = new System.Drawing.Point(141, 319);
-            this.textBoxCustomerID.Name = "textBoxCustomerID";
-            this.textBoxCustomerID.PlaceholderText = "Customer ID:";
-            this.textBoxCustomerID.Size = new System.Drawing.Size(100, 23);
-            this.textBoxCustomerID.TabIndex = 22;
+            this.tabPage1.Controls.Add(this.label6);
+            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.pictureBoxCheckout);
+            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 45F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tabPage1.Location = new System.Drawing.Point(4, 24);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(775, 420);
+            this.tabPage1.TabIndex = 5;
+            this.tabPage1.Text = "Checkout";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.ForeColor = System.Drawing.Color.Red;
+            this.label6.Location = new System.Drawing.Point(259, 12);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(347, 81);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "CHECKOUT";
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBox1.Location = new System.Drawing.Point(392, 134);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(365, 280);
+            this.richTextBox1.TabIndex = 12;
+            this.richTextBox1.Text = "";
+            // 
+            // pictureBoxCheckout
+            // 
+            this.pictureBoxCheckout.Image = global::Application.Properties.Resources.ICA;
+            this.pictureBoxCheckout.Location = new System.Drawing.Point(140, 12);
+            this.pictureBoxCheckout.Name = "pictureBoxCheckout";
+            this.pictureBoxCheckout.Size = new System.Drawing.Size(123, 86);
+            this.pictureBoxCheckout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxCheckout.TabIndex = 10;
+            this.pictureBoxCheckout.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 453);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.allTabs);
             this.Name = "Form1";
             this.Text = "ICA Store";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.tabControl1.ResumeLayout(false);
+            this.allTabs.ResumeLayout(false);
             this.tabProduct.ResumeLayout(false);
             this.tabProduct.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).EndInit();
@@ -853,13 +906,16 @@
             this.tabStore.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckout)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private TabControl tabControl1;
+        private TabControl allTabs;
         private TabPage tabProduct;
         private TabPage tabProductCategory;
         private TabPage tabOrder;
@@ -929,5 +985,9 @@
         private ComboBox comboBoxOrderSupermarketID;
         private ComboBox comboBoxOrderCustomerID;
         private TextBox textBoxCustomerID;
+        private TabPage tabPage1;
+        private RichTextBox richTextBox1;
+        private PictureBox pictureBoxCheckout;
+        private Label label6;
     }
 }

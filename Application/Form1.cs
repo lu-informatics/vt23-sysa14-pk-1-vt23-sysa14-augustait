@@ -51,9 +51,6 @@ namespace Application
             DataTable supermarketData = _layer.GetSupermarketData();
             DataTable customerData = _layer.GetCustomerData();
 
-            // Bind the data to each ComboBox
-
-
             // Bind the data to the ComboBox
             comboBoxOrderProductID.DataSource = productData;
             comboBoxOrderProductID.DisplayMember = "ProductID";
@@ -66,10 +63,6 @@ namespace Application
 
             comboBoxOrderCustomerID.DataSource = customerData;
             comboBoxOrderCustomerID.ValueMember = "CustomerID";
-
-
-
-        
 
     }
 
@@ -832,7 +825,7 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
             else if (comboBoxOrderProductID.SelectedIndex == -1 || comboBoxOrderSupermarketID.SelectedIndex == -1
                      || comboBoxOrderCustomerID.SelectedIndex == -1)
             {
-                OrderTextBox.Text = "Please select a value from each of the comboboxes!";
+                OrderTextBox.Text = "Please select a Product, Store & Customer";
             }
             else
             {
@@ -875,7 +868,39 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
 
         private void BtnDeleteOrder_Click(object sender, EventArgs e)
         {
+            string orderID = textOrderOrderID.Text;
 
+            if (string.IsNullOrWhiteSpace(orderID))
+            {
+                richTextBoxStore.Text = "Please enter the Order ID that you want to delete!";
+            }
+
+            else
+            {
+                try
+                {
+                    int tmpOrderID = Int32.Parse(orderID);
+                    _layer.deleteOrder(tmpOrderID);
+
+                    OrderTextBox.Text = "Order has successfully been deleted!";
+
+                    textOrderOrderID.Clear();
+
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 0)
+                    {
+                        OrderTextBox.Text = "No connection with server";
+
+                    }
+                }
+                catch (FormatException)
+                {
+                    OrderTextBox.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID.";
+                }
+
+            }
         }
 
         private void BtnViewAllOrders_Click(object sender, EventArgs e)
@@ -910,6 +935,21 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
                     richTextBoxProduct.Text = "There are no Products to view!";
                 }
             
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click_2(object sender, EventArgs e)
+        {
+
         }
     }
 }
