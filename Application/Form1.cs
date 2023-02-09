@@ -779,6 +779,7 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
         private void buttonViewAllCostumers_Click(object sender, EventArgs e)
         {
 
+
         }
 
 
@@ -879,7 +880,36 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
 
         private void BtnViewAllOrders_Click(object sender, EventArgs e)
         {
+                try
+                {
+                    using (SqlDataReader readerViewAllOrders = _layer.printallOrders())
+                    {
+                        while (readerViewAllOrders.Read())
+                        {
+                            OrderTextBox.Text += "Order ID: " + readerViewAllOrders.GetInt32(0) + " " + "\n";
+                            OrderTextBox.Text += "Date: " + readerViewAllOrders.GetString(1) + " " + "\n";
+                            OrderTextBox.Text += "Product ID: " + readerViewAllOrders.GetInt32(2) + " " + "\n";
+                            OrderTextBox.Text += "Supermarket ID: " + readerViewAllOrders.GetInt32(3) + "\n";
+                            OrderTextBox.Text += "Customer ID: " + readerViewAllOrders.GetInt32(4) + "\n";
+                            OrderTextBox.Text += "-----------------------" + "\n";
 
+                        textOrderOrderID.Clear();
+
+                    }
+                }
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 0)
+                    {
+                        richTextBoxProduct.Text = "No connection with server";
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    richTextBoxProduct.Text = "There are no Products to view!";
+                }
+            
         }
     }
 }
