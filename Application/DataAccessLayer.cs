@@ -345,7 +345,7 @@ namespace Application
 
         }
 
-        public void showAllCustomers()
+        public SqlDataReader showAllCustomers()
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -353,21 +353,7 @@ namespace Application
             command.CommandText = "SELECT * FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-
-            while (reader.Read())
-            {
-                Console.WriteLine(reader.GetString(0));
-                Console.WriteLine(reader.GetInt32(1));
-                Console.WriteLine(reader.GetString(2));
-                Console.WriteLine(reader.GetString(3));
-                Console.WriteLine(reader.GetInt32(4));
-                Console.WriteLine(reader.GetString(5));
-
-            }
-            reader.Close();
-            connection.Dispose();
-            connection.Close();
-            reader.Close();
+            return reader;
 
         }
         public SqlDataReader printallOrders()

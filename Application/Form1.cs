@@ -734,7 +734,7 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
                 }
                 else
                 {
-                    richTextBoxCostumer.Text += "The CustomerID you have provided does not exist";
+                    richTextBoxCostumer.Text = "The CustomerID you have provided does not exist";
                 }
             }
         }
@@ -771,6 +771,37 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
         //VIEW ALL COSTUMERS
         private void buttonViewAllCostumers_Click(object sender, EventArgs e)
         {
+
+            try
+            {
+                using (SqlDataReader readerViewCustomers = _layer.showAllCustomers())
+                {
+                    while (readerViewCustomers.Read())
+                    {
+                        richTextBoxCostumer.Text += "Name: " + readerViewCustomers.GetString(0) + " " + "\n";
+                        richTextBoxCostumer.Text += "CustomerID: " + readerViewCustomers.GetInt32(1) + " " + "\n";
+                        richTextBoxCostumer.Text += "Username: " + readerViewCustomers.GetString(2) + " " + "\n";
+                        richTextBoxCostumer.Text += "Address: " + readerViewCustomers.GetString(3) + "\n";
+                        richTextBoxCostumer.Text += "Phonenumber: " + readerViewCustomers.GetInt32(4) + "\n";
+                        richTextBoxCostumer.Text += "Mail: " + readerViewCustomers.GetString(5) + "\n";
+                        richTextBoxCostumer.Text += "-----------------------" + "\n";
+
+                        clearAllTextBox();
+
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 0)
+                {
+                    richTextBoxProduct.Text = "No connection with server";
+                }
+            }
+            catch (NullReferenceException)
+            {
+                richTextBoxProduct.Text = "There are no Customers to view!";
+            }
 
 
         }
