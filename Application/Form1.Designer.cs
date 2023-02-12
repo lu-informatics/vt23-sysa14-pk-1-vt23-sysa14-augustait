@@ -128,7 +128,7 @@
             this.allTabs.Controls.Add(this.tabCustomer);
             this.allTabs.Controls.Add(this.tabStore);
             this.allTabs.Controls.Add(this.tabPage1);
-            this.allTabs.Location = new System.Drawing.Point(5, 0);
+            this.allTabs.Location = new System.Drawing.Point(0, 0);
             this.allTabs.Name = "allTabs";
             this.allTabs.SelectedIndex = 0;
             this.allTabs.Size = new System.Drawing.Size(783, 448);
@@ -278,10 +278,10 @@
             // 
             // buttonViewAllProductCategory
             // 
-            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(308, 234);
+            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(312, 257);
             this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
-            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(75, 23);
-            this.buttonViewAllProductCategory.TabIndex = 10;
+            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(109, 23);
+            this.buttonViewAllProductCategory.TabIndex = 11;
             this.buttonViewAllProductCategory.Text = "View All";
             this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
             this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
@@ -289,7 +289,7 @@
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox3.Location = new System.Drawing.Point(308, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(312, 0);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(123, 86);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -298,15 +298,16 @@
             // 
             // richTextBoxProductCategory
             // 
-            this.richTextBoxProductCategory.Location = new System.Drawing.Point(45, 132);
+            this.richTextBoxProductCategory.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBoxProductCategory.Location = new System.Drawing.Point(40, 140);
             this.richTextBoxProductCategory.Name = "richTextBoxProductCategory";
-            this.richTextBoxProductCategory.Size = new System.Drawing.Size(628, 96);
+            this.richTextBoxProductCategory.Size = new System.Drawing.Size(662, 96);
             this.richTextBoxProductCategory.TabIndex = 6;
             this.richTextBoxProductCategory.Text = "";
             // 
             // textBoxProductCategoryName
             // 
-            this.textBoxProductCategoryName.Location = new System.Drawing.Point(405, 275);
+            this.textBoxProductCategoryName.Location = new System.Drawing.Point(410, 315);
             this.textBoxProductCategoryName.Name = "textBoxProductCategoryName";
             this.textBoxProductCategoryName.PlaceholderText = "Name:";
             this.textBoxProductCategoryName.Size = new System.Drawing.Size(100, 23);
@@ -314,7 +315,7 @@
             // 
             // textBoxProductCategoryID
             // 
-            this.textBoxProductCategoryID.Location = new System.Drawing.Point(190, 275);
+            this.textBoxProductCategoryID.Location = new System.Drawing.Point(220, 315);
             this.textBoxProductCategoryID.Name = "textBoxProductCategoryID";
             this.textBoxProductCategoryID.PlaceholderText = "ID:";
             this.textBoxProductCategoryID.Size = new System.Drawing.Size(100, 23);
@@ -322,9 +323,9 @@
             // 
             // buttonProductCategoryDelete
             // 
-            this.buttonProductCategoryDelete.Location = new System.Drawing.Point(598, 335);
+            this.buttonProductCategoryDelete.Location = new System.Drawing.Point(602, 359);
             this.buttonProductCategoryDelete.Name = "buttonProductCategoryDelete";
-            this.buttonProductCategoryDelete.Size = new System.Drawing.Size(75, 23);
+            this.buttonProductCategoryDelete.Size = new System.Drawing.Size(100, 23);
             this.buttonProductCategoryDelete.TabIndex = 3;
             this.buttonProductCategoryDelete.Text = "Delete";
             this.buttonProductCategoryDelete.UseVisualStyleBackColor = true;
@@ -332,9 +333,9 @@
             // 
             // buttonFindProductCategory
             // 
-            this.buttonFindProductCategory.Location = new System.Drawing.Point(199, 335);
+            this.buttonFindProductCategory.Location = new System.Drawing.Point(220, 359);
             this.buttonFindProductCategory.Name = "buttonFindProductCategory";
-            this.buttonFindProductCategory.Size = new System.Drawing.Size(75, 23);
+            this.buttonFindProductCategory.Size = new System.Drawing.Size(100, 23);
             this.buttonFindProductCategory.TabIndex = 2;
             this.buttonFindProductCategory.Text = "Find";
             this.buttonFindProductCategory.UseVisualStyleBackColor = true;
@@ -342,9 +343,9 @@
             // 
             // buttonProductCategoryUpdate
             // 
-            this.buttonProductCategoryUpdate.Location = new System.Drawing.Point(415, 335);
+            this.buttonProductCategoryUpdate.Location = new System.Drawing.Point(410, 359);
             this.buttonProductCategoryUpdate.Name = "buttonProductCategoryUpdate";
-            this.buttonProductCategoryUpdate.Size = new System.Drawing.Size(75, 23);
+            this.buttonProductCategoryUpdate.Size = new System.Drawing.Size(100, 23);
             this.buttonProductCategoryUpdate.TabIndex = 1;
             this.buttonProductCategoryUpdate.Text = "Update";
             this.buttonProductCategoryUpdate.UseVisualStyleBackColor = true;
@@ -352,9 +353,9 @@
             // 
             // buttonCreateProductCategory
             // 
-            this.buttonCreateProductCategory.Location = new System.Drawing.Point(45, 335);
+            this.buttonCreateProductCategory.Location = new System.Drawing.Point(40, 359);
             this.buttonCreateProductCategory.Name = "buttonCreateProductCategory";
-            this.buttonCreateProductCategory.Size = new System.Drawing.Size(75, 23);
+            this.buttonCreateProductCategory.Size = new System.Drawing.Size(100, 23);
             this.buttonCreateProductCategory.TabIndex = 0;
             this.buttonCreateProductCategory.Text = "Create";
             this.buttonCreateProductCategory.UseVisualStyleBackColor = true;
@@ -389,9 +390,9 @@
             // 
             // BtnViewAllOrders
             // 
-            this.BtnViewAllOrders.Location = new System.Drawing.Point(608, 371);
+            this.BtnViewAllOrders.Location = new System.Drawing.Point(312, 257);
             this.BtnViewAllOrders.Name = "BtnViewAllOrders";
-            this.BtnViewAllOrders.Size = new System.Drawing.Size(75, 23);
+            this.BtnViewAllOrders.Size = new System.Drawing.Size(109, 23);
             this.BtnViewAllOrders.TabIndex = 29;
             this.BtnViewAllOrders.Text = "View all";
             this.BtnViewAllOrders.UseVisualStyleBackColor = true;
@@ -399,9 +400,9 @@
             // 
             // BtnDeleteOrder
             // 
-            this.BtnDeleteOrder.Location = new System.Drawing.Point(472, 371);
+            this.BtnDeleteOrder.Location = new System.Drawing.Point(602, 359);
             this.BtnDeleteOrder.Name = "BtnDeleteOrder";
-            this.BtnDeleteOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnDeleteOrder.Size = new System.Drawing.Size(100, 23);
             this.BtnDeleteOrder.TabIndex = 28;
             this.BtnDeleteOrder.Text = "Delete";
             this.BtnDeleteOrder.UseVisualStyleBackColor = true;
@@ -409,9 +410,9 @@
             // 
             // BtnUpdateOrder
             // 
-            this.BtnUpdateOrder.Location = new System.Drawing.Point(340, 371);
+            this.BtnUpdateOrder.Location = new System.Drawing.Point(410, 359);
             this.BtnUpdateOrder.Name = "BtnUpdateOrder";
-            this.BtnUpdateOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnUpdateOrder.Size = new System.Drawing.Size(100, 23);
             this.BtnUpdateOrder.TabIndex = 27;
             this.BtnUpdateOrder.Text = "Update";
             this.BtnUpdateOrder.UseVisualStyleBackColor = true;
@@ -419,9 +420,9 @@
             // 
             // BtnFindOrder
             // 
-            this.BtnFindOrder.Location = new System.Drawing.Point(203, 371);
+            this.BtnFindOrder.Location = new System.Drawing.Point(220, 359);
             this.BtnFindOrder.Name = "BtnFindOrder";
-            this.BtnFindOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnFindOrder.Size = new System.Drawing.Size(100, 23);
             this.BtnFindOrder.TabIndex = 26;
             this.BtnFindOrder.Text = "Find";
             this.BtnFindOrder.UseVisualStyleBackColor = true;
@@ -429,9 +430,9 @@
             // 
             // BtnCreateOrder
             // 
-            this.BtnCreateOrder.Location = new System.Drawing.Point(72, 371);
+            this.BtnCreateOrder.Location = new System.Drawing.Point(40, 359);
             this.BtnCreateOrder.Name = "BtnCreateOrder";
-            this.BtnCreateOrder.Size = new System.Drawing.Size(75, 23);
+            this.BtnCreateOrder.Size = new System.Drawing.Size(100, 23);
             this.BtnCreateOrder.TabIndex = 25;
             this.BtnCreateOrder.Text = "Create";
             this.BtnCreateOrder.UseVisualStyleBackColor = true;
@@ -440,7 +441,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(662, 303);
+            this.label5.Location = new System.Drawing.Point(662, 297);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
             this.label5.TabIndex = 24;
@@ -449,7 +450,7 @@
             // Store
             // 
             this.Store.AutoSize = true;
-            this.Store.Location = new System.Drawing.Point(522, 303);
+            this.Store.Location = new System.Drawing.Point(537, 297);
             this.Store.Name = "Store";
             this.Store.Size = new System.Drawing.Size(34, 15);
             this.Store.TabIndex = 23;
@@ -458,7 +459,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(401, 303);
+            this.label3.Location = new System.Drawing.Point(399, 297);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 15);
             this.label3.TabIndex = 22;
@@ -467,7 +468,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(222, 303);
+            this.label2.Location = new System.Drawing.Point(222, 297);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 15);
             this.label2.TabIndex = 21;
@@ -476,7 +477,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 303);
+            this.label1.Location = new System.Drawing.Point(52, 297);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 15);
             this.label1.TabIndex = 20;
@@ -485,7 +486,7 @@
             // comboBoxOrderSupermarketID
             // 
             this.comboBoxOrderSupermarketID.FormattingEnabled = true;
-            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(511, 321);
+            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(511, 315);
             this.comboBoxOrderSupermarketID.Name = "comboBoxOrderSupermarketID";
             this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(94, 23);
             this.comboBoxOrderSupermarketID.TabIndex = 19;
@@ -493,21 +494,21 @@
             // comboBoxOrderCustomerID
             // 
             this.comboBoxOrderCustomerID.FormattingEnabled = true;
-            this.comboBoxOrderCustomerID.Location = new System.Drawing.Point(645, 321);
+            this.comboBoxOrderCustomerID.Location = new System.Drawing.Point(645, 315);
             this.comboBoxOrderCustomerID.Name = "comboBoxOrderCustomerID";
             this.comboBoxOrderCustomerID.Size = new System.Drawing.Size(94, 23);
             this.comboBoxOrderCustomerID.TabIndex = 18;
             // 
             // textOrderDate
             // 
-            this.textOrderDate.Location = new System.Drawing.Point(168, 321);
+            this.textOrderDate.Location = new System.Drawing.Point(176, 315);
             this.textOrderDate.Name = "textOrderDate";
             this.textOrderDate.Size = new System.Drawing.Size(174, 23);
             this.textOrderDate.TabIndex = 17;
             // 
             // textOrderOrderID
             // 
-            this.textOrderOrderID.Location = new System.Drawing.Point(36, 321);
+            this.textOrderOrderID.Location = new System.Drawing.Point(40, 315);
             this.textOrderOrderID.Name = "textOrderOrderID";
             this.textOrderOrderID.PlaceholderText = "Order ID:";
             this.textOrderOrderID.Size = new System.Drawing.Size(94, 23);
@@ -516,7 +517,7 @@
             // comboBoxOrderProductID
             // 
             this.comboBoxOrderProductID.FormattingEnabled = true;
-            this.comboBoxOrderProductID.Location = new System.Drawing.Point(381, 321);
+            this.comboBoxOrderProductID.Location = new System.Drawing.Point(381, 315);
             this.comboBoxOrderProductID.Name = "comboBoxOrderProductID";
             this.comboBoxOrderProductID.Size = new System.Drawing.Size(94, 23);
             this.comboBoxOrderProductID.TabIndex = 13;
@@ -524,17 +525,17 @@
             // OrderTextBox
             // 
             this.OrderTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.OrderTextBox.Location = new System.Drawing.Point(63, 97);
+            this.OrderTextBox.Location = new System.Drawing.Point(40, 140);
             this.OrderTextBox.Name = "OrderTextBox";
             this.OrderTextBox.ReadOnly = true;
-            this.OrderTextBox.Size = new System.Drawing.Size(645, 163);
+            this.OrderTextBox.Size = new System.Drawing.Size(662, 96);
             this.OrderTextBox.TabIndex = 12;
             this.OrderTextBox.Text = "";
             // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox4.Location = new System.Drawing.Point(315, 6);
+            this.pictureBox4.Location = new System.Drawing.Point(312, 0);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(123, 86);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -567,7 +568,7 @@
             // 
             // textBoxCustomerID
             // 
-            this.textBoxCustomerID.Location = new System.Drawing.Point(141, 319);
+            this.textBoxCustomerID.Location = new System.Drawing.Point(141, 315);
             this.textBoxCustomerID.Name = "textBoxCustomerID";
             this.textBoxCustomerID.PlaceholderText = "Customer ID:";
             this.textBoxCustomerID.Size = new System.Drawing.Size(100, 23);
@@ -575,9 +576,9 @@
             // 
             // buttonAddCostumer
             // 
-            this.buttonAddCostumer.Location = new System.Drawing.Point(56, 369);
+            this.buttonAddCostumer.Location = new System.Drawing.Point(40, 359);
             this.buttonAddCostumer.Name = "buttonAddCostumer";
-            this.buttonAddCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonAddCostumer.Size = new System.Drawing.Size(100, 23);
             this.buttonAddCostumer.TabIndex = 21;
             this.buttonAddCostumer.Text = "Create";
             this.buttonAddCostumer.UseVisualStyleBackColor = true;
@@ -585,9 +586,9 @@
             // 
             // buttonFindCostumer
             // 
-            this.buttonFindCostumer.Location = new System.Drawing.Point(249, 369);
+            this.buttonFindCostumer.Location = new System.Drawing.Point(220, 359);
             this.buttonFindCostumer.Name = "buttonFindCostumer";
-            this.buttonFindCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonFindCostumer.Size = new System.Drawing.Size(100, 23);
             this.buttonFindCostumer.TabIndex = 20;
             this.buttonFindCostumer.Text = "Find";
             this.buttonFindCostumer.UseVisualStyleBackColor = true;
@@ -595,9 +596,9 @@
             // 
             // buttonDeleteCostumer
             // 
-            this.buttonDeleteCostumer.Location = new System.Drawing.Point(609, 369);
+            this.buttonDeleteCostumer.Location = new System.Drawing.Point(602, 359);
             this.buttonDeleteCostumer.Name = "buttonDeleteCostumer";
-            this.buttonDeleteCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonDeleteCostumer.Size = new System.Drawing.Size(100, 23);
             this.buttonDeleteCostumer.TabIndex = 19;
             this.buttonDeleteCostumer.Text = "Delete";
             this.buttonDeleteCostumer.UseVisualStyleBackColor = true;
@@ -605,9 +606,9 @@
             // 
             // buttonUpdateCostumer
             // 
-            this.buttonUpdateCostumer.Location = new System.Drawing.Point(440, 369);
+            this.buttonUpdateCostumer.Location = new System.Drawing.Point(410, 359);
             this.buttonUpdateCostumer.Name = "buttonUpdateCostumer";
-            this.buttonUpdateCostumer.Size = new System.Drawing.Size(109, 23);
+            this.buttonUpdateCostumer.Size = new System.Drawing.Size(100, 23);
             this.buttonUpdateCostumer.TabIndex = 18;
             this.buttonUpdateCostumer.Text = "Update";
             this.buttonUpdateCostumer.UseVisualStyleBackColor = true;
@@ -615,7 +616,7 @@
             // 
             // textBoxCostumerUserName
             // 
-            this.textBoxCostumerUserName.Location = new System.Drawing.Point(268, 319);
+            this.textBoxCostumerUserName.Location = new System.Drawing.Point(268, 315);
             this.textBoxCostumerUserName.Name = "textBoxCostumerUserName";
             this.textBoxCostumerUserName.PlaceholderText = "User name:";
             this.textBoxCostumerUserName.Size = new System.Drawing.Size(100, 23);
@@ -623,7 +624,7 @@
             // 
             // textBoxCostumerAddress
             // 
-            this.textBoxCostumerAddress.Location = new System.Drawing.Point(401, 319);
+            this.textBoxCostumerAddress.Location = new System.Drawing.Point(401, 315);
             this.textBoxCostumerAddress.Name = "textBoxCostumerAddress";
             this.textBoxCostumerAddress.PlaceholderText = "Address:";
             this.textBoxCostumerAddress.Size = new System.Drawing.Size(100, 23);
@@ -631,7 +632,7 @@
             // 
             // textBoxCostumerPhoneNumber
             // 
-            this.textBoxCostumerPhoneNumber.Location = new System.Drawing.Point(541, 320);
+            this.textBoxCostumerPhoneNumber.Location = new System.Drawing.Point(541, 315);
             this.textBoxCostumerPhoneNumber.Name = "textBoxCostumerPhoneNumber";
             this.textBoxCostumerPhoneNumber.PlaceholderText = "Phone Number#";
             this.textBoxCostumerPhoneNumber.Size = new System.Drawing.Size(100, 23);
@@ -639,7 +640,7 @@
             // 
             // textBoxCostumerMail
             // 
-            this.textBoxCostumerMail.Location = new System.Drawing.Point(669, 320);
+            this.textBoxCostumerMail.Location = new System.Drawing.Point(669, 315);
             this.textBoxCostumerMail.Name = "textBoxCostumerMail";
             this.textBoxCostumerMail.PlaceholderText = "E-mail:";
             this.textBoxCostumerMail.Size = new System.Drawing.Size(100, 23);
@@ -647,7 +648,7 @@
             // 
             // textBoxCostumerName
             // 
-            this.textBoxCostumerName.Location = new System.Drawing.Point(6, 319);
+            this.textBoxCostumerName.Location = new System.Drawing.Point(6, 315);
             this.textBoxCostumerName.Name = "textBoxCostumerName";
             this.textBoxCostumerName.PlaceholderText = "Name:";
             this.textBoxCostumerName.Size = new System.Drawing.Size(100, 23);
@@ -655,7 +656,7 @@
             // 
             // buttonViewAllCostumers
             // 
-            this.buttonViewAllCostumers.Location = new System.Drawing.Point(324, 282);
+            this.buttonViewAllCostumers.Location = new System.Drawing.Point(312, 257);
             this.buttonViewAllCostumers.Name = "buttonViewAllCostumers";
             this.buttonViewAllCostumers.Size = new System.Drawing.Size(109, 23);
             this.buttonViewAllCostumers.TabIndex = 12;
@@ -666,7 +667,7 @@
             // richTextBoxCostumer
             // 
             this.richTextBoxCostumer.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxCostumer.Location = new System.Drawing.Point(56, 180);
+            this.richTextBoxCostumer.Location = new System.Drawing.Point(40, 140);
             this.richTextBoxCostumer.Name = "richTextBoxCostumer";
             this.richTextBoxCostumer.ReadOnly = true;
             this.richTextBoxCostumer.Size = new System.Drawing.Size(662, 96);
@@ -675,9 +676,9 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Location = new System.Drawing.Point(310, 63);
+            this.pictureBox2.Location = new System.Drawing.Point(669, 0);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(123, 111);
+            this.pictureBox2.Size = new System.Drawing.Size(107, 86);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox2.TabIndex = 10;
             this.pictureBox2.TabStop = false;
@@ -685,9 +686,9 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox1.Location = new System.Drawing.Point(310, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(312, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(123, 73);
+            this.pictureBox1.Size = new System.Drawing.Size(123, 86);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
