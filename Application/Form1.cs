@@ -292,7 +292,7 @@ namespace Application
 
                     _layer.insertProductCategory(productCategoryId, productCategoryName);
 
-                    richTextBoxProduct.Text = "The product has been successfully created!";
+                    richTextBoxProduct.Text = "The Product Category has been successfully created!";
 
 
 
@@ -303,14 +303,10 @@ namespace Application
                 {
                     if (ex.Number == 2627)
                     {
-                        richTextBoxProductCategory.Text = "A product with the same ID already exists.";
+                        richTextBoxProductCategory.Text = "A Product Category with the same ID already exists.";
                         textBoxProductID.Text = " ";
                     }
-                    else if (ex.Number == 547)
-                    {
-                        richTextBoxProductCategory.Text = "The category ID provided does not exist.";
-                        textBoxCategoryID.Text = " ";
-                    }
+                  
                     else if (ex.Number == 0)
                     {
                         richTextBoxProductCategory.Text = "No connection with the server.";
@@ -320,7 +316,7 @@ namespace Application
 
                 catch (FormatException)
                 {
-                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Product Category ID.";
                 }
             }
 
@@ -347,13 +343,13 @@ namespace Application
 
                     _layer.updateProductCategory(productCategoryId, productCategoryName);
 
-                    richTextBoxProductCategory.Text = "The product has been successfully been updated!";
+                    richTextBoxProductCategory.Text = "The Product Category has been successfully been updated!";
 
                 }
 
                 catch (FormatException)
                 {
-                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Product Category ID.";
                 }
             }
         }
@@ -369,7 +365,7 @@ namespace Application
 
             if (string.IsNullOrWhiteSpace(productCategoryIdString))
             {
-                richTextBoxProductCategory.Text = "Please enter the Product ID that you want to delete!";
+                richTextBoxProductCategory.Text = "Please enter the Product Category ID that you want to delete!";
             }
 
             else
@@ -379,12 +375,12 @@ namespace Application
                     int productCategoryId = int.Parse(productCategoryIdString);
                     _layer.deleteProduct(productCategoryId);
 
-                    richTextBoxProductCategory.Text = "Product has successfully been deleted!";
+                    richTextBoxProductCategory.Text = "Product Category has successfully been deleted!";
                     clearAllTextBox();
                 }
                 catch (FormatException)
                 {
-                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
+                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Product Category ID.";
                 }
 
             }
@@ -416,7 +412,7 @@ namespace Application
                     }
                     else
                     {
-                        richTextBoxProduct.Text += "The ProductID you have provided does not exist";
+                        richTextBoxProductCategory.Text += "The Product Category ID you have provided does not exist";
                     }
                 }
             }
@@ -424,12 +420,12 @@ namespace Application
             {
                 if (ex.Number == 0)
                 {
-                    richTextBoxProduct.Text = "No connection with server";
+                    richTextBoxProductCategory.Text = "No connection with server";
                 }
             }
             catch (FormatException)
             {
-                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+                richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Product Category ID";
             }
 
 
@@ -471,7 +467,7 @@ namespace Application
 
                 catch (FormatException)
                 {
-                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
                 }
 
             }
@@ -542,7 +538,7 @@ namespace Application
             if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName) 
                 || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
                 {
-                    richTextBoxProduct.Text = "Please enter all of the following fields: Store ID, Region Name, Store Name, Store City & Store Address.";
+                    richTextBoxStore.Text = "Please enter all of the following fields: Store ID, Region Name, Store Name, Store City & Store Address.";
                 }
                 else
                 {
@@ -552,7 +548,7 @@ namespace Application
 
                         _layer.updateStore(tmpStoreID, regionName, storeName, storeCity, storeAddress);
 
-                        richTextBoxProduct.Text = "The Store has been successfully been updated!";
+                        richTextBoxStore.Text = "The Store has been successfully been updated!";
 
                         clearAllTextBox();
                     }
@@ -561,7 +557,7 @@ namespace Application
 
                     catch (FormatException)
                     {
-                        richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the Store ID";
+                        richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Store ID";
                     }
 
                 }
@@ -631,12 +627,12 @@ namespace Application
             {
                 if (ex.Number == 0)
                 {
-                    richTextBoxProduct.Text = "No connection with server";
+                    richTextBoxStore.Text = "No connection with server";
                 }
             }
             catch (NullReferenceException)
             {
-                richTextBoxProduct.Text = "There are no Products to view!";
+                richTextBoxStore.Text = "There are no Supermarkets to view!";
             }
 
 
@@ -656,7 +652,7 @@ namespace Application
             if (string.IsNullOrWhiteSpace(costumerName) || string.IsNullOrWhiteSpace(costumerMail) || string.IsNullOrWhiteSpace(stringCostumerPhoneNumber)
                || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(stringCustomerID))
             {
-                richTextBoxStore.Text = "Please enter all the fields!";
+                richTextBoxCostumer.Text = "Please enter all the fields!";
             }
             else
             {
@@ -679,24 +675,20 @@ namespace Application
 
                 catch (FormatException)
                 {
-                    richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
+                    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
                 }
 
                 catch (SqlException ex)
                 {
                     if (ex.Number == 2627)
                     {
-                        richTextBoxProductCategory.Text = "A product with the same ID already exists.";
-                        textBoxProductID.Text = " ";
+                        richTextBoxCostumer.Text = "A Customer with the same ID already exists.";
+                        textBoxCustomerID.Text = " ";
                     }
-                    else if (ex.Number == 547)
-                    {
-                        richTextBoxProductCategory.Text = "The category ID provided does not exist.";
-                        textBoxCategoryID.Text = " ";
-                    }
+  
                     else if (ex.Number == 0)
                     {
-                        richTextBoxProductCategory.Text = "No connection with the server.";
+                        richTextBoxCostumer.Text = "No connection with the server.";
 
                     }
                 }
@@ -748,7 +740,7 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
 }
             catch (FormatException)
 {
-    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the product ID";
+    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID";
 }
 
 
@@ -760,13 +752,99 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
         private void buttonUpdateCostumer_Click(object sender, EventArgs e)
         {
 
+            string costumerName = textBoxCostumerName.Text;
+            string costumerMail = textBoxCostumerMail.Text;
+            string stringCostumerPhoneNumber = textBoxCostumerPhoneNumber.Text;
+            string costumerUserName = textBoxCostumerUserName.Text;
+            string costumerAddress = textBoxCostumerAddress.Text;
+            string stringCustomerID = textBoxCustomerID.Text;
+
+            if (string.IsNullOrWhiteSpace(costumerName) || string.IsNullOrWhiteSpace(costumerMail) || string.IsNullOrWhiteSpace(stringCostumerPhoneNumber)
+               || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(stringCustomerID))
+            {
+                richTextBoxCostumer.Text = "Please enter all the fields!";
+            }
+            else
+            {
+
+                try
+                {
+                    int customerID = int.Parse(stringCustomerID);
+                    int costumerPhoneNumber = int.Parse(stringCostumerPhoneNumber);
+
+                    _layer.updateCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
+
+                    richTextBoxCostumer.Text = "The Customer has been successfully updated!" + "\n";
+
+
+                    clearAllTextBox();
+
+                }
+
+                catch (FormatException)
+                {
+                    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
+                }
+
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627)
+                    {
+                        richTextBoxCostumer.Text = "A Customer with the same ID already exists.";
+                        textBoxCustomerID.Text = " ";
+                    }
+
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxCostumer.Text = "No connection with the server.";
+
+                    }
+                }
+
+            }
         }
 
         //DELETE CUSTOMER
         private void buttonDeleteCostumer_Click(object sender, EventArgs e)
         {
 
-        }
+            String stringCustomerID = textBoxCustomerID.Text;
+
+                if (string.IsNullOrWhiteSpace(stringCustomerID))
+                {
+                    richTextBoxCostumer.Text = "Please enter the Customer ID that you want to delete!";
+                }
+
+                else
+                {
+                    try
+                    {
+                        int customerID = Int32.Parse(stringCustomerID);
+                        _layer.deleteCustomer(customerID);
+
+                        richTextBoxCostumer.Text = "Customer has successfully been deleted!";
+
+                        clearAllTextBox();
+
+                    }
+                    catch (SqlException ex)
+                    {
+                        if (ex.Number == 0)
+                        {
+                            richTextBoxCostumer.Text = "No connection with server";
+
+                        }
+                    }
+                    catch (FormatException)
+                    {
+                        richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID.";
+                    }
+
+                }
+            }
+
+
+        
 
         //VIEW ALL COSTUMERS
         private void buttonViewAllCostumers_Click(object sender, EventArgs e)
