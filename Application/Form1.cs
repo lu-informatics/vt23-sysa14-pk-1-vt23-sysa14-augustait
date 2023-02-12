@@ -358,35 +358,44 @@ namespace Application
         // DELETE PRODUCTCATEGORY
         private void buttonProductCategoryDelete_Click(object sender, EventArgs e)
         {
-
-
-
             string productCategoryIdString = textBoxProductCategoryID.Text;
 
             if (string.IsNullOrWhiteSpace(productCategoryIdString))
             {
                 richTextBoxProductCategory.Text = "Please enter the Product Category ID that you want to delete!";
             }
-
             else
             {
                 try
                 {
                     int productCategoryId = int.Parse(productCategoryIdString);
-                    _layer.deleteProduct(productCategoryId);
 
-                    richTextBoxProductCategory.Text = "Product Category has successfully been deleted!";
-                    clearAllTextBox();
+                    try
+                    {
+                        _layer.deleteProductCategory(productCategoryId);
+
+                        richTextBoxProductCategory.Text = "Product Category has successfully been deleted!";
+                        clearAllTextBox();
+                    }
+                    catch (SqlException ex)
+                    {
+                        if (ex.Number == 547)
+                        {
+                            richTextBoxProductCategory.Text = "The Product Category you are trying to delete is in use in the Product table. Please remove the references to this category in the Product table before deleting.";
+                        }
+                        else
+                        {
+                            richTextBoxProductCategory.Text = "An unexpected error has occurred: " + ex.Message;
+                        }
+                    }
                 }
                 catch (FormatException)
                 {
                     richTextBoxProductCategory.Text = "Invalid input format. Please make sure to provide a positive number for the Product Category ID.";
                 }
-
             }
-
-
         }
+
 
 
         //FIND PRODUCTCATEGORY
@@ -873,12 +882,12 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
             {
                 if (ex.Number == 0)
                 {
-                    richTextBoxProduct.Text = "No connection with server";
+                    richTextBoxCostumer.Text = "No connection with server";
                 }
             }
             catch (NullReferenceException)
             {
-                richTextBoxProduct.Text = "There are no Customers to view!";
+                richTextBoxCostumer.Text = "There are no Customers to view!";
             }
 
 
