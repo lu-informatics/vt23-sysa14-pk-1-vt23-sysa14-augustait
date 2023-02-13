@@ -282,7 +282,7 @@
             this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
             this.buttonViewAllProductCategory.Size = new System.Drawing.Size(109, 23);
             this.buttonViewAllProductCategory.TabIndex = 11;
-            this.buttonViewAllProductCategory.Text = "View All";
+            this.buttonViewAllProductCategory.Text = "View all";
             this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
             this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
             // 
