@@ -69,6 +69,7 @@ namespace Application
         //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
         {
+            richTextBoxProduct.Text = " ";
             string productIdString = textBoxProductID.Text;
             string productName = textBoxProductName.Text;
             string productPriceString = textBoxProductPrice.Text;
@@ -126,6 +127,7 @@ namespace Application
         //VIEW ALL PRODUCT INFORMATION
         private void buttonViewAllProducts_Click(object sender, EventArgs e)
         {
+            richTextBoxProduct.Text = " ";
             try
             {
                 using (SqlDataReader readerViewProducts = _layer.printallProducts())
@@ -162,10 +164,11 @@ namespace Application
         //UPDATE PRODUCT
         private void buttonProductUpdate_Click(object sender, EventArgs e)
         {
+
+            richTextBoxProduct.Text = " ";
             string productIdString = textBoxProductID.Text;
             string productName = textBoxProductName.Text;
             string productPriceString = textBoxProductPrice.Text;
-            string categoryIdString = textBoxCategoryID.Text;
 
             if (string.IsNullOrWhiteSpace(productIdString) || string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(productPriceString))
             {
@@ -178,56 +181,74 @@ namespace Application
                     int productId = int.Parse(productIdString);
                     decimal productPrice = decimal.Parse(productPriceString);
 
-                    _layer.updateProduct(productId, productName, productPrice);
+                    SqlDataReader reader = _layer.findProduct(productId);
 
-                    richTextBoxProduct.Text = "The product has been successfully been updated!";
+                    if (reader == null || !reader.HasRows)
+                    {
+                        richTextBoxProduct.Text = "The product with the specified ID could not be found.";
+                    }
+                    else
+                    {
+                        _layer.updateProduct(productId, productName, productPrice);
 
-                    clearAllTextBox();
+                        richTextBoxProduct.Text = "The product has been successfully been updated!";
+
+                        clearAllTextBox();
+                    }
                 }
-
-
-
                 catch (FormatException)
                 {
                     richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
                 }
-
             }
         }
+
 
         //DELETE PRODUCTt
         private void buttonProductDelete_Click(object sender, EventArgs e)
         {
+            richTextBoxProduct.Text = "";
             string productIdString = textBoxProductID.Text;
 
             if (string.IsNullOrWhiteSpace(productIdString))
             {
                 richTextBoxProduct.Text = "Please enter the Product ID that you want to delete!";
             }
-
             else
             {
                 try
                 {
                     int productId = int.Parse(productIdString);
-                    _layer.deleteProduct(productId);
 
-                    richTextBoxProduct.Text = "Product has successfully been deleted!";
-                    clearAllTextBox();
+                    SqlDataReader reader = _layer.findProduct(productId);
+
+                    if (reader == null || !reader.HasRows)
+                    {
+                        richTextBoxProduct.Text = "The product with the specified ID could not be found.";
+                    }
+                    else
+                    {
+                        _layer.deleteProduct(productId);
+
+                        richTextBoxProduct.Text = "Product has successfully been deleted!";
+                        clearAllTextBox();
+                    }
                 }
                 catch (FormatException)
                 {
                     richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
                 }
-
             }
         }
+
 
         //FIND PRODUCT
         private void buttonFindProduct_Click(object sender, EventArgs e)
         {
+            
             try
             {
+                richTextBoxProduct.Text = " ";
                 string productIdString = textBoxProductID.Text;
                 int productID = Int32.Parse(productIdString);
 
