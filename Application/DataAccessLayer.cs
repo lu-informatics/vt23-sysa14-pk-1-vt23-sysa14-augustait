@@ -367,14 +367,13 @@ namespace Application
 
 
         }
-        public void AddOrder(int orderID, string orderDate, int productID, int supermarketID, int customerID)
+        public void AddOrder(int orderID, string orderDate, int supermarketID, int customerID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @productID, @supermarketID, @customerID)";
+            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @supermarketID, @customerID)";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
-            command.Parameters.Add(new SqlParameter("@productID", productID));
             command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
             command.Parameters.Add(new SqlParameter("@customerID", customerID));
 
@@ -436,14 +435,18 @@ namespace Application
             connection.Dispose();
         }
 
-        public void AddCheckout(int checkoutID, string orderID, int totCost, String paymentMethod)
+
+      
+        //ORDERLINE METHODS
+        public void AddOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Checkout VALUES (@checkoutID, @orderID, @totCost, @paymentMethod)";
-            command.Parameters.Add(new SqlParameter("@checkoutID", checkoutID));
+            command.CommandText = "INSERT INTO Orderline VALUES (@orderID, @productID, @orderlineID, @quantity, @paymentMethod)";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
-            command.Parameters.Add(new SqlParameter("@totCost", totCost));
+            command.Parameters.Add(new SqlParameter("@productID", productID));
+            command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
+            command.Parameters.Add(new SqlParameter("@quantity", quantity));
             command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
 
             connection.Open();
@@ -454,12 +457,13 @@ namespace Application
             connection.Dispose();
         }
 
-        public void deleteCheckout(int checkoutID)
+
+           public void deleteOrderline(int orderlineID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Checkout WHERE CheckoutID = @chekoutID";
-            command.Parameters.Add(new SqlParameter("@chekoutID", checkoutID));
+            command.CommandText = "DELETE FROM Checkout WHERE OrderlineNumber = @orderlineID";
+            command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
 
             connection.Open();
 
@@ -469,30 +473,49 @@ namespace Application
             connection.Dispose();
         }
 
-        public SqlDataReader findCheckout(int checkoutID)
+
+        public SqlDataReader findOrderlinesByOrderID(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
-
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Checkout WHERE CheckoutID = @checkoutID";
-            command.Parameters.Add(new SqlParameter("@checkoutID", checkoutID));
+            command.CommandText = "SELECT * FROM Orderline WHERE OrderID = @orderID ORDER BY OrderID";
+            command.Parameters.AddWithValue("@orderID", orderID);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             return reader;
         }
 
-        public SqlDataReader printallCheckouts()
+        public decimal GetOrderTotalAmount(int orderId)
         {
-            SqlConnection connection = GetDatabaseConnection();
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Checkout";
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-            return reader;
-
-
+            decimal totalAmount = 0;
+            using (SqlConnection connection = GetDatabaseConnection())
+            {
+                string query = "SELECT Product.Price, Orderline.Quantity FROM Orderline " +
+                               "INNER JOIN Product ON Orderline.ProductID = Product.ProductID " +
+                               "WHERE Orderline.OrderID = @orderId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@orderId", orderId);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        decimal price = reader.GetDecimal(0);
+                        int quantity = reader.GetInt32(1);
+                        totalAmount += price * quantity;
+                    }
+                    reader.Close();
+                }
+            }
+            return totalAmount;
         }
 
+
+
+
+
+
+        //METHODS FOR COLLECTING DATA
         public DataTable GetProductData()
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -527,6 +550,20 @@ namespace Application
 
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT CustomerID FROM Customer";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            DataTable customerData = new DataTable();
+            customerData.Load(reader);
+            connection.Close();
+            return customerData;
+        }
+
+        public DataTable GetOrderData()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT OrderID FROM Order_";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable customerData = new DataTable();
