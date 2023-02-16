@@ -400,16 +400,16 @@ namespace Application
         }
 
        
-        public void updateOrder(int productID, int supermarketID, int customerID)
+        public void updateOrder(int orderID, string orderDate)
         {
             SqlConnection connection = GetDatabaseConnection();
 
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Order_ SET supermarketID = @supermarketID, customerID = @customerID, WHERE orderID = @orderID";
-            command.Parameters.Add(new SqlParameter("@productID", productID));
-            command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
-            command.Parameters.Add(new SqlParameter("@customerID", customerID));
+            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate WHERE orderID = @orderID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
+
 
             connection.Open();
 
