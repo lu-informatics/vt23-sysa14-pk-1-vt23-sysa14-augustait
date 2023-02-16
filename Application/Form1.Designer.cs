@@ -844,7 +844,7 @@
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.richTextBoxOrderline);
             this.tabPage1.Controls.Add(this.pictureBoxCheckout);
-            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 45F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -856,10 +856,10 @@
             // orderlineDataGridView
             // 
             this.orderlineDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.orderlineDataGridView.Location = new System.Drawing.Point(476, 54);
+            this.orderlineDataGridView.Location = new System.Drawing.Point(291, 48);
             this.orderlineDataGridView.Name = "orderlineDataGridView";
             this.orderlineDataGridView.RowTemplate.Height = 25;
-            this.orderlineDataGridView.Size = new System.Drawing.Size(240, 150);
+            this.orderlineDataGridView.Size = new System.Drawing.Size(425, 269);
             this.orderlineDataGridView.TabIndex = 41;
             // 
             // buttonDeleteOrderline
@@ -1105,7 +1105,7 @@
             this.label6.ForeColor = System.Drawing.Color.Red;
             this.label6.Location = new System.Drawing.Point(259, 12);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(347, 81);
+            this.label6.Size = new System.Drawing.Size(68, 15);
             this.label6.TabIndex = 14;
             this.label6.Text = "CHECKOUT";
             // 
