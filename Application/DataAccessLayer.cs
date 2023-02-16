@@ -572,6 +572,28 @@ namespace Application
             return customerData;
         }
 
+        public DataSet View(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Orderline")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Orderline";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Orderline");
+
+                    return dataSet;
+                }
+            }
+
+            
+            return dataSet;
+        }
+
 
 
     }
