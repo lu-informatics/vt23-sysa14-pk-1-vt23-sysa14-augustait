@@ -856,10 +856,11 @@
             // orderlineDataGridView
             // 
             this.orderlineDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.orderlineDataGridView.Location = new System.Drawing.Point(291, 48);
+            this.orderlineDataGridView.Location = new System.Drawing.Point(392, 0);
             this.orderlineDataGridView.Name = "orderlineDataGridView";
+            this.orderlineDataGridView.ReadOnly = true;
             this.orderlineDataGridView.RowTemplate.Height = 25;
-            this.orderlineDataGridView.Size = new System.Drawing.Size(425, 269);
+            this.orderlineDataGridView.Size = new System.Drawing.Size(383, 241);
             this.orderlineDataGridView.TabIndex = 41;
             // 
             // buttonDeleteOrderline
@@ -867,7 +868,7 @@
             this.buttonDeleteOrderline.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonDeleteOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDeleteOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonDeleteOrderline.Location = new System.Drawing.Point(459, 381);
+            this.buttonDeleteOrderline.Location = new System.Drawing.Point(392, 386);
             this.buttonDeleteOrderline.Name = "buttonDeleteOrderline";
             this.buttonDeleteOrderline.Size = new System.Drawing.Size(86, 23);
             this.buttonDeleteOrderline.TabIndex = 40;
@@ -880,7 +881,7 @@
             this.buttonFindOrderline.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonFindOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonFindOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonFindOrderline.Location = new System.Drawing.Point(520, 294);
+            this.buttonFindOrderline.Location = new System.Drawing.Point(620, 386);
             this.buttonFindOrderline.Name = "buttonFindOrderline";
             this.buttonFindOrderline.Size = new System.Drawing.Size(86, 23);
             this.buttonFindOrderline.TabIndex = 39;
@@ -925,18 +926,18 @@
             // 
             // textBoxOrderlineID
             // 
-            this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxOrderlineID.Location = new System.Drawing.Point(22, 172);
             this.textBoxOrderlineID.Name = "textBoxOrderlineID";
             this.textBoxOrderlineID.PlaceholderText = "Orderline ID;";
-            this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 11);
+            this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 23);
             this.textBoxOrderlineID.TabIndex = 35;
             // 
             // label10
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(392, 291);
+            this.label10.Location = new System.Drawing.Point(392, 350);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 15);
             this.label10.TabIndex = 34;
@@ -947,7 +948,7 @@
             this.buttonOrderlineCreate.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonOrderlineCreate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonOrderlineCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonOrderlineCreate.Location = new System.Drawing.Point(590, 381);
+            this.buttonOrderlineCreate.Location = new System.Drawing.Point(507, 386);
             this.buttonOrderlineCreate.Name = "buttonOrderlineCreate";
             this.buttonOrderlineCreate.Size = new System.Drawing.Size(86, 23);
             this.buttonOrderlineCreate.TabIndex = 33;
@@ -1103,7 +1104,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.White;
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(259, 12);
+            this.label6.Location = new System.Drawing.Point(129, 12);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(68, 15);
             this.label6.TabIndex = 14;
@@ -1113,17 +1114,17 @@
             // 
             this.richTextBoxOrderline.BackColor = System.Drawing.Color.WhiteSmoke;
             this.richTextBoxOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBoxOrderline.Location = new System.Drawing.Point(392, 134);
+            this.richTextBoxOrderline.Location = new System.Drawing.Point(392, 256);
             this.richTextBoxOrderline.Name = "richTextBoxOrderline";
             this.richTextBoxOrderline.ReadOnly = true;
-            this.richTextBoxOrderline.Size = new System.Drawing.Size(365, 154);
+            this.richTextBoxOrderline.Size = new System.Drawing.Size(383, 91);
             this.richTextBoxOrderline.TabIndex = 12;
             this.richTextBoxOrderline.Text = "";
             // 
             // pictureBoxCheckout
             // 
             this.pictureBoxCheckout.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBoxCheckout.Location = new System.Drawing.Point(140, 12);
+            this.pictureBoxCheckout.Location = new System.Drawing.Point(0, 12);
             this.pictureBoxCheckout.Name = "pictureBoxCheckout";
             this.pictureBoxCheckout.Size = new System.Drawing.Size(123, 86);
             this.pictureBoxCheckout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
