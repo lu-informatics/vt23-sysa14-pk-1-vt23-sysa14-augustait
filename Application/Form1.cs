@@ -261,6 +261,8 @@ namespace Application
 
 
 
+
+
         //FIND PRODUCT
         private void buttonFindProduct_Click(object sender, EventArgs e)
         {
@@ -360,6 +362,7 @@ namespace Application
 
 
         }
+
         // UPDATE PRODUCTCATEGORY
         private void buttonUpdateProductCategory_Click(object sender, EventArgs e)
         {
@@ -462,18 +465,18 @@ namespace Application
         {
             try
             {
-                richTextBoxProductCategory.Text = "The Product Category has been successfully created!";
-                string productCategoryString = textBoxCategoryID.Text;
+                richTextBoxProductCategory.Text = " ";
+                string productCategoryString = textBoxProductCategoryID.Text;
                 int productCategoryID = Int32.Parse(productCategoryString);
 
-                using (SqlDataReader readerFindProductCategory = _layer.findProduct(productCategoryID))
+                using (SqlDataReader readerFindProductCategory = _layer.findProductCategory(productCategoryID))
                 {
                     if (readerFindProductCategory.HasRows)
                     {
                         while (readerFindProductCategory.Read())
                         {
-                            richTextBoxProduct.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
-                            richTextBoxProduct.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
+                            richTextBoxProductCategory.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
+                            richTextBoxProductCategory.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
 
                             clearAllTextBox();
 
@@ -499,6 +502,8 @@ namespace Application
 
 
         }
+
+       
 
         //VIEW ALL PRODUCT CATEGORY
         private void buttonViewAllProductCategory_Click(object sender, EventArgs e)
@@ -1099,32 +1104,37 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
         private void BtnUpdateOrder_Click(object sender, EventArgs e)
         {
             string orderID = textOrderOrderID.Text;
-            int productId = int.Parse(comboBoxOrderProductID.SelectedValue.ToString());
-            int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
-            int customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
+            string date = textOrderDate.Value.ToString("yyyy-MM-dd");
+       
 
-            if (string.IsNullOrWhiteSpace(orderID))
+            if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(date))
             {
-                OrderTextBox.Text = "Please enter an Order ID!";
-            }
-            else if (comboBoxOrderProductID.SelectedIndex == -1 || comboBoxOrderSupermarketID.SelectedIndex == -1
-                     || comboBoxOrderCustomerID.SelectedIndex == -1)
-            {
-                OrderTextBox.Text = "Please select a Product, Store & Customer";
+
+                OrderTextBox.Text = "Please select a Order ID, Product, Store & Customer";
             }
             else
             {
                 try
                 {
+                    int tmpOrderID = int.Parse(orderID);
 
-                    _layer.updateOrder( productId, supermarketID, customerID);
+                    SqlDataReader reader = _layer.findOrder(tmpOrderID);
 
-                    OrderTextBox.Text = "The order has been updated!" + "\n";
+                    if (!reader.HasRows)
+                    {
+                        OrderTextBox.Text = "The product with the specified ID could not be found.";
 
-                    textOrderOrderID.Clear();
-                    comboBoxOrderProductID.SelectedIndex = -1;
-                    comboBoxOrderSupermarketID.SelectedIndex = -1;
-                    comboBoxOrderCustomerID.SelectedIndex = -1;
+                    }
+                    else
+                    {
+                        _layer.updateOrder(tmpOrderID,date);
+
+                        OrderTextBox.Text = "The order has been updated!" + "\n";
+
+                   
+                    }
+
+                   
                 }
                 catch (FormatException)
                 {
@@ -1140,7 +1150,8 @@ private void buttonFindCostumer_Click(object sender, EventArgs e)
             }
         }
 
-            private void BtnDeleteOrder_Click(object sender, EventArgs e)
+
+        private void BtnDeleteOrder_Click(object sender, EventArgs e)
         {
             string orderID = textOrderOrderID.Text;
 
