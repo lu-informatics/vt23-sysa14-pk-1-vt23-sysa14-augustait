@@ -80,6 +80,13 @@ namespace Application
 
         }
 
+        private void UpdateView(string type)
+        {
+            orderlineDataGridView.DataSource = _layer.View(type);
+            orderlineDataGridView.DataMember = type;
+           
+
+        }
         //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
         {
@@ -1272,6 +1279,9 @@ namespace Application
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
                     _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    UpdateView("Orderline");
+
+
 
                     richTextBoxOrderline.Text = "The Order has been successfully created!" + "\n";
 
