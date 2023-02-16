@@ -59,14 +59,12 @@
             this.BtnCreateOrder = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.Store = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxOrderSupermarketID = new System.Windows.Forms.ComboBox();
             this.comboBoxOrderCustomerID = new System.Windows.Forms.ComboBox();
             this.textOrderDate = new System.Windows.Forms.DateTimePicker();
             this.textOrderOrderID = new System.Windows.Forms.TextBox();
-            this.comboBoxOrderProductID = new System.Windows.Forms.ComboBox();
             this.OrderTextBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabCustomer = new System.Windows.Forms.TabPage();
@@ -82,7 +80,6 @@
             this.textBoxCostumerName = new System.Windows.Forms.TextBox();
             this.buttonViewAllCostumers = new System.Windows.Forms.Button();
             this.richTextBoxCostumer = new System.Windows.Forms.RichTextBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabStore = new System.Windows.Forms.TabPage();
             this.buttonStoreDelete = new System.Windows.Forms.Button();
@@ -99,8 +96,25 @@
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonDeleteOrderline = new System.Windows.Forms.Button();
+            this.buttonFindOrderline = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxOrderlinePayment = new System.Windows.Forms.ComboBox();
+            this.textBoxOrderlineID = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.buttonOrderlineCreate = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.comboBoxOrderlineProductID = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrderlineQuantity = new System.Windows.Forms.ComboBox();
+            this.comboBoxOrderlineOrderID = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
@@ -110,7 +124,6 @@
             this.tabOrder.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabCustomer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabStore.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
@@ -370,14 +383,12 @@
             this.tabOrder.Controls.Add(this.BtnCreateOrder);
             this.tabOrder.Controls.Add(this.label5);
             this.tabOrder.Controls.Add(this.Store);
-            this.tabOrder.Controls.Add(this.label3);
             this.tabOrder.Controls.Add(this.label2);
             this.tabOrder.Controls.Add(this.label1);
             this.tabOrder.Controls.Add(this.comboBoxOrderSupermarketID);
             this.tabOrder.Controls.Add(this.comboBoxOrderCustomerID);
             this.tabOrder.Controls.Add(this.textOrderDate);
             this.tabOrder.Controls.Add(this.textOrderOrderID);
-            this.tabOrder.Controls.Add(this.comboBoxOrderProductID);
             this.tabOrder.Controls.Add(this.OrderTextBox);
             this.tabOrder.Controls.Add(this.pictureBox4);
             this.tabOrder.Location = new System.Drawing.Point(4, 24);
@@ -450,25 +461,16 @@
             // Store
             // 
             this.Store.AutoSize = true;
-            this.Store.Location = new System.Drawing.Point(537, 297);
+            this.Store.Location = new System.Drawing.Point(508, 297);
             this.Store.Name = "Store";
             this.Store.Size = new System.Drawing.Size(34, 15);
             this.Store.TabIndex = 23;
             this.Store.Text = "Store";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(399, 297);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(49, 15);
-            this.label3.TabIndex = 22;
-            this.label3.Text = "Product";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(222, 297);
+            this.label2.Location = new System.Drawing.Point(281, 297);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 15);
             this.label2.TabIndex = 21;
@@ -486,7 +488,7 @@
             // comboBoxOrderSupermarketID
             // 
             this.comboBoxOrderSupermarketID.FormattingEnabled = true;
-            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(511, 315);
+            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(477, 315);
             this.comboBoxOrderSupermarketID.Name = "comboBoxOrderSupermarketID";
             this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(94, 23);
             this.comboBoxOrderSupermarketID.TabIndex = 19;
@@ -501,7 +503,7 @@
             // 
             // textOrderDate
             // 
-            this.textOrderDate.Location = new System.Drawing.Point(176, 315);
+            this.textOrderDate.Location = new System.Drawing.Point(222, 315);
             this.textOrderDate.Name = "textOrderDate";
             this.textOrderDate.Size = new System.Drawing.Size(174, 23);
             this.textOrderDate.TabIndex = 17;
@@ -513,14 +515,6 @@
             this.textOrderOrderID.PlaceholderText = "Order ID:";
             this.textOrderOrderID.Size = new System.Drawing.Size(94, 23);
             this.textOrderOrderID.TabIndex = 14;
-            // 
-            // comboBoxOrderProductID
-            // 
-            this.comboBoxOrderProductID.FormattingEnabled = true;
-            this.comboBoxOrderProductID.Location = new System.Drawing.Point(381, 315);
-            this.comboBoxOrderProductID.Name = "comboBoxOrderProductID";
-            this.comboBoxOrderProductID.Size = new System.Drawing.Size(94, 23);
-            this.comboBoxOrderProductID.TabIndex = 13;
             // 
             // OrderTextBox
             // 
@@ -556,7 +550,6 @@
             this.tabCustomer.Controls.Add(this.textBoxCostumerName);
             this.tabCustomer.Controls.Add(this.buttonViewAllCostumers);
             this.tabCustomer.Controls.Add(this.richTextBoxCostumer);
-            this.tabCustomer.Controls.Add(this.pictureBox2);
             this.tabCustomer.Controls.Add(this.pictureBox1);
             this.tabCustomer.Location = new System.Drawing.Point(4, 24);
             this.tabCustomer.Name = "tabCustomer";
@@ -673,15 +666,6 @@
             this.richTextBoxCostumer.Size = new System.Drawing.Size(662, 96);
             this.richTextBoxCostumer.TabIndex = 11;
             this.richTextBoxCostumer.Text = "";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(669, 0);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(107, 86);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 10;
-            this.pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
@@ -837,8 +821,25 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.buttonDeleteOrderline);
+            this.tabPage1.Controls.Add(this.buttonFindOrderline);
+            this.tabPage1.Controls.Add(this.label13);
+            this.tabPage1.Controls.Add(this.label12);
+            this.tabPage1.Controls.Add(this.comboBoxOrderlinePayment);
+            this.tabPage1.Controls.Add(this.textBoxOrderlineID);
+            this.tabPage1.Controls.Add(this.label10);
+            this.tabPage1.Controls.Add(this.buttonOrderlineCreate);
+            this.tabPage1.Controls.Add(this.label4);
+            this.tabPage1.Controls.Add(this.label11);
+            this.tabPage1.Controls.Add(this.label3);
+            this.tabPage1.Controls.Add(this.label9);
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.comboBoxOrderlineProductID);
+            this.tabPage1.Controls.Add(this.comboBoxOrderlineQuantity);
+            this.tabPage1.Controls.Add(this.comboBoxOrderlineOrderID);
             this.tabPage1.Controls.Add(this.label6);
-            this.tabPage1.Controls.Add(this.richTextBox1);
+            this.tabPage1.Controls.Add(this.richTextBoxOrderline);
             this.tabPage1.Controls.Add(this.pictureBoxCheckout);
             this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 45F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
@@ -848,6 +849,242 @@
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Checkout";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // buttonDeleteOrderline
+            // 
+            this.buttonDeleteOrderline.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonDeleteOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonDeleteOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonDeleteOrderline.Location = new System.Drawing.Point(459, 381);
+            this.buttonDeleteOrderline.Name = "buttonDeleteOrderline";
+            this.buttonDeleteOrderline.Size = new System.Drawing.Size(86, 23);
+            this.buttonDeleteOrderline.TabIndex = 40;
+            this.buttonDeleteOrderline.Text = "DELETE";
+            this.buttonDeleteOrderline.UseVisualStyleBackColor = false;
+            this.buttonDeleteOrderline.Click += new System.EventHandler(this.buttonDeleteOrderline_Click);
+            // 
+            // buttonFindOrderline
+            // 
+            this.buttonFindOrderline.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonFindOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonFindOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonFindOrderline.Location = new System.Drawing.Point(520, 294);
+            this.buttonFindOrderline.Name = "buttonFindOrderline";
+            this.buttonFindOrderline.Size = new System.Drawing.Size(86, 23);
+            this.buttonFindOrderline.TabIndex = 39;
+            this.buttonFindOrderline.Text = "FIND";
+            this.buttonFindOrderline.UseVisualStyleBackColor = false;
+            this.buttonFindOrderline.Click += new System.EventHandler(this.buttonFindOrderline_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(253, 394);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(99, 15);
+            this.label13.TabIndex = 38;
+            this.label13.Text = "Payment Method";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.ForeColor = System.Drawing.Color.IndianRed;
+            this.label12.Location = new System.Drawing.Point(8, 367);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(311, 21);
+            this.label12.TabIndex = 37;
+            this.label12.Text = "Step 4: Please select a payment method";
+            // 
+            // comboBoxOrderlinePayment
+            // 
+            this.comboBoxOrderlinePayment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOrderlinePayment.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxOrderlinePayment.FormattingEnabled = true;
+            this.comboBoxOrderlinePayment.Items.AddRange(new object[] {
+            "KLARNA",
+            "DEBIT CARD",
+            "CREDIT CARD"});
+            this.comboBoxOrderlinePayment.Location = new System.Drawing.Point(22, 391);
+            this.comboBoxOrderlinePayment.Name = "comboBoxOrderlinePayment";
+            this.comboBoxOrderlinePayment.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlinePayment.TabIndex = 36;
+            // 
+            // textBoxOrderlineID
+            // 
+            this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxOrderlineID.Location = new System.Drawing.Point(22, 172);
+            this.textBoxOrderlineID.Name = "textBoxOrderlineID";
+            this.textBoxOrderlineID.PlaceholderText = "Orderline ID;";
+            this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 23);
+            this.textBoxOrderlineID.TabIndex = 35;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(392, 291);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(44, 15);
+            this.label10.TabIndex = 34;
+            this.label10.Text = "TOTAL:";
+            // 
+            // buttonOrderlineCreate
+            // 
+            this.buttonOrderlineCreate.BackColor = System.Drawing.SystemColors.Menu;
+            this.buttonOrderlineCreate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.buttonOrderlineCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.buttonOrderlineCreate.Location = new System.Drawing.Point(590, 381);
+            this.buttonOrderlineCreate.Name = "buttonOrderlineCreate";
+            this.buttonOrderlineCreate.Size = new System.Drawing.Size(86, 23);
+            this.buttonOrderlineCreate.TabIndex = 33;
+            this.buttonOrderlineCreate.Text = "CREATE";
+            this.buttonOrderlineCreate.UseVisualStyleBackColor = false;
+            this.buttonOrderlineCreate.Click += new System.EventHandler(this.buttonOrderlineCreate_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.Color.IndianRed;
+            this.label4.Location = new System.Drawing.Point(8, 291);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(381, 21);
+            this.label4.TabIndex = 31;
+            this.label4.Text = "Step 3: Please select the Quantity for the Product";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.ForeColor = System.Drawing.Color.IndianRed;
+            this.label11.Location = new System.Drawing.Point(8, 220);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(239, 21);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Step 2: Please select a Product";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.Color.IndianRed;
+            this.label3.Location = new System.Drawing.Point(8, 134);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(339, 21);
+            this.label3.TabIndex = 27;
+            this.label3.Text = "Step 1: Please insert a number and Order ID";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label9.Location = new System.Drawing.Point(251, 175);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 15);
+            this.label9.TabIndex = 26;
+            this.label9.Text = "Order ID";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(251, 327);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 15);
+            this.label8.TabIndex = 25;
+            this.label8.Text = "Quantity";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(249, 247);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(49, 15);
+            this.label7.TabIndex = 24;
+            this.label7.Text = "Product";
+            // 
+            // comboBoxOrderlineProductID
+            // 
+            this.comboBoxOrderlineProductID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxOrderlineProductID.FormattingEnabled = true;
+            this.comboBoxOrderlineProductID.Location = new System.Drawing.Point(18, 244);
+            this.comboBoxOrderlineProductID.Name = "comboBoxOrderlineProductID";
+            this.comboBoxOrderlineProductID.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlineProductID.TabIndex = 17;
+            // 
+            // comboBoxOrderlineQuantity
+            // 
+            this.comboBoxOrderlineQuantity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOrderlineQuantity.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxOrderlineQuantity.FormattingEnabled = true;
+            this.comboBoxOrderlineQuantity.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "33",
+            "34",
+            "35",
+            "36",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45",
+            "46",
+            "47",
+            "48",
+            "49",
+            "50"});
+            this.comboBoxOrderlineQuantity.Location = new System.Drawing.Point(22, 324);
+            this.comboBoxOrderlineQuantity.Name = "comboBoxOrderlineQuantity";
+            this.comboBoxOrderlineQuantity.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlineQuantity.TabIndex = 16;
+            // 
+            // comboBoxOrderlineOrderID
+            // 
+            this.comboBoxOrderlineOrderID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.comboBoxOrderlineOrderID.FormattingEnabled = true;
+            this.comboBoxOrderlineOrderID.Location = new System.Drawing.Point(140, 172);
+            this.comboBoxOrderlineOrderID.Name = "comboBoxOrderlineOrderID";
+            this.comboBoxOrderlineOrderID.Size = new System.Drawing.Size(107, 23);
+            this.comboBoxOrderlineOrderID.TabIndex = 15;
             // 
             // label6
             // 
@@ -860,15 +1097,16 @@
             this.label6.TabIndex = 14;
             this.label6.Text = "CHECKOUT";
             // 
-            // richTextBox1
+            // richTextBoxOrderline
             // 
-            this.richTextBox1.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBox1.Location = new System.Drawing.Point(392, 134);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(365, 280);
-            this.richTextBox1.TabIndex = 12;
-            this.richTextBox1.Text = "";
+            this.richTextBoxOrderline.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBoxOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.richTextBoxOrderline.Location = new System.Drawing.Point(392, 134);
+            this.richTextBoxOrderline.Name = "richTextBoxOrderline";
+            this.richTextBoxOrderline.ReadOnly = true;
+            this.richTextBoxOrderline.Size = new System.Drawing.Size(365, 154);
+            this.richTextBoxOrderline.TabIndex = 12;
+            this.richTextBoxOrderline.Text = "";
             // 
             // pictureBoxCheckout
             // 
@@ -901,7 +1139,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabCustomer.ResumeLayout(false);
             this.tabCustomer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabStore.ResumeLayout(false);
             this.tabStore.PerformLayout();
@@ -957,7 +1194,6 @@
         private TextBox textBoxCostumerName;
         private Button buttonViewAllCostumers;
         private RichTextBox richTextBoxCostumer;
-        private PictureBox pictureBox2;
         private PictureBox pictureBox1;
         private Button buttonProductCategoryDelete;
         private Button buttonFindProductCategory;
@@ -972,7 +1208,6 @@
         private PictureBox pictureBox4;
         private DateTimePicker textOrderDate;
         private TextBox textOrderOrderID;
-        private ComboBox comboBoxOrderProductID;
         private Button BtnViewAllOrders;
         private Button BtnDeleteOrder;
         private Button BtnUpdateOrder;
@@ -980,15 +1215,31 @@
         private Button BtnCreateOrder;
         private Label label5;
         private Label Store;
-        private Label label3;
         private Label label2;
         private Label label1;
         private ComboBox comboBoxOrderSupermarketID;
         private ComboBox comboBoxOrderCustomerID;
         private TextBox textBoxCustomerID;
         private TabPage tabPage1;
-        private RichTextBox richTextBox1;
+        private RichTextBox richTextBoxOrderline;
         private PictureBox pictureBoxCheckout;
         private Label label6;
+        private ComboBox comboBoxOrderlineProductID;
+        private ComboBox comboBoxOrderlineQuantity;
+        private ComboBox comboBoxOrderlineOrderID;
+        private Label label9;
+        private Label label8;
+        private Label label7;
+        private Label label4;
+        private Label label11;
+        private Label label3;
+        private Button buttonOrderlineCreate;
+        private Label label10;
+        private Label label13;
+        private Label label12;
+        private TextBox textBoxOrderlineID;
+        private ComboBox comboBoxOrderlinePayment;
+        private Button buttonDeleteOrderline;
+        private Button buttonFindOrderline;
     }
 }
