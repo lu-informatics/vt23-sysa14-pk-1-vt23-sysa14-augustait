@@ -54,6 +54,12 @@ namespace Application
             DataTable customerData = _layer.GetCustomerData();
             DataTable orderData = _layer.GetOrderData();
 
+            DataSet dataSet = _layer.View("Orderline");
+
+            DataTable orderLineTable = dataSet.Tables["Orderline"];
+
+            orderlineDataGridView.DataSource = orderLineTable;
+
 
             //Comboboxes for Orderline
             comboBoxOrderlineProductID.DataSource = productData;

@@ -96,6 +96,7 @@
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.orderlineDataGridView = new System.Windows.Forms.DataGridView();
             this.buttonDeleteOrderline = new System.Windows.Forms.Button();
             this.buttonFindOrderline = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -129,6 +130,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderlineDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -821,6 +823,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.orderlineDataGridView);
             this.tabPage1.Controls.Add(this.buttonDeleteOrderline);
             this.tabPage1.Controls.Add(this.buttonFindOrderline);
             this.tabPage1.Controls.Add(this.label13);
@@ -849,6 +852,15 @@
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Checkout";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // orderlineDataGridView
+            // 
+            this.orderlineDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderlineDataGridView.Location = new System.Drawing.Point(476, 54);
+            this.orderlineDataGridView.Name = "orderlineDataGridView";
+            this.orderlineDataGridView.RowTemplate.Height = 25;
+            this.orderlineDataGridView.Size = new System.Drawing.Size(240, 150);
+            this.orderlineDataGridView.TabIndex = 41;
             // 
             // buttonDeleteOrderline
             // 
@@ -913,11 +925,11 @@
             // 
             // textBoxOrderlineID
             // 
-            this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxOrderlineID.Location = new System.Drawing.Point(22, 172);
             this.textBoxOrderlineID.Name = "textBoxOrderlineID";
             this.textBoxOrderlineID.PlaceholderText = "Orderline ID;";
-            this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 23);
+            this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 11);
             this.textBoxOrderlineID.TabIndex = 35;
             // 
             // label10
@@ -1146,6 +1158,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderlineDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckout)).EndInit();
             this.ResumeLayout(false);
 
@@ -1241,5 +1254,6 @@
         private ComboBox comboBoxOrderlinePayment;
         private Button buttonDeleteOrderline;
         private Button buttonFindOrderline;
+        private DataGridView orderlineDataGridView;
     }
 }
