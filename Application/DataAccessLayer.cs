@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Application
 {
@@ -474,8 +475,27 @@ namespace Application
             connection.Dispose();
         }
 
+        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Orderline SET orderlineNumber = @orderlineID, quantity = @quantity, paymentMethod = @paymentMethod WHERE OrderID = @orderID AND ProductID = @productID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@productID", productID));
+            command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
+            command.Parameters.Add(new SqlParameter("@quantity", quantity));
+            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
+          
+            connection.Open();
 
-        public SqlDataReader findOrderlinesByOrderID(int orderID)
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+    public SqlDataReader findOrderlinesByOrderID(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();

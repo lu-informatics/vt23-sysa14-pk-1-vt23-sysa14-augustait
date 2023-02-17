@@ -117,6 +117,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
@@ -823,6 +824,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.orderlineDataGridView);
             this.tabPage1.Controls.Add(this.buttonDeleteOrderline);
             this.tabPage1.Controls.Add(this.buttonFindOrderline);
@@ -868,7 +870,7 @@
             this.buttonDeleteOrderline.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonDeleteOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDeleteOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonDeleteOrderline.Location = new System.Drawing.Point(392, 386);
+            this.buttonDeleteOrderline.Location = new System.Drawing.Point(597, 386);
             this.buttonDeleteOrderline.Name = "buttonDeleteOrderline";
             this.buttonDeleteOrderline.Size = new System.Drawing.Size(86, 23);
             this.buttonDeleteOrderline.TabIndex = 40;
@@ -881,7 +883,7 @@
             this.buttonFindOrderline.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonFindOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonFindOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonFindOrderline.Location = new System.Drawing.Point(620, 386);
+            this.buttonFindOrderline.Location = new System.Drawing.Point(494, 386);
             this.buttonFindOrderline.Name = "buttonFindOrderline";
             this.buttonFindOrderline.Size = new System.Drawing.Size(86, 23);
             this.buttonFindOrderline.TabIndex = 39;
@@ -948,7 +950,7 @@
             this.buttonOrderlineCreate.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonOrderlineCreate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonOrderlineCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonOrderlineCreate.Location = new System.Drawing.Point(507, 386);
+            this.buttonOrderlineCreate.Location = new System.Drawing.Point(392, 386);
             this.buttonOrderlineCreate.Name = "buttonOrderlineCreate";
             this.buttonOrderlineCreate.Size = new System.Drawing.Size(86, 23);
             this.buttonOrderlineCreate.TabIndex = 33;
@@ -1131,6 +1133,19 @@
             this.pictureBoxCheckout.TabIndex = 10;
             this.pictureBoxCheckout.TabStop = false;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Menu;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Location = new System.Drawing.Point(689, 386);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "UPDATE";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.buttonUpdateOrderline_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1256,5 +1271,6 @@
         private Button buttonDeleteOrderline;
         private Button buttonFindOrderline;
         private DataGridView orderlineDataGridView;
+        private Button button1;
     }
 }
