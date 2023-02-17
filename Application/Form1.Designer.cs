@@ -460,7 +460,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(662, 297);
+            this.label5.Location = new System.Drawing.Point(667, 297);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
             this.label5.TabIndex = 24;
@@ -469,7 +469,7 @@
             // Store
             // 
             this.Store.AutoSize = true;
-            this.Store.Location = new System.Drawing.Point(508, 297);
+            this.Store.Location = new System.Drawing.Point(465, 297);
             this.Store.Name = "Store";
             this.Store.Size = new System.Drawing.Size(34, 15);
             this.Store.TabIndex = 23;
@@ -478,7 +478,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(281, 297);
+            this.label2.Location = new System.Drawing.Point(220, 297);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 15);
             this.label2.TabIndex = 21;
@@ -487,7 +487,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 297);
+            this.label1.Location = new System.Drawing.Point(29, 297);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 15);
             this.label1.TabIndex = 20;
@@ -496,9 +496,9 @@
             // comboBoxOrderSupermarketID
             // 
             this.comboBoxOrderSupermarketID.FormattingEnabled = true;
-            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(477, 315);
+            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(380, 315);
             this.comboBoxOrderSupermarketID.Name = "comboBoxOrderSupermarketID";
-            this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(214, 23);
             this.comboBoxOrderSupermarketID.TabIndex = 19;
             // 
             // comboBoxOrderCustomerID
@@ -506,22 +506,22 @@
             this.comboBoxOrderCustomerID.FormattingEnabled = true;
             this.comboBoxOrderCustomerID.Location = new System.Drawing.Point(645, 315);
             this.comboBoxOrderCustomerID.Name = "comboBoxOrderCustomerID";
-            this.comboBoxOrderCustomerID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderCustomerID.Size = new System.Drawing.Size(115, 23);
             this.comboBoxOrderCustomerID.TabIndex = 18;
             // 
             // textOrderDate
             // 
-            this.textOrderDate.Location = new System.Drawing.Point(222, 315);
+            this.textOrderDate.Location = new System.Drawing.Point(152, 315);
             this.textOrderDate.Name = "textOrderDate";
-            this.textOrderDate.Size = new System.Drawing.Size(174, 23);
+            this.textOrderDate.Size = new System.Drawing.Size(191, 23);
             this.textOrderDate.TabIndex = 17;
             // 
             // textOrderOrderID
             // 
-            this.textOrderOrderID.Location = new System.Drawing.Point(40, 315);
+            this.textOrderOrderID.Location = new System.Drawing.Point(7, 315);
             this.textOrderOrderID.Name = "textOrderOrderID";
             this.textOrderOrderID.PlaceholderText = "Order ID:";
-            this.textOrderOrderID.Size = new System.Drawing.Size(94, 23);
+            this.textOrderOrderID.Size = new System.Drawing.Size(116, 23);
             this.textOrderOrderID.TabIndex = 14;
             // 
             // OrderTextBox

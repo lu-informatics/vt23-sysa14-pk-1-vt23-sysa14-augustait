@@ -88,7 +88,7 @@ namespace Application
 
             //Comboboxes for Orderline
             comboBoxOrderlineProductID.DataSource = productData;
-            comboBoxOrderlineProductID.DisplayMember = "ProductID";
+            comboBoxOrderlineProductID.DisplayMember = "ProductName";
             comboBoxOrderlineProductID.ValueMember = "ProductID";
 
             comboBoxOrderlineOrderID.DataSource = orderData;
@@ -98,9 +98,11 @@ namespace Application
 
             //Comboboxes for Order
             comboBoxOrderSupermarketID.DataSource = supermarketData;
+            comboBoxOrderSupermarketID.DisplayMember = "StoreName";
             comboBoxOrderSupermarketID.ValueMember = "SupermarketID";
 
             comboBoxOrderCustomerID.DataSource = customerData;
+            comboBoxOrderCustomerID.DisplayMember = "Name";
             comboBoxOrderCustomerID.ValueMember = "CustomerID";
 
         }
