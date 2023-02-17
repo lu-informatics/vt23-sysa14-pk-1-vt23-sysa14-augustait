@@ -627,6 +627,116 @@ namespace Application
             return dataSet;
         }
 
+        public DataSet ViewOrder(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Order_")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Order_";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Order_");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewProduct(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Product")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Product";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Product");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewStore(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Store")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Store";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Store");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewCustomer(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Customer")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Customer";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Customer");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewProductCategory(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "ProductCategory")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM ProductCategory";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "ProductCategory");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
 
 
     }
