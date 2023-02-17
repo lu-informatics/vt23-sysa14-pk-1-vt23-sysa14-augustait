@@ -554,7 +554,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ProductID FROM Product";
+            command.CommandText = "SELECT ProductID, ProductName FROM Product";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable productData = new DataTable();
@@ -568,7 +568,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT SupermarketID FROM Store";
+            command.CommandText = "SELECT SupermarketID, StoreName FROM Store";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable supermarketData = new DataTable();
@@ -582,7 +582,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CustomerID FROM Customer";
+            command.CommandText = "SELECT CustomerID, Name FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable customerData = new DataTable();
