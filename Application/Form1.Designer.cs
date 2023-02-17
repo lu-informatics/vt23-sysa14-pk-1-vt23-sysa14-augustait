@@ -30,7 +30,7 @@
         {
             this.allTabs = new System.Windows.Forms.TabControl();
             this.tabProduct = new System.Windows.Forms.TabPage();
-            this.buttonViewAllProducts = new System.Windows.Forms.Button();
+            this.productDataGridView = new System.Windows.Forms.DataGridView();
             this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
             this.textBoxCategoryID = new System.Windows.Forms.TextBox();
             this.pictureBoxICA = new System.Windows.Forms.PictureBox();
@@ -42,7 +42,7 @@
             this.textBoxProductID = new System.Windows.Forms.TextBox();
             this.textBoxProductName = new System.Windows.Forms.TextBox();
             this.tabProductCategory = new System.Windows.Forms.TabPage();
-            this.buttonViewAllProductCategory = new System.Windows.Forms.Button();
+            this.productCategoryDataGridView = new System.Windows.Forms.DataGridView();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.richTextBoxProductCategory = new System.Windows.Forms.RichTextBox();
             this.textBoxProductCategoryName = new System.Windows.Forms.TextBox();
@@ -52,7 +52,7 @@
             this.buttonProductCategoryUpdate = new System.Windows.Forms.Button();
             this.buttonCreateProductCategory = new System.Windows.Forms.Button();
             this.tabOrder = new System.Windows.Forms.TabPage();
-            this.BtnViewAllOrders = new System.Windows.Forms.Button();
+            this.orderDataGridView = new System.Windows.Forms.DataGridView();
             this.BtnDeleteOrder = new System.Windows.Forms.Button();
             this.BtnUpdateOrder = new System.Windows.Forms.Button();
             this.BtnFindOrder = new System.Windows.Forms.Button();
@@ -68,6 +68,7 @@
             this.OrderTextBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.customerDataGridView = new System.Windows.Forms.DataGridView();
             this.textBoxCustomerID = new System.Windows.Forms.TextBox();
             this.buttonAddCostumer = new System.Windows.Forms.Button();
             this.buttonFindCostumer = new System.Windows.Forms.Button();
@@ -78,10 +79,10 @@
             this.textBoxCostumerPhoneNumber = new System.Windows.Forms.TextBox();
             this.textBoxCostumerMail = new System.Windows.Forms.TextBox();
             this.textBoxCostumerName = new System.Windows.Forms.TextBox();
-            this.buttonViewAllCostumers = new System.Windows.Forms.Button();
             this.richTextBoxCostumer = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabStore = new System.Windows.Forms.TabPage();
+            this.storeDataGridView = new System.Windows.Forms.DataGridView();
             this.buttonStoreDelete = new System.Windows.Forms.Button();
             this.buttonStoreUpdate = new System.Windows.Forms.Button();
             this.buttonStoreFind = new System.Windows.Forms.Button();
@@ -92,10 +93,10 @@
             this.textBoxStoreRegionName = new System.Windows.Forms.TextBox();
             this.textBoxStoreID = new System.Windows.Forms.TextBox();
             this.pictureBoxStoreMap = new System.Windows.Forms.PictureBox();
-            this.buttonViewAllStore = new System.Windows.Forms.Button();
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
             this.orderlineDataGridView = new System.Windows.Forms.DataGridView();
             this.buttonDeleteOrderline = new System.Windows.Forms.Button();
             this.buttonFindOrderline = new System.Windows.Forms.Button();
@@ -117,17 +118,21 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
             this.tabProductCategory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productCategoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabCustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabStore.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.storeDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
             this.tabPage1.SuspendLayout();
@@ -152,7 +157,7 @@
             // 
             // tabProduct
             // 
-            this.tabProduct.Controls.Add(this.buttonViewAllProducts);
+            this.tabProduct.Controls.Add(this.productDataGridView);
             this.tabProduct.Controls.Add(this.richTextBoxProduct);
             this.tabProduct.Controls.Add(this.textBoxCategoryID);
             this.tabProduct.Controls.Add(this.pictureBoxICA);
@@ -171,23 +176,23 @@
             this.tabProduct.Text = "Product";
             this.tabProduct.UseVisualStyleBackColor = true;
             // 
-            // buttonViewAllProducts
+            // productDataGridView
             // 
-            this.buttonViewAllProducts.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllProducts.Name = "buttonViewAllProducts";
-            this.buttonViewAllProducts.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllProducts.TabIndex = 11;
-            this.buttonViewAllProducts.Text = "View all";
-            this.buttonViewAllProducts.UseVisualStyleBackColor = true;
-            this.buttonViewAllProducts.Click += new System.EventHandler(this.buttonViewAllProducts_Click);
+            this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productDataGridView.Location = new System.Drawing.Point(129, 0);
+            this.productDataGridView.Name = "productDataGridView";
+            this.productDataGridView.ReadOnly = true;
+            this.productDataGridView.RowTemplate.Height = 25;
+            this.productDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.productDataGridView.TabIndex = 43;
             // 
             // richTextBoxProduct
             // 
             this.richTextBoxProduct.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxProduct.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxProduct.Location = new System.Drawing.Point(129, 198);
             this.richTextBoxProduct.Name = "richTextBoxProduct";
             this.richTextBoxProduct.ReadOnly = true;
-            this.richTextBoxProduct.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxProduct.Size = new System.Drawing.Size(643, 96);
             this.richTextBoxProduct.TabIndex = 10;
             this.richTextBoxProduct.Text = "";
             // 
@@ -202,7 +207,7 @@
             // pictureBoxICA
             // 
             this.pictureBoxICA.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBoxICA.Location = new System.Drawing.Point(312, 0);
+            this.pictureBoxICA.Location = new System.Drawing.Point(3, 0);
             this.pictureBoxICA.Name = "pictureBoxICA";
             this.pictureBoxICA.Size = new System.Drawing.Size(123, 86);
             this.pictureBoxICA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -275,7 +280,7 @@
             // 
             // tabProductCategory
             // 
-            this.tabProductCategory.Controls.Add(this.buttonViewAllProductCategory);
+            this.tabProductCategory.Controls.Add(this.productCategoryDataGridView);
             this.tabProductCategory.Controls.Add(this.pictureBox3);
             this.tabProductCategory.Controls.Add(this.richTextBoxProductCategory);
             this.tabProductCategory.Controls.Add(this.textBoxProductCategoryName);
@@ -292,20 +297,20 @@
             this.tabProductCategory.Text = "Product Category";
             this.tabProductCategory.UseVisualStyleBackColor = true;
             // 
-            // buttonViewAllProductCategory
+            // productCategoryDataGridView
             // 
-            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
-            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllProductCategory.TabIndex = 11;
-            this.buttonViewAllProductCategory.Text = "View all";
-            this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
-            this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
+            this.productCategoryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productCategoryDataGridView.Location = new System.Drawing.Point(136, 0);
+            this.productCategoryDataGridView.Name = "productCategoryDataGridView";
+            this.productCategoryDataGridView.ReadOnly = true;
+            this.productCategoryDataGridView.RowTemplate.Height = 25;
+            this.productCategoryDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.productCategoryDataGridView.TabIndex = 43;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox3.Location = new System.Drawing.Point(312, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(123, 86);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -315,9 +320,9 @@
             // richTextBoxProductCategory
             // 
             this.richTextBoxProductCategory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxProductCategory.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxProductCategory.Location = new System.Drawing.Point(136, 198);
             this.richTextBoxProductCategory.Name = "richTextBoxProductCategory";
-            this.richTextBoxProductCategory.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxProductCategory.Size = new System.Drawing.Size(639, 96);
             this.richTextBoxProductCategory.TabIndex = 6;
             this.richTextBoxProductCategory.Text = "";
             // 
@@ -379,7 +384,7 @@
             // 
             // tabOrder
             // 
-            this.tabOrder.Controls.Add(this.BtnViewAllOrders);
+            this.tabOrder.Controls.Add(this.orderDataGridView);
             this.tabOrder.Controls.Add(this.BtnDeleteOrder);
             this.tabOrder.Controls.Add(this.BtnUpdateOrder);
             this.tabOrder.Controls.Add(this.BtnFindOrder);
@@ -402,15 +407,15 @@
             this.tabOrder.Text = "Order";
             this.tabOrder.UseVisualStyleBackColor = true;
             // 
-            // BtnViewAllOrders
+            // orderDataGridView
             // 
-            this.BtnViewAllOrders.Location = new System.Drawing.Point(312, 257);
-            this.BtnViewAllOrders.Name = "BtnViewAllOrders";
-            this.BtnViewAllOrders.Size = new System.Drawing.Size(109, 23);
-            this.BtnViewAllOrders.TabIndex = 29;
-            this.BtnViewAllOrders.Text = "View all";
-            this.BtnViewAllOrders.UseVisualStyleBackColor = true;
-            this.BtnViewAllOrders.Click += new System.EventHandler(this.BtnViewAllOrders_Click);
+            this.orderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderDataGridView.Location = new System.Drawing.Point(129, 0);
+            this.orderDataGridView.Name = "orderDataGridView";
+            this.orderDataGridView.ReadOnly = true;
+            this.orderDataGridView.RowTemplate.Height = 25;
+            this.orderDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.orderDataGridView.TabIndex = 42;
             // 
             // BtnDeleteOrder
             // 
@@ -522,17 +527,17 @@
             // OrderTextBox
             // 
             this.OrderTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.OrderTextBox.Location = new System.Drawing.Point(40, 140);
+            this.OrderTextBox.Location = new System.Drawing.Point(129, 198);
             this.OrderTextBox.Name = "OrderTextBox";
             this.OrderTextBox.ReadOnly = true;
-            this.OrderTextBox.Size = new System.Drawing.Size(662, 96);
+            this.OrderTextBox.Size = new System.Drawing.Size(643, 96);
             this.OrderTextBox.TabIndex = 12;
             this.OrderTextBox.Text = "";
             // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox4.Location = new System.Drawing.Point(312, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(0, 0);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(123, 86);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -541,6 +546,7 @@
             // 
             // tabCustomer
             // 
+            this.tabCustomer.Controls.Add(this.customerDataGridView);
             this.tabCustomer.Controls.Add(this.textBoxCustomerID);
             this.tabCustomer.Controls.Add(this.buttonAddCostumer);
             this.tabCustomer.Controls.Add(this.buttonFindCostumer);
@@ -551,7 +557,6 @@
             this.tabCustomer.Controls.Add(this.textBoxCostumerPhoneNumber);
             this.tabCustomer.Controls.Add(this.textBoxCostumerMail);
             this.tabCustomer.Controls.Add(this.textBoxCostumerName);
-            this.tabCustomer.Controls.Add(this.buttonViewAllCostumers);
             this.tabCustomer.Controls.Add(this.richTextBoxCostumer);
             this.tabCustomer.Controls.Add(this.pictureBox1);
             this.tabCustomer.Location = new System.Drawing.Point(4, 24);
@@ -561,6 +566,16 @@
             this.tabCustomer.TabIndex = 3;
             this.tabCustomer.Text = "Customer";
             this.tabCustomer.UseVisualStyleBackColor = true;
+            // 
+            // customerDataGridView
+            // 
+            this.customerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customerDataGridView.Location = new System.Drawing.Point(132, 0);
+            this.customerDataGridView.Name = "customerDataGridView";
+            this.customerDataGridView.ReadOnly = true;
+            this.customerDataGridView.RowTemplate.Height = 25;
+            this.customerDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.customerDataGridView.TabIndex = 43;
             // 
             // textBoxCustomerID
             // 
@@ -650,30 +665,20 @@
             this.textBoxCostumerName.Size = new System.Drawing.Size(100, 23);
             this.textBoxCostumerName.TabIndex = 13;
             // 
-            // buttonViewAllCostumers
-            // 
-            this.buttonViewAllCostumers.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllCostumers.Name = "buttonViewAllCostumers";
-            this.buttonViewAllCostumers.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllCostumers.TabIndex = 12;
-            this.buttonViewAllCostumers.Text = "View all";
-            this.buttonViewAllCostumers.UseVisualStyleBackColor = true;
-            this.buttonViewAllCostumers.Click += new System.EventHandler(this.buttonViewAllCostumers_Click);
-            // 
             // richTextBoxCostumer
             // 
             this.richTextBoxCostumer.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxCostumer.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxCostumer.Location = new System.Drawing.Point(132, 198);
             this.richTextBoxCostumer.Name = "richTextBoxCostumer";
             this.richTextBoxCostumer.ReadOnly = true;
-            this.richTextBoxCostumer.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxCostumer.Size = new System.Drawing.Size(643, 96);
             this.richTextBoxCostumer.TabIndex = 11;
             this.richTextBoxCostumer.Text = "";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox1.Location = new System.Drawing.Point(312, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(123, 86);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -682,6 +687,7 @@
             // 
             // tabStore
             // 
+            this.tabStore.Controls.Add(this.storeDataGridView);
             this.tabStore.Controls.Add(this.buttonStoreDelete);
             this.tabStore.Controls.Add(this.buttonStoreUpdate);
             this.tabStore.Controls.Add(this.buttonStoreFind);
@@ -692,7 +698,6 @@
             this.tabStore.Controls.Add(this.textBoxStoreRegionName);
             this.tabStore.Controls.Add(this.textBoxStoreID);
             this.tabStore.Controls.Add(this.pictureBoxStoreMap);
-            this.tabStore.Controls.Add(this.buttonViewAllStore);
             this.tabStore.Controls.Add(this.richTextBoxStore);
             this.tabStore.Controls.Add(this.pictureBoxStore);
             this.tabStore.Location = new System.Drawing.Point(4, 24);
@@ -702,6 +707,16 @@
             this.tabStore.TabIndex = 4;
             this.tabStore.Text = "Store";
             this.tabStore.UseVisualStyleBackColor = true;
+            // 
+            // storeDataGridView
+            // 
+            this.storeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.storeDataGridView.Location = new System.Drawing.Point(377, 0);
+            this.storeDataGridView.Name = "storeDataGridView";
+            this.storeDataGridView.ReadOnly = true;
+            this.storeDataGridView.RowTemplate.Height = 25;
+            this.storeDataGridView.Size = new System.Drawing.Size(398, 210);
+            this.storeDataGridView.TabIndex = 42;
             // 
             // buttonStoreDelete
             // 
@@ -792,23 +807,13 @@
             this.pictureBoxStoreMap.TabIndex = 13;
             this.pictureBoxStoreMap.TabStop = false;
             // 
-            // buttonViewAllStore
-            // 
-            this.buttonViewAllStore.Location = new System.Drawing.Point(492, 212);
-            this.buttonViewAllStore.Name = "buttonViewAllStore";
-            this.buttonViewAllStore.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllStore.TabIndex = 12;
-            this.buttonViewAllStore.Text = "View all";
-            this.buttonViewAllStore.UseVisualStyleBackColor = true;
-            this.buttonViewAllStore.Click += new System.EventHandler(this.buttonViewAllStore_Click);
-            // 
             // richTextBoxStore
             // 
             this.richTextBoxStore.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxStore.Location = new System.Drawing.Point(377, 241);
+            this.richTextBoxStore.Location = new System.Drawing.Point(377, 228);
             this.richTextBoxStore.Name = "richTextBoxStore";
             this.richTextBoxStore.ReadOnly = true;
-            this.richTextBoxStore.Size = new System.Drawing.Size(365, 158);
+            this.richTextBoxStore.Size = new System.Drawing.Size(392, 171);
             this.richTextBoxStore.TabIndex = 11;
             this.richTextBoxStore.Text = "";
             // 
@@ -854,6 +859,19 @@
             this.tabPage1.TabIndex = 5;
             this.tabPage1.Text = "Checkout";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Menu;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Location = new System.Drawing.Point(689, 386);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "UPDATE";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.buttonUpdateOrderline_Click);
             // 
             // orderlineDataGridView
             // 
@@ -1133,19 +1151,6 @@
             this.pictureBoxCheckout.TabIndex = 10;
             this.pictureBoxCheckout.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Menu;
-            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.button1.Location = new System.Drawing.Point(689, 386);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 23);
-            this.button1.TabIndex = 42;
-            this.button1.Text = "UPDATE";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.buttonUpdateOrderline_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1158,18 +1163,23 @@
             this.allTabs.ResumeLayout(false);
             this.tabProduct.ResumeLayout(false);
             this.tabProduct.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).EndInit();
             this.tabProductCategory.ResumeLayout(false);
             this.tabProductCategory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productCategoryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabOrder.ResumeLayout(false);
             this.tabOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabCustomer.ResumeLayout(false);
             this.tabCustomer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabStore.ResumeLayout(false);
             this.tabStore.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.storeDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
             this.tabPage1.ResumeLayout(false);
@@ -1197,9 +1207,7 @@
         private Button buttonUpdateProduct;
         private TextBox textBoxCategoryID;
         private RichTextBox richTextBoxProduct;
-        private Button buttonViewAllProducts;
         private PictureBox pictureBoxStore;
-        private Button buttonViewAllStore;
         private RichTextBox richTextBoxStore;
         private PictureBox pictureBoxStoreMap;
         private Button buttonStoreDelete;
@@ -1221,7 +1229,6 @@
         private TextBox textBoxCostumerPhoneNumber;
         private TextBox textBoxCostumerMail;
         private TextBox textBoxCostumerName;
-        private Button buttonViewAllCostumers;
         private RichTextBox richTextBoxCostumer;
         private PictureBox pictureBox1;
         private Button buttonProductCategoryDelete;
@@ -1231,7 +1238,6 @@
         private RichTextBox richTextBoxProductCategory;
         private TextBox textBoxProductCategoryName;
         private TextBox textBoxProductCategoryID;
-        private Button buttonViewAllProductCategory;
         private PictureBox pictureBox3;
         private RichTextBox OrderTextBox;
         private PictureBox pictureBox4;
@@ -1272,5 +1278,11 @@
         private Button buttonFindOrderline;
         private DataGridView orderlineDataGridView;
         private Button button1;
+        private DataGridView OrderDataGridView;
+        private DataGridView orderDataGridView;
+        private DataGridView productDataGridView;
+        private DataGridView productCategoryDataGridView;
+        private DataGridView customerDataGridView;
+        private DataGridView storeDataGridView;
     }
 }
