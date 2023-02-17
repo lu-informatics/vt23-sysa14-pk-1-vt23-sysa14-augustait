@@ -554,7 +554,9 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ProductID, ProductName FROM Product";
+
+            command.CommandText = "SELECT ProductName FROM Product";
+
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable productData = new DataTable();

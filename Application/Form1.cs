@@ -89,7 +89,8 @@ namespace Application
             //Comboboxes for Orderline
             comboBoxOrderlineProductID.DataSource = productData;
             comboBoxOrderlineProductID.DisplayMember = "ProductName";
-            comboBoxOrderlineProductID.ValueMember = "ProductID";
+            comboBoxOrderlineProductID.ValueMember = "ProductName";
+
 
             comboBoxOrderlineOrderID.DataSource = orderData;
             comboBoxOrderlineOrderID.DisplayMember = "OrderID";
