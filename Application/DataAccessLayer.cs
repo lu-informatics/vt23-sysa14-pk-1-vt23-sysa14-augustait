@@ -591,6 +591,21 @@ namespace Application
             return customerData;
         }
 
+        public DataTable GetProductCategoryData()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT CategoryID, CategoryName FROM ProductCategory";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            DataTable categoryData = new DataTable();
+            categoryData.Load(reader);
+            connection.Close();
+            return categoryData;
+        }
+
+
         public DataTable GetOrderData()
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -599,12 +614,14 @@ namespace Application
             command.CommandText = "SELECT OrderID FROM Order_";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            DataTable customerData = new DataTable();
-            customerData.Load(reader);
+           
+            DataTable orderData = new DataTable();
+            orderData.Load(reader);
             connection.Close();
-            return customerData;
+            return orderData;
         }
 
+        //Data for GridView
         public DataSet View(string type)
         {
             DataSet dataSet = new();
