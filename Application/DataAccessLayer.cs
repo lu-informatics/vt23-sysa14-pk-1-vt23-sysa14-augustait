@@ -458,12 +458,13 @@ namespace Application
         }
 
 
-           public void deleteOrderline(int orderlineID)
+           public void deleteOrderline(int orderID, int productID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Checkout WHERE OrderlineNumber = @orderlineID";
-            command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
+            command.CommandText = "DELETE FROM Orderline WHERE OrderID = @orderID AND ProductID = @productID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@productID", productID));
 
             connection.Open();
 
@@ -480,6 +481,18 @@ namespace Application
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Orderline WHERE OrderID = @orderID ORDER BY OrderID";
             command.Parameters.AddWithValue("@orderID", orderID);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+
+        public SqlDataReader findOrderlinesByOrderIDandProductID(int orderID, int productID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Orderline WHERE OrderID = @orderID AND ProductID = @productID";
+            command.Parameters.AddWithValue("@orderID", orderID);
+            command.Parameters.AddWithValue("@productID", productID);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             return reader;

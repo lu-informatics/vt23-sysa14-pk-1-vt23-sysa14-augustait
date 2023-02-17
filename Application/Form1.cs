@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.Linq.Expressions;
@@ -1042,7 +1043,7 @@ namespace Application
             else if (comboBoxOrderSupermarketID.SelectedIndex == -1
                      || comboBoxOrderCustomerID.SelectedIndex == -1)
             {
-                OrderTextBox.Text = "Please select a Product, Store & Customer";
+                OrderTextBox.Text = "Please select a Store & Customer";
             }
             else
             {
@@ -1256,6 +1257,7 @@ namespace Application
         {
             try
             {
+                richTextBoxOrderline.Text = " ";
                 string orderlineID = textBoxOrderlineID.Text;
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
                 int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
@@ -1279,9 +1281,9 @@ namespace Application
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
                     _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
-                    UpdateView("Orderline");
 
 
+                    
 
                     richTextBoxOrderline.Text = "The Order has been successfully created!" + "\n";
 
@@ -1295,6 +1297,8 @@ namespace Application
             }
             catch (SqlException error)
             {
+
+
                 if (error.Number == 2627)
                 {
                     richTextBoxOrderline.Text = "You have already added a product with the same id to the chosen Order please select another product.";
@@ -1307,7 +1311,7 @@ namespace Application
             try
             {
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
-
+                richTextBoxOrderline.Text = " ";
 
                 using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderID(orderID))
                 {
@@ -1349,15 +1353,38 @@ namespace Application
         }
         private void buttonDeleteOrderline_Click(object sender, EventArgs e)
         {
-  
-            
+            richTextBoxOrderline.Text = " ";
+
+            try
+            {
+                if (comboBoxOrderlineOrderID.SelectedIndex == -1 ||  comboBoxOrderlineProductID.SelectedIndex == -1)
+                {
+                    richTextBoxOrderline.Text = "Please select an Order ID and Product ID to delete!!";
+                }
+                else
+                {
+                    int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
+                    int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
+                    SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxOrderline.Text = "Please check if there is a Order ID with the selected Product ID or vice versa!";
+                    }
+                      
+                    else
+                    {
+                        _layer.deleteOrderline(orderID, productID);
+                        UpdateView("Orderline");
+                        richTextBoxOrderline.Text = "The Product ID: " + productID + " was sucessfully deleted from the Order ID: " + orderID;
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID and Product ID";
+            }
         }
-
-      
-
-
-
-
 
 
     }
@@ -1365,7 +1392,16 @@ namespace Application
 
 
 
-     
+
+
+
+
+
+
+
+
+
+
 
 
 
