@@ -30,9 +30,8 @@
         {
             this.allTabs = new System.Windows.Forms.TabControl();
             this.tabProduct = new System.Windows.Forms.TabPage();
-            this.buttonViewAllProducts = new System.Windows.Forms.Button();
+            this.productDataGridView = new System.Windows.Forms.DataGridView();
             this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
-            this.textBoxCategoryID = new System.Windows.Forms.TextBox();
             this.pictureBoxICA = new System.Windows.Forms.PictureBox();
             this.buttonDeleteProduct = new System.Windows.Forms.Button();
             this.buttonUpdateProduct = new System.Windows.Forms.Button();
@@ -42,7 +41,7 @@
             this.textBoxProductID = new System.Windows.Forms.TextBox();
             this.textBoxProductName = new System.Windows.Forms.TextBox();
             this.tabProductCategory = new System.Windows.Forms.TabPage();
-            this.buttonViewAllProductCategory = new System.Windows.Forms.Button();
+            this.productCategoryDataGridView = new System.Windows.Forms.DataGridView();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.richTextBoxProductCategory = new System.Windows.Forms.RichTextBox();
             this.textBoxProductCategoryName = new System.Windows.Forms.TextBox();
@@ -52,7 +51,7 @@
             this.buttonProductCategoryUpdate = new System.Windows.Forms.Button();
             this.buttonCreateProductCategory = new System.Windows.Forms.Button();
             this.tabOrder = new System.Windows.Forms.TabPage();
-            this.BtnViewAllOrders = new System.Windows.Forms.Button();
+            this.orderDataGridView = new System.Windows.Forms.DataGridView();
             this.BtnDeleteOrder = new System.Windows.Forms.Button();
             this.BtnUpdateOrder = new System.Windows.Forms.Button();
             this.BtnFindOrder = new System.Windows.Forms.Button();
@@ -68,6 +67,7 @@
             this.OrderTextBox = new System.Windows.Forms.RichTextBox();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.tabCustomer = new System.Windows.Forms.TabPage();
+            this.customerDataGridView = new System.Windows.Forms.DataGridView();
             this.textBoxCustomerID = new System.Windows.Forms.TextBox();
             this.buttonAddCostumer = new System.Windows.Forms.Button();
             this.buttonFindCostumer = new System.Windows.Forms.Button();
@@ -78,10 +78,10 @@
             this.textBoxCostumerPhoneNumber = new System.Windows.Forms.TextBox();
             this.textBoxCostumerMail = new System.Windows.Forms.TextBox();
             this.textBoxCostumerName = new System.Windows.Forms.TextBox();
-            this.buttonViewAllCostumers = new System.Windows.Forms.Button();
             this.richTextBoxCostumer = new System.Windows.Forms.RichTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.tabStore = new System.Windows.Forms.TabPage();
+            this.storeDataGridView = new System.Windows.Forms.DataGridView();
             this.buttonStoreDelete = new System.Windows.Forms.Button();
             this.buttonStoreUpdate = new System.Windows.Forms.Button();
             this.buttonStoreFind = new System.Windows.Forms.Button();
@@ -92,10 +92,11 @@
             this.textBoxStoreRegionName = new System.Windows.Forms.TextBox();
             this.textBoxStoreID = new System.Windows.Forms.TextBox();
             this.pictureBoxStoreMap = new System.Windows.Forms.PictureBox();
-            this.buttonViewAllStore = new System.Windows.Forms.Button();
             this.richTextBoxStore = new System.Windows.Forms.RichTextBox();
             this.pictureBoxStore = new System.Windows.Forms.PictureBox();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.button1 = new System.Windows.Forms.Button();
+            this.orderlineDataGridView = new System.Windows.Forms.DataGridView();
             this.buttonDeleteOrderline = new System.Windows.Forms.Button();
             this.buttonFindOrderline = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
@@ -116,19 +117,27 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
+            this.comboBoxProductCategory = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).BeginInit();
             this.tabProductCategory.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productCategoryDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.tabOrder.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.tabCustomer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabStore.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.storeDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).BeginInit();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderlineDataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckout)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,9 +158,10 @@
             // 
             // tabProduct
             // 
-            this.tabProduct.Controls.Add(this.buttonViewAllProducts);
+            this.tabProduct.Controls.Add(this.label14);
+            this.tabProduct.Controls.Add(this.comboBoxProductCategory);
+            this.tabProduct.Controls.Add(this.productDataGridView);
             this.tabProduct.Controls.Add(this.richTextBoxProduct);
-            this.tabProduct.Controls.Add(this.textBoxCategoryID);
             this.tabProduct.Controls.Add(this.pictureBoxICA);
             this.tabProduct.Controls.Add(this.buttonDeleteProduct);
             this.tabProduct.Controls.Add(this.buttonUpdateProduct);
@@ -168,38 +178,30 @@
             this.tabProduct.Text = "Product";
             this.tabProduct.UseVisualStyleBackColor = true;
             // 
-            // buttonViewAllProducts
+            // productDataGridView
             // 
-            this.buttonViewAllProducts.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllProducts.Name = "buttonViewAllProducts";
-            this.buttonViewAllProducts.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllProducts.TabIndex = 11;
-            this.buttonViewAllProducts.Text = "View all";
-            this.buttonViewAllProducts.UseVisualStyleBackColor = true;
-            this.buttonViewAllProducts.Click += new System.EventHandler(this.buttonViewAllProducts_Click);
+            this.productDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productDataGridView.Location = new System.Drawing.Point(129, 0);
+            this.productDataGridView.Name = "productDataGridView";
+            this.productDataGridView.ReadOnly = true;
+            this.productDataGridView.RowTemplate.Height = 25;
+            this.productDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.productDataGridView.TabIndex = 43;
             // 
             // richTextBoxProduct
             // 
             this.richTextBoxProduct.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxProduct.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxProduct.Location = new System.Drawing.Point(129, 198);
             this.richTextBoxProduct.Name = "richTextBoxProduct";
             this.richTextBoxProduct.ReadOnly = true;
-            this.richTextBoxProduct.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxProduct.Size = new System.Drawing.Size(643, 96);
             this.richTextBoxProduct.TabIndex = 10;
             this.richTextBoxProduct.Text = "";
-            // 
-            // textBoxCategoryID
-            // 
-            this.textBoxCategoryID.Location = new System.Drawing.Point(602, 315);
-            this.textBoxCategoryID.Name = "textBoxCategoryID";
-            this.textBoxCategoryID.PlaceholderText = "Category ID:";
-            this.textBoxCategoryID.Size = new System.Drawing.Size(100, 23);
-            this.textBoxCategoryID.TabIndex = 9;
             // 
             // pictureBoxICA
             // 
             this.pictureBoxICA.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBoxICA.Location = new System.Drawing.Point(312, 0);
+            this.pictureBoxICA.Location = new System.Drawing.Point(3, 0);
             this.pictureBoxICA.Name = "pictureBoxICA";
             this.pictureBoxICA.Size = new System.Drawing.Size(123, 86);
             this.pictureBoxICA.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -272,7 +274,7 @@
             // 
             // tabProductCategory
             // 
-            this.tabProductCategory.Controls.Add(this.buttonViewAllProductCategory);
+            this.tabProductCategory.Controls.Add(this.productCategoryDataGridView);
             this.tabProductCategory.Controls.Add(this.pictureBox3);
             this.tabProductCategory.Controls.Add(this.richTextBoxProductCategory);
             this.tabProductCategory.Controls.Add(this.textBoxProductCategoryName);
@@ -289,20 +291,20 @@
             this.tabProductCategory.Text = "Product Category";
             this.tabProductCategory.UseVisualStyleBackColor = true;
             // 
-            // buttonViewAllProductCategory
+            // productCategoryDataGridView
             // 
-            this.buttonViewAllProductCategory.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllProductCategory.Name = "buttonViewAllProductCategory";
-            this.buttonViewAllProductCategory.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllProductCategory.TabIndex = 11;
-            this.buttonViewAllProductCategory.Text = "View all";
-            this.buttonViewAllProductCategory.UseVisualStyleBackColor = true;
-            this.buttonViewAllProductCategory.Click += new System.EventHandler(this.buttonViewAllProductCategory_Click);
+            this.productCategoryDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.productCategoryDataGridView.Location = new System.Drawing.Point(136, 0);
+            this.productCategoryDataGridView.Name = "productCategoryDataGridView";
+            this.productCategoryDataGridView.ReadOnly = true;
+            this.productCategoryDataGridView.RowTemplate.Height = 25;
+            this.productCategoryDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.productCategoryDataGridView.TabIndex = 43;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox3.Location = new System.Drawing.Point(312, 0);
+            this.pictureBox3.Location = new System.Drawing.Point(0, 0);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(123, 86);
             this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -312,9 +314,9 @@
             // richTextBoxProductCategory
             // 
             this.richTextBoxProductCategory.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxProductCategory.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxProductCategory.Location = new System.Drawing.Point(136, 198);
             this.richTextBoxProductCategory.Name = "richTextBoxProductCategory";
-            this.richTextBoxProductCategory.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxProductCategory.Size = new System.Drawing.Size(639, 96);
             this.richTextBoxProductCategory.TabIndex = 6;
             this.richTextBoxProductCategory.Text = "";
             // 
@@ -376,7 +378,7 @@
             // 
             // tabOrder
             // 
-            this.tabOrder.Controls.Add(this.BtnViewAllOrders);
+            this.tabOrder.Controls.Add(this.orderDataGridView);
             this.tabOrder.Controls.Add(this.BtnDeleteOrder);
             this.tabOrder.Controls.Add(this.BtnUpdateOrder);
             this.tabOrder.Controls.Add(this.BtnFindOrder);
@@ -399,15 +401,15 @@
             this.tabOrder.Text = "Order";
             this.tabOrder.UseVisualStyleBackColor = true;
             // 
-            // BtnViewAllOrders
+            // orderDataGridView
             // 
-            this.BtnViewAllOrders.Location = new System.Drawing.Point(312, 257);
-            this.BtnViewAllOrders.Name = "BtnViewAllOrders";
-            this.BtnViewAllOrders.Size = new System.Drawing.Size(109, 23);
-            this.BtnViewAllOrders.TabIndex = 29;
-            this.BtnViewAllOrders.Text = "View all";
-            this.BtnViewAllOrders.UseVisualStyleBackColor = true;
-            this.BtnViewAllOrders.Click += new System.EventHandler(this.BtnViewAllOrders_Click);
+            this.orderDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderDataGridView.Location = new System.Drawing.Point(129, 0);
+            this.orderDataGridView.Name = "orderDataGridView";
+            this.orderDataGridView.ReadOnly = true;
+            this.orderDataGridView.RowTemplate.Height = 25;
+            this.orderDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.orderDataGridView.TabIndex = 42;
             // 
             // BtnDeleteOrder
             // 
@@ -452,7 +454,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(662, 297);
+            this.label5.Location = new System.Drawing.Point(667, 297);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(59, 15);
             this.label5.TabIndex = 24;
@@ -461,7 +463,7 @@
             // Store
             // 
             this.Store.AutoSize = true;
-            this.Store.Location = new System.Drawing.Point(508, 297);
+            this.Store.Location = new System.Drawing.Point(465, 297);
             this.Store.Name = "Store";
             this.Store.Size = new System.Drawing.Size(34, 15);
             this.Store.TabIndex = 23;
@@ -470,7 +472,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(281, 297);
+            this.label2.Location = new System.Drawing.Point(220, 297);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(66, 15);
             this.label2.TabIndex = 21;
@@ -479,7 +481,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(52, 297);
+            this.label1.Location = new System.Drawing.Point(29, 297);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(54, 15);
             this.label1.TabIndex = 20;
@@ -488,9 +490,9 @@
             // comboBoxOrderSupermarketID
             // 
             this.comboBoxOrderSupermarketID.FormattingEnabled = true;
-            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(477, 315);
+            this.comboBoxOrderSupermarketID.Location = new System.Drawing.Point(380, 315);
             this.comboBoxOrderSupermarketID.Name = "comboBoxOrderSupermarketID";
-            this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderSupermarketID.Size = new System.Drawing.Size(214, 23);
             this.comboBoxOrderSupermarketID.TabIndex = 19;
             // 
             // comboBoxOrderCustomerID
@@ -498,38 +500,38 @@
             this.comboBoxOrderCustomerID.FormattingEnabled = true;
             this.comboBoxOrderCustomerID.Location = new System.Drawing.Point(645, 315);
             this.comboBoxOrderCustomerID.Name = "comboBoxOrderCustomerID";
-            this.comboBoxOrderCustomerID.Size = new System.Drawing.Size(94, 23);
+            this.comboBoxOrderCustomerID.Size = new System.Drawing.Size(115, 23);
             this.comboBoxOrderCustomerID.TabIndex = 18;
             // 
             // textOrderDate
             // 
-            this.textOrderDate.Location = new System.Drawing.Point(222, 315);
+            this.textOrderDate.Location = new System.Drawing.Point(152, 315);
             this.textOrderDate.Name = "textOrderDate";
-            this.textOrderDate.Size = new System.Drawing.Size(174, 23);
+            this.textOrderDate.Size = new System.Drawing.Size(191, 23);
             this.textOrderDate.TabIndex = 17;
             // 
             // textOrderOrderID
             // 
-            this.textOrderOrderID.Location = new System.Drawing.Point(40, 315);
+            this.textOrderOrderID.Location = new System.Drawing.Point(7, 315);
             this.textOrderOrderID.Name = "textOrderOrderID";
             this.textOrderOrderID.PlaceholderText = "Order ID:";
-            this.textOrderOrderID.Size = new System.Drawing.Size(94, 23);
+            this.textOrderOrderID.Size = new System.Drawing.Size(116, 23);
             this.textOrderOrderID.TabIndex = 14;
             // 
             // OrderTextBox
             // 
             this.OrderTextBox.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.OrderTextBox.Location = new System.Drawing.Point(40, 140);
+            this.OrderTextBox.Location = new System.Drawing.Point(129, 198);
             this.OrderTextBox.Name = "OrderTextBox";
             this.OrderTextBox.ReadOnly = true;
-            this.OrderTextBox.Size = new System.Drawing.Size(662, 96);
+            this.OrderTextBox.Size = new System.Drawing.Size(643, 96);
             this.OrderTextBox.TabIndex = 12;
             this.OrderTextBox.Text = "";
             // 
             // pictureBox4
             // 
             this.pictureBox4.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox4.Location = new System.Drawing.Point(312, 0);
+            this.pictureBox4.Location = new System.Drawing.Point(0, 0);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(123, 86);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -538,6 +540,7 @@
             // 
             // tabCustomer
             // 
+            this.tabCustomer.Controls.Add(this.customerDataGridView);
             this.tabCustomer.Controls.Add(this.textBoxCustomerID);
             this.tabCustomer.Controls.Add(this.buttonAddCostumer);
             this.tabCustomer.Controls.Add(this.buttonFindCostumer);
@@ -548,7 +551,6 @@
             this.tabCustomer.Controls.Add(this.textBoxCostumerPhoneNumber);
             this.tabCustomer.Controls.Add(this.textBoxCostumerMail);
             this.tabCustomer.Controls.Add(this.textBoxCostumerName);
-            this.tabCustomer.Controls.Add(this.buttonViewAllCostumers);
             this.tabCustomer.Controls.Add(this.richTextBoxCostumer);
             this.tabCustomer.Controls.Add(this.pictureBox1);
             this.tabCustomer.Location = new System.Drawing.Point(4, 24);
@@ -558,6 +560,16 @@
             this.tabCustomer.TabIndex = 3;
             this.tabCustomer.Text = "Customer";
             this.tabCustomer.UseVisualStyleBackColor = true;
+            // 
+            // customerDataGridView
+            // 
+            this.customerDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customerDataGridView.Location = new System.Drawing.Point(132, 0);
+            this.customerDataGridView.Name = "customerDataGridView";
+            this.customerDataGridView.ReadOnly = true;
+            this.customerDataGridView.RowTemplate.Height = 25;
+            this.customerDataGridView.Size = new System.Drawing.Size(643, 192);
+            this.customerDataGridView.TabIndex = 43;
             // 
             // textBoxCustomerID
             // 
@@ -647,30 +659,20 @@
             this.textBoxCostumerName.Size = new System.Drawing.Size(100, 23);
             this.textBoxCostumerName.TabIndex = 13;
             // 
-            // buttonViewAllCostumers
-            // 
-            this.buttonViewAllCostumers.Location = new System.Drawing.Point(312, 257);
-            this.buttonViewAllCostumers.Name = "buttonViewAllCostumers";
-            this.buttonViewAllCostumers.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllCostumers.TabIndex = 12;
-            this.buttonViewAllCostumers.Text = "View all";
-            this.buttonViewAllCostumers.UseVisualStyleBackColor = true;
-            this.buttonViewAllCostumers.Click += new System.EventHandler(this.buttonViewAllCostumers_Click);
-            // 
             // richTextBoxCostumer
             // 
             this.richTextBoxCostumer.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxCostumer.Location = new System.Drawing.Point(40, 140);
+            this.richTextBoxCostumer.Location = new System.Drawing.Point(132, 198);
             this.richTextBoxCostumer.Name = "richTextBoxCostumer";
             this.richTextBoxCostumer.ReadOnly = true;
-            this.richTextBoxCostumer.Size = new System.Drawing.Size(662, 96);
+            this.richTextBoxCostumer.Size = new System.Drawing.Size(643, 96);
             this.richTextBoxCostumer.TabIndex = 11;
             this.richTextBoxCostumer.Text = "";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBox1.Location = new System.Drawing.Point(312, 0);
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(123, 86);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -679,6 +681,7 @@
             // 
             // tabStore
             // 
+            this.tabStore.Controls.Add(this.storeDataGridView);
             this.tabStore.Controls.Add(this.buttonStoreDelete);
             this.tabStore.Controls.Add(this.buttonStoreUpdate);
             this.tabStore.Controls.Add(this.buttonStoreFind);
@@ -689,7 +692,6 @@
             this.tabStore.Controls.Add(this.textBoxStoreRegionName);
             this.tabStore.Controls.Add(this.textBoxStoreID);
             this.tabStore.Controls.Add(this.pictureBoxStoreMap);
-            this.tabStore.Controls.Add(this.buttonViewAllStore);
             this.tabStore.Controls.Add(this.richTextBoxStore);
             this.tabStore.Controls.Add(this.pictureBoxStore);
             this.tabStore.Location = new System.Drawing.Point(4, 24);
@@ -700,9 +702,19 @@
             this.tabStore.Text = "Store";
             this.tabStore.UseVisualStyleBackColor = true;
             // 
+            // storeDataGridView
+            // 
+            this.storeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.storeDataGridView.Location = new System.Drawing.Point(178, 0);
+            this.storeDataGridView.Name = "storeDataGridView";
+            this.storeDataGridView.ReadOnly = true;
+            this.storeDataGridView.RowTemplate.Height = 25;
+            this.storeDataGridView.Size = new System.Drawing.Size(597, 210);
+            this.storeDataGridView.TabIndex = 42;
+            // 
             // buttonStoreDelete
             // 
-            this.buttonStoreDelete.Location = new System.Drawing.Point(287, 376);
+            this.buttonStoreDelete.Location = new System.Drawing.Point(518, 376);
             this.buttonStoreDelete.Name = "buttonStoreDelete";
             this.buttonStoreDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreDelete.TabIndex = 22;
@@ -712,7 +724,7 @@
             // 
             // buttonStoreUpdate
             // 
-            this.buttonStoreUpdate.Location = new System.Drawing.Point(194, 376);
+            this.buttonStoreUpdate.Location = new System.Drawing.Point(420, 376);
             this.buttonStoreUpdate.Name = "buttonStoreUpdate";
             this.buttonStoreUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreUpdate.TabIndex = 21;
@@ -722,7 +734,7 @@
             // 
             // buttonStoreFind
             // 
-            this.buttonStoreFind.Location = new System.Drawing.Point(98, 376);
+            this.buttonStoreFind.Location = new System.Drawing.Point(313, 376);
             this.buttonStoreFind.Name = "buttonStoreFind";
             this.buttonStoreFind.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreFind.TabIndex = 20;
@@ -732,7 +744,7 @@
             // 
             // buttonStoreAdd
             // 
-            this.buttonStoreAdd.Location = new System.Drawing.Point(6, 376);
+            this.buttonStoreAdd.Location = new System.Drawing.Point(201, 376);
             this.buttonStoreAdd.Name = "buttonStoreAdd";
             this.buttonStoreAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreAdd.TabIndex = 19;
@@ -742,7 +754,7 @@
             // 
             // textBoxStoreAddress
             // 
-            this.textBoxStoreAddress.Location = new System.Drawing.Point(17, 311);
+            this.textBoxStoreAddress.Location = new System.Drawing.Point(651, 328);
             this.textBoxStoreAddress.Name = "textBoxStoreAddress";
             this.textBoxStoreAddress.PlaceholderText = "Address:";
             this.textBoxStoreAddress.Size = new System.Drawing.Size(108, 23);
@@ -750,7 +762,7 @@
             // 
             // textBoxStoreCity
             // 
-            this.textBoxStoreCity.Location = new System.Drawing.Point(17, 272);
+            this.textBoxStoreCity.Location = new System.Drawing.Point(499, 328);
             this.textBoxStoreCity.Name = "textBoxStoreCity";
             this.textBoxStoreCity.PlaceholderText = "City:";
             this.textBoxStoreCity.Size = new System.Drawing.Size(108, 23);
@@ -758,7 +770,7 @@
             // 
             // textBoxStoreName
             // 
-            this.textBoxStoreName.Location = new System.Drawing.Point(17, 228);
+            this.textBoxStoreName.Location = new System.Drawing.Point(358, 328);
             this.textBoxStoreName.Name = "textBoxStoreName";
             this.textBoxStoreName.PlaceholderText = "Store name:";
             this.textBoxStoreName.Size = new System.Drawing.Size(108, 23);
@@ -766,7 +778,7 @@
             // 
             // textBoxStoreRegionName
             // 
-            this.textBoxStoreRegionName.Location = new System.Drawing.Point(17, 187);
+            this.textBoxStoreRegionName.Location = new System.Drawing.Point(221, 328);
             this.textBoxStoreRegionName.Name = "textBoxStoreRegionName";
             this.textBoxStoreRegionName.PlaceholderText = "Region name:";
             this.textBoxStoreRegionName.Size = new System.Drawing.Size(108, 23);
@@ -774,7 +786,7 @@
             // 
             // textBoxStoreID
             // 
-            this.textBoxStoreID.Location = new System.Drawing.Point(17, 148);
+            this.textBoxStoreID.Location = new System.Drawing.Point(82, 328);
             this.textBoxStoreID.Name = "textBoxStoreID";
             this.textBoxStoreID.PlaceholderText = "Supermarket ID:";
             this.textBoxStoreID.Size = new System.Drawing.Size(108, 23);
@@ -789,30 +801,20 @@
             this.pictureBoxStoreMap.TabIndex = 13;
             this.pictureBoxStoreMap.TabStop = false;
             // 
-            // buttonViewAllStore
-            // 
-            this.buttonViewAllStore.Location = new System.Drawing.Point(492, 212);
-            this.buttonViewAllStore.Name = "buttonViewAllStore";
-            this.buttonViewAllStore.Size = new System.Drawing.Size(109, 23);
-            this.buttonViewAllStore.TabIndex = 12;
-            this.buttonViewAllStore.Text = "View all";
-            this.buttonViewAllStore.UseVisualStyleBackColor = true;
-            this.buttonViewAllStore.Click += new System.EventHandler(this.buttonViewAllStore_Click);
-            // 
             // richTextBoxStore
             // 
             this.richTextBoxStore.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxStore.Location = new System.Drawing.Point(377, 241);
+            this.richTextBoxStore.Location = new System.Drawing.Point(178, 228);
             this.richTextBoxStore.Name = "richTextBoxStore";
             this.richTextBoxStore.ReadOnly = true;
-            this.richTextBoxStore.Size = new System.Drawing.Size(365, 158);
+            this.richTextBoxStore.Size = new System.Drawing.Size(591, 94);
             this.richTextBoxStore.TabIndex = 11;
             this.richTextBoxStore.Text = "";
             // 
             // pictureBoxStore
             // 
             this.pictureBoxStore.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBoxStore.Location = new System.Drawing.Point(17, 18);
+            this.pictureBoxStore.Location = new System.Drawing.Point(2, 6);
             this.pictureBoxStore.Name = "pictureBoxStore";
             this.pictureBoxStore.Size = new System.Drawing.Size(123, 86);
             this.pictureBoxStore.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -821,6 +823,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.orderlineDataGridView);
             this.tabPage1.Controls.Add(this.buttonDeleteOrderline);
             this.tabPage1.Controls.Add(this.buttonFindOrderline);
             this.tabPage1.Controls.Add(this.label13);
@@ -841,7 +845,7 @@
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.richTextBoxOrderline);
             this.tabPage1.Controls.Add(this.pictureBoxCheckout);
-            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 45F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.tabPage1.Location = new System.Drawing.Point(4, 24);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -850,12 +854,35 @@
             this.tabPage1.Text = "Checkout";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.SystemColors.Menu;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.button1.Location = new System.Drawing.Point(689, 386);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(86, 23);
+            this.button1.TabIndex = 42;
+            this.button1.Text = "UPDATE";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.buttonUpdateOrderline_Click);
+            // 
+            // orderlineDataGridView
+            // 
+            this.orderlineDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.orderlineDataGridView.Location = new System.Drawing.Point(392, 0);
+            this.orderlineDataGridView.Name = "orderlineDataGridView";
+            this.orderlineDataGridView.ReadOnly = true;
+            this.orderlineDataGridView.RowTemplate.Height = 25;
+            this.orderlineDataGridView.Size = new System.Drawing.Size(383, 241);
+            this.orderlineDataGridView.TabIndex = 41;
+            // 
             // buttonDeleteOrderline
             // 
             this.buttonDeleteOrderline.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonDeleteOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonDeleteOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonDeleteOrderline.Location = new System.Drawing.Point(459, 381);
+            this.buttonDeleteOrderline.Location = new System.Drawing.Point(597, 386);
             this.buttonDeleteOrderline.Name = "buttonDeleteOrderline";
             this.buttonDeleteOrderline.Size = new System.Drawing.Size(86, 23);
             this.buttonDeleteOrderline.TabIndex = 40;
@@ -868,7 +895,7 @@
             this.buttonFindOrderline.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonFindOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonFindOrderline.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonFindOrderline.Location = new System.Drawing.Point(520, 294);
+            this.buttonFindOrderline.Location = new System.Drawing.Point(494, 386);
             this.buttonFindOrderline.Name = "buttonFindOrderline";
             this.buttonFindOrderline.Size = new System.Drawing.Size(86, 23);
             this.buttonFindOrderline.TabIndex = 39;
@@ -880,7 +907,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(253, 394);
+            this.label13.Location = new System.Drawing.Point(249, 345);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(99, 15);
             this.label13.TabIndex = 38;
@@ -889,11 +916,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.ForeColor = System.Drawing.Color.IndianRed;
-            this.label12.Location = new System.Drawing.Point(8, 367);
+            this.label12.Location = new System.Drawing.Point(8, 307);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(311, 21);
+            this.label12.Size = new System.Drawing.Size(275, 19);
             this.label12.TabIndex = 37;
             this.label12.Text = "Step 4: Please select a payment method";
             // 
@@ -906,7 +933,7 @@
             "KLARNA",
             "DEBIT CARD",
             "CREDIT CARD"});
-            this.comboBoxOrderlinePayment.Location = new System.Drawing.Point(22, 391);
+            this.comboBoxOrderlinePayment.Location = new System.Drawing.Point(18, 342);
             this.comboBoxOrderlinePayment.Name = "comboBoxOrderlinePayment";
             this.comboBoxOrderlinePayment.Size = new System.Drawing.Size(225, 23);
             this.comboBoxOrderlinePayment.TabIndex = 36;
@@ -916,7 +943,7 @@
             this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxOrderlineID.Location = new System.Drawing.Point(22, 172);
             this.textBoxOrderlineID.Name = "textBoxOrderlineID";
-            this.textBoxOrderlineID.PlaceholderText = "Orderline ID;";
+            this.textBoxOrderlineID.PlaceholderText = "Orderline number:";
             this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 23);
             this.textBoxOrderlineID.TabIndex = 35;
             // 
@@ -924,7 +951,7 @@
             // 
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label10.Location = new System.Drawing.Point(392, 291);
+            this.label10.Location = new System.Drawing.Point(392, 350);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(44, 15);
             this.label10.TabIndex = 34;
@@ -935,7 +962,7 @@
             this.buttonOrderlineCreate.BackColor = System.Drawing.SystemColors.Menu;
             this.buttonOrderlineCreate.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.buttonOrderlineCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.buttonOrderlineCreate.Location = new System.Drawing.Point(590, 381);
+            this.buttonOrderlineCreate.Location = new System.Drawing.Point(392, 386);
             this.buttonOrderlineCreate.Name = "buttonOrderlineCreate";
             this.buttonOrderlineCreate.Size = new System.Drawing.Size(86, 23);
             this.buttonOrderlineCreate.TabIndex = 33;
@@ -946,33 +973,32 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.IndianRed;
             this.label4.Location = new System.Drawing.Point(8, 291);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(381, 21);
+            this.label4.Size = new System.Drawing.Size(0, 19);
             this.label4.TabIndex = 31;
-            this.label4.Text = "Step 3: Please select the Quantity for the Product";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label11.ForeColor = System.Drawing.Color.IndianRed;
-            this.label11.Location = new System.Drawing.Point(8, 220);
+            this.label11.Location = new System.Drawing.Point(6, 231);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(239, 21);
+            this.label11.Size = new System.Drawing.Size(213, 19);
             this.label11.TabIndex = 30;
             this.label11.Text = "Step 2: Please select a Product";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.IndianRed;
             this.label3.Location = new System.Drawing.Point(8, 134);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(339, 21);
+            this.label3.Size = new System.Drawing.Size(302, 19);
             this.label3.TabIndex = 27;
             this.label3.Text = "Step 1: Please insert a number and Order ID";
             // 
@@ -980,7 +1006,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(251, 175);
+            this.label9.Location = new System.Drawing.Point(259, 175);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 15);
             this.label9.TabIndex = 26;
@@ -990,7 +1016,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(251, 327);
+            this.label8.Location = new System.Drawing.Point(257, 259);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 15);
             this.label8.TabIndex = 25;
@@ -1000,7 +1026,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(249, 247);
+            this.label7.Location = new System.Drawing.Point(163, 256);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 15);
             this.label7.TabIndex = 24;
@@ -1010,9 +1036,9 @@
             // 
             this.comboBoxOrderlineProductID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.comboBoxOrderlineProductID.FormattingEnabled = true;
-            this.comboBoxOrderlineProductID.Location = new System.Drawing.Point(18, 244);
+            this.comboBoxOrderlineProductID.Location = new System.Drawing.Point(18, 256);
             this.comboBoxOrderlineProductID.Name = "comboBoxOrderlineProductID";
-            this.comboBoxOrderlineProductID.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlineProductID.Size = new System.Drawing.Size(139, 23);
             this.comboBoxOrderlineProductID.TabIndex = 17;
             // 
             // comboBoxOrderlineQuantity
@@ -1072,9 +1098,9 @@
             "48",
             "49",
             "50"});
-            this.comboBoxOrderlineQuantity.Location = new System.Drawing.Point(22, 324);
+            this.comboBoxOrderlineQuantity.Location = new System.Drawing.Point(212, 256);
             this.comboBoxOrderlineQuantity.Name = "comboBoxOrderlineQuantity";
-            this.comboBoxOrderlineQuantity.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlineQuantity.Size = new System.Drawing.Size(42, 23);
             this.comboBoxOrderlineQuantity.TabIndex = 16;
             // 
             // comboBoxOrderlineOrderID
@@ -1083,17 +1109,18 @@
             this.comboBoxOrderlineOrderID.FormattingEnabled = true;
             this.comboBoxOrderlineOrderID.Location = new System.Drawing.Point(140, 172);
             this.comboBoxOrderlineOrderID.Name = "comboBoxOrderlineOrderID";
-            this.comboBoxOrderlineOrderID.Size = new System.Drawing.Size(107, 23);
+            this.comboBoxOrderlineOrderID.Size = new System.Drawing.Size(114, 23);
             this.comboBoxOrderlineOrderID.TabIndex = 15;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(259, 12);
+            this.label6.Location = new System.Drawing.Point(112, 26);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(347, 81);
+            this.label6.Size = new System.Drawing.Size(274, 62);
             this.label6.TabIndex = 14;
             this.label6.Text = "CHECKOUT";
             // 
@@ -1101,22 +1128,39 @@
             // 
             this.richTextBoxOrderline.BackColor = System.Drawing.Color.WhiteSmoke;
             this.richTextBoxOrderline.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.richTextBoxOrderline.Location = new System.Drawing.Point(392, 134);
+            this.richTextBoxOrderline.Location = new System.Drawing.Point(392, 256);
             this.richTextBoxOrderline.Name = "richTextBoxOrderline";
             this.richTextBoxOrderline.ReadOnly = true;
-            this.richTextBoxOrderline.Size = new System.Drawing.Size(365, 154);
+            this.richTextBoxOrderline.Size = new System.Drawing.Size(383, 91);
             this.richTextBoxOrderline.TabIndex = 12;
             this.richTextBoxOrderline.Text = "";
             // 
             // pictureBoxCheckout
             // 
             this.pictureBoxCheckout.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBoxCheckout.Location = new System.Drawing.Point(140, 12);
+            this.pictureBoxCheckout.Location = new System.Drawing.Point(0, 12);
             this.pictureBoxCheckout.Name = "pictureBoxCheckout";
             this.pictureBoxCheckout.Size = new System.Drawing.Size(123, 86);
             this.pictureBoxCheckout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCheckout.TabIndex = 10;
             this.pictureBoxCheckout.TabStop = false;
+            // 
+            // comboBoxProductCategory
+            // 
+            this.comboBoxProductCategory.FormattingEnabled = true;
+            this.comboBoxProductCategory.Location = new System.Drawing.Point(636, 315);
+            this.comboBoxProductCategory.Name = "comboBoxProductCategory";
+            this.comboBoxProductCategory.Size = new System.Drawing.Size(115, 23);
+            this.comboBoxProductCategory.TabIndex = 44;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(530, 318);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(103, 15);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "Product Category:";
             // 
             // Form1
             // 
@@ -1130,22 +1174,28 @@
             this.allTabs.ResumeLayout(false);
             this.tabProduct.ResumeLayout(false);
             this.tabProduct.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxICA)).EndInit();
             this.tabProductCategory.ResumeLayout(false);
             this.tabProductCategory.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.productCategoryDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.tabOrder.ResumeLayout(false);
             this.tabOrder.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.tabCustomer.ResumeLayout(false);
             this.tabCustomer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.customerDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabStore.ResumeLayout(false);
             this.tabStore.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.storeDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStoreMap)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxStore)).EndInit();
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.orderlineDataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCheckout)).EndInit();
             this.ResumeLayout(false);
 
@@ -1166,11 +1216,8 @@
         private PictureBox pictureBoxICA;
         private Button buttonDeleteProduct;
         private Button buttonUpdateProduct;
-        private TextBox textBoxCategoryID;
         private RichTextBox richTextBoxProduct;
-        private Button buttonViewAllProducts;
         private PictureBox pictureBoxStore;
-        private Button buttonViewAllStore;
         private RichTextBox richTextBoxStore;
         private PictureBox pictureBoxStoreMap;
         private Button buttonStoreDelete;
@@ -1192,7 +1239,6 @@
         private TextBox textBoxCostumerPhoneNumber;
         private TextBox textBoxCostumerMail;
         private TextBox textBoxCostumerName;
-        private Button buttonViewAllCostumers;
         private RichTextBox richTextBoxCostumer;
         private PictureBox pictureBox1;
         private Button buttonProductCategoryDelete;
@@ -1202,7 +1248,6 @@
         private RichTextBox richTextBoxProductCategory;
         private TextBox textBoxProductCategoryName;
         private TextBox textBoxProductCategoryID;
-        private Button buttonViewAllProductCategory;
         private PictureBox pictureBox3;
         private RichTextBox OrderTextBox;
         private PictureBox pictureBox4;
@@ -1241,5 +1286,15 @@
         private ComboBox comboBoxOrderlinePayment;
         private Button buttonDeleteOrderline;
         private Button buttonFindOrderline;
+        private DataGridView orderlineDataGridView;
+        private Button button1;
+        private DataGridView OrderDataGridView;
+        private DataGridView orderDataGridView;
+        private DataGridView productDataGridView;
+        private DataGridView productCategoryDataGridView;
+        private DataGridView customerDataGridView;
+        private DataGridView storeDataGridView;
+        private Label label14;
+        private ComboBox comboBoxProductCategory;
     }
 }

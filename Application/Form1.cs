@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.Linq.Expressions;
@@ -21,7 +22,6 @@ namespace Application
             List<TextBox> list = new List<TextBox>();
             list.Add(textBoxProductID);
             list.Add(textBoxProductName);
-            list.Add(textBoxCategoryID);
             list.Add(textBoxProductPrice);
             list.Add(textBoxStoreID);
             list.Add(textBoxStoreName);
@@ -53,26 +53,107 @@ namespace Application
             DataTable supermarketData = _layer.GetSupermarketData();
             DataTable customerData = _layer.GetCustomerData();
             DataTable orderData = _layer.GetOrderData();
+            DataTable categoryData = _layer.GetProductCategoryData();
 
+
+            //DataGridView for Orderline
+            DataSet dataSet = _layer.View("Orderline");
+            DataTable orderLineTable = dataSet.Tables["Orderline"];
+            orderlineDataGridView.DataSource = orderLineTable;
+
+            //DataGridView for Order
+            DataSet dataSetOrder = _layer.ViewOrder("Order_");
+            DataTable orderTable = dataSetOrder.Tables["Order_"];
+            orderDataGridView.DataSource = orderTable;
+
+            //DataGridView for Product
+            DataSet dataSetProduct = _layer.ViewProduct("Product");
+            DataTable productTable = dataSetProduct.Tables["Product"];
+            productDataGridView.DataSource = productTable;
+
+            //DataGridView for Store
+            DataSet dataSetStore = _layer.ViewStore("Store");
+            DataTable storeTable = dataSetStore.Tables["Store"];
+            storeDataGridView.DataSource = storeTable;
+
+            //DataGridView for Customer
+            DataSet dataSetCustomer = _layer.ViewCustomer("Customer");
+            DataTable customerTable = dataSetCustomer.Tables["Customer"];
+            customerDataGridView.DataSource = customerTable;
+
+            //DataGridView for ProductCategory
+            DataSet dataSetProductCategory = _layer.ViewProductCategory("ProductCategory");
+            DataTable productCategoryTable = dataSetProductCategory.Tables["ProductCategory"];
+            productCategoryDataGridView.DataSource = productCategoryTable;
 
             //Comboboxes for Orderline
             comboBoxOrderlineProductID.DataSource = productData;
             comboBoxOrderlineProductID.DisplayMember = "ProductName";
             comboBoxOrderlineProductID.ValueMember = "ProductName";
 
+
             comboBoxOrderlineOrderID.DataSource = orderData;
             comboBoxOrderlineOrderID.DisplayMember = "OrderID";
             comboBoxOrderlineOrderID.ValueMember = "OrderID";
 
 
-            //Comboboxes for Orderline
+            //Comboboxes for Order
             comboBoxOrderSupermarketID.DataSource = supermarketData;
+            comboBoxOrderSupermarketID.DisplayMember = "StoreName";
             comboBoxOrderSupermarketID.ValueMember = "SupermarketID";
 
             comboBoxOrderCustomerID.DataSource = customerData;
+            comboBoxOrderCustomerID.DisplayMember = "Name";
             comboBoxOrderCustomerID.ValueMember = "CustomerID";
 
+            //Comboboxes for Product
+            comboBoxProductCategory.DataSource = categoryData;
+            comboBoxProductCategory.DisplayMember = "CategoryName";
+            comboBoxProductCategory.ValueMember = "CategoryID";
+
         }
+
+        private void UpdateView(string type)
+        {
+            orderlineDataGridView.DataSource = _layer.View(type);
+            orderlineDataGridView.DataMember = type;
+
+        }
+        private void UpdateViewOrder(string type)
+            {
+                orderDataGridView.DataSource = _layer.ViewOrder(type);
+                orderDataGridView.DataMember = type;
+
+            }
+
+        private void UpdateViewProduct(string type)
+        {
+            productDataGridView.DataSource = _layer.ViewProduct(type);
+            productDataGridView.DataMember = type;
+
+        }
+
+        private void UpdateViewStore(string type)
+        {
+            storeDataGridView.DataSource = _layer.ViewStore(type);
+            storeDataGridView.DataMember = type;
+
+        }
+
+        private void UpdateViewCustomer(string type)
+        {
+            customerDataGridView.DataSource = _layer.ViewCustomer(type);
+            customerDataGridView.DataMember = type;
+
+        }
+
+        private void UpdateViewProductCategory(string type)
+        {
+            productCategoryDataGridView.DataSource = _layer.ViewProductCategory(type);
+            productCategoryDataGridView.DataMember = type;
+
+        }
+
 
         //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
@@ -81,10 +162,12 @@ namespace Application
             string productIdString = textBoxProductID.Text;
             string productName = textBoxProductName.Text;
             string productPriceString = textBoxProductPrice.Text;
-            string categoryIdString = textBoxCategoryID.Text;
+            int categoryId = int.Parse(comboBoxProductCategory.SelectedValue.ToString());
+
+
 
             if (string.IsNullOrWhiteSpace(productIdString) || string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(productPriceString)
-                || string.IsNullOrWhiteSpace(categoryIdString))
+                || string.IsNullOrWhiteSpace(comboBoxProductCategory.Text) || comboBoxProductCategory.SelectedIndex == -1)
             {
                 richTextBoxProduct.Text = "Please enter all the fields!";
             }
@@ -93,14 +176,16 @@ namespace Application
                 try
                 {
                     int productId = int.Parse(productIdString);
-                    int categoryId = int.Parse(categoryIdString);
                     decimal productPrice = decimal.Parse(productPriceString);
 
                     _layer.insertProduct(productId, productName, productPrice, categoryId);
 
+                    UpdateViewProduct("Product");
+
                     richTextBoxProduct.Text = "The product has been successfully created!";
 
                     clearAllTextBox();
+                    comboBoxProductCategory.SelectedIndex = -1;
 
 
 
@@ -116,7 +201,6 @@ namespace Application
                     else if (ex.Number == 547)
                     {
                         richTextBoxProduct.Text = "The category ID provided does not exist.";
-                        textBoxCategoryID.Text = " ";
                     }
                     else if (ex.Number == 0)
                     {
@@ -131,42 +215,6 @@ namespace Application
                 }
             }
         }
-
-        //VIEW ALL PRODUCT INFORMATION
-        private void buttonViewAllProducts_Click(object sender, EventArgs e)
-        {
-            richTextBoxProduct.Text = " ";
-            try
-            {
-                using (SqlDataReader readerViewProducts = _layer.printallProducts())
-                {
-                    while (readerViewProducts.Read())
-                    {
-                        richTextBoxProduct.Text += "ID: " + readerViewProducts.GetInt32(0) + " " + "\n";
-                        richTextBoxProduct.Text += "Name: " + readerViewProducts.GetString(1) + " " + "\n";
-                        richTextBoxProduct.Text += "Cost: " + readerViewProducts.GetDecimal(2) + "kr " + " " + "\n";
-                        richTextBoxProduct.Text += "ProductCategoryID: " + readerViewProducts.GetInt32(3) + "\n";
-                        richTextBoxProduct.Text += "-----------------------" + "\n";
-
-                        clearAllTextBox();
-
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 0)
-                {
-                    richTextBoxProduct.Text = "Could not connect to the database. Please check your connection and try again. ";
-                }
-            }
-            catch (NullReferenceException)
-            {
-                richTextBoxProduct.Text = "There are no Products to view!";
-            }
-        }
-
-
 
 
         //UPDATE PRODUCT
@@ -198,10 +246,12 @@ namespace Application
                     else
                     {
                         _layer.updateProduct(productId, productName, productPrice);
+                        UpdateViewProduct("Product");
 
                         richTextBoxProduct.Text = "The product has been successfully been updated!";
 
                         clearAllTextBox();
+                        
                     }
                 }
                 catch (FormatException)
@@ -245,6 +295,7 @@ namespace Application
                     else
                     {
                         _layer.deleteProduct(productId);
+                        UpdateViewProduct("Product");
 
                         richTextBoxProduct.Text = "Product has successfully been deleted!";
                         clearAllTextBox();
@@ -344,6 +395,8 @@ namespace Application
                     richTextBoxProductCategory.Text = "The Product Category has been successfully created!";
 
                     clearAllTextBox();
+
+                    UpdateViewProductCategory("ProductCategory");
                 }
 
                 catch (SqlException ex)
@@ -399,6 +452,7 @@ namespace Application
 
                         richTextBoxProductCategory.Text = "The Product Category has been successfully updated!";
                         clearAllTextBox();
+                        UpdateViewProductCategory("ProductCategory");
                     }
                 }
                 catch (FormatException)
@@ -443,6 +497,7 @@ namespace Application
 
                         richTextBoxProductCategory.Text = "The Product Category has been successfully deleted!";
                         clearAllTextBox();
+                        UpdateViewProductCategory("ProductCategory");
                     }
                 }
 
@@ -512,44 +567,13 @@ namespace Application
 
 
 
-        //VIEW ALL PRODUCT CATEGORY
-        private void buttonViewAllProductCategory_Click(object sender, EventArgs e)
-        {
-            richTextBoxProductCategory.Text = " ";
-            try
-            {
-                using (SqlDataReader readerViewProductCategory = _layer.printallProductCategory())
-                {
-                    while (readerViewProductCategory.Read())
-                    {
-                        richTextBoxProductCategory.Text += "ID: " + readerViewProductCategory.GetInt32(0) + " " + "\n";
-                        richTextBoxProductCategory.Text += "Category Name: " + readerViewProductCategory.GetString(1) + " " + "\n";
-                        richTextBoxProductCategory.Text += "-----------------------" + "\n";
-
-
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 0)
-                {
-                    richTextBoxProduct.Text = "Could not connect to the database. Please check your connection and try again. ";
-                }
-            }
-            catch (NullReferenceException)
-            {
-                richTextBoxProduct.Text = "There are no Product Categories to view!";
-            }
-
-
-        }
+        
 
 
         //ADD STORE
         private void buttonStoreAdd_Click(object sender, EventArgs e)
         {
-
+            richTextBoxStore.Text = " ";
             string storeID = textBoxStoreID.Text;
             string regionName = textBoxStoreRegionName.Text;
             string storeName = textBoxStoreName.Text;
@@ -574,6 +598,8 @@ namespace Application
 
 
                     clearAllTextBox();
+
+                    UpdateViewStore("Store");
                 }
 
                 catch (SqlException ex)
@@ -605,6 +631,7 @@ namespace Application
         {
             try
             {
+                richTextBoxStore.Text = " ";
                 string storeID = textBoxStoreID.Text;
                 int newID = Int32.Parse(storeID);
 
@@ -648,6 +675,7 @@ namespace Application
         //UPDATE STORE
         private void buttonStoreUpdate_Click(object sender, EventArgs e)
         {
+            richTextBoxStore.Text = " ";
             string storeID = textBoxStoreID.Text;
             string regionName = textBoxStoreRegionName.Text;
             string storeName = textBoxStoreName.Text;
@@ -663,6 +691,7 @@ namespace Application
             {
                 try
                 {
+                    richTextBoxStore.Text = " ";
                     int tmpStoreID = int.Parse(storeID);
 
                     _layer.updateStore(tmpStoreID, regionName, storeName, storeCity, storeAddress);
@@ -670,6 +699,7 @@ namespace Application
                     richTextBoxStore.Text = "The Store has been successfully been updated!";
 
                     clearAllTextBox();
+                    UpdateViewStore("Store");
                 }
 
                 catch (SqlException ex)
@@ -693,6 +723,7 @@ namespace Application
         //DELETE STORE
         private void buttonStoreDelete_Click(object sender, EventArgs e)
         {
+            richTextBoxStore.Text = " ";
             String storeID = textBoxStoreID.Text;
 
             if (string.IsNullOrWhiteSpace(storeID))
@@ -710,6 +741,7 @@ namespace Application
                     richTextBoxStore.Text = "Store has successfully been deleted!";
 
                     clearAllTextBox();
+                    UpdateViewStore("Store");
 
                 }
                 catch (SqlException ex)
@@ -728,47 +760,12 @@ namespace Application
             }
         }
 
-        //VIEW ALL INFORMATION STORE
-        private void buttonViewAllStore_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlDataReader readerViewStores = _layer.printallStores())
-                {
-                    while (readerViewStores.Read())
-                    {
-                        richTextBoxStore.Text += "ID: " + readerViewStores.GetInt32(0) + " " + "\n";
-                        richTextBoxStore.Text += "Region Name: " + readerViewStores.GetString(1) + " " + "\n";
-                        richTextBoxStore.Text += "Store name: " + readerViewStores.GetString(2) + " " + "\n";
-                        richTextBoxStore.Text += "City: " + readerViewStores.GetString(3) + "\n";
-                        richTextBoxStore.Text += "Address: " + readerViewStores.GetString(4) + "\n";
-                        richTextBoxStore.Text += "-----------------------" + "\n";
-
-
-                        clearAllTextBox();
-
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 0)
-                {
-                    richTextBoxStore.Text = "Could not connect to the database. Please check your connection and try again. ";
-                }
-            }
-            catch (NullReferenceException)
-            {
-                richTextBoxStore.Text = "There are no Supermarkets to view!";
-            }
-
-
-        }
+        
 
         //CREATE CUSTOMER
         private void buttonAddCostumer_Click(object sender, EventArgs e)
         {
-
+            richTextBoxCostumer.Text = " ";
             string costumerName = textBoxCostumerName.Text;
             string costumerMail = textBoxCostumerMail.Text;
             string stringCostumerPhoneNumber = textBoxCostumerPhoneNumber.Text;
@@ -792,6 +789,8 @@ namespace Application
                     _layer.addCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
 
                     richTextBoxCostumer.Text = "The Customer has been successfully created!" + "\n";
+
+                    UpdateViewCustomer("Customer");
 
 
                     clearAllTextBox();
@@ -831,6 +830,7 @@ namespace Application
         {
             try
             {
+                richTextBoxCostumer.Text = " ";
                 string stringCustomerID = textBoxCustomerID.Text;
                 int customerID = Int32.Parse(stringCustomerID);
 
@@ -879,7 +879,7 @@ namespace Application
         //UPDATE CUSTOMER
         private void buttonUpdateCostumer_Click(object sender, EventArgs e)
         {
-
+            richTextBoxCostumer.Text = " ";
             string costumerName = textBoxCostumerName.Text;
             string costumerMail = textBoxCostumerMail.Text;
             string stringCostumerPhoneNumber = textBoxCostumerPhoneNumber.Text;
@@ -904,6 +904,7 @@ namespace Application
 
                     richTextBoxCostumer.Text = "The Customer has been successfully updated!" + "\n";
 
+                    UpdateViewCustomer("Customer");
 
                     clearAllTextBox();
 
@@ -935,7 +936,7 @@ namespace Application
         //DELETE CUSTOMER
         private void buttonDeleteCostumer_Click(object sender, EventArgs e)
         {
-
+            richTextBoxCostumer.Text = " ";
             String stringCustomerID = textBoxCustomerID.Text;
 
             if (string.IsNullOrWhiteSpace(stringCustomerID))
@@ -951,6 +952,7 @@ namespace Application
                     _layer.deleteCustomer(customerID);
 
                     richTextBoxCostumer.Text = "Customer has successfully been deleted!";
+                    UpdateViewCustomer("Customer");
 
                     clearAllTextBox();
 
@@ -972,49 +974,9 @@ namespace Application
         }
 
 
-
-
-        //VIEW ALL COSTUMERS
-        private void buttonViewAllCostumers_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                using (SqlDataReader readerViewCustomers = _layer.showAllCustomers())
-                {
-                    while (readerViewCustomers.Read())
-                    {
-                        richTextBoxCostumer.Text += "Name: " + readerViewCustomers.GetString(0) + " " + "\n";
-                        richTextBoxCostumer.Text += "CustomerID: " + readerViewCustomers.GetInt32(1) + " " + "\n";
-                        richTextBoxCostumer.Text += "Username: " + readerViewCustomers.GetString(2) + " " + "\n";
-                        richTextBoxCostumer.Text += "Address: " + readerViewCustomers.GetString(3) + "\n";
-                        richTextBoxCostumer.Text += "Phonenumber: " + readerViewCustomers.GetInt32(4) + "\n";
-                        richTextBoxCostumer.Text += "Mail: " + readerViewCustomers.GetString(5) + "\n";
-                        richTextBoxCostumer.Text += "-----------------------" + "\n";
-
-                        clearAllTextBox();
-
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 0)
-                {
-                    richTextBoxCostumer.Text = "No connection with server";
-                }
-            }
-            catch (NullReferenceException)
-            {
-                richTextBoxCostumer.Text = "There are no Customers to view!";
-            }
-
-
-        }
-
-
         private void BtnCreateOrder_Click(object sender, EventArgs e)
         {
+            OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
             string date = textOrderDate.Value.ToString("yyyy-MM-dd");
             int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
@@ -1029,7 +991,7 @@ namespace Application
             else if (comboBoxOrderSupermarketID.SelectedIndex == -1
                      || comboBoxOrderCustomerID.SelectedIndex == -1)
             {
-                OrderTextBox.Text = "Please select a Product, Store & Customer";
+                OrderTextBox.Text = "Please select a Store & Customer";
             }
             else
             {
@@ -1038,6 +1000,7 @@ namespace Application
                     int ID = int.Parse(orderID);
 
                     _layer.AddOrder(ID, date, supermarketID, customerID);
+                    UpdateViewOrder("Order");
 
                     OrderTextBox.Text = "The order has been successfully created!" + "\n";
 
@@ -1064,6 +1027,7 @@ namespace Application
 
             try
             {
+                OrderTextBox.Text = "";
                 string orderID = textOrderOrderID.Text;
                 int tmpOrderID = int.Parse(orderID);
 
@@ -1108,6 +1072,7 @@ namespace Application
 
         private void BtnUpdateOrder_Click(object sender, EventArgs e)
         {
+            OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
             string date = textOrderDate.Value.ToString("yyyy-MM-dd");
 
@@ -1133,6 +1098,7 @@ namespace Application
                     else
                     {
                         _layer.updateOrder(tmpOrderID, date);
+                        UpdateViewOrder("Order");
 
                         OrderTextBox.Text = "The order has been updated!" + "\n";
 
@@ -1158,6 +1124,7 @@ namespace Application
 
         private void BtnDeleteOrder_Click(object sender, EventArgs e)
         {
+            OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
 
             if (string.IsNullOrWhiteSpace(orderID))
@@ -1182,6 +1149,7 @@ namespace Application
                     {
                         _layer.deleteOrder(tmpOrderID);
 
+                        UpdateViewOrder("Order");
                         OrderTextBox.Text = "Order has successfully been deleted!";
 
                     }
@@ -1203,46 +1171,11 @@ namespace Application
             }
         }
 
-      
-
-        private void BtnViewAllOrders_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlDataReader readerViewAllOrders = _layer.printallOrders())
-                {
-                    while (readerViewAllOrders.Read())
-                    {
-                        OrderTextBox.Text += "Order ID: " + readerViewAllOrders.GetInt32(0) + " " + "\n";
-                        OrderTextBox.Text += "Date: " + readerViewAllOrders.GetString(1) + " " + "\n";
-                        OrderTextBox.Text += "Supermarket ID: " + readerViewAllOrders.GetInt32(2) + "\n";
-                        OrderTextBox.Text += "Customer ID: " + readerViewAllOrders.GetInt32(3) + "\n";
-                        OrderTextBox.Text += "-----------------------" + "\n";
-
-                        textOrderOrderID.Clear();
-
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 0)
-                {
-                    richTextBoxProduct.Text = "No connection with server";
-                }
-            }
-            catch (NullReferenceException)
-            {
-                richTextBoxProduct.Text = "There are no Products to view!";
-            }
-
-        }
-
-
         private void buttonOrderlineCreate_Click(object sender, EventArgs e)
         {
             try
             {
+                richTextBoxOrderline.Text = " ";
                 string orderlineID = textBoxOrderlineID.Text;
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
                 int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
@@ -1266,6 +1199,10 @@ namespace Application
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
                     _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    UpdateView("Orderline");
+
+
+                    
 
                     richTextBoxOrderline.Text = "The Order has been successfully created!" + "\n";
 
@@ -1279,6 +1216,8 @@ namespace Application
             }
             catch (SqlException error)
             {
+
+
                 if (error.Number == 2627)
                 {
                     richTextBoxOrderline.Text = "You have already added a product with the same id to the chosen Order please select another product.";
@@ -1291,13 +1230,15 @@ namespace Application
             try
             {
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
-
+                richTextBoxOrderline.Text = " ";
 
                 using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderID(orderID))
                 {
                     if (readerFindOrderlines.HasRows)
                     {
                         richTextBoxOrderline.Text += "--- ORDERS ---" + "\n";
+                        UpdateView("Orderline");
+
 
                         while (readerFindOrderlines.Read())
                         {
@@ -1308,7 +1249,7 @@ namespace Application
                             richTextBoxOrderline.Text += "Payment Method : " + readerFindOrderlines.GetString(4) + "\n";
                             richTextBoxOrderline.Text += "-----------------------" + "\n";
 
-
+                            
                         }
                     }
                     else
@@ -1333,23 +1274,115 @@ namespace Application
         }
         private void buttonDeleteOrderline_Click(object sender, EventArgs e)
         {
-  
-            
+            richTextBoxOrderline.Text = " ";
+
+            try
+            {
+                if (comboBoxOrderlineOrderID.SelectedIndex == -1 ||  comboBoxOrderlineProductID.SelectedIndex == -1)
+                {
+                    richTextBoxOrderline.Text = "Please select an Order ID and Product ID to delete!!";
+                }
+                else
+                {
+                    int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
+                    int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
+                    SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxOrderline.Text = "Please check if there is a Order ID with the selected Product ID or vice versa!";
+                    }
+                      
+                    else
+                    {
+                        _layer.deleteOrderline(orderID, productID);
+                        UpdateView("Orderline");
+                        richTextBoxOrderline.Text = "The Product ID: " + productID + " was sucessfully deleted from the Order ID: " + orderID;
+                    }
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID and Product ID";
+            }
         }
 
-      
+        private void buttonUpdateOrderline_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxOrderline.Text = " ";
+                string orderlineID = textBoxOrderlineID.Text;
+                int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
+                int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
+                int quantity;
+                string orderlinePaymentmethod = comboBoxOrderlinePayment.Text;
 
+                if (comboBoxOrderlineOrderID.SelectedIndex == -1
+                || comboBoxOrderlineProductID.SelectedIndex == -1
+                || comboBoxOrderlineQuantity.SelectedIndex == -1
+                 || comboBoxOrderlinePayment.SelectedIndex == -1 || string.IsNullOrEmpty(comboBoxOrderlinePayment.Text))
+                {
+                    richTextBoxOrderline.Text = "Please select an Orderline number, Order, Product, Quantity & Payment method to update";
+                    return;
+                }
+                else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
+                {
+                    richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
+                    return;
+                }
+                else
+                {
+                    SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxOrderline.Text = "Please check if there is an Orderline with the selected Order ID and Product ID!";
+                        return;
+                    }
 
+                    int tmpOrderlineID = int.Parse(orderlineID);
+                    _layer.updateOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    UpdateView("Orderline");
 
+                    richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
 
-
-
+                    comboBoxOrderlineQuantity.SelectedIndex = -1;
+                    comboBoxOrderlineOrderID.SelectedIndex = -1;
+                    comboBoxOrderlineProductID.SelectedIndex = -1;
+                    comboBoxOrderlinePayment.SelectedIndex = -1;
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Orderline ID, Order ID, and Product ID";
+            }
+            catch (SqlException error)
+            {
+                if (error.Number == 0)
+                {
+                    richTextBoxOrderline.Text = "Connection problems!";
+                
+            }
+            }
+        }
     }
 }
 
 
 
-     
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

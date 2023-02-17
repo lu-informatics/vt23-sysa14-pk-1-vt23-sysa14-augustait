@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Application
 {
@@ -458,12 +459,13 @@ namespace Application
         }
 
 
-           public void deleteOrderline(int orderlineID)
+           public void deleteOrderline(int orderID, int productID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "DELETE FROM Checkout WHERE OrderlineNumber = @orderlineID";
-            command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
+            command.CommandText = "DELETE FROM Orderline WHERE OrderID = @orderID AND ProductID = @productID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@productID", productID));
 
             connection.Open();
 
@@ -473,13 +475,44 @@ namespace Application
             connection.Dispose();
         }
 
+        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "UPDATE Orderline SET orderlineNumber = @orderlineID, quantity = @quantity, paymentMethod = @paymentMethod WHERE OrderID = @orderID AND ProductID = @productID";
+            command.Parameters.Add(new SqlParameter("@orderID", orderID));
+            command.Parameters.Add(new SqlParameter("@productID", productID));
+            command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
+            command.Parameters.Add(new SqlParameter("@quantity", quantity));
+            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
+          
+            connection.Open();
 
-        public SqlDataReader findOrderlinesByOrderID(int orderID)
+            command.ExecuteNonQuery();
+
+            connection.Close();
+            connection.Dispose();
+
+        }
+
+    public SqlDataReader findOrderlinesByOrderID(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * FROM Orderline WHERE OrderID = @orderID ORDER BY OrderID";
             command.Parameters.AddWithValue("@orderID", orderID);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+
+        public SqlDataReader findOrderlinesByOrderIDandProductID(int orderID, int productID)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT * FROM Orderline WHERE OrderID = @orderID AND ProductID = @productID";
+            command.Parameters.AddWithValue("@orderID", orderID);
+            command.Parameters.AddWithValue("@productID", productID);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             return reader;
@@ -521,7 +554,9 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
+
             command.CommandText = "SELECT ProductName FROM Product";
+
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable productData = new DataTable();
@@ -535,7 +570,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT SupermarketID FROM Store";
+            command.CommandText = "SELECT SupermarketID, StoreName FROM Store";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable supermarketData = new DataTable();
@@ -549,7 +584,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CustomerID FROM Customer";
+            command.CommandText = "SELECT CustomerID, Name FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable customerData = new DataTable();
@@ -557,6 +592,21 @@ namespace Application
             connection.Close();
             return customerData;
         }
+
+        public DataTable GetProductCategoryData()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT CategoryID, CategoryName FROM ProductCategory";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            DataTable categoryData = new DataTable();
+            categoryData.Load(reader);
+            connection.Close();
+            return categoryData;
+        }
+
 
         public DataTable GetOrderData()
         {
@@ -566,10 +616,144 @@ namespace Application
             command.CommandText = "SELECT OrderID FROM Order_";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            DataTable customerData = new DataTable();
-            customerData.Load(reader);
+           
+            DataTable orderData = new DataTable();
+            orderData.Load(reader);
             connection.Close();
-            return customerData;
+            return orderData;
+        }
+
+        //Data for GridView
+        public DataSet View(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Orderline")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Orderline";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Orderline");
+
+                    return dataSet;
+                }
+            }
+
+            
+            return dataSet;
+        }
+
+        public DataSet ViewOrder(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Order_")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Order_";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Order_");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewProduct(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Product")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Product";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Product");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewStore(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Store")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Store";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Store");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewCustomer(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "Customer")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM Customer";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "Customer");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
+        }
+
+        public DataSet ViewProductCategory(string type)
+        {
+            DataSet dataSet = new();
+
+            if (type == "ProductCategory")
+            {
+                using (SqlConnection connection = GetDatabaseConnection())
+                {
+                    SqlCommand command = GetDatabaseConnection().CreateCommand();
+                    command.CommandText = "SELECT  * FROM ProductCategory";
+
+                    SqlDataAdapter dataAdapter = new(command);
+                    dataAdapter.Fill(dataSet, "ProductCategory");
+
+                    return dataSet;
+                }
+            }
+
+
+            return dataSet;
         }
 
 
