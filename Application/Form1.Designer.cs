@@ -32,7 +32,6 @@
             this.tabProduct = new System.Windows.Forms.TabPage();
             this.productDataGridView = new System.Windows.Forms.DataGridView();
             this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
-            this.textBoxCategoryID = new System.Windows.Forms.TextBox();
             this.pictureBoxICA = new System.Windows.Forms.PictureBox();
             this.buttonDeleteProduct = new System.Windows.Forms.Button();
             this.buttonUpdateProduct = new System.Windows.Forms.Button();
@@ -118,6 +117,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
+            this.comboBoxProductCategory = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
@@ -157,9 +158,10 @@
             // 
             // tabProduct
             // 
+            this.tabProduct.Controls.Add(this.label14);
+            this.tabProduct.Controls.Add(this.comboBoxProductCategory);
             this.tabProduct.Controls.Add(this.productDataGridView);
             this.tabProduct.Controls.Add(this.richTextBoxProduct);
-            this.tabProduct.Controls.Add(this.textBoxCategoryID);
             this.tabProduct.Controls.Add(this.pictureBoxICA);
             this.tabProduct.Controls.Add(this.buttonDeleteProduct);
             this.tabProduct.Controls.Add(this.buttonUpdateProduct);
@@ -195,14 +197,6 @@
             this.richTextBoxProduct.Size = new System.Drawing.Size(643, 96);
             this.richTextBoxProduct.TabIndex = 10;
             this.richTextBoxProduct.Text = "";
-            // 
-            // textBoxCategoryID
-            // 
-            this.textBoxCategoryID.Location = new System.Drawing.Point(602, 315);
-            this.textBoxCategoryID.Name = "textBoxCategoryID";
-            this.textBoxCategoryID.PlaceholderText = "Category ID:";
-            this.textBoxCategoryID.Size = new System.Drawing.Size(100, 23);
-            this.textBoxCategoryID.TabIndex = 9;
             // 
             // pictureBoxICA
             // 
@@ -1151,6 +1145,23 @@
             this.pictureBoxCheckout.TabIndex = 10;
             this.pictureBoxCheckout.TabStop = false;
             // 
+            // comboBoxProductCategory
+            // 
+            this.comboBoxProductCategory.FormattingEnabled = true;
+            this.comboBoxProductCategory.Location = new System.Drawing.Point(636, 315);
+            this.comboBoxProductCategory.Name = "comboBoxProductCategory";
+            this.comboBoxProductCategory.Size = new System.Drawing.Size(115, 23);
+            this.comboBoxProductCategory.TabIndex = 44;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(530, 318);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(103, 15);
+            this.label14.TabIndex = 45;
+            this.label14.Text = "Product Category:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1205,7 +1216,6 @@
         private PictureBox pictureBoxICA;
         private Button buttonDeleteProduct;
         private Button buttonUpdateProduct;
-        private TextBox textBoxCategoryID;
         private RichTextBox richTextBoxProduct;
         private PictureBox pictureBoxStore;
         private RichTextBox richTextBoxStore;
@@ -1284,5 +1294,7 @@
         private DataGridView productCategoryDataGridView;
         private DataGridView customerDataGridView;
         private DataGridView storeDataGridView;
+        private Label label14;
+        private ComboBox comboBoxProductCategory;
     }
 }

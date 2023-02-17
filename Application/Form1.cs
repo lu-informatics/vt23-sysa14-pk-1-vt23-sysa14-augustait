@@ -22,7 +22,6 @@ namespace Application
             List<TextBox> list = new List<TextBox>();
             list.Add(textBoxProductID);
             list.Add(textBoxProductName);
-            list.Add(textBoxCategoryID);
             list.Add(textBoxProductPrice);
             list.Add(textBoxStoreID);
             list.Add(textBoxStoreName);
@@ -54,6 +53,7 @@ namespace Application
             DataTable supermarketData = _layer.GetSupermarketData();
             DataTable customerData = _layer.GetCustomerData();
             DataTable orderData = _layer.GetOrderData();
+            DataTable categoryData = _layer.GetProductCategoryData();
 
 
             //DataGridView for Orderline
@@ -104,6 +104,11 @@ namespace Application
             comboBoxOrderCustomerID.DataSource = customerData;
             comboBoxOrderCustomerID.DisplayMember = "Name";
             comboBoxOrderCustomerID.ValueMember = "CustomerID";
+
+            //Comboboxes for Product
+            comboBoxProductCategory.DataSource = categoryData;
+            comboBoxProductCategory.DisplayMember = "CategoryName";
+            comboBoxProductCategory.ValueMember = "CategoryID";
 
         }
 
@@ -156,10 +161,12 @@ namespace Application
             string productIdString = textBoxProductID.Text;
             string productName = textBoxProductName.Text;
             string productPriceString = textBoxProductPrice.Text;
-            string categoryIdString = textBoxCategoryID.Text;
+            int categoryId = int.Parse(comboBoxProductCategory.SelectedValue.ToString());
+
+
 
             if (string.IsNullOrWhiteSpace(productIdString) || string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(productPriceString)
-                || string.IsNullOrWhiteSpace(categoryIdString))
+                || string.IsNullOrWhiteSpace(comboBoxProductCategory.Text) || comboBoxProductCategory.SelectedIndex == -1)
             {
                 richTextBoxProduct.Text = "Please enter all the fields!";
             }
@@ -168,7 +175,6 @@ namespace Application
                 try
                 {
                     int productId = int.Parse(productIdString);
-                    int categoryId = int.Parse(categoryIdString);
                     decimal productPrice = decimal.Parse(productPriceString);
 
                     _layer.insertProduct(productId, productName, productPrice, categoryId);
@@ -178,6 +184,7 @@ namespace Application
                     richTextBoxProduct.Text = "The product has been successfully created!";
 
                     clearAllTextBox();
+                    comboBoxProductCategory.SelectedIndex = -1;
 
 
 
@@ -193,7 +200,6 @@ namespace Application
                     else if (ex.Number == 547)
                     {
                         richTextBoxProduct.Text = "The category ID provided does not exist.";
-                        textBoxCategoryID.Text = " ";
                     }
                     else if (ex.Number == 0)
                     {
@@ -244,6 +250,7 @@ namespace Application
                         richTextBoxProduct.Text = "The product has been successfully been updated!";
 
                         clearAllTextBox();
+                        
                     }
                 }
                 catch (FormatException)
