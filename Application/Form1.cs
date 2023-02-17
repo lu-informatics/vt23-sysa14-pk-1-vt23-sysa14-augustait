@@ -1281,6 +1281,7 @@ namespace Application
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
                     _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    UpdateView("Orderline");
 
 
                     
@@ -1386,9 +1387,67 @@ namespace Application
             }
         }
 
+        private void buttonUpdateOrderline_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                richTextBoxOrderline.Text = " ";
+                string orderlineID = textBoxOrderlineID.Text;
+                int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
+                int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
+                int quantity;
+                string orderlinePaymentmethod = comboBoxOrderlinePayment.Text;
 
+                if (comboBoxOrderlineOrderID.SelectedIndex == -1
+                || comboBoxOrderlineProductID.SelectedIndex == -1
+                || comboBoxOrderlineQuantity.SelectedIndex == -1
+                 || comboBoxOrderlinePayment.SelectedIndex == -1 || string.IsNullOrEmpty(comboBoxOrderlinePayment.Text))
+                {
+                    richTextBoxOrderline.Text = "Please select an Orderline number, Order, Product, Quantity & Payment method to update";
+                    return;
+                }
+                else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
+                {
+                    richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
+                    return;
+                }
+                else
+                {
+                    SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxOrderline.Text = "Please check if there is an Orderline with the selected Order ID and Product ID!";
+                        return;
+                    }
+
+                    int tmpOrderlineID = int.Parse(orderlineID);
+                    _layer.updateOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    UpdateView("Orderline");
+
+                    richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
+
+                    comboBoxOrderlineQuantity.SelectedIndex = -1;
+                    comboBoxOrderlineOrderID.SelectedIndex = -1;
+                    comboBoxOrderlineProductID.SelectedIndex = -1;
+                    comboBoxOrderlinePayment.SelectedIndex = -1;
+                }
+            }
+            catch (FormatException)
+            {
+                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Orderline ID, Order ID, and Product ID";
+            }
+            catch (SqlException error)
+            {
+                if (error.Number == 0)
+                {
+                }
+            }
+        }
     }
 }
+
+
+
 
 
 
