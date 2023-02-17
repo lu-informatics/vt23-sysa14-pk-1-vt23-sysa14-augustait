@@ -711,16 +711,16 @@
             // storeDataGridView
             // 
             this.storeDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.storeDataGridView.Location = new System.Drawing.Point(377, 0);
+            this.storeDataGridView.Location = new System.Drawing.Point(178, 0);
             this.storeDataGridView.Name = "storeDataGridView";
             this.storeDataGridView.ReadOnly = true;
             this.storeDataGridView.RowTemplate.Height = 25;
-            this.storeDataGridView.Size = new System.Drawing.Size(398, 210);
+            this.storeDataGridView.Size = new System.Drawing.Size(597, 210);
             this.storeDataGridView.TabIndex = 42;
             // 
             // buttonStoreDelete
             // 
-            this.buttonStoreDelete.Location = new System.Drawing.Point(287, 376);
+            this.buttonStoreDelete.Location = new System.Drawing.Point(518, 376);
             this.buttonStoreDelete.Name = "buttonStoreDelete";
             this.buttonStoreDelete.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreDelete.TabIndex = 22;
@@ -730,7 +730,7 @@
             // 
             // buttonStoreUpdate
             // 
-            this.buttonStoreUpdate.Location = new System.Drawing.Point(194, 376);
+            this.buttonStoreUpdate.Location = new System.Drawing.Point(420, 376);
             this.buttonStoreUpdate.Name = "buttonStoreUpdate";
             this.buttonStoreUpdate.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreUpdate.TabIndex = 21;
@@ -740,7 +740,7 @@
             // 
             // buttonStoreFind
             // 
-            this.buttonStoreFind.Location = new System.Drawing.Point(98, 376);
+            this.buttonStoreFind.Location = new System.Drawing.Point(313, 376);
             this.buttonStoreFind.Name = "buttonStoreFind";
             this.buttonStoreFind.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreFind.TabIndex = 20;
@@ -750,7 +750,7 @@
             // 
             // buttonStoreAdd
             // 
-            this.buttonStoreAdd.Location = new System.Drawing.Point(6, 376);
+            this.buttonStoreAdd.Location = new System.Drawing.Point(201, 376);
             this.buttonStoreAdd.Name = "buttonStoreAdd";
             this.buttonStoreAdd.Size = new System.Drawing.Size(75, 23);
             this.buttonStoreAdd.TabIndex = 19;
@@ -760,7 +760,7 @@
             // 
             // textBoxStoreAddress
             // 
-            this.textBoxStoreAddress.Location = new System.Drawing.Point(17, 311);
+            this.textBoxStoreAddress.Location = new System.Drawing.Point(651, 328);
             this.textBoxStoreAddress.Name = "textBoxStoreAddress";
             this.textBoxStoreAddress.PlaceholderText = "Address:";
             this.textBoxStoreAddress.Size = new System.Drawing.Size(108, 23);
@@ -768,7 +768,7 @@
             // 
             // textBoxStoreCity
             // 
-            this.textBoxStoreCity.Location = new System.Drawing.Point(17, 272);
+            this.textBoxStoreCity.Location = new System.Drawing.Point(499, 328);
             this.textBoxStoreCity.Name = "textBoxStoreCity";
             this.textBoxStoreCity.PlaceholderText = "City:";
             this.textBoxStoreCity.Size = new System.Drawing.Size(108, 23);
@@ -776,7 +776,7 @@
             // 
             // textBoxStoreName
             // 
-            this.textBoxStoreName.Location = new System.Drawing.Point(17, 228);
+            this.textBoxStoreName.Location = new System.Drawing.Point(358, 328);
             this.textBoxStoreName.Name = "textBoxStoreName";
             this.textBoxStoreName.PlaceholderText = "Store name:";
             this.textBoxStoreName.Size = new System.Drawing.Size(108, 23);
@@ -784,7 +784,7 @@
             // 
             // textBoxStoreRegionName
             // 
-            this.textBoxStoreRegionName.Location = new System.Drawing.Point(17, 187);
+            this.textBoxStoreRegionName.Location = new System.Drawing.Point(221, 328);
             this.textBoxStoreRegionName.Name = "textBoxStoreRegionName";
             this.textBoxStoreRegionName.PlaceholderText = "Region name:";
             this.textBoxStoreRegionName.Size = new System.Drawing.Size(108, 23);
@@ -792,7 +792,7 @@
             // 
             // textBoxStoreID
             // 
-            this.textBoxStoreID.Location = new System.Drawing.Point(17, 148);
+            this.textBoxStoreID.Location = new System.Drawing.Point(82, 328);
             this.textBoxStoreID.Name = "textBoxStoreID";
             this.textBoxStoreID.PlaceholderText = "Supermarket ID:";
             this.textBoxStoreID.Size = new System.Drawing.Size(108, 23);
@@ -810,17 +810,17 @@
             // richTextBoxStore
             // 
             this.richTextBoxStore.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBoxStore.Location = new System.Drawing.Point(377, 228);
+            this.richTextBoxStore.Location = new System.Drawing.Point(178, 228);
             this.richTextBoxStore.Name = "richTextBoxStore";
             this.richTextBoxStore.ReadOnly = true;
-            this.richTextBoxStore.Size = new System.Drawing.Size(392, 171);
+            this.richTextBoxStore.Size = new System.Drawing.Size(591, 94);
             this.richTextBoxStore.TabIndex = 11;
             this.richTextBoxStore.Text = "";
             // 
             // pictureBoxStore
             // 
             this.pictureBoxStore.Image = global::Application.Properties.Resources.ICA;
-            this.pictureBoxStore.Location = new System.Drawing.Point(17, 18);
+            this.pictureBoxStore.Location = new System.Drawing.Point(2, 6);
             this.pictureBoxStore.Name = "pictureBoxStore";
             this.pictureBoxStore.Size = new System.Drawing.Size(123, 86);
             this.pictureBoxStore.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -913,7 +913,7 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(253, 394);
+            this.label13.Location = new System.Drawing.Point(249, 345);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(99, 15);
             this.label13.TabIndex = 38;
@@ -922,11 +922,11 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label12.ForeColor = System.Drawing.Color.IndianRed;
-            this.label12.Location = new System.Drawing.Point(8, 367);
+            this.label12.Location = new System.Drawing.Point(8, 307);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(311, 21);
+            this.label12.Size = new System.Drawing.Size(275, 19);
             this.label12.TabIndex = 37;
             this.label12.Text = "Step 4: Please select a payment method";
             // 
@@ -939,7 +939,7 @@
             "KLARNA",
             "DEBIT CARD",
             "CREDIT CARD"});
-            this.comboBoxOrderlinePayment.Location = new System.Drawing.Point(22, 391);
+            this.comboBoxOrderlinePayment.Location = new System.Drawing.Point(18, 342);
             this.comboBoxOrderlinePayment.Name = "comboBoxOrderlinePayment";
             this.comboBoxOrderlinePayment.Size = new System.Drawing.Size(225, 23);
             this.comboBoxOrderlinePayment.TabIndex = 36;
@@ -949,7 +949,7 @@
             this.textBoxOrderlineID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.textBoxOrderlineID.Location = new System.Drawing.Point(22, 172);
             this.textBoxOrderlineID.Name = "textBoxOrderlineID";
-            this.textBoxOrderlineID.PlaceholderText = "Orderline ID;";
+            this.textBoxOrderlineID.PlaceholderText = "Orderline number:";
             this.textBoxOrderlineID.Size = new System.Drawing.Size(108, 23);
             this.textBoxOrderlineID.TabIndex = 35;
             // 
@@ -979,33 +979,32 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label4.ForeColor = System.Drawing.Color.IndianRed;
             this.label4.Location = new System.Drawing.Point(8, 291);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(381, 21);
+            this.label4.Size = new System.Drawing.Size(0, 19);
             this.label4.TabIndex = 31;
-            this.label4.Text = "Step 3: Please select the Quantity for the Product";
             // 
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label11.ForeColor = System.Drawing.Color.IndianRed;
-            this.label11.Location = new System.Drawing.Point(8, 220);
+            this.label11.Location = new System.Drawing.Point(6, 231);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(239, 21);
+            this.label11.Size = new System.Drawing.Size(213, 19);
             this.label11.TabIndex = 30;
             this.label11.Text = "Step 2: Please select a Product";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.Color.IndianRed;
             this.label3.Location = new System.Drawing.Point(8, 134);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(339, 21);
+            this.label3.Size = new System.Drawing.Size(302, 19);
             this.label3.TabIndex = 27;
             this.label3.Text = "Step 1: Please insert a number and Order ID";
             // 
@@ -1013,7 +1012,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label9.Location = new System.Drawing.Point(251, 175);
+            this.label9.Location = new System.Drawing.Point(259, 175);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 15);
             this.label9.TabIndex = 26;
@@ -1023,7 +1022,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label8.Location = new System.Drawing.Point(251, 327);
+            this.label8.Location = new System.Drawing.Point(257, 259);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 15);
             this.label8.TabIndex = 25;
@@ -1033,7 +1032,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(249, 247);
+            this.label7.Location = new System.Drawing.Point(163, 256);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 15);
             this.label7.TabIndex = 24;
@@ -1043,9 +1042,9 @@
             // 
             this.comboBoxOrderlineProductID.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.comboBoxOrderlineProductID.FormattingEnabled = true;
-            this.comboBoxOrderlineProductID.Location = new System.Drawing.Point(18, 244);
+            this.comboBoxOrderlineProductID.Location = new System.Drawing.Point(18, 256);
             this.comboBoxOrderlineProductID.Name = "comboBoxOrderlineProductID";
-            this.comboBoxOrderlineProductID.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlineProductID.Size = new System.Drawing.Size(139, 23);
             this.comboBoxOrderlineProductID.TabIndex = 17;
             // 
             // comboBoxOrderlineQuantity
@@ -1105,9 +1104,9 @@
             "48",
             "49",
             "50"});
-            this.comboBoxOrderlineQuantity.Location = new System.Drawing.Point(22, 324);
+            this.comboBoxOrderlineQuantity.Location = new System.Drawing.Point(212, 256);
             this.comboBoxOrderlineQuantity.Name = "comboBoxOrderlineQuantity";
-            this.comboBoxOrderlineQuantity.Size = new System.Drawing.Size(225, 23);
+            this.comboBoxOrderlineQuantity.Size = new System.Drawing.Size(42, 23);
             this.comboBoxOrderlineQuantity.TabIndex = 16;
             // 
             // comboBoxOrderlineOrderID
@@ -1116,17 +1115,18 @@
             this.comboBoxOrderlineOrderID.FormattingEnabled = true;
             this.comboBoxOrderlineOrderID.Location = new System.Drawing.Point(140, 172);
             this.comboBoxOrderlineOrderID.Name = "comboBoxOrderlineOrderID";
-            this.comboBoxOrderlineOrderID.Size = new System.Drawing.Size(107, 23);
+            this.comboBoxOrderlineOrderID.Size = new System.Drawing.Size(114, 23);
             this.comboBoxOrderlineOrderID.TabIndex = 15;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.White;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 35F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label6.ForeColor = System.Drawing.Color.Red;
-            this.label6.Location = new System.Drawing.Point(129, 12);
+            this.label6.Location = new System.Drawing.Point(112, 26);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(68, 15);
+            this.label6.Size = new System.Drawing.Size(274, 62);
             this.label6.TabIndex = 14;
             this.label6.Text = "CHECKOUT";
             // 
