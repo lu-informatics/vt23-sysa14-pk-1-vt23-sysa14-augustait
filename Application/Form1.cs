@@ -96,7 +96,7 @@ namespace Application
             comboBoxOrderlineOrderID.ValueMember = "OrderID";
 
 
-            //Comboboxes for Orderline
+            //Comboboxes for Order
             comboBoxOrderSupermarketID.DataSource = supermarketData;
             comboBoxOrderSupermarketID.ValueMember = "SupermarketID";
 
@@ -145,6 +145,8 @@ namespace Application
             productCategoryDataGridView.DataMember = type;
 
         }
+
+
         //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
         {
