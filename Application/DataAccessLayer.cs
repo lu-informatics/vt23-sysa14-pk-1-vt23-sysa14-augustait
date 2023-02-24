@@ -518,36 +518,7 @@ namespace Application
             return reader;
         }
 
-        public decimal GetOrderTotalAmount(int orderId)
-        {
-            decimal totalAmount = 0;
-            using (SqlConnection connection = GetDatabaseConnection())
-            {
-                string query = "SELECT Product.Price, Orderline.Quantity FROM Orderline " +
-                               "INNER JOIN Product ON Orderline.ProductID = Product.ProductID " +
-                               "WHERE Orderline.OrderID = @orderId";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@orderId", orderId);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        decimal price = reader.GetDecimal(0);
-                        int quantity = reader.GetInt32(1);
-                        totalAmount += price * quantity;
-                    }
-                    reader.Close();
-                }
-            }
-            return totalAmount;
-        }
-
-
-
-
-
-
+       
         //METHODS FOR COLLECTING DATA
         public DataTable GetProductData()
         {
