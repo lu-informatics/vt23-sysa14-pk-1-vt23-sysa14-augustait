@@ -1258,7 +1258,7 @@ namespace Application
                     }
                     else
                     {
-                        richTextBoxOrderline.Text += "The OrderID you have provided does not exist";
+                        richTextBoxOrderline.Text += "The OrderID you have provided does contain any products, please add a product";
                     }
                 }
             }
