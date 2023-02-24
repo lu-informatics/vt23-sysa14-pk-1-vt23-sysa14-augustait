@@ -188,7 +188,7 @@ namespace Application
 
 
 
-        //METHOD ADD STOREe
+        //METHOD ADD STORE
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -754,6 +754,109 @@ namespace Application
 
 
             return dataSet;
+        }
+
+        //METHODS FOR UPDATING COMBOBOXES
+        public List<string> GetProductDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+
+            command.CommandText = "SELECT ProductName FROM Product";
+
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> productData = new List<string>();
+
+            while (reader.Read())
+            {
+                string productName = reader.GetString(0);
+                productData.Add(productName);
+            }
+
+            connection.Close();
+            return productData;
+        }
+
+        public List<string> GetSupermarketDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT StoreName FROM Store";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> supermarketData = new List<string>();
+
+            while (reader.Read())
+            {
+                string storeName = reader.GetString(0);
+                supermarketData.Add(storeName);
+            }
+
+            connection.Close();
+            return supermarketData;
+        }
+
+        public List<string> GetCustomerDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT Name FROM Customer";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> customerData = new List<string>();
+
+            while (reader.Read())
+            {
+                string customerName = reader.GetString(0);
+                customerData.Add(customerName);
+            }
+
+            connection.Close();
+            return customerData;
+        }
+
+        public List<string> GetProductCategoryDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT CategoryName FROM ProductCategory";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> categoryData = new List<string>();
+
+            while (reader.Read())
+            {
+                string categoryName = reader.GetString(0);
+                categoryData.Add(categoryName);
+            }
+
+            connection.Close();
+            return categoryData;
+        }
+
+        public List<int> GetOrderDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT OrderID FROM Order_";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<int> orderData = new List<int>();
+            while (reader.Read())
+            {
+                int orderID = reader.GetInt32(0);
+                orderData.Add(orderID);
+            }
+
+            connection.Close();
+            return orderData;
         }
 
 
