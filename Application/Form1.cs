@@ -89,7 +89,7 @@ namespace Application
             //Comboboxes for Orderline
             comboBoxOrderlineProductID.DataSource = productData;
             comboBoxOrderlineProductID.DisplayMember = "ProductName";
-            comboBoxOrderlineProductID.ValueMember = "ProductName";
+            comboBoxOrderlineProductID.ValueMember = "ProductID";
 
 
             comboBoxOrderlineOrderID.DataSource = orderData;
@@ -981,6 +981,7 @@ namespace Application
             string date = textOrderDate.Value.ToString("yyyy-MM-dd");
             int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
             int customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
+            string paymentMethod = comboBoxOrderPaymentMethod.SelectedItem.ToString();
 
 
 
@@ -989,7 +990,7 @@ namespace Application
                 OrderTextBox.Text = "Please enter an Order ID!";
             }
             else if (comboBoxOrderSupermarketID.SelectedIndex == -1
-                     || comboBoxOrderCustomerID.SelectedIndex == -1)
+                     || comboBoxOrderCustomerID.SelectedIndex == -1 || comboBoxOrderPaymentMethod.SelectedIndex == -1)
             {
                 OrderTextBox.Text = "Please select a Store & Customer";
             }
@@ -999,7 +1000,7 @@ namespace Application
                 {
                     int ID = int.Parse(orderID);
 
-                    _layer.AddOrder(ID, date, supermarketID, customerID);
+                    _layer.AddOrder(ID, date, supermarketID, customerID, paymentMethod);
                     UpdateViewOrder("Order");
 
                     OrderTextBox.Text = "The order has been successfully created!" + "\n";
@@ -1007,6 +1008,7 @@ namespace Application
                     textOrderOrderID.Clear();
                     comboBoxOrderSupermarketID.SelectedIndex = -1;
                     comboBoxOrderCustomerID.SelectedIndex = -1;
+                    comboBoxOrderPaymentMethod.SelectedIndex = -1;
                 }
                 catch (FormatException)
                 {
@@ -1043,6 +1045,8 @@ namespace Application
                             OrderTextBox.Text += "Date: " + readerFindOrder.GetString(1) + " " + "\n";
                             OrderTextBox.Text += "Supermarket ID: " + readerFindOrder.GetInt32(2) + "\n";
                             OrderTextBox.Text += "Customer ID: " + readerFindOrder.GetInt32(3) + "\n";
+                            OrderTextBox.Text += "Payment Method: " + readerFindOrder.GetString(4) + "\n";
+
                             OrderTextBox.Text += "-----------------------" + "\n";
 
                             textOrderOrderID.Clear();
@@ -1075,9 +1079,10 @@ namespace Application
             OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
             string date = textOrderDate.Value.ToString("yyyy-MM-dd");
+            string paymentMethod = comboBoxOrderPaymentMethod.SelectedItem.ToString();
 
 
-            if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(date))
+            if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(date) || comboBoxOrderPaymentMethod.SelectedIndex == -1)
             {
 
                 OrderTextBox.Text = "Please select a Order ID, Product, Store & Customer";
@@ -1097,10 +1102,13 @@ namespace Application
                     }
                     else
                     {
-                        _layer.updateOrder(tmpOrderID, date);
+                        _layer.updateOrder(tmpOrderID, date, paymentMethod);
                         UpdateViewOrder("Order");
 
                         OrderTextBox.Text = "The order has been updated!" + "\n";
+
+                        comboBoxOrderPaymentMethod.SelectedIndex = -1;
+
 
 
                     }
@@ -1180,12 +1188,10 @@ namespace Application
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
                 int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
                 int quantity;
-                string orderlinePaymentmethod = comboBoxOrderlinePayment.Text;
 
                 if (comboBoxOrderlineOrderID.SelectedIndex == -1
                 || comboBoxOrderlineProductID.SelectedIndex == -1
-                || comboBoxOrderlineQuantity.SelectedIndex == -1
-                 || comboBoxOrderlinePayment.SelectedIndex == -1 || string.IsNullOrEmpty(comboBoxOrderlinePayment.Text))
+                || comboBoxOrderlineQuantity.SelectedIndex == -1)
                 {
                     richTextBoxOrderline.Text = "Please select an A Orderline number, Order, Product, Quantity & Payment method";
                     return;
@@ -1198,18 +1204,17 @@ namespace Application
                 else
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
-                    _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity);
                     UpdateView("Orderline");
 
 
                     
 
-                    richTextBoxOrderline.Text = "The Order has been successfully created!" + "\n";
+                    richTextBoxOrderline.Text = "The Orderline has been successfully created!" + "\n";
 
                     comboBoxOrderlineQuantity.SelectedIndex = -1;
                     comboBoxOrderlineOrderID.SelectedIndex = -1;
                     comboBoxOrderlineProductID.SelectedIndex = -1;
-                    comboBoxOrderlinePayment.SelectedIndex = -1;
 
                 }
 
@@ -1246,7 +1251,6 @@ namespace Application
                             richTextBoxOrderline.Text += "Product ID: " + readerFindOrderlines.GetInt32(1) + " " + "\n";
                             richTextBoxOrderline.Text += "Orderline ID: " + readerFindOrderlines.GetInt32(2) + "\n";
                             richTextBoxOrderline.Text += "Quantity ID: " + readerFindOrderlines.GetInt32(3) + "\n";
-                            richTextBoxOrderline.Text += "Payment Method : " + readerFindOrderlines.GetString(4) + "\n";
                             richTextBoxOrderline.Text += "-----------------------" + "\n";
 
                             
@@ -1316,12 +1320,10 @@ namespace Application
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
                 int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
                 int quantity;
-                string orderlinePaymentmethod = comboBoxOrderlinePayment.Text;
 
                 if (comboBoxOrderlineOrderID.SelectedIndex == -1
                 || comboBoxOrderlineProductID.SelectedIndex == -1
-                || comboBoxOrderlineQuantity.SelectedIndex == -1
-                 || comboBoxOrderlinePayment.SelectedIndex == -1 || string.IsNullOrEmpty(comboBoxOrderlinePayment.Text))
+                || comboBoxOrderlineQuantity.SelectedIndex == -1)
                 {
                     richTextBoxOrderline.Text = "Please select an Orderline number, Order, Product, Quantity & Payment method to update";
                     return;
@@ -1341,7 +1343,7 @@ namespace Application
                     }
 
                     int tmpOrderlineID = int.Parse(orderlineID);
-                    _layer.updateOrderline(orderID, productID, tmpOrderlineID, quantity, orderlinePaymentmethod);
+                    _layer.updateOrderline(orderID, productID, tmpOrderlineID, quantity);
                     UpdateView("Orderline");
 
                     richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
@@ -1349,7 +1351,6 @@ namespace Application
                     comboBoxOrderlineQuantity.SelectedIndex = -1;
                     comboBoxOrderlineOrderID.SelectedIndex = -1;
                     comboBoxOrderlineProductID.SelectedIndex = -1;
-                    comboBoxOrderlinePayment.SelectedIndex = -1;
                 }
             }
             catch (FormatException)
