@@ -15,6 +15,30 @@ namespace Application
         {
             _layer = new();
             InitializeComponent();
+            updateCombobox();
+        }
+
+        public void updateCombobox()
+        {
+            // Populate combobox with product data
+            List<string> productData = _layer.GetProductDataCombobox();
+            comboBoxOrderlineProductID.DataSource = productData;
+
+            // Populate combobox with supermarket data
+            List<string> supermarketData = _layer.GetSupermarketDataCombobox();
+            comboBoxOrderSupermarketID.DataSource = supermarketData;
+
+            // Populate combobox with customer data
+            List<string> customerData = _layer.GetCustomerDataCombobox();
+            comboBoxOrderCustomerID.DataSource = customerData;
+
+            // Populate combobox with product category data
+            List<string> categoryData = _layer.GetProductCategoryDataCombobox();
+            comboBoxProductCategory.DataSource = categoryData;
+
+            // Populate combobox with order data
+            List<int> orderData = _layer.GetOrderDataCombobox();
+            comboBoxOrderlineOrderID.DataSource = orderData;
         }
 
         public void clearAllTextBox()
@@ -186,6 +210,7 @@ namespace Application
 
                     clearAllTextBox();
                     comboBoxProductCategory.SelectedIndex = -1;
+                    updateCombobox();
 
 
 
@@ -251,7 +276,9 @@ namespace Application
                         richTextBoxProduct.Text = "The product has been successfully been updated!";
 
                         clearAllTextBox();
-                        
+                        updateCombobox();
+
+
                     }
                 }
                 catch (FormatException)
@@ -299,6 +326,8 @@ namespace Application
 
                         richTextBoxProduct.Text = "Product has successfully been deleted!";
                         clearAllTextBox();
+                        updateCombobox();
+
                     }
                 }
                 catch (FormatException)
@@ -340,7 +369,10 @@ namespace Application
                             richTextBoxProduct.Text += "Name: " + readerFindProduct.GetString(1) + " " + "\n";
                             richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
+                           
                             clearAllTextBox();
+
+
 
 
                         }
@@ -397,6 +429,9 @@ namespace Application
                     clearAllTextBox();
 
                     UpdateViewProductCategory("ProductCategory");
+
+                    updateCombobox();
+
                 }
 
                 catch (SqlException ex)
@@ -453,6 +488,9 @@ namespace Application
                         richTextBoxProductCategory.Text = "The Product Category has been successfully updated!";
                         clearAllTextBox();
                         UpdateViewProductCategory("ProductCategory");
+
+                        updateCombobox();
+
                     }
                 }
                 catch (FormatException)
@@ -498,6 +536,9 @@ namespace Application
                         richTextBoxProductCategory.Text = "The Product Category has been successfully deleted!";
                         clearAllTextBox();
                         UpdateViewProductCategory("ProductCategory");
+
+                        updateCombobox();
+
                     }
                 }
 
@@ -541,6 +582,7 @@ namespace Application
                             richTextBoxProductCategory.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
 
                             clearAllTextBox();
+
 
                         }
                     }
@@ -600,6 +642,9 @@ namespace Application
                     clearAllTextBox();
 
                     UpdateViewStore("Store");
+                    
+                    updateCombobox();
+
                 }
 
                 catch (SqlException ex)
@@ -651,6 +696,9 @@ namespace Application
 
                             clearAllTextBox();
 
+                            updateCombobox();
+
+
                         }
                     }
                     else
@@ -700,6 +748,9 @@ namespace Application
 
                     clearAllTextBox();
                     UpdateViewStore("Store");
+
+                    updateCombobox();
+
                 }
 
                 catch (SqlException ex)
@@ -742,6 +793,9 @@ namespace Application
 
                     clearAllTextBox();
                     UpdateViewStore("Store");
+
+                    updateCombobox();
+
 
                 }
                 catch (SqlException ex)
@@ -791,6 +845,9 @@ namespace Application
                     richTextBoxCostumer.Text = "The Customer has been successfully created!" + "\n";
 
                     UpdateViewCustomer("Customer");
+
+                    updateCombobox();
+
 
 
                     clearAllTextBox();
@@ -908,6 +965,9 @@ namespace Application
 
                     clearAllTextBox();
 
+                    updateCombobox();
+
+
                 }
 
                 catch (FormatException)
@@ -955,6 +1015,9 @@ namespace Application
                     UpdateViewCustomer("Customer");
 
                     clearAllTextBox();
+
+                    updateCombobox();
+
 
                 }
                 catch (SqlException ex)
@@ -1004,6 +1067,9 @@ namespace Application
                     UpdateViewOrder("Order_");
 
                     OrderTextBox.Text = "The order has been successfully created!" + "\n";
+
+                    updateCombobox();
+
 
                     textOrderOrderID.Clear();
                     comboBoxOrderSupermarketID.SelectedIndex = -1;
@@ -1106,10 +1172,11 @@ namespace Application
                         UpdateViewOrder("Order");
 
                         OrderTextBox.Text = "The order has been updated!" + "\n";
+                        
+                        updateCombobox();
+
 
                         comboBoxOrderPaymentMethod.SelectedIndex = -1;
-
-
 
                     }
 
@@ -1156,6 +1223,9 @@ namespace Application
                     else
                     {
                         _layer.deleteOrder(tmpOrderID);
+
+                        updateCombobox();
+
 
                         UpdateViewOrder("Order");
                         OrderTextBox.Text = "Order has successfully been deleted!";
@@ -1207,8 +1277,11 @@ namespace Application
                     _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity);
                     UpdateView("Orderline");
 
+                    updateCombobox();
 
-                    
+
+
+
 
                     richTextBoxOrderline.Text = "The Orderline has been successfully created!" + "\n";
 
@@ -1302,6 +1375,9 @@ namespace Application
                         _layer.deleteOrderline(orderID, productID);
                         UpdateView("Orderline");
                         richTextBoxOrderline.Text = "The Product ID: " + productID + " was sucessfully deleted from the Order ID: " + orderID;
+
+                        updateCombobox();
+
                     }
                 }
             }
@@ -1345,6 +1421,9 @@ namespace Application
                     int tmpOrderlineID = int.Parse(orderlineID);
                     _layer.updateOrderline(orderID, productID, tmpOrderlineID, quantity);
                     UpdateView("Orderline");
+
+                    updateCombobox();
+
 
                     richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
 
