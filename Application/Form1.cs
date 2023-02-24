@@ -1053,9 +1053,9 @@ namespace Application
                 OrderTextBox.Text = "Please enter an Order ID!";
             }
             else if (comboBoxOrderSupermarketID.SelectedIndex == -1
-                     || comboBoxOrderCustomerID.SelectedIndex == -1 || comboBoxOrderPaymentMethod.SelectedIndex == -1)
+                     || comboBoxOrderCustomerID.SelectedIndex == -1 || comboBoxOrderPaymentMethod.SelectedIndex == -1 || paymentMethod == null)
             {
-                OrderTextBox.Text = "Please select a Store & Customer";
+                OrderTextBox.Text = "Please select a Store, Customer & Payment Method";
             }
             else
             {
@@ -1086,6 +1086,14 @@ namespace Application
                     {
                         OrderTextBox.Text = "An order with the same ID already exists.";
                     }
+                }
+                catch (NullReferenceException)
+                {
+                    OrderTextBox.Text = "Please select a Payment Method";
+                }
+                catch (InvalidOperationException)
+                {
+                    OrderTextBox.Text = "Please select a Payment Method";
                 }
             }
         }
@@ -1263,7 +1271,7 @@ namespace Application
                 || comboBoxOrderlineProductID.SelectedIndex == -1
                 || comboBoxOrderlineQuantity.SelectedIndex == -1)
                 {
-                    richTextBoxOrderline.Text = "Please select an A Orderline number, Order, Product, Quantity & Payment method";
+                    richTextBoxOrderline.Text = "Please select an A Orderline number, Order, Product, Quantity";
                     return;
                 }
                 else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
