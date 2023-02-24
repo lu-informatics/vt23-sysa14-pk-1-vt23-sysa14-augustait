@@ -1001,7 +1001,7 @@ namespace Application
                     int ID = int.Parse(orderID);
 
                     _layer.AddOrder(ID, date, supermarketID, customerID, paymentMethod);
-                    UpdateViewOrder("Order");
+                    UpdateViewOrder("Order_");
 
                     OrderTextBox.Text = "The order has been successfully created!" + "\n";
 
