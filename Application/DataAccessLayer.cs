@@ -368,15 +368,17 @@ namespace Application
 
 
         }
-        public void AddOrder(int orderID, string orderDate, int supermarketID, int customerID)
+        public void AddOrder(int orderID, string orderDate, int supermarketID, int customerID, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @supermarketID, @customerID)";
+            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @supermarketID, @customerID, @paymentMethod)";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
             command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
             command.Parameters.Add(new SqlParameter("@customerID", customerID));
+            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
+
 
             connection.Open();
 
@@ -400,13 +402,13 @@ namespace Application
         }
 
        
-        public void updateOrder(int orderID, string orderDate)
+        public void updateOrder(int orderID, string orderDate, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
 
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate WHERE orderID = @orderID";
+            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate WHERE   orderID = @orderID, paymentMethod = @paymentMethod";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
 
@@ -439,16 +441,15 @@ namespace Application
 
       
         //ORDERLINE METHODS
-        public void AddOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
+        public void AddOrderline(int orderID, int productID, int orderlineID, int quantity)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Orderline VALUES (@orderID, @productID, @orderlineID, @quantity, @paymentMethod)";
+            command.CommandText = "INSERT INTO Orderline VALUES (@orderID, @productID, @orderlineID, @quantity)";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@productID", productID));
             command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
             command.Parameters.Add(new SqlParameter("@quantity", quantity));
-            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
 
             connection.Open();
 
@@ -475,7 +476,7 @@ namespace Application
             connection.Dispose();
         }
 
-        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
+        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -484,7 +485,6 @@ namespace Application
             command.Parameters.Add(new SqlParameter("@productID", productID));
             command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
             command.Parameters.Add(new SqlParameter("@quantity", quantity));
-            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
           
             connection.Open();
 
@@ -555,7 +555,7 @@ namespace Application
 
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT ProductName FROM Product";
+            command.CommandText = "SELECT ProductID, ProductName FROM Product";
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
