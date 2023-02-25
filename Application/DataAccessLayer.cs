@@ -188,7 +188,7 @@ namespace Application
 
 
 
-        //METHOD ADD STOREe
+        //METHOD ADD STORE
         public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -368,15 +368,17 @@ namespace Application
 
 
         }
-        public void AddOrder(int orderID, string orderDate, int supermarketID, int customerID)
+        public void AddOrder(int orderID, string orderDate, int supermarketID, int customerID, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @supermarketID, @customerID)";
+            command.CommandText = "INSERT INTO Order_ VALUES (@orderID, @orderDate, @supermarketID, @customerID, @paymentMethod)";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
             command.Parameters.Add(new SqlParameter("@supermarketID", supermarketID));
             command.Parameters.Add(new SqlParameter("@customerID", customerID));
+            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
+
 
             connection.Open();
 
@@ -400,13 +402,13 @@ namespace Application
         }
 
        
-        public void updateOrder(int orderID, string orderDate)
+        public void updateOrder(int orderID, string orderDate, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
 
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate WHERE orderID = @orderID";
+            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate WHERE   orderID = @orderID, paymentMethod = @paymentMethod";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
 
@@ -439,16 +441,15 @@ namespace Application
 
       
         //ORDERLINE METHODS
-        public void AddOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
+        public void AddOrderline(int orderID, int productID, int orderlineID, int quantity)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "INSERT INTO Orderline VALUES (@orderID, @productID, @orderlineID, @quantity, @paymentMethod)";
+            command.CommandText = "INSERT INTO Orderline VALUES (@orderID, @productID, @orderlineID, @quantity)";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@productID", productID));
             command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
             command.Parameters.Add(new SqlParameter("@quantity", quantity));
-            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
 
             connection.Open();
 
@@ -475,7 +476,7 @@ namespace Application
             connection.Dispose();
         }
 
-        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity, string paymentMethod)
+        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -484,7 +485,6 @@ namespace Application
             command.Parameters.Add(new SqlParameter("@productID", productID));
             command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
             command.Parameters.Add(new SqlParameter("@quantity", quantity));
-            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
           
             connection.Open();
 
@@ -518,43 +518,16 @@ namespace Application
             return reader;
         }
 
-        public decimal GetOrderTotalAmount(int orderId)
-        {
-            decimal totalAmount = 0;
-            using (SqlConnection connection = GetDatabaseConnection())
-            {
-                string query = "SELECT Product.Price, Orderline.Quantity FROM Orderline " +
-                               "INNER JOIN Product ON Orderline.ProductID = Product.ProductID " +
-                               "WHERE Orderline.OrderID = @orderId";
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@orderId", orderId);
-                    connection.Open();
-                    SqlDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        decimal price = reader.GetDecimal(0);
-                        int quantity = reader.GetInt32(1);
-                        totalAmount += price * quantity;
-                    }
-                    reader.Close();
-                }
-            }
-            return totalAmount;
-        }
-
-
-
-
-
-
+       
         //METHODS FOR COLLECTING DATA
         public DataTable GetProductData()
         {
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT ProductID FROM Product";
+
+            command.CommandText = "SELECT ProductID, ProductName FROM Product";
+
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable productData = new DataTable();
@@ -568,7 +541,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT SupermarketID FROM Store";
+            command.CommandText = "SELECT SupermarketID, StoreName FROM Store";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable supermarketData = new DataTable();
@@ -582,7 +555,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CustomerID FROM Customer";
+            command.CommandText = "SELECT CustomerID, Name FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable customerData = new DataTable();
@@ -590,6 +563,21 @@ namespace Application
             connection.Close();
             return customerData;
         }
+
+        public DataTable GetProductCategoryData()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT CategoryID, CategoryName FROM ProductCategory";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            DataTable categoryData = new DataTable();
+            categoryData.Load(reader);
+            connection.Close();
+            return categoryData;
+        }
+
 
         public DataTable GetOrderData()
         {
@@ -599,12 +587,14 @@ namespace Application
             command.CommandText = "SELECT OrderID FROM Order_";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
-            DataTable customerData = new DataTable();
-            customerData.Load(reader);
+           
+            DataTable orderData = new DataTable();
+            orderData.Load(reader);
             connection.Close();
-            return customerData;
+            return orderData;
         }
 
+        //Data for GridView
         public DataSet View(string type)
         {
             DataSet dataSet = new();
@@ -735,6 +725,109 @@ namespace Application
 
 
             return dataSet;
+        }
+
+        //METHODS FOR UPDATING COMBOBOXES
+        public List<string> GetProductDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+
+            command.CommandText = "SELECT ProductName FROM Product";
+
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> productData = new List<string>();
+
+            while (reader.Read())
+            {
+                string productName = reader.GetString(0);
+                productData.Add(productName);
+            }
+
+            connection.Close();
+            return productData;
+        }
+
+        public List<string> GetSupermarketDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT StoreName FROM Store";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> supermarketData = new List<string>();
+
+            while (reader.Read())
+            {
+                string storeName = reader.GetString(0);
+                supermarketData.Add(storeName);
+            }
+
+            connection.Close();
+            return supermarketData;
+        }
+
+        public List<string> GetCustomerDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT Name FROM Customer";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> customerData = new List<string>();
+
+            while (reader.Read())
+            {
+                string customerName = reader.GetString(0);
+                customerData.Add(customerName);
+            }
+
+            connection.Close();
+            return customerData;
+        }
+
+        public List<string> GetProductCategoryDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT CategoryName FROM ProductCategory";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            List<string> categoryData = new List<string>();
+
+            while (reader.Read())
+            {
+                string categoryName = reader.GetString(0);
+                categoryData.Add(categoryName);
+            }
+
+            connection.Close();
+            return categoryData;
+        }
+
+        public List<int> GetOrderDataCombobox()
+        {
+            SqlConnection connection = GetDatabaseConnection();
+
+            SqlCommand command = connection.CreateCommand();
+            command.CommandText = "SELECT OrderID FROM Order_";
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            List<int> orderData = new List<int>();
+            while (reader.Read())
+            {
+                int orderID = reader.GetInt32(0);
+                orderData.Add(orderID);
+            }
+
+            connection.Close();
+            return orderData;
         }
 
 
