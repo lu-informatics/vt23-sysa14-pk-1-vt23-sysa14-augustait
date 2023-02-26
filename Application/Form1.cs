@@ -1193,7 +1193,7 @@ namespace Application
             if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(date) || comboBoxOrderPaymentMethod.SelectedIndex == -1)
             {
 
-                OrderTextBox.Text = "Please select a Order ID, Product, Store & Customer";
+                OrderTextBox.Text = "Please select a date or payment method to update";
             }
             else
             {
@@ -1297,8 +1297,8 @@ namespace Application
 
             }
         }
-
-        private void buttonOrderlineCreate_Click(object sender, EventArgs e)
+         
+    private void buttonOrderlineCreate_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1315,23 +1315,27 @@ namespace Application
                     richTextBoxOrderline.Text = "Please select an A Orderline number, Order, Product, Quantity";
                     return;
                 }
+
                 else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
                 {
                     richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
                     return;
+ 
                 }
-              
 
                 else
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
+                    int count = _layer.CheckOrderline(orderID, tmpOrderlineID);
+                    if (count > 0)
+                    {
+                        richTextBoxOrderline.Text = "An Orderline with the same ID already exists in the chosen Order. Please select another Orderline ID.";
+                        return;
+                    }
                     _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity);
                     UpdateView("Orderline");
 
                     updateCombobox();
-
-
-
 
 
                     richTextBoxOrderline.Text = "The Orderline has been successfully created!" + "\n";
@@ -1341,8 +1345,8 @@ namespace Application
                     comboBoxOrderlineProductID.SelectedIndex = -1;
 
                 }
-        
-    }
+                
+            }
             catch (SqlException error)
             {
 
@@ -1362,6 +1366,7 @@ namespace Application
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
                 int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
                 richTextBoxOrderline.Text = " ";
+                decimal totalPrice = _layer.GetTotalPrice(orderID);
 
                 using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderIDandProductID(orderID, productID))
                 {
@@ -1384,6 +1389,9 @@ namespace Application
                             richTextBoxOrderline.Text += "Payment Method: " + readerFindOrderlines.GetString(9) + "\n";
                             richTextBoxOrderline.Text += "Total price: " + readerFindOrderlines.GetDecimal(10) + "\n";
                             richTextBoxOrderline.Text += "-----------------------" + "\n";
+
+                            TextBoxTotal.Text = totalPrice.ToString("0.00");
+
                         }
                     }
                     else

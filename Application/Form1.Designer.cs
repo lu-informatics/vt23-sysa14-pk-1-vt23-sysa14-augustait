@@ -115,6 +115,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
+            this.TextBoxTotal = new System.Windows.Forms.RichTextBox();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
@@ -861,6 +862,7 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.TextBoxTotal);
             this.tabPage1.Controls.Add(this.button1);
             this.tabPage1.Controls.Add(this.orderlineDataGridView);
             this.tabPage1.Controls.Add(this.buttonDeleteOrderline);
@@ -1110,6 +1112,17 @@
             this.pictureBoxCheckout.TabIndex = 10;
             this.pictureBoxCheckout.TabStop = false;
             // 
+            // TextBoxTotal
+            // 
+            this.TextBoxTotal.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.TextBoxTotal.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.TextBoxTotal.Location = new System.Drawing.Point(442, 347);
+            this.TextBoxTotal.Name = "TextBoxTotal";
+            this.TextBoxTotal.ReadOnly = true;
+            this.TextBoxTotal.Size = new System.Drawing.Size(94, 18);
+            this.TextBoxTotal.TabIndex = 43;
+            this.TextBoxTotal.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1240,5 +1253,6 @@
         private ComboBox comboBoxProductCategory;
         private Label label3;
         private ComboBox comboBoxOrderPaymentMethod;
+        private RichTextBox TextBoxTotal;
     }
 }
