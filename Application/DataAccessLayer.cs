@@ -830,15 +830,44 @@ namespace Application
             connection.Close();
             return orderData;
         }
+        public int CheckOrderline(int orderID, int orderlineNumber)
+        {
+            SqlConnection connection = GetDatabaseConnection();
+            {
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = "SELECT COUNT(*) FROM Orderline WHERE OrderID = @OrderID AND OrderlineNumber = @OrderlineNumber";
+                command.Parameters.AddWithValue("@OrderID", orderID);
+                command.Parameters.AddWithValue("@OrderlineNumber", orderlineNumber);
+                connection.Open();
 
+                int count = (int)command.ExecuteScalar();
+                connection.Close();
 
+                return count;
+            }
+        }
 
+        public decimal GetTotalPrice(int orderID)
+            {
+                decimal totalPrice = 0;
+                SqlConnection connection = GetDatabaseConnection();
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT SUM(p.Price * ol.Quantity) " +
+                              "FROM Orderline ol " +
+                              "JOIN Product p ON ol.ProductID = p.ProductID " +
+                              "WHERE ol.OrderID = @OrderID";
+                    command.Parameters.AddWithValue("@OrderID", orderID);
+                    connection.Open();
+                    object result = command.ExecuteScalar();
+                    if (result != DBNull.Value)
+                    {
+                        totalPrice = (decimal)result;
+                    }
+                }
+                return totalPrice;
+            }
+        }
     }
 
 
-
-
-
-
-
-}
