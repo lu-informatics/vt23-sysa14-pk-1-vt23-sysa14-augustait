@@ -872,26 +872,7 @@ namespace Application
             }
         }
 
-        public decimal GetTotalPrice(int orderID)
-            {
-                decimal totalPrice = 0;
-                SqlConnection connection = GetDatabaseConnection();
-                {
-                    SqlCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT SUM(p.Price * ol.Quantity) " +
-                              "FROM Orderline ol " +
-                              "JOIN Product p ON ol.ProductID = p.ProductID " +
-                              "WHERE ol.OrderID = @OrderID";
-                    command.Parameters.AddWithValue("@OrderID", orderID);
-                    connection.Open();
-                    object result = command.ExecuteScalar();
-                    if (result != DBNull.Value)
-                    {
-                        totalPrice = (decimal)result;
-                    }
-                }
-                return totalPrice;
-            }
+    
         }
     }
 
