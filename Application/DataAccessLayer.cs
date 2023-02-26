@@ -768,8 +768,8 @@ namespace Application
 
             while (reader.Read())
             {
-                string productName = reader.GetString(0);
-                productData.Add(productName);
+                int productId = reader.GetInt32(0);
+                productData.Add(productId.ToString());
             }
 
             connection.Close();
@@ -788,8 +788,8 @@ namespace Application
 
             while (reader.Read())
             {
-                string storeName = reader.GetString(0);
-                supermarketData.Add(storeName);
+                int storeId = reader.GetInt32(0);
+                supermarketData.Add(storeId.ToString());
             }
 
             connection.Close();
@@ -808,8 +808,8 @@ namespace Application
 
             while (reader.Read())
             {
-                string customerName = reader.GetString(0);
-                customerData.Add(customerName);
+                int customerId = reader.GetInt32(0);
+                customerData.Add(customerId.ToString());
             }
 
             connection.Close();
@@ -828,8 +828,8 @@ namespace Application
 
             while (reader.Read())
             {
-                string categoryName = reader.GetString(0);
-                categoryData.Add(categoryName);
+                int categoryId = reader.GetInt32(0);
+                categoryData.Add(categoryId.ToString());
             }
 
             connection.Close();
