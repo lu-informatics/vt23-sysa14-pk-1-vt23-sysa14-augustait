@@ -545,7 +545,7 @@ namespace Application
 
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT ProductID, ProductName FROM Product";
+            command.CommandText = "SELECT ProductID FROM Product";
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
@@ -560,7 +560,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT SupermarketID, StoreName FROM Store";
+            command.CommandText = "SELECT SupermarketID FROM Store";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable supermarketData = new DataTable();
@@ -574,7 +574,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CustomerID, Name FROM Customer";
+            command.CommandText = "SELECT CustomerID FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable customerData = new DataTable();
@@ -588,7 +588,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CategoryID, CategoryName FROM ProductCategory";
+            command.CommandText = "SELECT CategoryID FROM ProductCategory";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             DataTable categoryData = new DataTable();
@@ -760,7 +760,7 @@ namespace Application
 
             SqlCommand command = connection.CreateCommand();
 
-            command.CommandText = "SELECT ProductName FROM Product";
+            command.CommandText = "SELECT ProductID FROM Product";
 
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
@@ -781,7 +781,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT StoreName FROM Store";
+            command.CommandText = "SELECT SupermarketID FROM Store";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             List<string> supermarketData = new List<string>();
@@ -801,7 +801,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT Name FROM Customer";
+            command.CommandText = "SELECT CustomerID FROM Customer";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             List<string> customerData = new List<string>();
@@ -821,7 +821,7 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT CategoryName FROM ProductCategory";
+            command.CommandText = "SELECT CategoryID FROM ProductCategory";
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             List<string> categoryData = new List<string>();

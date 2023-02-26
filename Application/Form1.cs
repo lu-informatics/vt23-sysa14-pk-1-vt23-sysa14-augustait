@@ -112,7 +112,7 @@ namespace Application
 
             //Comboboxes for Orderline
             comboBoxOrderlineProductID.DataSource = productData;
-            comboBoxOrderlineProductID.DisplayMember = "ProductName";
+            comboBoxOrderlineProductID.DisplayMember = "ProductID";
             comboBoxOrderlineProductID.ValueMember = "ProductID";
 
 
@@ -123,16 +123,16 @@ namespace Application
 
             //Comboboxes for Order
             comboBoxOrderSupermarketID.DataSource = supermarketData;
-            comboBoxOrderSupermarketID.DisplayMember = "StoreName";
+            comboBoxOrderSupermarketID.DisplayMember = "SupermarketID";
             comboBoxOrderSupermarketID.ValueMember = "SupermarketID";
 
             comboBoxOrderCustomerID.DataSource = customerData;
-            comboBoxOrderCustomerID.DisplayMember = "Name";
+            comboBoxOrderCustomerID.DisplayMember = "CustomerID";
             comboBoxOrderCustomerID.ValueMember = "CustomerID";
 
             //Comboboxes for Product
             comboBoxProductCategory.DataSource = categoryData;
-            comboBoxProductCategory.DisplayMember = "CategoryName";
+            comboBoxProductCategory.DisplayMember = "CategoryID";
             comboBoxProductCategory.ValueMember = "CategoryID";
 
         }
