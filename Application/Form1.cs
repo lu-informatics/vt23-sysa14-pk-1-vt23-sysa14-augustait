@@ -619,7 +619,7 @@ namespace Application
 
 
 
-        
+
 
 
         //ADD STORE
@@ -632,7 +632,6 @@ namespace Application
             string storeCity = textBoxStoreCity.Text;
             string storeAddress = textBoxStoreAddress.Text;
 
-
             if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
                 || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
             {
@@ -642,21 +641,24 @@ namespace Application
             {
                 try
                 {
-                    int tmpID = int.Parse(storeID);
+                    int newID = int.Parse(storeID);
 
-                    _layer.addStore(tmpID, regionName, storeName, storeCity, storeAddress);
+                    if (_layer.findStore(newID) != null) // Check if the store already exists
+                    {
+                        richTextBoxStore.Text = $"Store with ID {newID} already exists.";
+                        return;
+                    }
+
+                    _layer.addStore(newID, regionName, storeName, storeCity, storeAddress);
 
                     richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
-
 
                     clearAllTextBox();
 
                     UpdateViewStore("Store");
-                    
+
                     updateCombobox();
-
                 }
-
                 catch (SqlException ex)
                 {
                     if (ex.Number == 0)
@@ -664,15 +666,11 @@ namespace Application
                         richTextBoxStore.Text = "Could not connect to the database. Please check your connection and try again. ";
                     }
                 }
-
                 catch (FormatException)
                 {
                     richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
                 }
-
             }
-
-
         }
 
 
@@ -733,14 +731,14 @@ namespace Application
         //UPDATE STORE
         private void buttonStoreUpdate_Click(object sender, EventArgs e)
         {
-            richTextBoxStore.Text = " ";
-            string storeID = textBoxStoreID.Text;
+            richTextBoxStore.Text = "";
+            string storeIdString = textBoxStoreID.Text;
             string regionName = textBoxStoreRegionName.Text;
             string storeName = textBoxStoreName.Text;
             string storeCity = textBoxStoreCity.Text;
             string storeAddress = textBoxStoreAddress.Text;
 
-            if (string.IsNullOrWhiteSpace(storeID) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
+            if (string.IsNullOrWhiteSpace(storeIdString) || string.IsNullOrWhiteSpace(regionName) || string.IsNullOrWhiteSpace(storeName)
                 || string.IsNullOrWhiteSpace(storeCity) || string.IsNullOrWhiteSpace(storeAddress))
             {
                 richTextBoxStore.Text = "Please enter all of the following fields: Store ID, Region Name, Store Name, Store City & Store Address.";
@@ -749,20 +747,23 @@ namespace Application
             {
                 try
                 {
-                    richTextBoxStore.Text = " ";
-                    int tmpStoreID = int.Parse(storeID);
+                    int storeId = int.Parse(storeIdString);
 
-                    _layer.updateStore(tmpStoreID, regionName, storeName, storeCity, storeAddress);
+                    SqlDataReader reader = _layer.findStore(storeId);
 
-                    richTextBoxStore.Text = "The Store has been successfully been updated!";
-
-                    clearAllTextBox();
-                    UpdateViewStore("Store");
-
-                    updateCombobox();
-
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxStore.Text = "The store with the specified ID could not be found.";
+                    }
+                    else
+                    {
+                        _layer.updateStore(storeId, regionName, storeName, storeCity, storeAddress);
+                        UpdateViewStore("Store");
+                        updateCombobox();
+                        richTextBoxStore.Text = "The store has been successfully updated!";
+                        clearAllTextBox();
+                    }
                 }
-
                 catch (SqlException ex)
                 {
                     if (ex.Number == 0)
@@ -770,43 +771,44 @@ namespace Application
                         richTextBoxStore.Text = "Could not connect to the database. Please check your connection and try again. ";
                     }
                 }
-
-
-
                 catch (FormatException)
                 {
                     richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Store ID";
                 }
-
             }
         }
 
         //DELETE STORE
         private void buttonStoreDelete_Click(object sender, EventArgs e)
         {
-            richTextBoxStore.Text = " ";
-            String storeID = textBoxStoreID.Text;
+            richTextBoxStore.Text = "";
+            string storeIdString = textBoxStoreID.Text;
 
-            if (string.IsNullOrWhiteSpace(storeID))
+            if (string.IsNullOrWhiteSpace(storeIdString))
             {
                 richTextBoxStore.Text = "Please enter the Store ID that you want to delete!";
             }
-
             else
             {
                 try
                 {
-                    int tmpID = Int32.Parse(storeID);
-                    _layer.deleteStore(tmpID);
+                    int storeId = int.Parse(storeIdString);
 
-                    richTextBoxStore.Text = "Store has successfully been deleted!";
+                    SqlDataReader reader = _layer.findStore(storeId);
 
-                    clearAllTextBox();
-                    UpdateViewStore("Store");
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxStore.Text = "The store with the specified ID could not be found.";
+                    }
+                    else
+                    {
+                        _layer.deleteStore(storeId);
+                        UpdateViewStore("Store");
 
-                    updateCombobox();
-
-
+                        richTextBoxStore.Text = "Store has successfully been deleted!";
+                        clearAllTextBox();
+                        updateCombobox();
+                    }
                 }
                 catch (SqlException ex)
                 {
@@ -820,20 +822,16 @@ namespace Application
                     }
                     else
                     {
-                        richTextBoxStore.Text = "An error occurred while deleting the product.";
-
+                        richTextBoxStore.Text = "An error occurred while deleting the store.";
                     }
                 }
-            
                 catch (FormatException)
                 {
-                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
+                    richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Store ID.";
                 }
-
             }
         }
 
-        
 
         //CREATE CUSTOMER
         private void buttonAddCostumer_Click(object sender, EventArgs e)
@@ -955,7 +953,7 @@ namespace Application
         //UPDATE CUSTOMER
         private void buttonUpdateCostumer_Click(object sender, EventArgs e)
         {
-            richTextBoxCostumer.Text = " ";
+            richTextBoxCostumer.Text = "";
             string costumerName = textBoxCostumerName.Text;
             string costumerMail = textBoxCostumerMail.Text;
             string stringCostumerPhoneNumber = textBoxCostumerPhoneNumber.Text;
@@ -964,51 +962,56 @@ namespace Application
             string stringCustomerID = textBoxCustomerID.Text;
 
             if (string.IsNullOrWhiteSpace(costumerName) || string.IsNullOrWhiteSpace(costumerMail) || string.IsNullOrWhiteSpace(stringCostumerPhoneNumber)
-               || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(stringCustomerID))
+                || string.IsNullOrWhiteSpace(costumerUserName) || string.IsNullOrWhiteSpace(costumerAddress) || string.IsNullOrWhiteSpace(stringCustomerID))
             {
                 richTextBoxCostumer.Text = "Please enter all the fields!";
             }
             else
             {
-
                 try
                 {
                     int customerID = int.Parse(stringCustomerID);
                     int costumerPhoneNumber = int.Parse(stringCostumerPhoneNumber);
 
-                    _layer.updateCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
+                    SqlDataReader reader = _layer.findCustomer(customerID);
 
-                    richTextBoxCostumer.Text = "The Customer has been successfully updated!" + "\n";
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxCostumer.Text = "The customer with the specified ID could not be found.";
+                    }
+                    else
+                    {
+                        _layer.updateCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
 
-                    UpdateViewCustomer("Customer");
+                        richTextBoxCostumer.Text = "The customer has been successfully updated!" + "\n";
 
-                    clearAllTextBox();
+                        UpdateViewCustomer("Customer");
 
-                    updateCombobox();
+                        clearAllTextBox();
 
-
+                        updateCombobox();
+                    }
                 }
-
                 catch (FormatException)
                 {
                     richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
                 }
-
                 catch (SqlException ex)
                 {
                     if (ex.Number == 2627)
                     {
-                        richTextBoxCostumer.Text = "A Customer with the same ID already exists.";
-                        textBoxCustomerID.Text = " ";
+                        richTextBoxCostumer.Text = "A customer with the same ID already exists.";
+                        textBoxCustomerID.Text = "";
                     }
-
                     else if (ex.Number == 0)
                     {
                         richTextBoxCostumer.Text = "No connection with the server.";
-
+                    }
+                    else
+                    {
+                        richTextBoxCostumer.Text = "An error occurred while updating the customer.";
                     }
                 }
-
             }
         }
 
@@ -1016,18 +1019,27 @@ namespace Application
         private void buttonDeleteCostumer_Click(object sender, EventArgs e)
         {
             richTextBoxCostumer.Text = " ";
-            String stringCustomerID = textBoxCustomerID.Text;
+            string stringCustomerID = textBoxCustomerID.Text;
 
             if (string.IsNullOrWhiteSpace(stringCustomerID))
             {
                 richTextBoxCostumer.Text = "Please enter the Customer ID that you want to delete!";
             }
-
             else
             {
                 try
                 {
-                    int customerID = Int32.Parse(stringCustomerID);
+                    int customerID = int.Parse(stringCustomerID);
+
+                    
+                    SqlDataReader reader = _layer.findCustomer(customerID);
+                    if (!reader.HasRows)
+                    {
+                        richTextBoxCostumer.Text = $"Customer with ID {customerID} does not exist!";
+                        return;
+                    }
+                    reader.Close();
+
                     _layer.deleteCustomer(customerID);
 
                     richTextBoxCostumer.Text = "Customer has successfully been deleted!";
@@ -1036,7 +1048,6 @@ namespace Application
                     clearAllTextBox();
 
                     updateCombobox();
-
 
                 }
                 catch (SqlException ex)
@@ -1055,7 +1066,6 @@ namespace Application
 
                     }
                 }
-            
                 catch (FormatException)
                 {
                     richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID.";
@@ -1063,7 +1073,6 @@ namespace Application
 
             }
         }
-
 
         private void BtnCreateOrder_Click(object sender, EventArgs e)
         {
