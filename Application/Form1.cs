@@ -374,9 +374,10 @@ namespace Application
                         {
                             richTextBoxProduct.Text += "ID: " + readerFindProduct.GetInt32(0) + " " + "\n";
                             richTextBoxProduct.Text += "Name: " + readerFindProduct.GetString(1) + " " + "\n";
-                            richTextBoxProduct.Text += "Cost: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
+                            richTextBoxProduct.Text += "Price: " + readerFindProduct.GetDecimal(2) + "kr " + " " + "\n";
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
-                           
+                            richTextBoxProduct.Text += "Category Name: " + readerFindProduct.GetString(4) + "\n";
+
                             clearAllTextBox();
 
 
@@ -1143,10 +1144,16 @@ namespace Application
                         {
                             OrderTextBox.Text += "--- ORDER FOUND ---" + "\n";
                             OrderTextBox.Text += "Order ID: " + readerFindOrder.GetInt32(0) + " " + "\n";
-                            OrderTextBox.Text += "Date: " + readerFindOrder.GetString(1) + " " + "\n";
-                            OrderTextBox.Text += "Supermarket ID: " + readerFindOrder.GetInt32(2) + "\n";
-                            OrderTextBox.Text += "Customer ID: " + readerFindOrder.GetInt32(3) + "\n";
-                            OrderTextBox.Text += "Payment Method: " + readerFindOrder.GetString(4) + "\n";
+                            OrderTextBox.Text += "Customer ID: " + readerFindOrder.GetInt32(1) + "\n";
+                            OrderTextBox.Text += "Customer Name: " + readerFindOrder.GetString(2) + "\n";
+                            OrderTextBox.Text += "Customer Username: " + readerFindOrder.GetString(3) + "\n";
+                            OrderTextBox.Text += "Customer Address: " + readerFindOrder.GetString(4) + "\n";
+                            OrderTextBox.Text += "Customer Email: " + readerFindOrder.GetString(5) + "\n";
+                            OrderTextBox.Text += "Store Name: " + readerFindOrder.GetString(6) + "\n";
+                            OrderTextBox.Text += "Supermarket ID: " + readerFindOrder.GetInt32(7) + "\n";
+                            OrderTextBox.Text += "Payment Method: " + readerFindOrder.GetString(8) + "\n";
+                            OrderTextBox.Text += "Order Date: " + readerFindOrder.GetString(9) + "\n";
+                            OrderTextBox.Text += "-----------------------" + "\n";
 
                             OrderTextBox.Text += "-----------------------" + "\n";
 
@@ -1350,45 +1357,48 @@ namespace Application
             try
             {
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
+                int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
                 richTextBoxOrderline.Text = " ";
 
-                using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderID(orderID))
+                using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderIDandProductID(orderID, productID))
                 {
                     if (readerFindOrderlines.HasRows)
                     {
-                        richTextBoxOrderline.Text += "--- ORDERS ---" + "\n";
+                        richTextBoxOrderline.Text += "--- ORDERLINES ---" + "\n";
                         UpdateView("Orderline");
-
 
                         while (readerFindOrderlines.Read())
                         {
-                            richTextBoxOrderline.Text += "Order ID: " + readerFindOrderlines.GetInt32(0) + " " + "\n";
-                            richTextBoxOrderline.Text += "Product ID: " + readerFindOrderlines.GetInt32(1) + " " + "\n";
-                            richTextBoxOrderline.Text += "Orderline ID: " + readerFindOrderlines.GetInt32(2) + "\n";
-                            richTextBoxOrderline.Text += "Quantity ID: " + readerFindOrderlines.GetInt32(3) + "\n";
+                            richTextBoxOrderline.Text += "Orderline Number: " + readerFindOrderlines.GetInt32(0) + "\n";
+                            richTextBoxOrderline.Text += "Order ID: " + readerFindOrderlines.GetInt32(1) + " " + "\n";
+                            richTextBoxOrderline.Text += "Product ID: " + readerFindOrderlines.GetInt32(2) + " " + "\n";
+                            richTextBoxOrderline.Text += "Product Name: " + readerFindOrderlines.GetString(3) + "\n";
+                            richTextBoxOrderline.Text += "Price: " + readerFindOrderlines.GetDecimal(4) + "\n";
+                            richTextBoxOrderline.Text += "Order Date: " + readerFindOrderlines.GetString(5) + "\n";
+                            richTextBoxOrderline.Text += "Store Name: " + readerFindOrderlines.GetString(6) + "\n";
+                            richTextBoxOrderline.Text += "Supermarket ID: " + readerFindOrderlines.GetInt32(7) + "\n";
+                            richTextBoxOrderline.Text += "Quantity: " + readerFindOrderlines.GetInt32(8) + "\n";
+                            richTextBoxOrderline.Text += "Payment Method: " + readerFindOrderlines.GetString(9) + "\n";
+                            richTextBoxOrderline.Text += "Total price: " + readerFindOrderlines.GetDecimal(10) + "\n";
                             richTextBoxOrderline.Text += "-----------------------" + "\n";
-
-                            
                         }
                     }
                     else
                     {
-                        richTextBoxOrderline.Text += "The OrderID you have provided does contain any products, please add a product";
+                        richTextBoxOrderline.Text += "No orderlines found for the given Order ID and Product ID.";
                     }
                 }
             }
             catch (SqlException ex)
             {
-
                 if (ex.Number == 0)
                 {
-
                     richTextBoxOrderline.Text = "No connection with server";
                 }
             }
             catch (FormatException)
             {
-                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID";
+                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID and Product ID.";
             }
         }
         private void buttonDeleteOrderline_Click(object sender, EventArgs e)

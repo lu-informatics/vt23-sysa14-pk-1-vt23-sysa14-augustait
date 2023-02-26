@@ -6,7 +6,10 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Application
 {
@@ -109,7 +112,10 @@ namespace Application
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Product WHERE ProductId = @ProductId";
+            command.CommandText = "SELECT Product.ProductID, Product.ProductName, Product.Price, Product.CategoryID, ProductCategory.CategoryName " +
+                      "FROM Product " +
+                      "JOIN ProductCategory ON Product.CategoryID = ProductCategory.CategoryID  " +
+                      "WHERE Product.ProductID = @ProductId";
             command.Parameters.Add(new SqlParameter("@ProductId", productId));
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
@@ -388,20 +394,23 @@ namespace Application
             connection.Dispose();
         }
 
-    
+
         public SqlDataReader findOrder(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Order_ WHERE orderID = @orderID";
+            command.CommandText = "SELECT Order_.OrderID, Order_.CustomerID, Customer.Name, Customer.UserName, Customer.Address, Customer.Email, Store.StoreName, Order_.SupermarketID, Order_.PaymentMethod, Order_.OrderDate FROM Order_" +
+                " JOIN Store ON Order_.SupermarketID = Store.SupermarketID " +
+                                  " JOIN Customer ON Order_.CustomerID = Customer.CustomerID " +
+                                  " WHERE Order_.OrderID = @orderID";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
             return reader;
         }
 
-       
+
         public void updateOrder(int orderID, string orderDate, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
@@ -508,17 +517,26 @@ namespace Application
 
         public SqlDataReader findOrderlinesByOrderIDandProductID(int orderID, int productID)
         {
-            SqlConnection connection = GetDatabaseConnection();
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * FROM Orderline WHERE OrderID = @orderID AND ProductID = @productID";
-            command.Parameters.AddWithValue("@orderID", orderID);
-            command.Parameters.AddWithValue("@productID", productID);
-            connection.Open();
-            SqlDataReader reader = command.ExecuteReader();
-            return reader;
+            {
+                SqlConnection connection = GetDatabaseConnection();
+                SqlCommand command = connection.CreateCommand();
+                command.CommandText = @"SELECT Orderline.OrderlineNumber, Orderline.OrderID, Orderline.ProductID, 
+                        Product.ProductName, Product.Price, Order_.OrderDate, Store.StoreName, 
+                        Order_.SupermarketID, Orderline.Quantity, Order_.PaymentMethod,
+                        Orderline.Quantity * Product.Price AS TotalPrice
+                        FROM Orderline 
+                        JOIN Order_ ON Orderline.OrderID = Order_.OrderID 
+                        JOIN Product ON Orderline.ProductID = Product.ProductID 
+                        JOIN Store ON Order_.SupermarketID = Store.SupermarketID 
+                        WHERE Orderline.OrderID = @orderID AND Orderline.ProductID = @productID";
+                command.Parameters.AddWithValue("@orderID", orderID);
+                command.Parameters.AddWithValue("@productID", productID);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                return reader;
+            }
         }
 
-       
         //METHODS FOR COLLECTING DATA
         public DataTable GetProductData()
         {
@@ -604,7 +622,11 @@ namespace Application
                 using (SqlConnection connection = GetDatabaseConnection())
                 {
                     SqlCommand command = GetDatabaseConnection().CreateCommand();
-                    command.CommandText = "SELECT  * FROM Orderline";
+                    command.CommandText = "SELECT Orderline.OrderlineNumber, Orderline.OrderID, Orderline.ProductID, ProductName, OrderDate, StoreName, " +
+                        "Order_.SupermarketID, Orderline.Quantity, Order_.PaymentMethod,  (Price * Quantity) AS TotalAmount " +
+                        "FROM Orderline JOIN Order_ ON Orderline.OrderID = Order_.OrderID " +
+                        "JOIN Product ON Orderline.ProductID = Product.ProductID " +
+                        "JOIN Store ON Order_.SupermarketID = Store.SupermarketID";
 
                     SqlDataAdapter dataAdapter = new(command);
                     dataAdapter.Fill(dataSet, "Orderline");
@@ -626,7 +648,9 @@ namespace Application
                 using (SqlConnection connection = GetDatabaseConnection())
                 {
                     SqlCommand command = GetDatabaseConnection().CreateCommand();
-                    command.CommandText = "SELECT  * FROM Order_";
+                    command.CommandText = "SELECT Order_.OrderID, Order_.CustomerID, Customer.Name, Customer.UserName, Customer.Address, Customer.Email, Store.StoreName, Order_.SupermarketID, Order_.PaymentMethod FROM Order_" +
+                        " JOIN Store ON Order_.SupermarketID = Store.SupermarketID " +
+                        " JOIN Customer ON Order_.CustomerID = Customer.CustomerID ";
 
                     SqlDataAdapter dataAdapter = new(command);
                     dataAdapter.Fill(dataSet, "Order_");
@@ -648,7 +672,8 @@ namespace Application
                 using (SqlConnection connection = GetDatabaseConnection())
                 {
                     SqlCommand command = GetDatabaseConnection().CreateCommand();
-                    command.CommandText = "SELECT  * FROM Product";
+                    command.CommandText = "SELECT Product.ProductID, Product.ProductName, Product.Price, Product.CategoryID, ProductCategory.CategoryName FROM Product " +
+                        "JOIN ProductCategory ON Product.CategoryID = ProductCategory.CategoryID";
 
                     SqlDataAdapter dataAdapter = new(command);
                     dataAdapter.Fill(dataSet, "Product");
