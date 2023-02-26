@@ -1366,7 +1366,6 @@ namespace Application
                 int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
                 int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
                 richTextBoxOrderline.Text = " ";
-                decimal totalPrice = _layer.GetTotalPrice(orderID);
 
                 using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderIDandProductID(orderID, productID))
                 {
@@ -1390,7 +1389,7 @@ namespace Application
                             richTextBoxOrderline.Text += "Total price: " + readerFindOrderlines.GetDecimal(10) + "\n";
                             richTextBoxOrderline.Text += "-----------------------" + "\n";
 
-                            TextBoxTotal.Text = totalPrice.ToString("0.00");
+       
 
                         }
                     }
