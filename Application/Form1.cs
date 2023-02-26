@@ -1308,11 +1308,19 @@ namespace Application
                     richTextBoxOrderline.Text = "Please select an A Orderline number, Order, Product, Quantity";
                     return;
                 }
+                if (_layer.findOrderlinesByOrderID != null)
+                {
+                    richTextBoxOrderline.Text = "An orderline with this number already exists in this order, please choose another number.";
+                return;
+            }
+
                 else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
                 {
                     richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
                     return;
                 }
+              
+
                 else
                 {
                     int tmpOrderlineID = int.Parse(orderlineID);
@@ -1332,8 +1340,8 @@ namespace Application
                     comboBoxOrderlineProductID.SelectedIndex = -1;
 
                 }
-
-            }
+        
+    }
             catch (SqlException error)
             {
 
@@ -1342,8 +1350,9 @@ namespace Application
                 {
                     richTextBoxOrderline.Text = "You have already added a product with the same id to the chosen Order please select another product.";
                 }
-            }
+}
         }
+ 
 
         private void buttonFindOrderline_Click(object sender, EventArgs e)
         {
