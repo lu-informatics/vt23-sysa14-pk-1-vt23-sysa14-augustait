@@ -408,9 +408,10 @@ namespace Application
 
 
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate WHERE   orderID = @orderID, paymentMethod = @paymentMethod";
+            command.CommandText = "UPDATE Order_ SET orderDate = @orderDate, paymentMethod = @paymentMethod WHERE orderID = @orderID";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@orderDate", orderDate));
+            command.Parameters.Add(new SqlParameter("@paymentMethod", paymentMethod));
 
 
             connection.Open();
@@ -480,7 +481,7 @@ namespace Application
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
-            command.CommandText = "UPDATE Orderline SET orderlineNumber = @orderlineID, quantity = @quantity, paymentMethod = @paymentMethod WHERE OrderID = @orderID AND ProductID = @productID";
+            command.CommandText = "UPDATE Orderline SET orderlineNumber = @orderlineID, quantity = @quantity WHERE OrderID = @orderID AND ProductID = @productID";
             command.Parameters.Add(new SqlParameter("@orderID", orderID));
             command.Parameters.Add(new SqlParameter("@productID", productID));
             command.Parameters.Add(new SqlParameter("@orderlineID", orderlineID));
