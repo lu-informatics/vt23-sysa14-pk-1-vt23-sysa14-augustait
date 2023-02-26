@@ -53,6 +53,8 @@
             this.buttonProductCategoryUpdate = new System.Windows.Forms.Button();
             this.buttonCreateProductCategory = new System.Windows.Forms.Button();
             this.tabOrder = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxOrderPaymentMethod = new System.Windows.Forms.ComboBox();
             this.orderDataGridView = new System.Windows.Forms.DataGridView();
             this.BtnDeleteOrder = new System.Windows.Forms.Button();
             this.BtnUpdateOrder = new System.Windows.Forms.Button();
@@ -114,8 +116,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.richTextBoxOrderline = new System.Windows.Forms.RichTextBox();
             this.pictureBoxCheckout = new System.Windows.Forms.PictureBox();
-            this.comboBoxOrderPaymentMethod = new System.Windows.Forms.ComboBox();
-            this.label3 = new System.Windows.Forms.Label();
             this.allTabs.SuspendLayout();
             this.tabProduct.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.productDataGridView)).BeginInit();
@@ -330,6 +330,7 @@
             this.richTextBoxProductCategory.BackColor = System.Drawing.Color.WhiteSmoke;
             this.richTextBoxProductCategory.Location = new System.Drawing.Point(136, 198);
             this.richTextBoxProductCategory.Name = "richTextBoxProductCategory";
+            this.richTextBoxProductCategory.ReadOnly = true;
             this.richTextBoxProductCategory.Size = new System.Drawing.Size(639, 96);
             this.richTextBoxProductCategory.TabIndex = 6;
             this.richTextBoxProductCategory.Text = "";
@@ -416,6 +417,28 @@
             this.tabOrder.TabIndex = 2;
             this.tabOrder.Text = "Order";
             this.tabOrder.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(53, 342);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 15);
+            this.label3.TabIndex = 44;
+            this.label3.Text = "Payment Method";
+            // 
+            // comboBoxOrderPaymentMethod
+            // 
+            this.comboBoxOrderPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxOrderPaymentMethod.FormattingEnabled = true;
+            this.comboBoxOrderPaymentMethod.Items.AddRange(new object[] {
+            "KLARNA",
+            "DEBIT CARD",
+            "CREDIT CARD"});
+            this.comboBoxOrderPaymentMethod.Location = new System.Drawing.Point(6, 360);
+            this.comboBoxOrderPaymentMethod.Name = "comboBoxOrderPaymentMethod";
+            this.comboBoxOrderPaymentMethod.Size = new System.Drawing.Size(203, 23);
+            this.comboBoxOrderPaymentMethod.TabIndex = 43;
             // 
             // orderDataGridView
             // 
@@ -1098,28 +1121,6 @@
             this.pictureBoxCheckout.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxCheckout.TabIndex = 10;
             this.pictureBoxCheckout.TabStop = false;
-            // 
-            // comboBoxOrderPaymentMethod
-            // 
-            this.comboBoxOrderPaymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxOrderPaymentMethod.FormattingEnabled = true;
-            this.comboBoxOrderPaymentMethod.Items.AddRange(new object[] {
-            "KLARNA",
-            "DEBIT CARD",
-            "CREDIT CARD"});
-            this.comboBoxOrderPaymentMethod.Location = new System.Drawing.Point(6, 360);
-            this.comboBoxOrderPaymentMethod.Name = "comboBoxOrderPaymentMethod";
-            this.comboBoxOrderPaymentMethod.Size = new System.Drawing.Size(203, 23);
-            this.comboBoxOrderPaymentMethod.TabIndex = 43;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(53, 342);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(99, 15);
-            this.label3.TabIndex = 44;
-            this.label3.Text = "Payment Method";
             // 
             // Form1
             // 

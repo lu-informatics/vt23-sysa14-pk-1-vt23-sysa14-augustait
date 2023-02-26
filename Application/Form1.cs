@@ -236,7 +236,7 @@ namespace Application
 
                 catch (FormatException)
                 {
-                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, category ID, and product price.";
+                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
                 }
             }
         }
@@ -330,23 +330,30 @@ namespace Application
 
                     }
                 }
-                catch (FormatException)
-                {
-                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
-                }
-
                 catch (SqlException ex)
                 {
-                    if (ex.Number == 0)
+                    if (ex.Number == 547)
                     {
-                        richTextBoxProduct.Text = "Could not connect to the database. Please check your connection and try again. ";
+                        richTextBoxProduct.Text = "Cannot delete this product because it is referenced in an orderline.";
+                    }
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxProduct.Text = "Could not connect to the database. Please check your connection and try again.";
+                    }
+                    else
+                    {
+                        richTextBoxProduct.Text = "An error occurred while deleting the product.";
+                        
                     }
                 }
+
+                catch (FormatException)
+                {
+                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                }
             }
-        }
-
-
-
+            }
+        
 
 
         //FIND PRODUCT
@@ -447,6 +454,8 @@ namespace Application
                         richTextBoxProductCategory.Text = "Could not connect to the database. Please check your connection and try again.";
 
                     }
+
+                     
                 }
 
                 catch (FormatException)
@@ -800,12 +809,21 @@ namespace Application
                 }
                 catch (SqlException ex)
                 {
-                    if (ex.Number == 0)
+                    if (ex.Number == 547)
                     {
-                        richTextBoxStore.Text = "Could not connect to the database. Please check your connection and try again. ";
+                        richTextBoxStore.Text = "Cannot delete this store because it is referenced in an order.";
+                    }
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxStore.Text = "Could not connect to the database. Please check your connection and try again.";
+                    }
+                    else
+                    {
+                        richTextBoxStore.Text = "An error occurred while deleting the product.";
 
                     }
                 }
+            
                 catch (FormatException)
                 {
                     richTextBoxStore.Text = "Invalid input format. Please make sure to provide a positive number for the Supermarket ID.";
@@ -1022,12 +1040,21 @@ namespace Application
                 }
                 catch (SqlException ex)
                 {
-                    if (ex.Number == 0)
+                    if (ex.Number == 547)
                     {
-                        richTextBoxCostumer.Text = "No connection with server";
+                        richTextBoxCostumer.Text = "Cannot delete this Customer because it is referenced in an order.";
+                    }
+                    else if (ex.Number == 0)
+                    {
+                        richTextBoxCostumer.Text = "Could not connect to the database. Please check your connection and try again.";
+                    }
+                    else
+                    {
+                        richTextBoxCostumer.Text = "An error occurred while deleting the product.";
 
                     }
                 }
+            
                 catch (FormatException)
                 {
                     richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID.";
@@ -1177,7 +1204,7 @@ namespace Application
                     else
                     {
                         _layer.updateOrder(tmpOrderID, date, paymentMethod);
-                        UpdateViewOrder("Order");
+                        UpdateViewOrder("Order_");
 
                         OrderTextBox.Text = "The order has been updated!" + "\n";
                         
@@ -1235,7 +1262,7 @@ namespace Application
                         updateCombobox();
 
 
-                        UpdateViewOrder("Order");
+                        UpdateViewOrder("Order_");
                         OrderTextBox.Text = "Order has successfully been deleted!";
 
                     }
@@ -1243,12 +1270,19 @@ namespace Application
                 }
                 catch (SqlException ex)
                 {
-                    if (ex.Number == 0)
+                    if (ex.Number == 547)
                     {
-                        OrderTextBox.Text = "No connection with server";
+                        OrderTextBox.Text = "Cannot delete this order because it is referenced in an orderline.";
 
                     }
+                    else if (ex.Number == 0)
+                    {
+                        OrderTextBox.Text = "No connection with the database. Please try again later!";
+
+
                 }
+                }
+
                 catch (FormatException)
                 {
                     OrderTextBox.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID.";
