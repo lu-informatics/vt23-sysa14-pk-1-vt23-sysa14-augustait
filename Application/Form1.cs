@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Drawing.Text;
 using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip;
 
 namespace Application
@@ -73,7 +74,7 @@ namespace Application
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DataTable productData = _layer.GetProductData();
+           // DataTable productData = _layer.GetProductData();
             DataTable supermarketData = _layer.GetSupermarketData();
             DataTable customerData = _layer.GetCustomerData();
             DataTable orderData = _layer.GetOrderData();
@@ -81,9 +82,9 @@ namespace Application
 
 
             //DataGridView for Orderline
-            DataSet dataSet = _layer.View("Orderline");
+            DataSet dataSet = _layer.View("Orderline");  //Lagrar data från databas
             DataTable orderLineTable = dataSet.Tables["Orderline"];
-            orderlineDataGridView.DataSource = orderLineTable;
+            orderlineDataGridView.DataSource = orderLineTable; //Tabellen kan 
 
             //DataGridView for Order
             DataSet dataSetOrder = _layer.ViewOrder("Order_");
@@ -111,9 +112,9 @@ namespace Application
             productCategoryDataGridView.DataSource = productCategoryTable;
 
             //Comboboxes for Orderline
-            comboBoxOrderlineProductID.DataSource = productData;
-            comboBoxOrderlineProductID.DisplayMember = "ProductID";
-            comboBoxOrderlineProductID.ValueMember = "ProductID";
+           // comboBoxOrderlineProductID.DataSource = productData;
+            //comboBoxOrderlineProductID.DisplayMember = "ProductID";
+           // comboBoxOrderlineProductID.ValueMember = "ProductID";
 
 
             comboBoxOrderlineOrderID.DataSource = orderData;
@@ -182,61 +183,78 @@ namespace Application
         //ADD PRODUCT
         private void buttonProductAdd_Click(object sender, EventArgs e)
         {
-            richTextBoxProduct.Text = " ";
-            string productIdString = textBoxProductID.Text;
-            string productName = textBoxProductName.Text;
-            string productPriceString = textBoxProductPrice.Text;
-            int categoryId = int.Parse(comboBoxProductCategory.SelectedValue.ToString());
+            richTextBoxProduct.Text = "";
 
-
-
-            if (string.IsNullOrWhiteSpace(productIdString) || string.IsNullOrWhiteSpace(productName) || string.IsNullOrWhiteSpace(productPriceString)
-                || string.IsNullOrWhiteSpace(comboBoxProductCategory.Text) || comboBoxProductCategory.SelectedIndex == -1)
+            if (string.IsNullOrWhiteSpace(textBoxProductID.Text) || string.IsNullOrWhiteSpace(textBoxProductName.Text) || string.IsNullOrWhiteSpace(textBoxProductPrice.Text))
             {
                 richTextBoxProduct.Text = "Please enter all the fields!";
+                return;
+            }
+
+            int categoryId = -1;
+
+            if (!string.IsNullOrWhiteSpace(comboBoxProductCategory.Text))
+            {
+                if (int.TryParse(comboBoxProductCategory.Text, out categoryId) == false)
+                {
+                    richTextBoxProduct.Text = "Invalid category ID!";
+                    return;
+                }
+            }
+            else if (comboBoxProductCategory.SelectedItem != null)
+            {
+                if (int.TryParse(comboBoxProductCategory.SelectedItem.ToString(), out categoryId) == false)
+                {
+                    richTextBoxProduct.Text = "Invalid category ID!";
+                    return;
+                }
             }
             else
             {
-                try
+                richTextBoxProduct.Text = "Please either select or enter a Product Category to the Product you want to create!";
+                return;
+            }
+
+            int productId = 0;
+            decimal productPrice = 0;
+
+            if (int.TryParse(textBoxProductID.Text, out productId) == false || productId <= 0)
+            {
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID.";
+                return;
+            }
+
+            if (decimal.TryParse(textBoxProductPrice.Text, out productPrice) == false || productPrice <= 0)
+            {
+                richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product price.";
+                return;
+            }
+
+            try
+            {
+                _layer.insertProduct(productId, textBoxProductName.Text, productPrice, categoryId);
+
+                UpdateViewProduct("Product");
+
+                richTextBoxProduct.Text = "The product has been successfully created!";
+                clearAllTextBox();
+                comboBoxProductCategory.SelectedIndex = -1;
+                updateCombobox();
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
                 {
-                    int productId = int.Parse(productIdString);
-                    decimal productPrice = decimal.Parse(productPriceString);
-
-                    _layer.insertProduct(productId, productName, productPrice, categoryId);
-
-                    UpdateViewProduct("Product");
-
-                    richTextBoxProduct.Text = "The product has been successfully created!";
-
-                    clearAllTextBox();
-                    comboBoxProductCategory.SelectedIndex = -1;
-                    updateCombobox();
-
-
-
+                    richTextBoxProduct.Text = "A product with the same ID already exists.";
+                    textBoxProductID.Text = "";
                 }
-
-                catch (SqlException ex)
+                else if (ex.Number == 547)
                 {
-                    if (ex.Number == 2627)
-                    {
-                        richTextBoxProduct.Text = "A product with the same ID already exists.";
-                        textBoxProductID.Text = " ";
-                    }
-                    else if (ex.Number == 547)
-                    {
-                        richTextBoxProduct.Text = "The category ID provided does not exist.";
-                    }
-                    else if (ex.Number == 0)
-                    {
-                        richTextBoxProduct.Text = "No connection with the server.";
-
-                    }
+                    richTextBoxProduct.Text = "The category ID provided does not exist.";
                 }
-
-                catch (FormatException)
+                else if (ex.Number == 0)
                 {
-                    richTextBoxProduct.Text = "Invalid input format. Please make sure to provide a positive number for the product ID, and product price.";
+                    richTextBoxProduct.Text = "No connection with the server.";
                 }
             }
         }
@@ -643,12 +661,6 @@ namespace Application
                 {
                     int newID = int.Parse(storeID);
 
-                    if (_layer.findStore(newID) != null) // Check if the store already exists
-                    {
-                        richTextBoxStore.Text = $"Store with ID {newID} already exists.";
-                        return;
-                    }
-
                     _layer.addStore(newID, regionName, storeName, storeCity, storeAddress);
 
                     richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
@@ -661,7 +673,11 @@ namespace Application
                 }
                 catch (SqlException ex)
                 {
-                    if (ex.Number == 0)
+                    if (ex.Number == 2627) 
+                    {
+                        richTextBoxStore.Text = $"Store with ID {storeID} already exists.";
+                    }
+                    else if (ex.Number == 0)
                     {
                         richTextBoxStore.Text = "Could not connect to the database. Please check your connection and try again. ";
                     }
