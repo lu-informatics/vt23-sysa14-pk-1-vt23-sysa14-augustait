@@ -1098,20 +1098,19 @@ namespace Application
             int supermarketID = 0;
             int customerID = 0;
 
-            // Check if user entered a value for supermarket ID
+            
             if (!int.TryParse(comboBoxOrderSupermarketID.Text, out supermarketID))
             {
-                // User did not enter a valid integer, so try to get the selected value
+                
                 if (comboBoxOrderSupermarketID.SelectedItem != null)
                 {
                     supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
                 }
             }
 
-            // Check if user entered a value for customer ID
+            
             if (!int.TryParse(comboBoxOrderCustomerID.Text, out customerID))
             {
-                // User did not enter a valid integer, so try to get the selected value
                 if (comboBoxOrderCustomerID.SelectedItem != null)
                 {
                     customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
@@ -1227,13 +1226,15 @@ namespace Application
             OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
             string date = textOrderDate.Value.ToString("yyyy-MM-dd");
-            string paymentMethod = comboBoxOrderPaymentMethod.SelectedItem.ToString();
+            string paymentMethod = comboBoxOrderPaymentMethod.SelectedItem?.ToString();
 
-
-            if (string.IsNullOrWhiteSpace(orderID) || string.IsNullOrWhiteSpace(date) || comboBoxOrderPaymentMethod.SelectedIndex == -1)
+            if (string.IsNullOrWhiteSpace(orderID))
             {
-
-                OrderTextBox.Text = "Please select a date or payment method to update";
+                OrderTextBox.Text = "Please enter an Order ID!";
+            }
+            else if (string.IsNullOrWhiteSpace(date) || string.IsNullOrWhiteSpace(paymentMethod))
+            {
+                OrderTextBox.Text = "Please select a date and payment method to update";
             }
             else
             {
@@ -1245,7 +1246,7 @@ namespace Application
 
                     if (!reader.HasRows)
                     {
-                        OrderTextBox.Text = "The product with the specified ID could not be found.";
+                        OrderTextBox.Text = "The order with the specified ID could not be found.";
 
                     }
                     else
@@ -1254,15 +1255,12 @@ namespace Application
                         UpdateViewOrder("Order_");
 
                         OrderTextBox.Text = "The order has been updated!" + "\n";
-                        
-                        updateCombobox();
 
+                        updateCombobox();
 
                         comboBoxOrderPaymentMethod.SelectedIndex = -1;
 
                     }
-
-
                 }
                 catch (FormatException)
                 {
