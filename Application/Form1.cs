@@ -1095,20 +1095,38 @@ namespace Application
             OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
             string date = textOrderDate.Value.ToString("yyyy-MM-dd");
-            int supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
-            int customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
-            string paymentMethod = comboBoxOrderPaymentMethod.SelectedItem.ToString();
+            int supermarketID = 0;
+            int customerID = 0;
 
+            // Check if user entered a value for supermarket ID
+            if (!int.TryParse(comboBoxOrderSupermarketID.Text, out supermarketID))
+            {
+                // User did not enter a valid integer, so try to get the selected value
+                if (comboBoxOrderSupermarketID.SelectedItem != null)
+                {
+                    supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
+                }
+            }
 
+            // Check if user entered a value for customer ID
+            if (!int.TryParse(comboBoxOrderCustomerID.Text, out customerID))
+            {
+                // User did not enter a valid integer, so try to get the selected value
+                if (comboBoxOrderCustomerID.SelectedItem != null)
+                {
+                    customerID = int.Parse(comboBoxOrderCustomerID.SelectedValue.ToString());
+                }
+            }
+
+            string paymentMethod = comboBoxOrderPaymentMethod.SelectedItem?.ToString();
 
             if (string.IsNullOrWhiteSpace(orderID))
             {
                 OrderTextBox.Text = "Please enter an Order ID!";
             }
-            else if (comboBoxOrderSupermarketID.SelectedIndex == -1
-                     || comboBoxOrderCustomerID.SelectedIndex == -1 || comboBoxOrderPaymentMethod.SelectedIndex == -1 || paymentMethod == null)
+            else if (supermarketID <= 0 || customerID <= 0 || string.IsNullOrWhiteSpace(paymentMethod))
             {
-                OrderTextBox.Text = "Please select a Store, Customer & Payment Method";
+                OrderTextBox.Text = "Please select or enter a Store, Customer & Payment Method";
             }
             else
             {
@@ -1133,20 +1151,17 @@ namespace Application
                 {
                     OrderTextBox.Text = "Invalid input format. Please make sure to only insert numbers for the order id.";
                 }
-                catch (SqlException error)
+                catch (SqlException ex)
                 {
-                    if (error.Number == 2627)
+                    if (ex.Number == 2627)
                     {
                         OrderTextBox.Text = "An order with the same ID already exists.";
                     }
-                }
-                catch (NullReferenceException)
-                {
-                    OrderTextBox.Text = "Please select a Payment Method";
-                }
-                catch (InvalidOperationException)
-                {
-                    OrderTextBox.Text = "Please select a Payment Method";
+                    else if (ex.Number == 547)
+                    {
+                        OrderTextBox.Text = "The order could not be created! Please verify if the Store or Customer that you have specified exist! ";
+
+                    }
                 }
             }
         }
