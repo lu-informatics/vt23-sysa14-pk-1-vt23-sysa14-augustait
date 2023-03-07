@@ -649,7 +649,7 @@ namespace Application
                 using (SqlConnection connection = GetDatabaseConnection())
                 {
                     SqlCommand command = GetDatabaseConnection().CreateCommand();
-                    command.CommandText = "SELECT Order_.OrderID, Order_.CustomerID, Customer.Name, Customer.UserName, Customer.Address, Customer.Email, Store.StoreName, Order_.SupermarketID, Order_.PaymentMethod FROM Order_" +
+                    command.CommandText = "SELECT Order_.OrderID, Order_.CustomerID, Customer.Name, Customer.UserName, Customer.Address, Customer.Email, Store.StoreName, Order_.SupermarketID, Order_.PaymentMethod, Order_.OrderDate FROM Order_" +
                         " JOIN Store ON Order_.SupermarketID = Store.SupermarketID " +
                         " JOIN Customer ON Order_.CustomerID = Customer.CustomerID ";
 
