@@ -1421,9 +1421,30 @@ namespace Application
         {
             try
             {
-                int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
-                int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
+               
                 richTextBoxOrderline.Text = " ";
+                int orderID, productID;
+
+                if (int.TryParse(comboBoxOrderlineOrderID.Text, out orderID) == false)
+                {
+                    if (comboBoxOrderlineOrderID.SelectedItem == null)
+                    {
+                        richTextBoxOrderline.Text = "Please select an Order ID.";
+                        return;
+                    }
+                    orderID = int.Parse(comboBoxOrderlineOrderID.SelectedItem.ToString());
+                }
+
+                if (int.TryParse(comboBoxOrderlineProductID.Text, out productID) == false)
+                {
+                    if (comboBoxOrderlineProductID.SelectedItem == null)
+                    {
+                        richTextBoxOrderline.Text = "Please select a Product ID.";
+                        return;
+                    }
+                    productID = int.Parse(comboBoxOrderlineProductID.SelectedItem.ToString());
+                }
+
 
                 using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderIDandProductID(orderID, productID))
                 {
@@ -1512,49 +1533,62 @@ namespace Application
             try
             {
                 richTextBoxOrderline.Text = " ";
-                string orderlineID = textBoxOrderlineID.Text;
-                int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
-                int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
-                int quantity;
+                int orderlineID = int.Parse(textBoxOrderlineID.Text);
+                int orderID, productID, quantity;
 
-                if (comboBoxOrderlineOrderID.SelectedIndex == -1
-                || comboBoxOrderlineProductID.SelectedIndex == -1
-                || comboBoxOrderlineQuantity.SelectedIndex == -1)
+                if (int.TryParse(comboBoxOrderlineOrderID.Text, out orderID) == false)
                 {
-                    richTextBoxOrderline.Text = "Please select an Orderline number, Order, Product, Quantity & Payment method to update";
-                    return;
-                }
-                else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
-                {
-                    richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
-                    return;
-                }
-                else
-                {
-                    SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
-                    if (!reader.HasRows)
+                    if (comboBoxOrderlineOrderID.SelectedItem == null)
                     {
-                        richTextBoxOrderline.Text = "Please check if there is an Orderline with the selected Order ID and Product ID!";
+                        richTextBoxOrderline.Text = "Please select an Order ID.";
                         return;
                     }
-
-                    int tmpOrderlineID = int.Parse(orderlineID);
-                    _layer.updateOrderline(orderID, productID, tmpOrderlineID, quantity);
-                    UpdateView("Orderline");
-
-                    updateCombobox();
-
-
-                    richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
-
-                    comboBoxOrderlineQuantity.SelectedIndex = -1;
-                    comboBoxOrderlineOrderID.SelectedIndex = -1;
-                    comboBoxOrderlineProductID.SelectedIndex = -1;
+                    orderID = int.Parse(comboBoxOrderlineOrderID.SelectedItem.ToString());
                 }
+
+                if (int.TryParse(comboBoxOrderlineProductID.Text, out productID) == false)
+                {
+                    if (comboBoxOrderlineProductID.SelectedItem == null)
+                    {
+                        richTextBoxOrderline.Text = "Please select a Product ID.";
+                        return;
+                    }
+                    productID = int.Parse(comboBoxOrderlineProductID.SelectedItem.ToString());
+                }
+
+                if (comboBoxOrderlineQuantity.SelectedIndex == -1)
+                {
+                    richTextBoxOrderline.Text = "Please select a Quantity to update.";
+                    return;
+                }
+
+                if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
+                {
+                    richTextBoxOrderline.Text = "Please make sure to only insert numbers for the quantity.";
+                    return;
+                }
+
+                SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+                if (!reader.HasRows)
+                {
+                    richTextBoxOrderline.Text = "Please check if there is an Orderline with the selected Order ID and Product ID!";
+                    return;
+                }
+
+                _layer.updateOrderline(orderID, productID, orderlineID, quantity);
+                UpdateView("Orderline");
+                updateCombobox();
+
+                richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
+
+                comboBoxOrderlineQuantity.SelectedIndex = -1;
+                comboBoxOrderlineOrderID.SelectedIndex = -1;
+                comboBoxOrderlineProductID.SelectedIndex = -1;
+            
             }
             catch (FormatException)
             {
-                richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Orderline ID, Order ID, and Product ID";
+                richTextBoxOrderline.Text = "Please make sure to provide a positive number for the Orderline ID, Order ID, and Product ID";
             }
             catch (SqlException error)
             {
