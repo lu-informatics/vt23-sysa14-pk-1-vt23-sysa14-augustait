@@ -1339,61 +1339,81 @@ namespace Application
     private void buttonOrderlineCreate_Click(object sender, EventArgs e)
         {
             try
+    {
+        richTextBoxOrderline.Text = " ";
+        string orderlineID = textBoxOrderlineID.Text;
+        int orderID, productID, quantity;
+
+        if (string.IsNullOrWhiteSpace(orderlineID))
+        {
+            richTextBoxOrderline.Text = "Please enter an Orderline number.";
+            return;
+        }
+
+        if (int.TryParse(comboBoxOrderlineOrderID.Text, out orderID) == false)
+        {
+            if (comboBoxOrderlineOrderID.SelectedItem == null)
             {
-                richTextBoxOrderline.Text = " ";
-                string orderlineID = textBoxOrderlineID.Text;
-                int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
-                int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
-                int quantity;
-
-                if (comboBoxOrderlineOrderID.SelectedIndex == -1
-                || comboBoxOrderlineProductID.SelectedIndex == -1
-                || comboBoxOrderlineQuantity.SelectedIndex == -1)
-                {
-                    richTextBoxOrderline.Text = "Please select an A Orderline number, Order, Product, Quantity";
-                    return;
-                }
-
-                else if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
-                {
-                    richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
-                    return;
- 
-                }
-
-                else
-                {
-                    int tmpOrderlineID = int.Parse(orderlineID);
-                    int count = _layer.CheckOrderline(orderID, tmpOrderlineID);
-                    if (count > 0)
-                    {
-                        richTextBoxOrderline.Text = "An Orderline with the same ID already exists in the chosen Order. Please select another Orderline ID.";
-                        return;
-                    }
-                    _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity);
-                    UpdateView("Orderline");
-
-                    updateCombobox();
-
-
-                    richTextBoxOrderline.Text = "The Orderline has been successfully created!" + "\n";
-
-                    comboBoxOrderlineQuantity.SelectedIndex = -1;
-                    comboBoxOrderlineOrderID.SelectedIndex = -1;
-                    comboBoxOrderlineProductID.SelectedIndex = -1;
-
-                }
-                
+                richTextBoxOrderline.Text = "Please select an Order.";
+                return;
             }
-            catch (SqlException error)
+            orderID = int.Parse(comboBoxOrderlineOrderID.SelectedItem.ToString());
+        }
+
+        if (int.TryParse(comboBoxOrderlineProductID.Text, out productID) == false)
+        {
+            if (comboBoxOrderlineProductID.SelectedItem == null)
             {
-
-
-                if (error.Number == 2627)
+                richTextBoxOrderline.Text = "Please select a Product.";
+                return;
+            }
+            productID = int.Parse(comboBoxOrderlineProductID.SelectedItem.ToString());
+        }
+               if (comboBoxOrderlineQuantity.SelectedItem == null)
                 {
-                    richTextBoxOrderline.Text = "You have already added a product with the same id to the chosen Order please select another product.";
+                    richTextBoxOrderline.Text = "Please select a quantity.";
+                    return;
                 }
-}
+
+                if (!int.TryParse(comboBoxOrderlineQuantity.SelectedItem.ToString(), out quantity))
+        {
+            richTextBoxOrderline.Text = "Invalid input format. Please make sure to only insert numbers for the quantity.";
+            return;
+        }
+
+        int tmpOrderlineID = int.Parse(orderlineID);
+        int count = _layer.CheckOrderline(orderID, tmpOrderlineID);
+        if (count > 0)
+        {
+            richTextBoxOrderline.Text = "An Orderline with the same ID already exists in the chosen Order. Please select another Orderline ID.";
+            return;
+        }
+        _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity);
+        UpdateView("Orderline");
+
+        updateCombobox();
+
+        richTextBoxOrderline.Text = "The Orderline has been successfully created!" + "\n";
+
+        comboBoxOrderlineQuantity.SelectedIndex = -1;
+        comboBoxOrderlineOrderID.SelectedIndex = -1;
+        comboBoxOrderlineProductID.SelectedIndex = -1;
+
+    }
+    catch (SqlException error)
+    {
+        if (error.Number == 2627)
+        {
+            richTextBoxOrderline.Text = "You have already added a product with the same id to the chosen Order please select another product.";
+                }
+        if (error.Number == 547)
+                {
+                    richTextBoxOrderline.Text = "The OrderID or ProductIDyou have provided does not exist";
+
+                }
+
+
+            }
         }
  
 
