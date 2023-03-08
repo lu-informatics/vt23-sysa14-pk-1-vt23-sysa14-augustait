@@ -1094,21 +1094,21 @@ namespace Application
         {
             OrderTextBox.Text = " ";
             string orderID = textOrderOrderID.Text;
-            string date = textOrderDate.Value.ToString("yyyy-MM-dd");
+            DateTime date = textOrderDate.Value;
             int supermarketID = 0;
             int customerID = 0;
 
-            
+
             if (!int.TryParse(comboBoxOrderSupermarketID.Text, out supermarketID))
             {
-                
+
                 if (comboBoxOrderSupermarketID.SelectedItem != null)
                 {
                     supermarketID = int.Parse(comboBoxOrderSupermarketID.SelectedValue.ToString());
                 }
             }
 
-            
+
             if (!int.TryParse(comboBoxOrderCustomerID.Text, out customerID))
             {
                 if (comboBoxOrderCustomerID.SelectedItem != null)
@@ -1127,13 +1127,17 @@ namespace Application
             {
                 OrderTextBox.Text = "Please select or enter a Store, Customer & Payment Method";
             }
+            else if (date < DateTime.Today)
+            {
+                OrderTextBox.Text = "The date of the order cannot be earlier than today!";
+            }
             else
             {
                 try
                 {
                     int ID = int.Parse(orderID);
 
-                    _layer.AddOrder(ID, date, supermarketID, customerID, paymentMethod);
+                    _layer.AddOrder(ID, date.ToString("yyyy-MM-dd"), supermarketID, customerID, paymentMethod);
                     UpdateViewOrder("Order_");
 
                     OrderTextBox.Text = "The order has been successfully created!" + "\n";
