@@ -1010,7 +1010,7 @@ namespace Application
                 }
                 catch (FormatException)
                 {
-                    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID, and Phone Number.";
+                    richTextBoxCostumer.Text = "Please make sure to provide a positive number for the Customer ID, and Phone Number.";
                 }
                 catch (SqlException ex)
                 {
@@ -1084,7 +1084,7 @@ namespace Application
                 }
                 catch (FormatException)
                 {
-                    richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Customer ID.";
+                    richTextBoxCostumer.Text = "Please make sure to provide a positive number for the Customer ID.";
                 }
 
             }
@@ -1212,12 +1212,12 @@ namespace Application
                 if (ex.Number == 0)
                 {
 
-                    richTextBoxCostumer.Text = "No connection with server";
+                    OrderTextBox.Text = "No connection with server";
                 }
             }
             catch (FormatException)
             {
-                richTextBoxCostumer.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID";
+                OrderTextBox.Text = "Please make sure to provide a positive number for the Order ID";
             }
         }
 
