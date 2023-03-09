@@ -36,7 +36,7 @@
             this.richTextBoxProduct = new System.Windows.Forms.RichTextBox();
             this.pictureBoxICA = new System.Windows.Forms.PictureBox();
             this.buttonDeleteProduct = new System.Windows.Forms.Button();
-            this.buttonUpdateProduct = new System.Windows.Forms.Button();
+            this.ButtonUpdateProduct = new System.Windows.Forms.Button();
             this.buttonFindProduct = new System.Windows.Forms.Button();
             this.buttonCreateProduct = new System.Windows.Forms.Button();
             this.textBoxProductPrice = new System.Windows.Forms.TextBox();
@@ -160,7 +160,7 @@
             this.tabProduct.Controls.Add(this.richTextBoxProduct);
             this.tabProduct.Controls.Add(this.pictureBoxICA);
             this.tabProduct.Controls.Add(this.buttonDeleteProduct);
-            this.tabProduct.Controls.Add(this.buttonUpdateProduct);
+            this.tabProduct.Controls.Add(this.ButtonUpdateProduct);
             this.tabProduct.Controls.Add(this.buttonFindProduct);
             this.tabProduct.Controls.Add(this.buttonCreateProduct);
             this.tabProduct.Controls.Add(this.textBoxProductPrice);
@@ -231,15 +231,15 @@
             this.buttonDeleteProduct.UseVisualStyleBackColor = true;
             this.buttonDeleteProduct.Click += new System.EventHandler(this.buttonProductDelete_Click);
             // 
-            // buttonUpdateProduct
+            // ButtonUpdateProduct
             // 
-            this.buttonUpdateProduct.Location = new System.Drawing.Point(410, 359);
-            this.buttonUpdateProduct.Name = "buttonUpdateProduct";
-            this.buttonUpdateProduct.Size = new System.Drawing.Size(100, 23);
-            this.buttonUpdateProduct.TabIndex = 6;
-            this.buttonUpdateProduct.Text = "Update";
-            this.buttonUpdateProduct.UseVisualStyleBackColor = true;
-            this.buttonUpdateProduct.Click += new System.EventHandler(this.buttonProductUpdate_Click);
+            this.ButtonUpdateProduct.Location = new System.Drawing.Point(410, 359);
+            this.ButtonUpdateProduct.Name = "ButtonUpdateProduct";
+            this.ButtonUpdateProduct.Size = new System.Drawing.Size(100, 23);
+            this.ButtonUpdateProduct.TabIndex = 6;
+            this.ButtonUpdateProduct.Text = "Update";
+            this.ButtonUpdateProduct.UseVisualStyleBackColor = true;
+            this.ButtonUpdateProduct.Click += new System.EventHandler(this.ButtonProductUpdate_Click);
             // 
             // buttonFindProduct
             // 
@@ -259,7 +259,7 @@
             this.buttonCreateProduct.TabIndex = 4;
             this.buttonCreateProduct.Text = "Create";
             this.buttonCreateProduct.UseVisualStyleBackColor = true;
-            this.buttonCreateProduct.Click += new System.EventHandler(this.buttonProductAdd_Click);
+            this.buttonCreateProduct.Click += new System.EventHandler(this.ButtonProductAdd_Click);
             // 
             // textBoxProductPrice
             // 
@@ -645,7 +645,7 @@
             this.buttonDeleteCostumer.TabIndex = 19;
             this.buttonDeleteCostumer.Text = "Delete";
             this.buttonDeleteCostumer.UseVisualStyleBackColor = true;
-            this.buttonDeleteCostumer.Click += new System.EventHandler(this.buttonDeleteCostumer_Click);
+            this.buttonDeleteCostumer.Click += new System.EventHandler(this.ButtonDeleteCostumer_Click);
             // 
             // buttonUpdateCostumer
             // 
@@ -897,7 +897,7 @@
             this.button1.TabIndex = 42;
             this.button1.Text = "UPDATE";
             this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.buttonUpdateOrderline_Click);
+            this.button1.Click += new System.EventHandler(this.ButtonUpdateOrderline_Click);
             // 
             // orderlineDataGridView
             // 
@@ -920,7 +920,7 @@
             this.buttonDeleteOrderline.TabIndex = 40;
             this.buttonDeleteOrderline.Text = "DELETE";
             this.buttonDeleteOrderline.UseVisualStyleBackColor = false;
-            this.buttonDeleteOrderline.Click += new System.EventHandler(this.buttonDeleteOrderline_Click);
+            this.buttonDeleteOrderline.Click += new System.EventHandler(this.ButtonDeleteOrderline_Click);
             // 
             // buttonFindOrderline
             // 
@@ -933,7 +933,7 @@
             this.buttonFindOrderline.TabIndex = 39;
             this.buttonFindOrderline.Text = "FIND";
             this.buttonFindOrderline.UseVisualStyleBackColor = false;
-            this.buttonFindOrderline.Click += new System.EventHandler(this.buttonFindOrderline_Click);
+            this.buttonFindOrderline.Click += new System.EventHandler(this.ButtonFindOrderline_Click);
             // 
             // textBoxOrderlineID
             // 
@@ -955,7 +955,7 @@
             this.buttonOrderlineCreate.TabIndex = 33;
             this.buttonOrderlineCreate.Text = "CREATE";
             this.buttonOrderlineCreate.UseVisualStyleBackColor = false;
-            this.buttonOrderlineCreate.Click += new System.EventHandler(this.buttonOrderlineCreate_Click);
+            this.buttonOrderlineCreate.Click += new System.EventHandler(this.ButtonOrderlineCreate_Click);
             // 
             // label4
             // 
@@ -1163,7 +1163,7 @@
         private Button buttonCreateProduct;
         private PictureBox pictureBoxICA;
         private Button buttonDeleteProduct;
-        private Button buttonUpdateProduct;
+        private Button ButtonUpdateProduct;
         private RichTextBox richTextBoxProduct;
         private PictureBox pictureBoxStore;
         private RichTextBox richTextBoxStore;
