@@ -28,7 +28,7 @@ namespace Application
         }
 
         //Prints all from Product Category
-        public SqlDataReader printallProductCategory()
+        public SqlDataReader PrintallProductCategory()
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -39,7 +39,7 @@ namespace Application
         }
 
         //Prints All Products
-        public SqlDataReader printallProducts()
+        public SqlDataReader PrintallProducts()
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -51,7 +51,7 @@ namespace Application
         }
 
         //METHOD ADD PRODUCT
-        public void insertProduct(int productId, string productName, decimal productPrice, int categoryId)
+        public void InsertProduct(int productId, string productName, decimal productPrice, int categoryId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -70,7 +70,7 @@ namespace Application
         }
 
         //METHOD DELETE PRODUCT
-        public void deleteProduct(int productId)
+        public void DeleteProduct(int productId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -88,7 +88,7 @@ namespace Application
         }
 
         //METHOD UPDATE PRODUCT
-        public void updateProduct(int productId, string productName, decimal price)
+        public void UpdateProduct(int productId, string productName, decimal price)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -107,7 +107,7 @@ namespace Application
         }
         
         //METHOD FIND PRODUCT
-        public SqlDataReader findProduct(int productId)
+        public SqlDataReader FindProduct(int productId)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -123,7 +123,7 @@ namespace Application
         }
 
         //METHOD ADD ProductCategory
-        public void insertProductCategory(int categoryId, string categoryName)
+        public void InsertProductCategory(int categoryId, string categoryName)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -141,7 +141,7 @@ namespace Application
         }
 
         //METHOD DELETE ProductCategory
-        public void deleteProductCategory(int categoryID)
+        public void DeleteProductCategory(int categoryID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -159,7 +159,7 @@ namespace Application
         }
 
         //METHOD FIND ProductCategory
-        public SqlDataReader findProductCategory(int categoryId)
+        public SqlDataReader FindProductCategory(int categoryId)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -173,7 +173,7 @@ namespace Application
 
 
         // METHOD UPDATE ProductCategory
-        public void updateProductCategory(int categoryID, string categoryName)
+        public void UpdateProductCategory(int categoryID, string categoryName)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -195,7 +195,7 @@ namespace Application
 
 
         //METHOD ADD STORE
-        public void addStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
+        public void AddStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -215,7 +215,7 @@ namespace Application
         }
 
         //METHOD FIND STORE
-        public SqlDataReader findStore(int supermarketID)
+        public SqlDataReader FindStore(int supermarketID)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -228,7 +228,7 @@ namespace Application
         }
 
         //METHOD UPDATE STORE
-        public void updateStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
+        public void UpdateStore(int supermarketID, string regionName, string storeName, string city, string storeAddress)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -251,7 +251,7 @@ namespace Application
         }
 
         //METHOD DELETE STORE
-        public void deleteStore(int supermarketID)
+        public void DeleteStore(int supermarketID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -267,7 +267,7 @@ namespace Application
         }
 
         //METHOD VIEW ALL INFORMATION ABOUT STORE
-        public SqlDataReader printallStores()
+        public SqlDataReader PrintallStores()
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -278,7 +278,7 @@ namespace Application
 
         }
 
-        public void addCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
+        public void AddCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -299,7 +299,7 @@ namespace Application
             connection.Dispose();
         }
 
-        public void deleteCustomer(int customerId)
+        public void DeleteCustomer(int customerId)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -314,7 +314,7 @@ namespace Application
             connection.Dispose();
         }
 
-        public SqlDataReader findCustomer(int customerId)
+        public SqlDataReader FindCustomer(int customerId)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -328,7 +328,7 @@ namespace Application
 
      
 
-        public void updateCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
+        public void UpdateCustomer(string name, int customerId, string userName, string address, int phoneNumber, string eMail)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -352,7 +352,7 @@ namespace Application
 
         }
 
-        public SqlDataReader showAllCustomers()
+        public SqlDataReader ShowAllCustomers()
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -363,7 +363,7 @@ namespace Application
             return reader;
 
         }
-        public SqlDataReader printallOrders()
+        public SqlDataReader PrintallOrders()
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -395,7 +395,7 @@ namespace Application
         }
 
 
-        public SqlDataReader findOrder(int orderID)
+        public SqlDataReader FindOrder(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -411,7 +411,7 @@ namespace Application
         }
 
 
-        public void updateOrder(int orderID, string orderDate, string paymentMethod)
+        public void UpdateOrder(int orderID, string orderDate, string paymentMethod)
         {
             SqlConnection connection = GetDatabaseConnection();
 
@@ -433,7 +433,7 @@ namespace Application
         }
 
        
-        public void deleteOrder(int orderID)
+        public void DeleteOrder(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -470,7 +470,7 @@ namespace Application
         }
 
 
-           public void deleteOrderline(int orderID, int productID)
+           public void DeleteOrderline(int orderID, int productID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -486,7 +486,7 @@ namespace Application
             connection.Dispose();
         }
 
-        public void updateOrderline(int orderID, int productID, int orderlineID, int quantity)
+        public void UpdateOrderline(int orderID, int productID, int orderlineID, int quantity)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -505,7 +505,7 @@ namespace Application
 
         }
 
-    public SqlDataReader findOrderlinesByOrderID(int orderID)
+    public SqlDataReader FindOrderlinesByOrderID(int orderID)
         {
             SqlConnection connection = GetDatabaseConnection();
             SqlCommand command = connection.CreateCommand();
@@ -516,7 +516,7 @@ namespace Application
             return reader;
         }
 
-        public SqlDataReader findOrderlinesByOrderIDandProductID(int orderID, int productID)
+        public SqlDataReader FindOrderlinesByOrderIDandProductID(int orderID, int productID)
         {
             {
                 SqlConnection connection = GetDatabaseConnection();
