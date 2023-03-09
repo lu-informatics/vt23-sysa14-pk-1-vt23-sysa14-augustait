@@ -16,10 +16,10 @@ namespace Application
         {
             _layer = new();
             InitializeComponent();
-            updateCombobox();
+            UpdateCombobox();
         }
 
-        public void updateCombobox()
+        public void UpdateCombobox()
         {
             // Populate combobox with product data
             List<string> productData = _layer.GetProductDataCombobox();
@@ -232,14 +232,14 @@ namespace Application
 
             try
             {
-                _layer.insertProduct(productId, textBoxProductName.Text, productPrice, categoryId);
+                _layer.InsertProduct(productId, textBoxProductName.Text, productPrice, categoryId);
 
                 UpdateViewProduct("Product");
 
                 richTextBoxProduct.Text = "The product has been successfully created!";
                 clearAllTextBox();
                 comboBoxProductCategory.SelectedIndex = -1;
-                updateCombobox();
+                UpdateCombobox();
             }
             catch (SqlException ex)
             {
@@ -280,7 +280,7 @@ namespace Application
                     int productId = int.Parse(productIdString);
                     decimal productPrice = decimal.Parse(productPriceString);
 
-                    SqlDataReader reader = _layer.findProduct(productId);
+                    SqlDataReader reader = _layer.FindProduct(productId);
 
                     if (!reader.HasRows)
                     {
@@ -288,13 +288,13 @@ namespace Application
                     }
                     else
                     {
-                        _layer.updateProduct(productId, productName, productPrice);
+                        _layer.UpdateProduct(productId, productName, productPrice);
                         UpdateViewProduct("Product");
 
                         richTextBoxProduct.Text = "The product has been successfully been updated!";
 
                         clearAllTextBox();
-                        updateCombobox();
+                        UpdateCombobox();
 
 
                     }
@@ -331,7 +331,7 @@ namespace Application
                 {
                     int productId = int.Parse(productIdString);
 
-                    SqlDataReader reader = _layer.findProduct(productId);
+                    SqlDataReader reader = _layer.FindProduct(productId);
 
                     if (!reader.HasRows)
                     {
@@ -339,12 +339,12 @@ namespace Application
                     }
                     else
                     {
-                        _layer.deleteProduct(productId);
+                        _layer.DeleteProduct(productId);
                         UpdateViewProduct("Product");
 
                         richTextBoxProduct.Text = "Product has successfully been deleted!";
                         clearAllTextBox();
-                        updateCombobox();
+                        UpdateCombobox();
 
                     }
                 }
@@ -384,7 +384,7 @@ namespace Application
                 string productIdString = textBoxProductID.Text;
                 int productID = Int32.Parse(productIdString);
 
-                using (SqlDataReader readerFindProduct = _layer.findProduct(productID))
+                using (SqlDataReader readerFindProduct = _layer.FindProduct(productID))
                 {
                     if (readerFindProduct.HasRows)
                     {
@@ -397,7 +397,6 @@ namespace Application
                             richTextBoxProduct.Text += "Category Name: " + readerFindProduct.GetString(4) + "\n";
 
                             clearAllTextBox();
-
 
 
 
@@ -448,7 +447,7 @@ namespace Application
                     int productCategoryId = int.Parse(productCategoryIdString);
 
 
-                    _layer.insertProductCategory(productCategoryId, productCategoryName);
+                    _layer.InsertProductCategory(productCategoryId, productCategoryName);
 
                     richTextBoxProductCategory.Text = "The Product Category has been successfully created!";
 
@@ -456,7 +455,7 @@ namespace Application
 
                     UpdateViewProductCategory("ProductCategory");
 
-                    updateCombobox();
+                    UpdateCombobox();
 
                 }
 
@@ -503,7 +502,7 @@ namespace Application
                 {
                     int productCategoryId = int.Parse(productCategoryIdString);
 
-                    SqlDataReader reader = _layer.findProductCategory(productCategoryId);
+                    SqlDataReader reader = _layer.FindProductCategory(productCategoryId);
 
                     if (!reader.HasRows)
                     {
@@ -511,13 +510,13 @@ namespace Application
                     }
                     else
                     {
-                        _layer.updateProductCategory(productCategoryId, productCategoryName);
+                        _layer.UpdateProductCategory(productCategoryId, productCategoryName);
 
                         richTextBoxProductCategory.Text = "The Product Category has been successfully updated!";
                         clearAllTextBox();
                         UpdateViewProductCategory("ProductCategory");
 
-                        updateCombobox();
+                        UpdateCombobox();
 
                     }
                 }
@@ -551,7 +550,7 @@ namespace Application
                 try
                 {
                     int productCategoryId = int.Parse(productCategoryIdString);
-                    SqlDataReader reader = _layer.findProductCategory(productCategoryId);
+                    SqlDataReader reader = _layer.FindProductCategory(productCategoryId);
 
                     if (!reader.HasRows)
                     {
@@ -559,13 +558,13 @@ namespace Application
                     }
                     else
                     {
-                        _layer.deleteProductCategory(productCategoryId);
+                        _layer.DeleteProductCategory(productCategoryId);
 
                         richTextBoxProductCategory.Text = "The Product Category has been successfully deleted!";
                         clearAllTextBox();
                         UpdateViewProductCategory("ProductCategory");
 
-                        updateCombobox();
+                        UpdateCombobox();
 
                     }
                 }
@@ -600,7 +599,7 @@ namespace Application
                 string productCategoryString = textBoxProductCategoryID.Text;
                 int productCategoryID = Int32.Parse(productCategoryString);
 
-                using (SqlDataReader readerFindProductCategory = _layer.findProductCategory(productCategoryID))
+                using (SqlDataReader readerFindProductCategory = _layer.FindProductCategory(productCategoryID))
                 {
                     if (readerFindProductCategory.HasRows)
                     {
@@ -661,7 +660,7 @@ namespace Application
                 {
                     int newID = int.Parse(storeID);
 
-                    _layer.addStore(newID, regionName, storeName, storeCity, storeAddress);
+                    _layer.AddStore(newID, regionName, storeName, storeCity, storeAddress);
 
                     richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
 
@@ -669,7 +668,7 @@ namespace Application
 
                     UpdateViewStore("Store");
 
-                    updateCombobox();
+                    UpdateCombobox();
                 }
                 catch (SqlException ex)
                 {
@@ -704,7 +703,7 @@ namespace Application
                 string storeID = textBoxStoreID.Text;
                 int newID = Int32.Parse(storeID);
 
-                using (SqlDataReader readerFindStore = _layer.findStore(newID))
+                using (SqlDataReader readerFindStore = _layer.FindStore(newID))
                 {
                     if (readerFindStore.HasRows)
                     {
@@ -720,7 +719,7 @@ namespace Application
 
                             clearAllTextBox();
 
-                            updateCombobox();
+                            UpdateCombobox();
 
 
                         }
@@ -765,7 +764,7 @@ namespace Application
                 {
                     int storeId = int.Parse(storeIdString);
 
-                    SqlDataReader reader = _layer.findStore(storeId);
+                    SqlDataReader reader = _layer.FindStore(storeId);
 
                     if (!reader.HasRows)
                     {
@@ -773,9 +772,9 @@ namespace Application
                     }
                     else
                     {
-                        _layer.updateStore(storeId, regionName, storeName, storeCity, storeAddress);
+                        _layer.UpdateStore(storeId, regionName, storeName, storeCity, storeAddress);
                         UpdateViewStore("Store");
-                        updateCombobox();
+                        UpdateCombobox();
                         richTextBoxStore.Text = "The store has been successfully updated!";
                         clearAllTextBox();
                     }
@@ -810,7 +809,7 @@ namespace Application
                 {
                     int storeId = int.Parse(storeIdString);
 
-                    SqlDataReader reader = _layer.findStore(storeId);
+                    SqlDataReader reader = _layer.FindStore(storeId);
 
                     if (!reader.HasRows)
                     {
@@ -818,12 +817,12 @@ namespace Application
                     }
                     else
                     {
-                        _layer.deleteStore(storeId);
+                        _layer.DeleteStore(storeId);
                         UpdateViewStore("Store");
 
                         richTextBoxStore.Text = "Store has successfully been deleted!";
                         clearAllTextBox();
-                        updateCombobox();
+                        UpdateCombobox();
                     }
                 }
                 catch (SqlException ex)
@@ -873,13 +872,13 @@ namespace Application
                     int customerID = int.Parse(stringCustomerID);
                     int costumerPhoneNumber = int.Parse(stringCostumerPhoneNumber);
 
-                    _layer.addCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
+                    _layer.AddCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
 
                     richTextBoxCostumer.Text = "The Customer has been successfully created!" + "\n";
 
                     UpdateViewCustomer("Customer");
 
-                    updateCombobox();
+                    UpdateCombobox();
 
 
 
@@ -924,7 +923,7 @@ namespace Application
                 string stringCustomerID = textBoxCustomerID.Text;
                 int customerID = Int32.Parse(stringCustomerID);
 
-                using (SqlDataReader readerFindCostumer = _layer.findCustomer(customerID))
+                using (SqlDataReader readerFindCostumer = _layer.FindCustomer(customerID))
                 {
                     if (readerFindCostumer.HasRows)
                     {
@@ -989,7 +988,7 @@ namespace Application
                     int customerID = int.Parse(stringCustomerID);
                     int costumerPhoneNumber = int.Parse(stringCostumerPhoneNumber);
 
-                    SqlDataReader reader = _layer.findCustomer(customerID);
+                    SqlDataReader reader = _layer.FindCustomer(customerID);
 
                     if (!reader.HasRows)
                     {
@@ -997,7 +996,7 @@ namespace Application
                     }
                     else
                     {
-                        _layer.updateCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
+                        _layer.UpdateCustomer(costumerName, customerID, costumerUserName, costumerAddress, costumerPhoneNumber, costumerMail);
 
                         richTextBoxCostumer.Text = "The customer has been successfully updated!" + "\n";
 
@@ -1005,7 +1004,7 @@ namespace Application
 
                         clearAllTextBox();
 
-                        updateCombobox();
+                        UpdateCombobox();
                     }
                 }
                 catch (FormatException)
@@ -1048,7 +1047,7 @@ namespace Application
                     int customerID = int.Parse(stringCustomerID);
 
                     
-                    SqlDataReader reader = _layer.findCustomer(customerID);
+                    SqlDataReader reader = _layer.FindCustomer(customerID);
                     if (!reader.HasRows)
                     {
                         richTextBoxCostumer.Text = $"Customer with ID {customerID} does not exist!";
@@ -1056,14 +1055,14 @@ namespace Application
                     }
                     reader.Close();
 
-                    _layer.deleteCustomer(customerID);
+                    _layer.DeleteCustomer(customerID);
 
                     richTextBoxCostumer.Text = "Customer has successfully been deleted!";
                     UpdateViewCustomer("Customer");
 
                     clearAllTextBox();
 
-                    updateCombobox();
+                    UpdateCombobox();
 
                 }
                 catch (SqlException ex)
@@ -1142,7 +1141,7 @@ namespace Application
 
                     OrderTextBox.Text = "The order has been successfully created!" + "\n";
 
-                    updateCombobox();
+                    UpdateCombobox();
 
 
                     textOrderOrderID.Clear();
@@ -1179,7 +1178,7 @@ namespace Application
                 int tmpOrderID = int.Parse(orderID);
 
 
-                using (SqlDataReader readerFindOrder = _layer.findOrder(tmpOrderID))
+                using (SqlDataReader readerFindOrder = _layer.FindOrder(tmpOrderID))
                 {
                     if (readerFindOrder.HasRows)
                     {
@@ -1246,7 +1245,7 @@ namespace Application
                 {
                     int tmpOrderID = int.Parse(orderID);
 
-                    SqlDataReader reader = _layer.findOrder(tmpOrderID);
+                    SqlDataReader reader = _layer.FindOrder(tmpOrderID);
 
                     if (!reader.HasRows)
                     {
@@ -1255,12 +1254,12 @@ namespace Application
                     }
                     else
                     {
-                        _layer.updateOrder(tmpOrderID, date, paymentMethod);
+                        _layer.UpdateOrder(tmpOrderID, date, paymentMethod);
                         UpdateViewOrder("Order_");
 
                         OrderTextBox.Text = "The order has been updated!" + "\n";
 
-                        updateCombobox();
+                        UpdateCombobox();
 
                         comboBoxOrderPaymentMethod.SelectedIndex = -1;
 
@@ -1297,7 +1296,7 @@ namespace Application
                 {
                     int tmpOrderID = Int32.Parse(orderID);
 
-                    SqlDataReader reader = _layer.findOrder(tmpOrderID);
+                    SqlDataReader reader = _layer.FindOrder(tmpOrderID);
 
                     if (!reader.HasRows)
                     {
@@ -1306,9 +1305,9 @@ namespace Application
                     }
                     else
                     {
-                        _layer.deleteOrder(tmpOrderID);
+                        _layer.DeleteOrder(tmpOrderID);
 
-                        updateCombobox();
+                        UpdateCombobox();
 
 
                         UpdateViewOrder("Order_");
@@ -1395,7 +1394,7 @@ namespace Application
         _layer.AddOrderline(orderID, productID, tmpOrderlineID, quantity);
         UpdateView("Orderline");
 
-        updateCombobox();
+                UpdateCombobox();
 
         richTextBoxOrderline.Text = "The Orderline has been successfully created!" + "\n";
 
@@ -1450,7 +1449,7 @@ namespace Application
                 }
 
 
-                using (SqlDataReader readerFindOrderlines = _layer.findOrderlinesByOrderIDandProductID(orderID, productID))
+                using (SqlDataReader readerFindOrderlines = _layer.FindOrderlinesByOrderIDandProductID(orderID, productID))
                 {
                     if (readerFindOrderlines.HasRows)
                     {
@@ -1508,7 +1507,7 @@ namespace Application
                 {
                     int productID = int.Parse(comboBoxOrderlineProductID.SelectedValue.ToString());
                     int orderID = int.Parse(comboBoxOrderlineOrderID.SelectedValue.ToString());
-                    SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+                    SqlDataReader reader = _layer.FindOrderlinesByOrderIDandProductID(orderID, productID);
 
                     if (!reader.HasRows)
                     {
@@ -1517,11 +1516,11 @@ namespace Application
                       
                     else
                     {
-                        _layer.deleteOrderline(orderID, productID);
+                        _layer.DeleteOrderline(orderID, productID);
                         UpdateView("Orderline");
                         richTextBoxOrderline.Text = "The Product ID: " + productID + " was sucessfully deleted from the Order ID: " + orderID;
 
-                        updateCombobox();
+                        UpdateCombobox();
 
                     }
                 }
@@ -1572,16 +1571,16 @@ namespace Application
                     return;
                 }
 
-                SqlDataReader reader = _layer.findOrderlinesByOrderIDandProductID(orderID, productID);
+                SqlDataReader reader = _layer.FindOrderlinesByOrderIDandProductID(orderID, productID);
                 if (!reader.HasRows)
                 {
                     richTextBoxOrderline.Text = "Please check if there is an Orderline with the selected Order ID and Product ID!";
                     return;
                 }
 
-                _layer.updateOrderline(orderID, productID, orderlineID, quantity);
+                _layer.UpdateOrderline(orderID, productID, orderlineID, quantity);
                 UpdateView("Orderline");
-                updateCombobox();
+                UpdateCombobox();
 
                 richTextBoxOrderline.Text = "The Orderline has been successfully updated!" + "\n";
 
