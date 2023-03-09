@@ -42,7 +42,7 @@ namespace Application
             comboBoxOrderlineOrderID.DataSource = orderData;
         }
 
-        public void clearAllTextBox()
+        public void ClearAllTextBox()
         {
             List<TextBox> list = new List<TextBox>();
             list.Add(textBoxProductID);
@@ -181,7 +181,7 @@ namespace Application
 
 
         //ADD PRODUCT
-        private void buttonProductAdd_Click(object sender, EventArgs e)
+        private void ButtonProductAdd_Click(object sender, EventArgs e)
         {
             richTextBoxProduct.Text = "";
 
@@ -237,7 +237,7 @@ namespace Application
                 UpdateViewProduct("Product");
 
                 richTextBoxProduct.Text = "The product has been successfully created!";
-                clearAllTextBox();
+                ClearAllTextBox();
                 comboBoxProductCategory.SelectedIndex = -1;
                 UpdateCombobox();
             }
@@ -261,7 +261,7 @@ namespace Application
 
 
         //UPDATE PRODUCT
-        private void buttonProductUpdate_Click(object sender, EventArgs e)
+        private void ButtonProductUpdate_Click(object sender, EventArgs e)
         {
 
             richTextBoxProduct.Text = " ";
@@ -293,7 +293,7 @@ namespace Application
 
                         richTextBoxProduct.Text = "The product has been successfully been updated!";
 
-                        clearAllTextBox();
+                        ClearAllTextBox();
                         UpdateCombobox();
 
 
@@ -343,7 +343,7 @@ namespace Application
                         UpdateViewProduct("Product");
 
                         richTextBoxProduct.Text = "Product has successfully been deleted!";
-                        clearAllTextBox();
+                        ClearAllTextBox();
                         UpdateCombobox();
 
                     }
@@ -396,7 +396,7 @@ namespace Application
                             richTextBoxProduct.Text += "ProductCategoryID: " + readerFindProduct.GetInt32(3) + "\n";
                             richTextBoxProduct.Text += "Category Name: " + readerFindProduct.GetString(4) + "\n";
 
-                            clearAllTextBox();
+                            ClearAllTextBox();
 
 
 
@@ -451,7 +451,7 @@ namespace Application
 
                     richTextBoxProductCategory.Text = "The Product Category has been successfully created!";
 
-                    clearAllTextBox();
+                    ClearAllTextBox();
 
                     UpdateViewProductCategory("ProductCategory");
 
@@ -513,7 +513,7 @@ namespace Application
                         _layer.UpdateProductCategory(productCategoryId, productCategoryName);
 
                         richTextBoxProductCategory.Text = "The Product Category has been successfully updated!";
-                        clearAllTextBox();
+                        ClearAllTextBox();
                         UpdateViewProductCategory("ProductCategory");
 
                         UpdateCombobox();
@@ -561,7 +561,7 @@ namespace Application
                         _layer.DeleteProductCategory(productCategoryId);
 
                         richTextBoxProductCategory.Text = "The Product Category has been successfully deleted!";
-                        clearAllTextBox();
+                        ClearAllTextBox();
                         UpdateViewProductCategory("ProductCategory");
 
                         UpdateCombobox();
@@ -608,7 +608,7 @@ namespace Application
                             richTextBoxProductCategory.Text += "ID: " + readerFindProductCategory.GetInt32(0) + " " + "\n";
                             richTextBoxProductCategory.Text += "Name: " + readerFindProductCategory.GetString(1) + " " + "\n";
 
-                            clearAllTextBox();
+                            ClearAllTextBox();
 
 
                         }
@@ -664,7 +664,7 @@ namespace Application
 
                     richTextBoxStore.Text = "The Store has been successfully created!" + "\n";
 
-                    clearAllTextBox();
+                    ClearAllTextBox();
 
                     UpdateViewStore("Store");
 
@@ -717,7 +717,7 @@ namespace Application
                             richTextBoxStore.Text += "Address: " + readerFindStore.GetString(4) + "\n";
                             richTextBoxStore.Text += "-----------------------" + "\n";
 
-                            clearAllTextBox();
+                            ClearAllTextBox();
 
                             UpdateCombobox();
 
@@ -776,7 +776,7 @@ namespace Application
                         UpdateViewStore("Store");
                         UpdateCombobox();
                         richTextBoxStore.Text = "The store has been successfully updated!";
-                        clearAllTextBox();
+                        ClearAllTextBox();
                     }
                 }
                 catch (SqlException ex)
@@ -821,7 +821,7 @@ namespace Application
                         UpdateViewStore("Store");
 
                         richTextBoxStore.Text = "Store has successfully been deleted!";
-                        clearAllTextBox();
+                        ClearAllTextBox();
                         UpdateCombobox();
                     }
                 }
@@ -882,7 +882,7 @@ namespace Application
 
 
 
-                    clearAllTextBox();
+                    ClearAllTextBox();
                 }
 
 
@@ -936,7 +936,7 @@ namespace Application
                             richTextBoxCostumer.Text += "Phonenumber: " + readerFindCostumer.GetInt32(4) + "\n";
                             richTextBoxCostumer.Text += "Mail: " + readerFindCostumer.GetString(5) + "\n";
 
-                            clearAllTextBox();
+                            ClearAllTextBox();
 
                         }
                     }
@@ -1002,7 +1002,7 @@ namespace Application
 
                         UpdateViewCustomer("Customer");
 
-                        clearAllTextBox();
+                        ClearAllTextBox();
 
                         UpdateCombobox();
                     }
@@ -1031,7 +1031,7 @@ namespace Application
         }
 
         //DELETE CUSTOMER
-        private void buttonDeleteCostumer_Click(object sender, EventArgs e)
+        private void ButtonDeleteCostumer_Click(object sender, EventArgs e)
         {
             richTextBoxCostumer.Text = " ";
             string stringCustomerID = textBoxCustomerID.Text;
@@ -1060,7 +1060,7 @@ namespace Application
                     richTextBoxCostumer.Text = "Customer has successfully been deleted!";
                     UpdateViewCustomer("Customer");
 
-                    clearAllTextBox();
+                    ClearAllTextBox();
 
                     UpdateCombobox();
 
@@ -1339,7 +1339,7 @@ namespace Application
             }
         }
          
-    private void buttonOrderlineCreate_Click(object sender, EventArgs e)
+    private void ButtonOrderlineCreate_Click(object sender, EventArgs e)
         {
             try
     {
@@ -1420,7 +1420,7 @@ namespace Application
         }
  
 
-        private void buttonFindOrderline_Click(object sender, EventArgs e)
+        private void ButtonFindOrderline_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1493,7 +1493,7 @@ namespace Application
                 richTextBoxOrderline.Text = "Invalid input format. Please make sure to provide a positive number for the Order ID and Product ID.";
             }
         }
-        private void buttonDeleteOrderline_Click(object sender, EventArgs e)
+        private void ButtonDeleteOrderline_Click(object sender, EventArgs e)
         {
             richTextBoxOrderline.Text = " ";
 
@@ -1531,7 +1531,7 @@ namespace Application
             }
         }
 
-        private void buttonUpdateOrderline_Click(object sender, EventArgs e)
+        private void ButtonUpdateOrderline_Click(object sender, EventArgs e)
         {
             try
             {
